@@ -68,7 +68,13 @@ document.getElementById('google-btn').addEventListener('click', async () => {
     let { data, error } = await sb.auth.signInWithPassword({ email, password });
     if (error) {
       const up = await sb.auth.signUp({ email, password });
-      if (up.error) { showErr(up.error.message); return; }
+      if (up.error) {
+        const m = (up.error.message || '').toLowerCase();
+        if (m.includes('database') || m.includes('approved') || m.includes('not allowed'))
+          showErr("This email isn't approved yet. You need to purchase access first.");
+        else showErr(up.error.message);
+        return;
+      }
       if (!up.data.session) {
         // rare: confirmation required — try signing in again
         const retry = await sb.auth.signInWithPassword({ email, password });
@@ -83,7 +89,17 @@ document.getElementById('google-btn').addEventListener('click', async () => {
   }
 });
 
-function onLogin(user) {
+async function onLogin(user) {
+  // BOUNCER: only approved (paid) emails get in — catches existing accounts too
+  if (sb) {
+    const { data: ok } = await sb.from('allowed_emails').select('email').limit(1);
+    if (!ok || ok.length === 0) {
+      await sb.auth.signOut();
+      currentUser = null;
+      showErr("This email isn't approved yet. You need to purchase access first.");
+      return;
+    }
+  }
   currentUser = { id: user.id, email: user.email, name: (user.user_metadata && user.user_metadata.name) || user.email };
   document.getElementById('login').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
