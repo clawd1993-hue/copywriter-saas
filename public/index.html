@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copywriter AI</title>
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <!-- LOGIN SCREEN (dummy Google auth) -->
+  <div id="login" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">✍️</div>
+      <h1>Copywriter AI</h1>
+      <p class="login-sub">The 8-step VSL system, on autopilot.</p>
+      <button id="google-btn" class="google-btn">
+        <span class="g">G</span> Continue with Google
+      </button>
+      <p class="login-note">Dummy login — real Google auth wires in later.</p>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" class="app hidden">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">✍️ Copywriter AI</div>
+      <div class="topbar-right">
+        <span class="plan-pill">Elite · 20 projects/mo</span>
+        <div class="avatar" title="clawd1993@gmail.com">M</div>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <!-- Project sidebar -->
+      <aside class="sidebar">
+        <button id="new-project-btn" class="new-project-btn">+ New Project</button>
+        <div class="sidebar-label">Your Projects</div>
+        <div id="project-list" class="project-list"></div>
+      </aside>
+
+      <!-- Split: dashboard + chat -->
+      <main class="split">
+        <!-- LEFT: skeleton dashboard -->
+        <section class="board">
+          <div class="board-head">
+            <h2 id="project-name">The Perfect VSL</h2>
+            <span class="badge">VSL Draft · 0/13</span>
+          </div>
+
+          <div class="board-block">
+            <h3>8-Step System</h3>
+            <div id="steps-grid" class="steps-grid"></div>
+          </div>
+
+          <div class="board-block">
+            <h3>Magic Copywriting Framework <span class="mini-badge">VSL · 13 sections</span></h3>
+            <div id="vsl-grid" class="vsl-grid"></div>
+          </div>
+        </section>
+
+        <!-- RIGHT: chat -->
+        <section class="chat">
+          <div class="chat-head">💬 Copywriter Chat</div>
+          <div id="chat-log" class="chat-log"></div>
+          <form id="chat-form" class="chat-input">
+            <textarea id="chat-text" rows="1" placeholder="Tell me about your offer to get started..."></textarea>
+            <button type="submit" id="chat-send">Send</button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js?v=1"></script>
+</body>
+</html>
