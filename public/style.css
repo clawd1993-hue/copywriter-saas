@@ -68,6 +68,11 @@ body {
   color: #fff; font-weight: 800; font-size: 0.8rem;
 }
 .login-note { margin-top: 18px; color: var(--grey); font-size: 0.78rem; }
+.email-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.login-input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.95rem; }
+.login-input:focus { outline: none; border-color: var(--accent); }
+.google-btn.plain .g { display: none; }
+.login-error { color: #e03131; font-size: 0.82rem; margin-top: 10px; min-height: 1em; }
 
 /* ---------- APP SHELL ---------- */
 .app { height: 100vh; display: flex; flex-direction: column; }

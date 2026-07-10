@@ -35,8 +35,12 @@ async function initAuth() {
 
   if (authEnabled && window.supabase) {
     sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
-    noteEl().textContent = 'Sign in to start.';
-    // Already logged in? (e.g. returning from Google redirect)
+    // real login: show email + password fields, relabel button
+    document.getElementById('email-fields').classList.remove('hidden');
+    const g = document.getElementById('google-btn');
+    g.innerHTML = 'Sign in / Sign up';
+    g.classList.add('plain');
+    noteEl().textContent = 'Enter your email + a password to start. New here? It signs you up automatically.';
     const { data } = await sb.auth.getSession();
     if (data.session) { onLogin(data.session.user); }
     sb.auth.onAuthStateChange((_e, session) => {
@@ -44,19 +48,38 @@ async function initAuth() {
     });
   } else {
     // DUMMY MODE — no real login yet
-    noteEl().textContent = 'Demo mode — real Google login coming.';
+    noteEl().textContent = 'Demo mode — real login coming.';
   }
 }
 
+function showErr(msg) { const e = document.getElementById('login-error'); if (e) e.textContent = msg || ''; }
+
 // ---------- LOGIN ----------
 document.getElementById('google-btn').addEventListener('click', async () => {
-  if (authEnabled && sb) {
-    await sb.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin }
-    });
-  } else {
-    enterDummy();   // demo: just walk in
+  if (!(authEnabled && sb)) { enterDummy(); return; }   // demo: just walk in
+  showErr('');
+  const email = (document.getElementById('email-input').value || '').trim();
+  const password = document.getElementById('password-input').value || '';
+  if (!email || password.length < 6) { showErr('Enter an email and a password (6+ characters).'); return; }
+  const btn = document.getElementById('google-btn');
+  btn.disabled = true; btn.textContent = 'Working…';
+  try {
+    // try to sign in; if the account doesn't exist yet, sign them up
+    let { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      const up = await sb.auth.signUp({ email, password });
+      if (up.error) { showErr(up.error.message); return; }
+      if (!up.data.session) {
+        // rare: confirmation required — try signing in again
+        const retry = await sb.auth.signInWithPassword({ email, password });
+        if (retry.error) { showErr('Check your email to confirm, then sign in.'); return; }
+      }
+    }
+    // onAuthStateChange handles entering the app
+  } catch (e) {
+    showErr('Something went wrong — try again.');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Sign in / Sign up';
   }
 });
 
