@@ -22,38 +22,122 @@ const VSL_SECTIONS = [
 
 const DUMMY_PROJECTS = ['The Perfect VSL', 'Pre-Diabetes Reversal', 'Faceless Funnel Challenge'];
 
+// ---------- AUTH STATE ----------
+let sb = null;            // supabase client (null in dummy mode)
+let authEnabled = false;  // true once Supabase keys are configured
+let currentUser = null;   // logged-in user {id, email}
+const noteEl = () => document.getElementById('login-note');
+
+async function initAuth() {
+  let cfg = { authEnabled: false };
+  try { cfg = await (await fetch('/api/config')).json(); } catch (e) {}
+  authEnabled = cfg.authEnabled;
+
+  if (authEnabled && window.supabase) {
+    sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+    noteEl().textContent = 'Sign in to start.';
+    // Already logged in? (e.g. returning from Google redirect)
+    const { data } = await sb.auth.getSession();
+    if (data.session) { onLogin(data.session.user); }
+    sb.auth.onAuthStateChange((_e, session) => {
+      if (session && !currentUser) onLogin(session.user);
+    });
+  } else {
+    // DUMMY MODE — no real login yet
+    noteEl().textContent = 'Demo mode — real Google login coming.';
+  }
+}
+
 // ---------- LOGIN ----------
-function enterApp() {
+document.getElementById('google-btn').addEventListener('click', async () => {
+  if (authEnabled && sb) {
+    await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin }
+    });
+  } else {
+    enterDummy();   // demo: just walk in
+  }
+});
+
+function onLogin(user) {
+  currentUser = { id: user.id, email: user.email, name: (user.user_metadata && user.user_metadata.name) || user.email };
   document.getElementById('login').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
-  boot();
+  const av = document.querySelector('.avatar');
+  if (av) { av.textContent = (currentUser.name || 'U')[0].toUpperCase(); av.title = currentUser.email; }
+  boot(true);
 }
-document.getElementById('google-btn').addEventListener('click', enterApp);
+
+function enterDummy() {
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  boot(false);
+}
+
 // Screenshot/demo shortcut: ?demo=1 skips straight into the app
-if (location.search.includes('demo')) window.addEventListener('load', enterApp);
+if (location.search.includes('demo')) window.addEventListener('load', enterDummy);
+window.addEventListener('load', initAuth);
 
 // ---------- BOOT ----------
-function boot() {
-  renderProjects();
+function boot(authed) {
   renderSteps();
   renderVSL();
   greet();
+  if (authed && sb) { loadProjects(); } else { renderDummyProjects(); }
+  wireNewProject(authed);
 }
 
-function renderProjects() {
+function renderDummyProjects() {
   const list = document.getElementById('project-list');
   list.innerHTML = '';
-  DUMMY_PROJECTS.forEach((name, i) => {
-    const el = document.createElement('div');
-    el.className = 'project-item' + (i === 0 ? ' active' : '');
-    el.textContent = name;
-    el.onclick = () => {
+  DUMMY_PROJECTS.forEach((name, i) => addProjectItem(name, i === 0));
+}
+
+// Load THIS user's projects from the database (only theirs — RLS enforces it)
+async function loadProjects() {
+  const list = document.getElementById('project-list');
+  list.innerHTML = '';
+  const { data, error } = await sb.from('projects').select('*').order('created_at', { ascending: false });
+  if (error) { console.warn(error); return; }
+  if (!data.length) {
+    // first-time user: make them a starter project
+    const { data: created } = await sb.from('projects').insert({ title: 'My First VSL' }).select().single();
+    if (created) data.push(created);
+  }
+  data.forEach((p, i) => addProjectItem(p.title, i === 0, p.id));
+}
+
+function addProjectItem(name, active, id) {
+  const list = document.getElementById('project-list');
+  const el = document.createElement('div');
+  el.className = 'project-item' + (active ? ' active' : '');
+  el.textContent = name;
+  el.dataset.id = id || '';
+  el.onclick = () => {
+    document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('project-name').textContent = name;
+  };
+  list.appendChild(el);
+  if (active) document.getElementById('project-name').textContent = name;
+}
+
+function wireNewProject(authed) {
+  const btn = document.getElementById('new-project-btn');
+  if (!btn) return;
+  btn.onclick = async () => {
+    const name = prompt('Name your project:');
+    if (!name) return;
+    if (authed && sb) {
+      const { data } = await sb.from('projects').insert({ title: name }).select().single();
+      addProjectItem(name, true, data && data.id);
       document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById('project-name').textContent = name;
-    };
-    list.appendChild(el);
-  });
+      [...document.querySelectorAll('.project-item')].find(p => p.textContent === name)?.classList.add('active');
+    } else {
+      addProjectItem(name, true);
+    }
+  };
 }
 
 function renderSteps() {

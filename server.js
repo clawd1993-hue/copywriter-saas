@@ -9,6 +9,17 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Public config for the frontend. The Supabase anon key is PUBLIC by design
+// (safe to expose — real security is enforced by Row-Level Security in the DB).
+// If these env vars aren't set, the app runs in dummy mode (fake login).
+app.get('/api/config', (req, res) => {
+  res.json({
+    supabaseUrl: process.env.SUPABASE_URL || '',
+    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
+    authEnabled: !!(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY)
+  });
+});
+
 // --- Chat endpoint ---
 // If an ANTHROPIC_API_KEY is present, talk to real Claude.
 // Otherwise return a mock copywriter-style reply so the UX works with no key (dummy mode).

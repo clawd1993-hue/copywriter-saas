@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copywriter AI</title>
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <!-- LOGIN SCREEN (dummy Google auth) -->
@@ -16,7 +17,7 @@
       <button id="google-btn" class="google-btn">
         <span class="g">G</span> Continue with Google
       </button>
-      <p class="login-note">Dummy login — real Google auth wires in later.</p>
+      <p class="login-note" id="login-note">Setting up…</p>
     </div>
   </div>
 
