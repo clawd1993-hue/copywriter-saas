@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copywriter AI</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -65,19 +65,34 @@
           </div>
         </section>
 
-        <!-- RIGHT: chat -->
-        <section class="chat">
-          <div class="chat-head">💬 Copywriter Chat</div>
-          <div id="chat-log" class="chat-log"></div>
-          <form id="chat-form" class="chat-input">
-            <textarea id="chat-text" rows="1" placeholder="Tell me about your offer to get started..."></textarea>
-            <button type="submit" id="chat-send">Send</button>
-          </form>
+        <!-- RIGHT: SOP explainer (top, opens on step click) + chat (bottom) -->
+        <section class="right-col">
+          <!-- SOP panel — hidden until a step tile is clicked -->
+          <div id="sop-panel" class="sop-panel hidden">
+            <div class="sop-head">
+              <div class="sop-title">
+                <span id="sop-step" class="sop-step">Step 1</span>
+                <span id="sop-name">Core Desire</span>
+              </div>
+              <button id="sop-close" class="sop-close" title="Close">✕</button>
+            </div>
+            <div id="sop-body" class="sop-body"></div>
+          </div>
+
+          <!-- Chat -->
+          <section class="chat">
+            <div class="chat-head">💬 Copywriter Chat</div>
+            <div id="chat-log" class="chat-log"></div>
+            <form id="chat-form" class="chat-input">
+              <textarea id="chat-text" rows="1" placeholder="Tell me about your offer to get started..."></textarea>
+              <button type="submit" id="chat-send">Send</button>
+            </form>
+          </section>
         </section>
       </main>
     </div>
   </div>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

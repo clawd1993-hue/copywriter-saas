@@ -22,6 +22,84 @@ const VSL_SECTIONS = [
 
 const DUMMY_PROJECTS = ['The Perfect VSL', 'Pre-Diabetes Reversal', 'Faceless Funnel Challenge'];
 
+// ---------- STEP SOPs (front-end, user-facing explainers) ----------
+// Placeholder content for now. When the compile step is built, this array is
+// swapped for the compiled output of Jim's SOP .md files — nothing else changes.
+const STEP_SOPS = [
+  { name: 'Core Desire', html: `
+    <p class="sop-lead">Everything downstream is built on this. Get it right and the whole VSL writes itself.</p>
+    <h4>What this step is</h4>
+    <p>We nail down the <strong>one deep desire</strong> your market is really chasing — the end result they lie awake wanting. Not the product, the outcome.</p>
+    <h4>Why it matters</h4>
+    <p>People don't buy the drill, they buy the hole. Anchor to the core desire and every hook, promise and proof point lands harder.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>The single dominant desire in one sentence</li><li>The emotional payoff behind it</li><li>The "after" state we'll sell throughout the VSL</li></ul>` },
+  { name: 'Market', html: `
+    <p class="sop-lead">Who are we actually talking to?</p>
+    <h4>What this step is</h4>
+    <p>We define the exact market — who they are, where they are in their journey, and how aware they are of the problem and the solutions out there.</p>
+    <h4>Why it matters</h4>
+    <p>The same offer sells completely differently to a cold beginner vs someone who's tried everything. Awareness level sets the tone of your whole script.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>A crisp picture of your ideal buyer</li><li>Their awareness &amp; sophistication level</li><li>The language they already use in their head</li></ul>` },
+  { name: 'Customer Research', html: `
+    <p class="sop-lead">This is where the gold is. We mine real words, not guesses.</p>
+    <h4>What this step is</h4>
+    <p>We dig into your customers' actual pains, fears, failures, desires and objections — in <em>their</em> words, from reviews, DMs, calls and comments.</p>
+    <h4>Why it matters</h4>
+    <p>The best copy is discovered, not invented. Feed the VSL real voice-of-customer and it feels like you're reading their mind.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>Pains, fears &amp; failures</li><li>Desires &amp; motivations</li><li>The exact phrases to quote back to them</li></ul>` },
+  { name: 'Problems → Product', html: `
+    <p class="sop-lead">Bridge from their world to your offer.</p>
+    <h4>What this step is</h4>
+    <p>We map every problem your market has onto what your product actually delivers — so each feature has a job to do.</p>
+    <h4>Why it matters</h4>
+    <p>A product is only valuable in contrast to a problem. Line them up and the pitch section becomes undeniable.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>Problem → matching product element</li><li>The gaps worth closing</li><li>The backbone of your Pitch section</li></ul>` },
+  { name: 'Problems → Solutions', html: `
+    <p class="sop-lead">Show why the old ways failed them.</p>
+    <h4>What this step is</h4>
+    <p>We contrast the common (broken) solutions against the real fix — positioning the failures of the past as not their fault.</p>
+    <h4>Why it matters</h4>
+    <p>Removing blame lowers resistance and sets up your Method as the thing that was missing all along.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>The failed alternatives named</li><li>Why each one let them down</li><li>The opening for your unique mechanism</li></ul>` },
+  { name: 'Vehicle', html: `
+    <p class="sop-lead">The <em>what</em> — the form your solution takes.</p>
+    <h4>What this step is</h4>
+    <p>We define the vehicle: the specific format that carries the transformation (the challenge, the system, the program, the service).</p>
+    <h4>Why it matters</h4>
+    <p>A clear, named vehicle makes the offer feel real and ownable — it's what they're actually buying access to.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>Your named vehicle</li><li>What it includes at a glance</li><li>Feeds the Product Overview section</li></ul>` },
+  { name: 'Method', html: `
+    <p class="sop-lead">The <em>how</em> — your unique mechanism.</p>
+    <h4>What this step is</h4>
+    <p>We articulate the signature method: the step-by-step way your vehicle delivers the result that nobody else has.</p>
+    <h4>Why it matters</h4>
+    <p>The Method is your "new opportunity." It's why this works when everything else didn't — the heart of the VSL.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>Your method named &amp; framed</li><li>The 3–5 core moving parts</li><li>Feeds "Introduce the Method" &amp; the P.S.</li></ul>` },
+  { name: 'Deliverables', html: `
+    <p class="sop-lead">Everything they get, stacked for value.</p>
+    <h4>What this step is</h4>
+    <p>We lay out the core deliverables and bonuses, ordered so the perceived value climbs well past the price.</p>
+    <h4>Why it matters</h4>
+    <p>A well-built stack makes the price feel like a no-brainer before you ever say a number.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>Core deliverables (the Pitch)</li><li>The bonus stack</li><li>Value framing for each piece</li></ul>` },
+  { name: 'Ad Concepts', html: `
+    <p class="sop-lead">Turn the angles into scroll-stopping hooks.</p>
+    <h4>What this step is</h4>
+    <p>We translate everything above into ad concepts and hooks that pull the right people into the VSL.</p>
+    <h4>Why it matters</h4>
+    <p>The best VSL earns nothing without traffic. Sharp hooks off your research are what get the click.</p>
+    <h4>What you'll walk away with</h4>
+    <ul><li>A batch of hook angles</li><li>Concepts mapped to desires &amp; pains</li><li>Ready-to-test ad ideas</li></ul>` }
+];
+
 // ---------- AUTH STATE ----------
 let sb = null;            // supabase client (null in dummy mode)
 let authEnabled = false;  // true once Supabase keys are configured
@@ -185,10 +263,30 @@ function renderSteps() {
   STEP_NAMES.forEach((nm, i) => {
     const tile = document.createElement('div');
     tile.className = 'step-tile';
+    tile.dataset.step = i;
     tile.innerHTML = `<span class="num">Step ${i + 1}</span><span class="dot"></span><div class="nm">${nm}</div>`;
+    tile.onclick = () => openSop(i);
     grid.appendChild(tile);
   });
 }
+
+// ---------- STEP SOP PANEL ----------
+function openSop(i) {
+  const sop = STEP_SOPS[i] || { name: STEP_NAMES[i] || 'Step', html: '<p class="sop-lead">SOP coming soon.</p>' };
+  document.getElementById('sop-step').textContent = 'Step ' + (i + 1);
+  document.getElementById('sop-name').textContent = sop.name;
+  document.getElementById('sop-body').innerHTML = sop.html;
+  document.getElementById('sop-panel').classList.remove('hidden');
+  document.querySelectorAll('.step-tile').forEach(t => t.classList.toggle('active', +t.dataset.step === i));
+  document.getElementById('sop-body').scrollTop = 0;
+}
+
+function closeSop() {
+  document.getElementById('sop-panel').classList.add('hidden');
+  document.querySelectorAll('.step-tile').forEach(t => t.classList.remove('active'));
+}
+
+document.getElementById('sop-close').addEventListener('click', closeSop);
 
 function renderVSL() {
   const grid = document.getElementById('vsl-grid');
