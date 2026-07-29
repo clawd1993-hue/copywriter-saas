@@ -7,7 +7,15 @@ const PORT = process.env.PORT || 3460;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders(res, filePath) {
+    // Never cache HTML — always revalidate so new deploys show up instantly
+    // (versioned assets like app.js?v=N still cache normally via the query string).
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    }
+  }
+}));
 
 // Public config for the frontend. The Supabase anon key is PUBLIC by design
 // (safe to expose — real security is enforced by Row-Level Security in the DB).
