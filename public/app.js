@@ -104,6 +104,7 @@ const STEP_SOPS = [
 let sb = null;            // supabase client (null in dummy mode)
 let authEnabled = false;  // true once Supabase keys are configured
 let currentUser = null;   // logged-in user {id, email}
+let logInFlight = false;  // guard: onLogin can fire twice (getSession + onAuthStateChange) — block re-entry
 const noteEl = () => document.getElementById('login-note');
 
 async function initAuth() {
@@ -168,12 +169,18 @@ document.getElementById('google-btn').addEventListener('click', async () => {
 });
 
 async function onLogin(user) {
+  // Re-entry guard: getSession() AND onAuthStateChange() can both call this before
+  // currentUser is set (bouncer check awaits first), causing a double boot() =
+  // doubled chat greeting + doubled project list. Block the second caller.
+  if (currentUser || logInFlight) return;
+  logInFlight = true;
   // BOUNCER: only approved (paid) emails get in — catches existing accounts too
   if (sb) {
     const { data: ok } = await sb.from('allowed_emails').select('email').limit(1);
     if (!ok || ok.length === 0) {
       await sb.auth.signOut();
       currentUser = null;
+      logInFlight = false;
       showErr("This email isn't approved yet. You need to purchase access first.");
       return;
     }
