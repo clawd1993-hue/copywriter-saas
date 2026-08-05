@@ -239,9 +239,19 @@ function addProjectItem(name, active, id, type) {
   const list = document.getElementById('project-list');
   const el = document.createElement('div');
   el.className = 'project-item' + (active ? ' active' : '');
-  el.textContent = name;
   el.dataset.id = id || '';
+  el.dataset.name = name;
   el.dataset.type = type || (id ? (projectTypes()[id] || '') : '');
+  const nameSpan = document.createElement('span');
+  nameSpan.className = 'pi-name';
+  nameSpan.textContent = name;
+  const trash = document.createElement('button');
+  trash.className = 'pi-trash';
+  trash.title = 'Delete project';
+  trash.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
+  trash.addEventListener('click', (e) => { e.stopPropagation(); openDeleteModal(el); });
+  el.appendChild(nameSpan);
+  el.appendChild(trash);
   el.onclick = () => selectProject(el);
   list.appendChild(el);
   if (active) document.getElementById('project-name').textContent = name;
@@ -255,7 +265,7 @@ let currentThreadKey = null;   // localStorage key for dummy-mode threads
 function selectProject(el) {
   document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
-  const name = el.textContent;
+  const name = el.dataset.name;
   document.getElementById('project-name').textContent = name;
   currentProjectId = el.dataset.id || null;
   currentThreadKey = currentProjectId || ('dummy:' + name);
@@ -352,6 +362,58 @@ document.getElementById('np-create').addEventListener('click', async () => {
     closeNpModal();
   } finally {
     cbtn.textContent = 'Create Project';
+  }
+});
+
+// ---------- DELETE PROJECT (type-DELETE-to-confirm) ----------
+let delTargetEl = null;
+function openDeleteModal(el) {
+  delTargetEl = el;
+  document.getElementById('del-name').textContent = el.dataset.name;
+  const inp = document.getElementById('del-input');
+  inp.value = '';
+  document.getElementById('del-confirm').disabled = true;
+  document.getElementById('del-modal').classList.remove('hidden');
+  setTimeout(() => inp.focus(), 40);
+}
+function closeDeleteModal() { document.getElementById('del-modal').classList.add('hidden'); delTargetEl = null; }
+document.getElementById('del-input').addEventListener('input', e => {
+  document.getElementById('del-confirm').disabled = e.target.value !== 'DELETE';
+});
+document.getElementById('del-input').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.value === 'DELETE') document.getElementById('del-confirm').click(); });
+document.getElementById('del-cancel').addEventListener('click', closeDeleteModal);
+document.getElementById('del-close').addEventListener('click', closeDeleteModal);
+document.getElementById('del-modal').addEventListener('click', e => { if (e.target.id === 'del-modal') closeDeleteModal(); });
+document.getElementById('del-confirm').addEventListener('click', async () => {
+  if (!delTargetEl) return;
+  const el = delTargetEl;
+  const id = el.dataset.id || null;
+  const key = id || ('dummy:' + el.dataset.name);
+  const wasActive = el.classList.contains('active');
+  const btn = document.getElementById('del-confirm');
+  btn.disabled = true; btn.textContent = 'Deleting…';
+  try {
+    if (sb && id) {
+      // messages cascade-delete via the FK, but clear explicitly to be safe
+      await sb.from('messages').delete().eq('project_id', id);
+      await sb.from('projects').delete().eq('id', id);
+    }
+    localStorage.removeItem('thread:' + key);
+    const types = projectTypes();
+    if (id && types[id]) { delete types[id]; localStorage.setItem('projectTypes', JSON.stringify(types)); }
+    el.remove();
+    closeDeleteModal();
+    if (wasActive) {
+      const next = document.querySelector('.project-item');
+      if (next) selectProject(next);
+      else {
+        currentProjectId = null; currentThreadKey = null; history = [];
+        chatLog.innerHTML = '';
+        document.getElementById('project-name').textContent = 'No project';
+      }
+    }
+  } finally {
+    btn.textContent = 'Delete';
   }
 });
 

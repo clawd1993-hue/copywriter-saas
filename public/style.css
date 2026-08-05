@@ -323,3 +323,19 @@ body {
 .np-btn-primary { background: var(--accent); color: #fff; }
 .np-btn-primary:hover { opacity: 0.92; }
 .np-btn-primary:disabled { opacity: 0.45; cursor: default; }
+
+/* ---- PROJECT ITEM: name + hover trash ---- */
+.project-item { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.pi-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pi-trash {
+  flex: none; border: none; background: transparent; color: var(--grey);
+  cursor: pointer; padding: 3px; border-radius: 6px; display: flex; align-items: center;
+  opacity: 0; transition: 0.12s; pointer-events: none;
+}
+.project-item:hover .pi-trash { opacity: 1; pointer-events: auto; }
+.pi-trash:hover { background: #f8d7da; color: #d64545; }
+
+/* ---- DANGER BUTTON (delete confirm) ---- */
+.np-btn-danger { background: #e03131; color: #fff; }
+.np-btn-danger:hover { opacity: 0.92; }
+.np-btn-danger:disabled { opacity: 0.4; cursor: default; }
