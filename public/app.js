@@ -1,24 +1,80 @@
 // ---------- SKELETON DATA (matches the current copywriter dashboard) ----------
+// The 8 STEP BUBBLES are UNIVERSAL across all project types. Steps 4 & 5 merge
+// into one "4/5" bubble, matching Jim's dashboard.
 const STEP_NAMES = [
-  'Core Desire', 'Market', 'Customer Research', 'Problems → Product',
-  'Problems → Solutions', 'Vehicle', 'Method', 'Deliverables', 'Ad Concepts'
+  'Core Desire', 'Market', 'Customer Research', 'Problems & Solutions',
+  'Vehicle', 'Method', 'Deliverables', 'Ad Concepts'
 ];
+const STEP_LABELS = ['1', '2', '3', '4/5', '6', '7', '8', '9'];
 
+// ---------- COPYWRITING SECTIONS — UNIQUE PER PROJECT TYPE ----------
+// Mirrored from Jim's dashboard. `source` = which step(s) feed each section
+// (this is the wiring the brain will use to push step output into the right bubble).
+
+// DTS VSL — 13 sections
 const VSL_SECTIONS = [
   { name: 'Hook', source: 'Step 3 Research + Step 6 Vehicle' },
   { name: 'Shocking Statement', source: 'Step 3 — Pains & Failures' },
   { name: 'Why (Desire)', source: 'Step 3 — Desires & Motivations' },
   { name: 'Why (Pain)', source: 'Step 3 — Pains, Fears, Failures' },
-  { name: 'Introduce the Method', source: 'Step 7 Method' },
-  { name: 'Credibility', source: 'Your story' },
-  { name: 'Proof', source: 'Testimonials' },
-  { name: 'Product Overview', source: 'Step 6 Vehicle' },
-  { name: 'Pitch', source: 'Step 8.1 — core deliverables' },
-  { name: 'Bonuses', source: 'Step 5 / Step 8.2 — bonus stack' },
+  { name: 'Introduce the Method', source: 'Step 7 Method (timeframe format)' },
+  { name: 'Credibility', source: 'Outside the system — Your story' },
+  { name: 'Proof', source: 'Outside the system — Testimonials' },
+  { name: 'Product Overview', source: 'Step 6 Vehicle (name it, what it is, why this opportunity works)' },
+  { name: 'Pitch', source: 'Step 8.1 — the 3 core deliverables you get (built-in even-ifs + values)' },
+  { name: 'Bonuses', source: 'Step 5 solutions / Step 8.2 — the bonus stack (full Edwards bullets + values)' },
   { name: 'Guarantee/Urgency', source: 'Outside the system' },
   { name: 'CTA', source: 'Outside the system' },
   { name: 'P.S.', source: 'Step 3 Desires + Step 7 Method' }
 ];
+
+// DTS WEBINAR — 20 sections (Brunson Perfect Webinar structure)
+const WEBINAR_SECTIONS = [
+  { name: 'Hook (Bold Promise)', source: 'Step 3 Research + Step 6 Vehicle — bold promise + the one belief baked in' },
+  { name: 'Credibility (Origin Story)', source: 'Outside the system — your story (2-beat: old belief→why false, then what worked + proof)' },
+  { name: 'Future Pace', source: 'Step 3 Desires + §1 promise — near-term win → the dream (trial close)' },
+  { name: 'Set the Frame', source: 'Step 6 Vehicle + §1 Big Domino — new opportunity + the ONE thing + preview 3 secrets' },
+  { name: '3 Secrets Intro', source: 'Step 6 (the 3 secrets) — state all 3 in full formula, vehicle-first (🚗→🌍→🧠)' },
+  { name: 'Secret 1 — The Vehicle', source: 'Step 6 secret (full formula) + Step 5 mechanism (demo it) → ends in proof' },
+  { name: 'Secret 2 — Become the Only Choice', source: '🌍 External — Step 6 (1-of-1 Offer Stack) + value-equation bonus stack → ends in proof' },
+  { name: 'Secret 3 — The Fill-in-the-Blank VSL', source: '🧠 Internal — Step 6 (8-step formula) + Step 5 mechanism → ends in proof' },
+  { name: 'Transition to the Offer', source: 'Permission to sell / two paths (outside the system)' },
+  { name: 'Product Overview', source: 'Step 8.1 — name the offer/flagship + the 🚗 Big Promise → hand into the Stack' },
+  { name: 'The Pitch', source: 'Step 8.1 — reveal the 🧠/🌍 core components one-by-one + $values' },
+  { name: 'Bonuses', source: 'Step 8.2 — the bonus stack (full Edwards bullets + values)' },
+  { name: 'Trial Closes', source: 'Temperature check before price (woven earlier too)' },
+  { name: 'Price — Anchor, Drop & Reason-Why', source: 'Step 8 values + outside — anchor high → drop to real price → why so low' },
+  { name: 'Objection Crush', source: 'Steps 3/4 objections — head-on' },
+  { name: 'Guarantee & Urgency', source: 'Outside the system' },
+  { name: 'Re-Stack', source: 'Step 8 — recap the full stack before the button' },
+  { name: 'CTA', source: 'Outside the system — the ask + closing question' },
+  { name: 'Future-Pace Close', source: 'Step 3 Desires — life after buying' },
+  { name: 'P.S.', source: 'Step 3 Desires + Step 7 Method' }
+];
+
+// CALL-BOOKER VSL — 14 sections = DTS VSL + a Qualify section; Pitch/Bonuses state NO price,
+// Guarantee = "free call, no obligation", CTA = book not buy (price revealed on the call)
+const CB_VSL_SECTIONS = [
+  { name: 'Hook', source: 'Step 3 Research + Step 6 Vehicle' },
+  { name: 'Shocking Statement', source: 'Step 3 — Pains & Failures' },
+  { name: 'Why (Desire)', source: 'Step 3 — Desires & Motivations' },
+  { name: 'Why (Pain)', source: 'Step 3 — Pains, Fears, Failures' },
+  { name: 'Introduce the Method', source: 'Step 7 Method (timeframe format)' },
+  { name: 'Credibility', source: 'Outside the system — Your story' },
+  { name: 'Proof', source: 'Outside the system — Testimonials' },
+  { name: 'Product Overview', source: 'Step 6 Vehicle (name it, what it is, why this opportunity works)' },
+  { name: 'Pitch', source: 'Step 8.1 — the 3 core deliverables (built-in even-ifs + values) — ▸ NO price' },
+  { name: 'Bonuses', source: 'Step 5 / Step 8.2 — the bonus stack (full Edwards bullets + values) — ▸ NO price' },
+  { name: 'Who This Is For (Qualify)', source: "Step 2/3 — who it's for / NOT for (take-away filter that qualifies the call)" },
+  { name: 'Guarantee/Urgency', source: 'Outside the system — ▸ "the call is free, zero obligation" + limited slots' },
+  { name: 'CTA', source: 'Outside the system — ▸ BOOK the call, not buy' },
+  { name: 'P.S.', source: 'Step 3 Desires + Step 7 Method — ▸ restate dream + nudge to book' }
+];
+
+// Project-type → its section set + framework badge
+const SECTION_SETS = { 'dts-vsl': VSL_SECTIONS, 'dts-webinar': WEBINAR_SECTIONS, 'call-booker': CB_VSL_SECTIONS };
+const TYPE_BADGE   = { 'dts-vsl': 'DTS VSL', 'dts-webinar': 'DTS Webinar', 'call-booker': 'Call-Booker VSL' };
+function getSections(type) { return SECTION_SETS[type] || VSL_SECTIONS; }
 
 const DUMMY_PROJECTS = ['The Perfect VSL', 'Pre-Diabetes Reversal', 'Faceless Funnel Challenge'];
 
@@ -50,22 +106,14 @@ const STEP_SOPS = [
     <p>The best copy is discovered, not invented. Feed the VSL real voice-of-customer and it feels like you're reading their mind.</p>
     <h4>What you'll walk away with</h4>
     <ul><li>Pains, fears &amp; failures</li><li>Desires &amp; motivations</li><li>The exact phrases to quote back to them</li></ul>` },
-  { name: 'Problems → Product', html: `
-    <p class="sop-lead">Bridge from their world to your offer.</p>
+  { name: 'Problems & Solutions', html: `
+    <p class="sop-lead">Turn every obstacle into a reason to buy. (Steps 4 &amp; 5 combined.)</p>
     <h4>What this step is</h4>
-    <p>We map every problem your market has onto what your product actually delivers — so each feature has a job to do.</p>
+    <p>We map every problem your market hits on the way to the result, then attach a named solution to each one. The sum of those solutions becomes your product.</p>
     <h4>Why it matters</h4>
-    <p>A product is only valuable in contrast to a problem. Line them up and the pitch section becomes undeniable.</p>
+    <p>A product is only valuable against a problem. Line them up and the Pitch and Bonus stack write themselves.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>Problem → matching product element</li><li>The gaps worth closing</li><li>The backbone of your Pitch section</li></ul>` },
-  { name: 'Problems → Solutions', html: `
-    <p class="sop-lead">Show why the old ways failed them.</p>
-    <h4>What this step is</h4>
-    <p>We contrast the common (broken) solutions against the real fix — positioning the failures of the past as not their fault.</p>
-    <h4>Why it matters</h4>
-    <p>Removing blame lowers resistance and sets up your Method as the thing that was missing all along.</p>
-    <h4>What you'll walk away with</h4>
-    <ul><li>The failed alternatives named</li><li>Why each one let them down</li><li>The opening for your unique mechanism</li></ul>` },
+    <ul><li>The full problem map (per step, 4 value-equation lenses)</li><li>A named solution for each problem</li><li>The backbone of your Pitch &amp; Bonuses</li></ul>` },
   { name: 'Vehicle', html: `
     <p class="sop-lead">The <em>what</em> — the form your solution takes.</p>
     <h4>What this step is</h4>
@@ -261,6 +309,7 @@ function addProjectItem(name, active, id, type) {
 // ---------- PROJECT SELECTION + PER-PROJECT CHAT THREAD ----------
 let currentProjectId = null;   // Supabase project id (null in dummy mode)
 let currentThreadKey = null;   // localStorage key for dummy-mode threads
+let currentProjectType = 'dts-vsl';  // drives which copywriting section set renders
 
 function selectProject(el) {
   document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
@@ -269,6 +318,8 @@ function selectProject(el) {
   document.getElementById('project-name').textContent = name;
   currentProjectId = el.dataset.id || null;
   currentThreadKey = currentProjectId || ('dummy:' + name);
+  currentProjectType = el.dataset.type || 'dts-vsl';
+  renderVSL();               // re-render copywriting sections for THIS project's type
   closeStepContent();
   refreshStepStatuses();
   loadThread();
@@ -426,7 +477,7 @@ function renderSteps() {
     const tile = document.createElement('div');
     tile.className = 'step-tile';
     tile.dataset.step = i;
-    tile.innerHTML = `<span class="num">Step ${i + 1}</span><span class="dot"></span><div class="nm">${nm}</div>`;
+    tile.innerHTML = `<span class="num">Step ${STEP_LABELS[i]}</span><span class="dot"></span><div class="nm">${nm}</div>`;
     tile.onclick = () => { openSop(i); openStepContent(i); };
     grid.appendChild(tile);
   });
@@ -435,7 +486,7 @@ function renderSteps() {
 // ---------- STEP SOP PANEL ----------
 function openSop(i) {
   const sop = STEP_SOPS[i] || { name: STEP_NAMES[i] || 'Step', html: '<p class="sop-lead">SOP coming soon.</p>' };
-  document.getElementById('sop-step').textContent = 'Step ' + (i + 1);
+  document.getElementById('sop-step').textContent = 'Step ' + STEP_LABELS[i];
   document.getElementById('sop-name').textContent = sop.name;
   document.getElementById('sop-body').innerHTML = sop.html;
   document.getElementById('sop-panel').classList.remove('hidden');
@@ -506,7 +557,7 @@ function refreshStepStatuses() {
 
 function openStepContent(i) {
   const panel = document.getElementById('step-content');
-  document.getElementById('sc-badge').textContent = 'Step ' + (i + 1);
+  document.getElementById('sc-badge').textContent = 'Step ' + STEP_LABELS[i];
   document.getElementById('sc-title').textContent = STEP_NAMES[i];
   panel.dataset.step = i;
   renderStepBody(i);
@@ -548,7 +599,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (docume
 function renderVSL() {
   const grid = document.getElementById('vsl-grid');
   grid.innerHTML = '';
-  VSL_SECTIONS.forEach((s, i) => {
+  const sections = getSections(currentProjectType);
+  sections.forEach((s, i) => {
     const item = document.createElement('div');
     item.className = 'vsl-item';
     item.innerHTML =
@@ -557,6 +609,13 @@ function renderVSL() {
       `<textarea placeholder="Write your ${s.name.toLowerCase()} here..."></textarea>`;
     grid.appendChild(item);
   });
+  // framework badges reflect the project type + its section count
+  const label = TYPE_BADGE[currentProjectType] || 'DTS VSL';
+  const isWebinar = currentProjectType === 'dts-webinar';
+  const secBadge = document.getElementById('sections-badge');
+  if (secBadge) secBadge.textContent = label + ' · ' + sections.length + ' sections';
+  const fwBadge = document.getElementById('fw-badge');
+  if (fwBadge) fwBadge.textContent = label + (isWebinar ? ' Script · 0/' : ' Draft · 0/') + sections.length;
 }
 
 // ---------- CHAT ----------
