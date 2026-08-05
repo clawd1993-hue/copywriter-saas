@@ -565,7 +565,7 @@ function renderStepBody(i) {
     body.innerHTML = '';
     const div = document.createElement('div');
     div.style.whiteSpace = 'pre-wrap';
-    div.textContent = content;
+    div.innerHTML = mdToHtml(content);
     body.appendChild(div);
   } else {
     body.innerHTML = '<div class="sc-empty"><span class="sc-spark">✨</span>' +
@@ -651,10 +651,21 @@ const chatForm = document.getElementById('chat-form');
 const chatText = document.getElementById('chat-text');
 let history = [];
 
+// Safe minimal markdown → HTML. Escapes first (no injection), then bold/italic/code.
+function mdToHtml(text) {
+  let s = String(text == null ? '' : text)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');   // **bold**
+  s = s.replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>'); // *italic*
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');           // `code`
+  return s;
+}
+
 function addMsg(role, text) {
   const el = document.createElement('div');
   el.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
-  el.textContent = text;
+  if (role === 'user') el.textContent = text;   // user input stays literal
+  else el.innerHTML = mdToHtml(text);           // bot messages render markdown
   chatLog.appendChild(el);
   chatLog.scrollTop = chatLog.scrollHeight;
   return el;
