@@ -290,8 +290,10 @@ body {
   border-radius: 16px;
   box-shadow: 0 24px 70px rgba(0,0,0,0.28);
   padding: 22px;
-  animation: sopGrow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: modalGrow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* scale-only (card is flex-centered, so NO translate — translate caused the flash-then-jump) */
+@keyframes modalGrow { from { opacity: 0.5; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
 .np-modal-head { display: flex; align-items: center; justify-content: space-between; }
 .np-modal-head h3 { font-size: 1.15rem; font-weight: 700; }
 .np-sub { color: var(--text-dim); font-size: 0.85rem; margin: 2px 0 16px; }
