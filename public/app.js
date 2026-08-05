@@ -86,6 +86,19 @@ const STEP_SOPS = [
     <p class="sop-lead">Everything downstream is built on this. Nail it and the whole VSL writes itself.</p>
     <h4>What this step is</h4>
     <p>We pin down <strong>which of the 10 Reasons People Buy</strong> your offer delivers — the emotional drivers that make someone actually pull out their wallet. Most strong offers hit <strong>2–3</strong> of them.</p>
+    <h4>The 10 Reasons People Buy</h4>
+    <ol class="sop-reasons">
+      <li>Make more money</li>
+      <li>Save money</li>
+      <li>Save time</li>
+      <li>Avoid effort</li>
+      <li>Escape physical or mental pain</li>
+      <li>Get more comfort</li>
+      <li>Improve health / hygiene</li>
+      <li>Gain praise</li>
+      <li>Be loved</li>
+      <li>Increase status / popularity</li>
+    </ol>
     <h4>Why it matters</h4>
     <p>People buy on emotion and justify with logic. Lock in the real reasons they buy, and every hook, promise and proof point downstream lands harder.</p>
     <h4>What you'll walk away with</h4>

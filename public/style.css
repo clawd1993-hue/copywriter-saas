@@ -268,8 +268,10 @@ body {
 .sop-body h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--accent); margin: 16px 0 6px; }
 .sop-body h4:first-child { margin-top: 0; }
 .sop-body p { color: var(--text); margin-bottom: 8px; }
-.sop-body ul { margin: 4px 0 8px 18px; color: var(--text); }
+.sop-body ul, .sop-body ol { margin: 4px 0 8px 20px; color: var(--text); }
 .sop-body li { margin-bottom: 4px; }
+.sop-body ol.sop-reasons { margin: 6px 0 8px 22px; }
+.sop-body ol.sop-reasons li { margin-bottom: 3px; font-size: 0.88rem; }
 .sop-body .sop-lead { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 4px; }
 
 /* RIGHT chat */
