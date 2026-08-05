@@ -50,7 +50,7 @@ app.post('/api/chat', async (req, res) => {
 
   if (affirm) {
     return res.json({
-      reply: "Done ✅ — pushed it straight into your Customer Research bubble (Step 3). Notice: no refresh 👇 It just appeared.",
+      reply: "Done ✅ — pushed it straight into your Customer Research bubble (Step 3).",
       push: { step: DEMO_STEP, content: DEMO_CONTENT }
     });
   }
