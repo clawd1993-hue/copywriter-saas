@@ -225,9 +225,13 @@ body {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
   background: var(--accent-dim);
 }
-.sop-title { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; font-weight: 700; font-size: 0.98rem; }
-.panel-eyebrow { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700; color: var(--text-dim); }
-.panel-titlerow { display: flex; align-items: center; gap: 8px; }
+.sop-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.98rem; }
+/* Role tags — make the two panels instantly distinguishable in their header bars */
+.role-tag { padding: 4px 10px; border-radius: 12px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.role-tag--guide { background: #fff; color: var(--accent); border: 1.5px solid var(--accent); }   /* explainer = outlined */
+.role-tag--output { background: var(--accent); color: #fff; }                                        /* AI result = solid */
+.hdr-name { font-weight: 700; font-size: 0.95rem; }
+.hdr-step { color: var(--text-dim); font-weight: 600; }
 .sop-step {
   background: var(--accent); color: #fff;
   padding: 3px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 700;
@@ -401,7 +405,7 @@ body {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--accent-dim);
 }
-.sc-headmain { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.sc-headmain { display: flex; align-items: center; gap: 10px; }
 .sc-badge { background: var(--accent); color: #fff; padding: 3px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; }
 .sc-title { font-weight: 700; font-size: 0.95rem; }
 .sc-body { padding: 16px; font-size: 0.9rem; line-height: 1.55; color: var(--text); }
