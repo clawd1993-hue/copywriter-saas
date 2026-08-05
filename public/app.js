@@ -414,8 +414,8 @@ document.getElementById('np-create').addEventListener('click', async () => {
         // monthly cap (DB trigger) or other insert failure — don't create a phantom local project
         const capped = /PROJECT_LIMIT_REACHED/i.test(error.message || '');
         if (errEl) errEl.textContent = capped
-          ? "🗂️ You've used all 20 projects included in your plan this month. Your limit resets on the 1st. Need more? Reach out and we'll sort you out."
-          : 'Hmm, that didn\'t go through — give it another try.';
+          ? "You've reached your 20 projects for this month. They reset at the start of next month."
+          : 'Could not create the project — try again.';
         cbtn.disabled = false; cbtn.textContent = 'Create Project';
         return;
       }
