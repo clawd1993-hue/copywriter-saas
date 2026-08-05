@@ -403,7 +403,11 @@ function openNpModal() {
   document.querySelectorAll('.np-type').forEach(t => t.classList.remove('selected'));
   const nameEl = document.getElementById('np-name');
   nameEl.value = '';
-  document.getElementById('np-create').disabled = true;
+  const cbtn = document.getElementById('np-create');
+  cbtn.disabled = true;
+  cbtn.textContent = 'Create Project';           // reset — a prior create left it on "Creating…"
+  const errEl = document.getElementById('np-error');
+  if (errEl) errEl.textContent = '';
   document.getElementById('np-modal').classList.remove('hidden');
   setTimeout(() => nameEl.focus(), 40);
 }
