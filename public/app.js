@@ -530,6 +530,8 @@ document.getElementById('sop-expand').addEventListener('click', toggleExpandSop)
 function stepContentKey() { return currentProjectId || currentThreadKey || 'none'; }
 function stepContentStore() { try { return JSON.parse(localStorage.getItem('stepcontent:' + stepContentKey()) || '{}'); } catch (e) { return {}; } }
 function getStepContent(i) { return stepContentStore()[i] || null; }
+// The step the brain should work on = first of the 8 bubbles without pushed content.
+function currentStepIndex() { const s = stepContentStore(); for (let i = 0; i < 8; i++) { if (!s[i]) return i; } return 7; }
 
 function renderStepBody(i) {
   const body = document.getElementById('sc-body');
@@ -634,7 +636,7 @@ function addMsg(role, text) {
 }
 
 function greet() {
-  addMsg('bot', "👋 Hey — I'm your copywriter. Tell me about your offer and I'll walk you through the 8-step system, filling in the VSL sections on the left as we go. What are you selling?");
+  addMsg('bot', "👋 Hey — I'm your copywriting assistant. Type “I'm ready” when you're ready to start, and I'll walk you through the steps to craft your perfect VSL.");
 }
 
 chatForm.addEventListener('submit', async (e) => {
@@ -654,7 +656,7 @@ chatForm.addEventListener('submit', async (e) => {
     const r = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ messages: history })
+      body: JSON.stringify({ messages: history, currentStep: currentStepIndex() })
     });
     const data = await r.json();
     typing.remove();
