@@ -114,13 +114,15 @@ const STEP_SOPS = [
     <h4>What you'll walk away with</h4>
     <ul><li>One specific, sharpened market</li><li>Confidence it's worth building on</li><li>The exact person your VSL speaks to</li></ul>` },
   { name: 'Customer Research', html: `
-    <p class="sop-lead">This is where the gold is. We mine real words, not guesses.</p>
+    <p class="sop-lead">The gold step. Jimmy mines <strong>real</strong> words from real people — no guessing.</p>
     <h4>What this step is</h4>
-    <p>We dig into your customers' actual pains, fears, failures, desires and objections — in <em>their</em> words, from reviews, DMs, calls and comments.</p>
+    <p>Jimmy digs through real discussions in your market — <strong>Reddit, forums, reviews, comments</strong> — and pulls out how your customers actually talk about their problem, in their own words.</p>
     <h4>Why it matters</h4>
-    <p>The best copy is discovered, not invented. Feed the VSL real voice-of-customer and it feels like you're reading their mind.</p>
+    <p>The best copy is <em>discovered, not invented</em>. Feed the VSL real voice-of-customer and it feels like you're reading their mind. Everything downstream is built on this.</p>
+    <h4>The 5 categories he pulls</h4>
+    <ul><li>😣 <strong>Pains</strong> — what hurts</li><li>🚫 <strong>Objections</strong> — why they think nothing'll work</li><li>✨ <strong>Desires</strong> — the dream outcome</li><li>💸 <strong>Failures</strong> — what they've already tried</li><li>🔥 <strong>Motivations</strong> — the deeper why</li></ul>
     <h4>What you'll walk away with</h4>
-    <ul><li>Pains, fears &amp; failures</li><li>Desires &amp; motivations</li><li>The exact phrases to quote back to them</li></ul>` },
+    <ul><li>Real quotes &amp; language in their voice</li><li>A past → present → future picture of their life</li><li>The emotional ammo for every step after this</li></ul>` },
   { name: 'Problems & Solutions', html: `
     <p class="sop-lead">Turn every obstacle into a reason to buy. (Steps 4 &amp; 5 combined.)</p>
     <h4>What this step is</h4>
@@ -709,6 +711,14 @@ chatForm.addEventListener('submit', async (e) => {
   typing.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span>';
   chatLog.appendChild(typing);
   chatLog.scrollTop = chatLog.scrollHeight;
+  // If a reply takes a while (e.g. Step 3 deep research), reveal a "researching" caption so it doesn't feel frozen
+  const slowCaption = setTimeout(() => {
+    const cap = document.createElement('div');
+    cap.className = 'typing-caption';
+    cap.textContent = '🔎 Researching real sources… this can take up to a minute';
+    typing.appendChild(cap);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }, 4000);
 
   try {
     const headers = { 'content-type': 'application/json' };
@@ -722,6 +732,7 @@ chatForm.addEventListener('submit', async (e) => {
       body: JSON.stringify({ messages: history, currentStep: currentStepIndex() })
     });
     const data = await r.json();
+    clearTimeout(slowCaption);
     typing.remove();
     addMsg('bot', data.reply);
     history.push({ role: 'assistant', content: data.reply });
@@ -732,6 +743,7 @@ chatForm.addEventListener('submit', async (e) => {
       openStepContent(data.push.step);
     }
   } catch (err) {
+    clearTimeout(slowCaption);
     typing.remove();
     addMsg('bot', '⚠️ Could not reach the server.');
   }

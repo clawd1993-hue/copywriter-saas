@@ -47,8 +47,21 @@ const LEAK_REFUSAL = "🔒 Those source files are proprietary, licensed material
 // Universal 8 bubbles (index -> SOP filename). Only Step 1 wired for now; more come one at a time.
 const STEP_SOP_FILES = {
   0: 'step-01-core-desire.md',
-  1: 'step-02-market.md'
-  // 2: 'step-03-customer-research.md', ... (added step by step)
+  1: 'step-02-market.md',
+  2: 'step-03-customer-research.md'
+  // 3: 'step-04-05-problems-solutions.md', ... (added step by step)
+};
+
+// Per-step overrides. Step 3 (Customer Research) = real deep research: web tools on + big output cap + high effort.
+const STEP_CONFIG = {
+  2: {
+    maxTokens: 12000,
+    effort: 'high',
+    tools: [
+      { type: 'web_search_20260209', name: 'web_search', max_uses: 8 },
+      { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 8 }
+    ]
+  }
 };
 const STEP_NAMES = ['Core Desire', 'Market', 'Customer Research', 'Problems & Solutions', 'Vehicle', 'Method', 'Deliverables', 'Ad Concepts'];
 
@@ -75,44 +88,54 @@ function extractPush(text, stepIndex) {
   return { reply, push: { step: stepIndex, content } };
 }
 
-function callClaude(system, messages, opts = {}) {
-  const model = opts.model || MODEL;
-  const maxTokens = opts.maxTokens || MAX_OUTPUT_TOKENS;
+// Low-level single POST to the Messages API. Returns the parsed JSON.
+function anthropicRequest(payload) {
   return new Promise((resolve, reject) => {
-    const body = {
-      model,
-      max_tokens: maxTokens,
-      system,
-      messages: messages.map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: String(m.content || '') }))
-    };
-    if (opts.effort !== null) body.output_config = { effort: opts.effort || 'medium' };
-    const payload = JSON.stringify(body);
+    const body = JSON.stringify(payload);
     const reqOpts = {
       hostname: 'api.anthropic.com', path: '/v1/messages', method: 'POST',
       headers: {
         'content-type': 'application/json',
         'x-api-key': ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01',
-        'content-length': Buffer.byteLength(payload)
+        'content-length': Buffer.byteLength(body)
       }
     };
     const r = https.request(reqOpts, resp => {
       let data = '';
       resp.on('data', c => (data += c));
-      resp.on('end', () => {
-        try {
-          const j = JSON.parse(data);
-          if (j.type === 'error' || j.error) return reject(new Error((j.error && j.error.message) || 'API error'));
-          if (j.stop_reason === 'refusal') return resolve("I can't help with that particular request — let's keep it to your copy. Type 'I'm ready' to continue.");
-          const text = (j.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();
-          resolve(text || '(no reply)');
-        } catch (e) { reject(e); }
-      });
+      resp.on('end', () => { try { resolve(JSON.parse(data)); } catch (e) { reject(e); } });
     });
     r.on('error', reject);
-    r.write(payload);
+    r.write(body);
     r.end();
   });
+}
+
+async function callClaude(system, messages, opts = {}) {
+  const model = opts.model || MODEL;
+  const maxTokens = opts.maxTokens || MAX_OUTPUT_TOKENS;
+  const base = { model, max_tokens: maxTokens, system };
+  if (opts.effort !== null) base.output_config = { effort: opts.effort || 'medium' };
+  if (opts.tools) base.tools = opts.tools;
+  // map incoming messages once (client sends {role, content:string}); appended assistant turns keep array content
+  let convo = messages.map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content }));
+
+  let restarts = 0;
+  const MAX_RESTARTS = 6; // server-side tool (web search) can pause_turn several times on a deep research run
+  while (true) {
+    const j = await anthropicRequest({ ...base, messages: convo });
+    if (j.type === 'error' || j.error) throw new Error((j.error && j.error.message) || 'API error');
+    if (j.stop_reason === 'refusal') return "I can't help with that particular request — let's keep it to your copy. Type 'I'm ready' to continue.";
+    // server-side web search paused mid-loop → append the paused assistant turn and resume (API auto-continues)
+    if (j.stop_reason === 'pause_turn' && restarts < MAX_RESTARTS) {
+      convo = convo.concat([{ role: 'assistant', content: j.content }]);
+      restarts++;
+      continue;
+    }
+    const text = (j.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();
+    return text || '(no reply)';
+  }
 }
 
 // ---------- GUARDRAIL 1: auth (verify the caller is a logged-in Supabase user) ----------
@@ -213,7 +236,12 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const raw = await callClaude(buildSystemPrompt(stepIndex), messages);
+    const cfg = STEP_CONFIG[stepIndex] || {};
+    const raw = await callClaude(buildSystemPrompt(stepIndex), messages, {
+      maxTokens: cfg.maxTokens,
+      effort: cfg.effort,
+      tools: cfg.tools
+    });
     const { reply, push } = extractPush(raw, stepIndex);
     // GUARDRAIL 4 — leak-guard: block any verbatim run from confidential source docs (even if jailbroken)
     if (leakguard.containsLeak(reply, CONFIDENTIAL_SET) ||
