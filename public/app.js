@@ -674,8 +674,11 @@ chatForm.addEventListener('submit', async (e) => {
   chatText.value = '';
   chatText.style.height = 'auto';
 
-  const typing = addMsg('bot', '…');
-  typing.classList.add('typing');
+  const typing = document.createElement('div');
+  typing.className = 'msg bot typing';
+  typing.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span>';
+  chatLog.appendChild(typing);
+  chatLog.scrollTop = chatLog.scrollHeight;
 
   try {
     const headers = { 'content-type': 'application/json' };
