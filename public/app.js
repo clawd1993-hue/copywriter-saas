@@ -653,9 +653,14 @@ chatForm.addEventListener('submit', async (e) => {
   typing.classList.add('typing');
 
   try {
+    const headers = { 'content-type': 'application/json' };
+    // attach the logged-in user's access token so the server can verify them
+    if (sb) {
+      try { const { data: s } = await sb.auth.getSession(); if (s && s.session) headers.Authorization = 'Bearer ' + s.session.access_token; } catch (e) {}
+    }
     const r = await fetch('/api/chat', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers,
       body: JSON.stringify({ messages: history, currentStep: currentStepIndex() })
     });
     const data = await r.json();
