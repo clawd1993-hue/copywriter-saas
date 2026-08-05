@@ -207,7 +207,6 @@ window.addEventListener('load', initAuth);
 function boot(authed) {
   renderSteps();
   renderVSL();
-  greet();
   if (authed && sb) { loadProjects(); } else { renderDummyProjects(); }
   wireNewProject(authed);
 }
@@ -216,6 +215,8 @@ function renderDummyProjects() {
   const list = document.getElementById('project-list');
   list.innerHTML = '';
   DUMMY_PROJECTS.forEach((name, i) => addProjectItem(name, i === 0));
+  const first = list.querySelector('.project-item');
+  if (first) selectProject(first);
 }
 
 // Load THIS user's projects from the database (only theirs — RLS enforces it)
@@ -230,6 +231,8 @@ async function loadProjects() {
     if (created) data.push(created);
   }
   data.forEach((p, i) => addProjectItem(p.title, i === 0, p.id));
+  const first = list.querySelector('.project-item');
+  if (first) selectProject(first);
 }
 
 function addProjectItem(name, active, id, type) {
@@ -239,13 +242,58 @@ function addProjectItem(name, active, id, type) {
   el.textContent = name;
   el.dataset.id = id || '';
   el.dataset.type = type || (id ? (projectTypes()[id] || '') : '');
-  el.onclick = () => {
-    document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('project-name').textContent = name;
-  };
+  el.onclick = () => selectProject(el);
   list.appendChild(el);
   if (active) document.getElementById('project-name').textContent = name;
+  return el;
+}
+
+// ---------- PROJECT SELECTION + PER-PROJECT CHAT THREAD ----------
+let currentProjectId = null;   // Supabase project id (null in dummy mode)
+let currentThreadKey = null;   // localStorage key for dummy-mode threads
+
+function selectProject(el) {
+  document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const name = el.textContent;
+  document.getElementById('project-name').textContent = name;
+  currentProjectId = el.dataset.id || null;
+  currentThreadKey = currentProjectId || ('dummy:' + name);
+  loadThread();
+}
+
+function localThread(key) { try { return JSON.parse(localStorage.getItem('thread:' + key) || '[]'); } catch (e) { return []; } }
+
+async function loadThread() {
+  chatLog.innerHTML = '';
+  history = [];
+  let msgs = [];
+  if (sb && currentProjectId) {
+    const { data } = await sb.from('messages')
+      .select('role,content').eq('project_id', currentProjectId)
+      .order('created_at', { ascending: true });
+    msgs = data || [];
+  } else {
+    msgs = localThread(currentThreadKey);
+  }
+  if (!msgs.length) {
+    greet();  // greeting is visual only — never persisted, shown for a fresh thread
+    return;
+  }
+  msgs.forEach(m => {
+    addMsg(m.role === 'user' ? 'user' : 'bot', m.content);
+    history.push({ role: m.role, content: m.content });
+  });
+}
+
+async function persistMsg(role, content) {
+  if (sb && currentProjectId) {
+    try { await sb.from('messages').insert({ project_id: currentProjectId, role, content }); } catch (e) { console.warn('msg save failed', e); }
+  } else if (currentThreadKey) {
+    const arr = localThread(currentThreadKey);
+    arr.push({ role, content });
+    localStorage.setItem('thread:' + currentThreadKey, JSON.stringify(arr));
+  }
 }
 
 function wireNewProject() {
@@ -299,8 +347,8 @@ document.getElementById('np-create').addEventListener('click', async () => {
       id = data && data.id;
     }
     saveProjectType(id, type);
-    document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
-    addProjectItem(name, true, id, type);
+    const el = addProjectItem(name, true, id, type);
+    selectProject(el);
     closeNpModal();
   } finally {
     cbtn.textContent = 'Create Project';
@@ -416,6 +464,7 @@ chatForm.addEventListener('submit', async (e) => {
   if (!text) return;
   addMsg('user', text);
   history.push({ role: 'user', content: text });
+  persistMsg('user', text);
   chatText.value = '';
   chatText.style.height = 'auto';
 
@@ -432,6 +481,7 @@ chatForm.addEventListener('submit', async (e) => {
     typing.remove();
     addMsg('bot', data.reply);
     history.push({ role: 'assistant', content: data.reply });
+    persistMsg('assistant', data.reply);
   } catch (err) {
     typing.remove();
     addMsg('bot', '⚠️ Could not reach the server.');
