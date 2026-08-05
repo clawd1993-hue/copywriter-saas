@@ -366,6 +366,18 @@ function wireNewProject() {
   btn.onclick = openNpModal;
 }
 
+// ---------- HELP / TRAINING MODAL ----------
+(function wireHelpModal() {
+  const modal = document.getElementById('help-modal');
+  const openBtn = document.getElementById('help-btn');
+  if (!modal || !openBtn) return;
+  const open = () => modal.classList.remove('hidden');
+  const close = () => modal.classList.add('hidden');
+  openBtn.addEventListener('click', open);
+  document.getElementById('help-close').addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target.id === 'help-modal') close(); });
+})();
+
 // ---------- NEW PROJECT MODAL ----------
 let npSelectedType = null;
 function projectTypes() { try { return JSON.parse(localStorage.getItem('projectTypes') || '{}'); } catch (e) { return {}; } }

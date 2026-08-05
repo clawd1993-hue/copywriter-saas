@@ -94,6 +94,14 @@ body {
   background: var(--accent); color: #fff;
   display: flex; align-items: center; justify-content: center; font-weight: 700;
 }
+.help-btn {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim);
+  font-size: 0.85rem; font-weight: 700; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.help-btn:hover { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
 
 .workspace { flex: 1; display: flex; min-height: 0; }
 
@@ -294,6 +302,21 @@ body {
   padding: 22px;
   animation: modalGrow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* Help / training modal — big window */
+.help-card { width: min(760px, 94vw); }
+.help-video-placeholder {
+  margin-top: 16px; border-radius: 12px;
+  background: var(--surface2); border: 1px dashed var(--border);
+  aspect-ratio: 16 / 9; width: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+}
+.hvp-play {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; padding-left: 4px;
+}
+.hvp-text { color: var(--text-dim); font-size: 0.9rem; font-weight: 600; }
 /* scale-only (card is flex-centered, so NO translate — translate caused the flash-then-jump) */
 @keyframes modalGrow { from { opacity: 0.5; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
 .np-modal-head { display: flex; align-items: center; justify-content: space-between; }

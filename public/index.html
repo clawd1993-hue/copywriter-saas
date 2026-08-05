@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copywriter AI</title>
-  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="style.css?v=15">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -33,6 +33,7 @@
       <div class="brand">✍️ Copywriter AI</div>
       <div class="topbar-right">
         <span class="plan-pill">Elite · 20 projects/mo</span>
+        <button id="help-btn" class="help-btn" title="Help &amp; training" aria-label="Help">?</button>
         <div class="avatar" title="clawd1993@gmail.com">M</div>
       </div>
     </header>
@@ -116,6 +117,22 @@
     </div>
   </div>
 
+  <!-- HELP / TRAINING MODAL -->
+  <div id="help-modal" class="np-modal hidden">
+    <div class="np-modal-card help-card">
+      <div class="np-modal-head">
+        <h3>How to use Jimmy Labs</h3>
+        <button id="help-close" class="sop-icon-btn" title="Close">✕</button>
+      </div>
+      <p class="np-sub">Your quick-start walkthrough.</p>
+      <!-- PLACEHOLDER: training video goes here later -->
+      <div class="help-video-placeholder">
+        <div class="hvp-play">▶</div>
+        <div class="hvp-text">Training video coming soon</div>
+      </div>
+    </div>
+  </div>
+
   <!-- NEW PROJECT MODAL -->
   <div id="np-modal" class="np-modal hidden">
     <div class="np-modal-card">
@@ -163,6 +180,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=21"></script>
+  <script src="app.js?v=22"></script>
 </body>
 </html>
