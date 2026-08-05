@@ -283,7 +283,7 @@ async function loadProjects() {
   if (first) selectProject(first);
 }
 
-function addProjectItem(name, active, id, type) {
+function addProjectItem(name, active, id, type, prepend) {
   const list = document.getElementById('project-list');
   const el = document.createElement('div');
   el.className = 'project-item' + (active ? ' active' : '');
@@ -301,7 +301,8 @@ function addProjectItem(name, active, id, type) {
   el.appendChild(nameSpan);
   el.appendChild(trash);
   el.onclick = () => selectProject(el);
-  list.appendChild(el);
+  if (prepend && list.firstChild) list.insertBefore(el, list.firstChild);
+  else list.appendChild(el);
   if (active) document.getElementById('project-name').textContent = name;
   return el;
 }
@@ -410,7 +411,7 @@ document.getElementById('np-create').addEventListener('click', async () => {
       id = data && data.id;
     }
     saveProjectType(id, type);
-    const el = addProjectItem(name, true, id, type);
+    const el = addProjectItem(name, true, id, type, true); // prepend — newest on top, like ChatGPT
     selectProject(el);
     closeNpModal();
   } finally {

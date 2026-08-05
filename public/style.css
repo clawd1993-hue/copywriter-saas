@@ -138,7 +138,9 @@ body {
 .sidebar.collapsed .sidebar-toggle .ico-collapse { display: none; }
 .sidebar.collapsed .sidebar-toggle .ico-expand { display: block; }
 .sidebar-label { color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
-.project-list { display: flex; flex-direction: column; gap: 6px; }
+.project-list { display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-right: 2px; }
+.project-list::-webkit-scrollbar { width: 6px; }
+.project-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 .project-item {
   padding: 10px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.9rem; border: 1px solid transparent;
