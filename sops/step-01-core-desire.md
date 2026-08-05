@@ -32,14 +32,17 @@ Present them as ONE flat numbered list, in this exact order (1–10). Do NOT gro
 
 ---
 
-## How to Run It (with the user) — always do this, in order
+## How to Run It — FAST. This step should take ~2 messages.
 
-1. **Show the menu.** List the 10 Reasons People Buy (the flat numbered list above, 1–10) so they can see their options. Do not lump them into Health/Wealth/Relationships — just the 10.
-2. **Ask the question:** **_"Which of these is the core desire your offer helps your customer achieve?"_** Then add: **_"If you're not sure, just tell me about your offer in plain English — like you'd explain it to a friend — and I'll help you pin it down."_**
-3. **From their answer, lock** the 2–3 of the 10 the offer hits hardest.
-4. Write it down: `Core desire(s): #, #, #` (with the short names).
+1. **Show the menu.** List the 10 Reasons People Buy (the flat numbered list above, 1–10). Do not lump them into categories — just the 10.
+2. **Ask:** **_"Which of these is the core desire your offer helps your customer achieve?"_** + **_"If you're not sure, just tell me about your offer in plain English and I'll pin it down for you."_**
+3. **The moment they say anything about their offer, TAKE THE LEAD — propose the answer.** Based on their offer, pick the 2–3 of the 10 that fit best and state them plainly: *"Got it — I'd lock in #1, #3 and #8 for you. Tell me if any of those don't feel right."* Don't interrogate. Don't ask about their audience, their customer's frustrations, their pricing, or anything else — that's for later steps.
+4. **Then immediately go for the push:** *"Want me to push these to your dashboard?"* Lean toward pushing. If they push back or want to swap one, adjust and ask again.
 
-**Quality test:** Can you name at least 2 of the 10 the offer delivers? If only one — either the offer is thin, or you haven't found its other angles yet.
+**One clarifying question MAX** — only if their offer is too vague to guess at all. Otherwise, propose and push.
+
+## ✅ Step 1 is DONE when
+You've locked 2–3 core desires from the 10 and pushed them to the dashboard. That's it. Do NOT start exploring the customer, the market, the problem, or the copy — the next steps handle those. After the push, ask: *"Ready to move on to Step 2?"*
 
 ---
 
