@@ -320,6 +320,7 @@ body {
   border: 1px solid var(--border); border-radius: 10px; background: var(--surface2);
 }
 .np-name-input:focus { outline: none; border-color: var(--accent); background: #fff; }
+.np-error { color: #d33; font-size: 0.85rem; margin: 10px 2px 0; min-height: 1em; }
 .np-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
 .np-btn { border: none; padding: 11px 18px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.9rem; font-family: inherit; transition: 0.15s; }
 .np-btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }

@@ -403,19 +403,31 @@ document.getElementById('np-create').addEventListener('click', async () => {
   const type = npSelectedType;
   if (!name || !type) return;
   const cbtn = document.getElementById('np-create');
+  const errEl = document.getElementById('np-error');
+  if (errEl) errEl.textContent = '';
   cbtn.disabled = true; cbtn.textContent = 'Creating…';
   try {
     let id = null;
     if (sb) {
-      const { data } = await sb.from('projects').insert({ title: name }).select().single();
+      const { data, error } = await sb.from('projects').insert({ title: name }).select().single();
+      if (error) {
+        // monthly cap (DB trigger) or other insert failure — don't create a phantom local project
+        const capped = /PROJECT_LIMIT_REACHED/i.test(error.message || '');
+        if (errEl) errEl.textContent = capped
+          ? "You've reached your 20 projects for this month. They reset at the start of next month."
+          : 'Could not create the project — try again.';
+        cbtn.disabled = false; cbtn.textContent = 'Create Project';
+        return;
+      }
       id = data && data.id;
     }
     saveProjectType(id, type);
     const el = addProjectItem(name, true, id, type, true); // prepend — newest on top, like ChatGPT
     selectProject(el);
     closeNpModal();
-  } finally {
-    cbtn.textContent = 'Create Project';
+  } catch (e) {
+    if (errEl) errEl.textContent = 'Could not create the project — try again.';
+    cbtn.disabled = false; cbtn.textContent = 'Create Project';
   }
 });
 
