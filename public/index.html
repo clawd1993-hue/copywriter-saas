@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copywriter AI</title>
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -65,6 +65,16 @@
           <div class="board-block">
             <h3>8-Step System</h3>
             <div id="steps-grid" class="steps-grid"></div>
+          </div>
+
+          <!-- Step content — AI pushes each step's output here (opens under the tiles) -->
+          <div id="step-content" class="step-content">
+            <div class="sc-head">
+              <span id="sc-badge" class="sc-badge">Step 1</span>
+              <span id="sc-title" class="sc-title">Core Desire</span>
+              <button id="sc-close" class="sop-icon-btn" title="Close">✕</button>
+            </div>
+            <div id="sc-body" class="sc-body"></div>
           </div>
 
           <div class="board-block">
@@ -152,6 +162,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>

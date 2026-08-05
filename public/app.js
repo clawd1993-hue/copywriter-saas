@@ -269,6 +269,8 @@ function selectProject(el) {
   document.getElementById('project-name').textContent = name;
   currentProjectId = el.dataset.id || null;
   currentThreadKey = currentProjectId || ('dummy:' + name);
+  closeStepContent();
+  refreshStepStatuses();
   loadThread();
 }
 
@@ -425,7 +427,7 @@ function renderSteps() {
     tile.className = 'step-tile';
     tile.dataset.step = i;
     tile.innerHTML = `<span class="num">Step ${i + 1}</span><span class="dot"></span><div class="nm">${nm}</div>`;
-    tile.onclick = () => openSop(i);
+    tile.onclick = () => { openSop(i); openStepContent(i); };
     grid.appendChild(tile);
   });
 }
@@ -472,6 +474,62 @@ function closeSop() {
 
 document.getElementById('sop-close').addEventListener('click', closeSop);
 document.getElementById('sop-expand').addEventListener('click', toggleExpandSop);
+
+// ---------- STEP CONTENT PANEL (where the AI pushes each step's output) ----------
+function stepContentKey() { return currentProjectId || currentThreadKey || 'none'; }
+function stepContentStore() { try { return JSON.parse(localStorage.getItem('stepcontent:' + stepContentKey()) || '{}'); } catch (e) { return {}; } }
+function getStepContent(i) { return stepContentStore()[i] || null; }
+
+function renderStepBody(i) {
+  const body = document.getElementById('sc-body');
+  const content = getStepContent(i);
+  if (content) {
+    body.innerHTML = '';
+    const div = document.createElement('div');
+    div.style.whiteSpace = 'pre-wrap';
+    div.textContent = content;
+    body.appendChild(div);
+  } else {
+    body.innerHTML = '<div class="sc-empty"><span class="sc-spark">✨</span>' +
+      '<div>Nothing here yet. When the AI finishes <b>' + STEP_NAMES[i] + '</b>, it\'ll push that output straight into this bubble.</div></div>';
+  }
+}
+
+function markStepDone(i) {
+  const tile = document.querySelector('.step-tile[data-step="' + i + '"]');
+  if (tile) tile.classList.add('done');
+}
+function refreshStepStatuses() {
+  const store = stepContentStore();
+  document.querySelectorAll('.step-tile').forEach(t => t.classList.toggle('done', !!store[+t.dataset.step]));
+}
+
+function openStepContent(i) {
+  const panel = document.getElementById('step-content');
+  document.getElementById('sc-badge').textContent = 'Step ' + (i + 1);
+  document.getElementById('sc-title').textContent = STEP_NAMES[i];
+  panel.dataset.step = i;
+  renderStepBody(i);
+  // collapse then re-expand each time so the open reads clearly (Michael's ask)
+  panel.classList.remove('open');
+  void panel.offsetWidth;
+  panel.classList.add('open');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function closeStepContent() { document.getElementById('step-content').classList.remove('open'); }
+document.getElementById('sc-close').addEventListener('click', closeStepContent);
+
+// INTEGRATION POINT for the brain: call when the AI completes a step's output.
+// pushStepContent(stepIndex, "the generated copy / research / etc")
+function pushStepContent(i, content) {
+  const store = stepContentStore();
+  store[i] = content;
+  localStorage.setItem('stepcontent:' + stepContentKey(), JSON.stringify(store));
+  markStepDone(i);
+  const panel = document.getElementById('step-content');
+  if (panel.classList.contains('open') && +panel.dataset.step === i) renderStepBody(i);
+}
+window.pushStepContent = pushStepContent;
 
 // ---------- SIDEBAR COLLAPSE ----------
 (function initSidebarToggle() {
