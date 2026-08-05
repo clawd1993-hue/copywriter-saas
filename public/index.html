@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copywriter AI</title>
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -106,6 +106,36 @@
     </div>
   </div>
 
-  <script src="app.js?v=8"></script>
+  <!-- NEW PROJECT MODAL -->
+  <div id="np-modal" class="np-modal hidden">
+    <div class="np-modal-card">
+      <div class="np-modal-head">
+        <h3>New Project</h3>
+        <button id="np-close" class="sop-icon-btn" title="Close">✕</button>
+      </div>
+      <p class="np-sub">Pick your funnel type</p>
+      <div class="np-types">
+        <button class="np-type" data-type="dts-vsl">
+          <div class="np-type-row"><span class="np-type-name">Direct-To-Sale VSL</span><span class="np-type-price">$0–$497</span></div>
+          <div class="np-type-desc">Sell a low-ticket digital product on autopilot</div>
+        </button>
+        <button class="np-type" data-type="dts-webinar">
+          <div class="np-type-row"><span class="np-type-name">Direct-To-Sale Webinar</span><span class="np-type-price">$497–$1,997</span></div>
+          <div class="np-type-desc">Sell a mid-ticket offer on autopilot</div>
+        </button>
+        <button class="np-type" data-type="call-booker">
+          <div class="np-type-row"><span class="np-type-name">Call-Booker VSL</span><span class="np-type-price">$1,997–$10k+</span></div>
+          <div class="np-type-desc">Book sales calls for high-ticket offers</div>
+        </button>
+      </div>
+      <input id="np-name" class="np-name-input" type="text" placeholder="Name your project…" />
+      <div class="np-actions">
+        <button id="np-cancel" class="np-btn np-btn-ghost">Cancel</button>
+        <button id="np-create" class="np-btn np-btn-primary" disabled>Create Project</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=9"></script>
 </body>
 </html>

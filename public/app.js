@@ -232,12 +232,13 @@ async function loadProjects() {
   data.forEach((p, i) => addProjectItem(p.title, i === 0, p.id));
 }
 
-function addProjectItem(name, active, id) {
+function addProjectItem(name, active, id, type) {
   const list = document.getElementById('project-list');
   const el = document.createElement('div');
   el.className = 'project-item' + (active ? ' active' : '');
   el.textContent = name;
   el.dataset.id = id || '';
+  el.dataset.type = type || (id ? (projectTypes()[id] || '') : '');
   el.onclick = () => {
     document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
@@ -247,22 +248,64 @@ function addProjectItem(name, active, id) {
   if (active) document.getElementById('project-name').textContent = name;
 }
 
-function wireNewProject(authed) {
+function wireNewProject() {
   const btn = document.getElementById('new-project-btn');
   if (!btn) return;
-  btn.onclick = async () => {
-    const name = prompt('Name your project:');
-    if (!name) return;
-    if (authed && sb) {
-      const { data } = await sb.from('projects').insert({ title: name }).select().single();
-      addProjectItem(name, true, data && data.id);
-      document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
-      [...document.querySelectorAll('.project-item')].find(p => p.textContent === name)?.classList.add('active');
-    } else {
-      addProjectItem(name, true);
-    }
-  };
+  btn.onclick = openNpModal;
 }
+
+// ---------- NEW PROJECT MODAL ----------
+let npSelectedType = null;
+function projectTypes() { try { return JSON.parse(localStorage.getItem('projectTypes') || '{}'); } catch (e) { return {}; } }
+function saveProjectType(id, type) { if (!id) return; const m = projectTypes(); m[id] = type; localStorage.setItem('projectTypes', JSON.stringify(m)); }
+
+function openNpModal() {
+  npSelectedType = null;
+  document.querySelectorAll('.np-type').forEach(t => t.classList.remove('selected'));
+  const nameEl = document.getElementById('np-name');
+  nameEl.value = '';
+  document.getElementById('np-create').disabled = true;
+  document.getElementById('np-modal').classList.remove('hidden');
+  setTimeout(() => nameEl.focus(), 40);
+}
+function closeNpModal() { document.getElementById('np-modal').classList.add('hidden'); }
+function npRefresh() {
+  const name = document.getElementById('np-name').value.trim();
+  document.getElementById('np-create').disabled = !(npSelectedType && name);
+}
+document.querySelectorAll('.np-type').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.np-type').forEach(t => t.classList.remove('selected'));
+    btn.classList.add('selected');
+    npSelectedType = btn.dataset.type;
+    npRefresh();
+  });
+});
+document.getElementById('np-name').addEventListener('input', npRefresh);
+document.getElementById('np-name').addEventListener('keydown', e => { if (e.key === 'Enter' && !document.getElementById('np-create').disabled) document.getElementById('np-create').click(); });
+document.getElementById('np-cancel').addEventListener('click', closeNpModal);
+document.getElementById('np-close').addEventListener('click', closeNpModal);
+document.getElementById('np-modal').addEventListener('click', e => { if (e.target.id === 'np-modal') closeNpModal(); });
+document.getElementById('np-create').addEventListener('click', async () => {
+  const name = document.getElementById('np-name').value.trim();
+  const type = npSelectedType;
+  if (!name || !type) return;
+  const cbtn = document.getElementById('np-create');
+  cbtn.disabled = true; cbtn.textContent = 'Creating…';
+  try {
+    let id = null;
+    if (sb) {
+      const { data } = await sb.from('projects').insert({ title: name }).select().single();
+      id = data && data.id;
+    }
+    saveProjectType(id, type);
+    document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+    addProjectItem(name, true, id, type);
+    closeNpModal();
+  } finally {
+    cbtn.textContent = 'Create Project';
+  }
+});
 
 function renderSteps() {
   const grid = document.getElementById('steps-grid');
