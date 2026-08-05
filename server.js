@@ -33,24 +33,34 @@ app.get('/api/config', (req, res) => {
 // Otherwise return a mock copywriter-style reply so the UX works with no key (dummy mode).
 app.post('/api/chat', async (req, res) => {
   const messages = (req.body && req.body.messages) || [];
-  const last = messages.length ? messages[messages.length - 1].content : '';
+  const last = (messages.length ? messages[messages.length - 1].content : '').trim();
 
-  if (!ANTHROPIC_API_KEY) {
-    // DUMMY BRAIN — placeholder. Real system prompt drops in here later.
-    const reply =
-      `🧠 (dummy brain — no real system loaded yet)\n\n` +
-      `Got it: "${last}"\n\n` +
-      `In the real version I'd walk you through the 8-step system here — starting with your Core Desire, ` +
-      `then filling the VSL sections on the left as we go. Right now I'm just a placeholder so you can see the flow.`;
-    return res.json({ reply });
-  }
+  // --- DEMO PUSH PROTOCOL (temporary — until the real per-step brain is wired) ---
+  // The rule that will be hard-baked into every step's SOP: ALWAYS draft, then ASK
+  // before pushing. Only push on an affirmative reply. Lets Michael feel the flow now.
+  const affirm = /^(yes|yep|yeah|yup|ya|push|push it|go|go ahead|do it|sure|ok(ay)?|please|send it|yes please)\b/i.test(last);
+  const DEMO_STEP = 2; // Step 3 · Customer Research (0-indexed bubble)
+  const DEMO_CONTENT =
+    "[DEMO OUTPUT — the real version comes from Jim's SOP]\n\n" +
+    "PAINS\n• The 3am problem that keeps them up\n• The daily grind they live with\n\n" +
+    "OBJECTIONS\n• Why they think nothing will work for someone like them\n\n" +
+    "DESIRES\n• Their dream outcome, in their own words\n\n" +
+    "FAILURES\n• Everything they've already tried that flopped\n\n" +
+    "MOTIVATIONS\n• The deeper why — who they're really doing this for";
 
-  try {
-    const reply = await callClaude(messages);
-    res.json({ reply });
-  } catch (e) {
-    res.status(500).json({ reply: `⚠️ Error talking to Claude: ${e.message}` });
+  if (affirm) {
+    return res.json({
+      reply: "Done ✅ — pushed it straight into your Customer Research bubble (Step 3). Notice: no refresh 👇 It just appeared.",
+      push: { step: DEMO_STEP, content: DEMO_CONTENT }
+    });
   }
+  return res.json({
+    reply:
+      "Here's a quick draft for Step 3 · Customer Research:\n\n" + DEMO_CONTENT +
+      "\n\n(This is just a demo so you can feel the push flow — the real output will come from Jim's SOPs.)\n\n" +
+      "Want me to push it to the dashboard? Reply \"yes\".",
+    push: null
+  });
 });
 
 function callClaude(messages) {

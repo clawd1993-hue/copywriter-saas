@@ -661,6 +661,11 @@ chatForm.addEventListener('submit', async (e) => {
     addMsg('bot', data.reply);
     history.push({ role: 'assistant', content: data.reply });
     persistMsg('assistant', data.reply);
+    // Live push: AI approved content → fill the matching bubble instantly (no refresh) + pop it open
+    if (data.push && typeof data.push.step === 'number') {
+      pushStepContent(data.push.step, data.push.content);
+      openStepContent(data.push.step);
+    }
   } catch (err) {
     typing.remove();
     addMsg('bot', '⚠️ Could not reach the server.');
