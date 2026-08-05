@@ -687,7 +687,7 @@ function addMsg(role, text) {
 }
 
 function greet() {
-  addMsg('bot', "👋 Hey, I'm Jimmy — your copywriting assistant. Type “I'm ready” when you're ready to start, and I'll walk you through the steps to craft your perfect VSL.");
+  addMsg('bot', "👋 Hey, I'm Jimmy — your AI copywriting assistant. Type “I'm ready” when you're ready to start, and I'll walk you through the steps to craft your perfect VSL.");
 }
 
 chatForm.addEventListener('submit', async (e) => {
