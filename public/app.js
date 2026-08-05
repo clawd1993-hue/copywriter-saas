@@ -109,7 +109,7 @@ const STEP_SOPS = [
     <p>We pin down <strong>exactly who you're selling to</strong> and sharpen it into one specific, self-identifying person — then check it's a <strong>"starving crowd"</strong> worth building on.</p>
     <h4>Why it matters</h4>
     <p>The #1 advantage in business isn't the product or the copy — it's selling to people who are <em>starving</em> for a solution. Nail the market and everything downstream gets easier.</p>
-    <h4>What makes a starving crowd</h4>
+    <h4>What makes a perfect market</h4>
     <ul><li>💰 Already spending money to fix it</li><li>📍 Easy to reach — they gather online</li><li>🔥 Desperate — a 2 AM problem, not a nice-to-have</li><li>📈 Growing, not dying</li></ul>
     <h4>What you'll walk away with</h4>
     <ul><li>One specific, sharpened market</li><li>Confidence it's worth building on</li><li>The exact person your VSL speaks to</li></ul>` },
