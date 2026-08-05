@@ -319,6 +319,19 @@ function closeSop() {
 
 document.getElementById('sop-close').addEventListener('click', closeSop);
 document.getElementById('sop-expand').addEventListener('click', toggleExpandSop);
+
+// ---------- SIDEBAR COLLAPSE ----------
+(function initSidebarToggle() {
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('sidebar-toggle');
+  if (!sidebar || !toggle) return;
+  if (localStorage.getItem('sidebarCollapsed') === '1') sidebar.classList.add('collapsed');
+  toggle.addEventListener('click', () => {
+    const collapsed = sidebar.classList.toggle('collapsed');
+    toggle.title = collapsed ? 'Expand menu' : 'Collapse menu';
+    localStorage.setItem('sidebarCollapsed', collapsed ? '1' : '0');
+  });
+})();
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (document.getElementById('sop-panel').classList.contains('expanded')) collapseSop(); else if (!document.getElementById('sop-panel').classList.contains('hidden')) closeSop(); } });
 
 function renderVSL() {
