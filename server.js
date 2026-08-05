@@ -46,8 +46,9 @@ const { set: CONFIDENTIAL_SET, docs: CONFIDENTIAL_DOCS } = leakguard.buildConfid
 const LEAK_REFUSAL = "🔒 Those source files are proprietary, licensed material held securely on our backend. I draw on them privately when crafting your copy, but I can't reproduce or display them here — that's a hard rule, for intellectual-property and client-confidentiality reasons. What I *can* do is put that firepower to work on your VSL. Where were we?";
 // Universal 8 bubbles (index -> SOP filename). Only Step 1 wired for now; more come one at a time.
 const STEP_SOP_FILES = {
-  0: 'step-01-core-desire.md'
-  // 1: 'step-02-market.md', 2: 'step-03-customer-research.md', ... (added step by step)
+  0: 'step-01-core-desire.md',
+  1: 'step-02-market.md'
+  // 2: 'step-03-customer-research.md', ... (added step by step)
 };
 const STEP_NAMES = ['Core Desire', 'Market', 'Customer Research', 'Problems & Solutions', 'Vehicle', 'Method', 'Deliverables', 'Ad Concepts'];
 

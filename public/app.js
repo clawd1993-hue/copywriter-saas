@@ -104,13 +104,15 @@ const STEP_SOPS = [
     <h4>What you'll walk away with</h4>
     <ul><li>Your 2–3 core desires from the 10 (e.g. make more money, save time, gain praise)</li><li>The emotional fuel for your hooks &amp; pitch</li><li>A rock-solid foundation for every step that follows</li></ul>` },
   { name: 'Market', html: `
-    <p class="sop-lead">Who are we actually talking to?</p>
+    <p class="sop-lead">A great offer to the wrong crowd dies. This locks the right one.</p>
     <h4>What this step is</h4>
-    <p>We define the exact market — who they are, where they are in their journey, and how aware they are of the problem and the solutions out there.</p>
+    <p>We pin down <strong>exactly who you're selling to</strong> and sharpen it into one specific, self-identifying person — then check it's a <strong>"starving crowd"</strong> worth building on.</p>
     <h4>Why it matters</h4>
-    <p>The same offer sells completely differently to a cold beginner vs someone who's tried everything. Awareness level sets the tone of your whole script.</p>
+    <p>The #1 advantage in business isn't the product or the copy — it's selling to people who are <em>starving</em> for a solution. Nail the market and everything downstream gets easier.</p>
+    <h4>What makes a starving crowd</h4>
+    <ul><li>💰 Already spending money to fix it</li><li>📍 Easy to reach — they gather online</li><li>🔥 Desperate — a 2 AM problem, not a nice-to-have</li><li>📈 Growing, not dying</li></ul>
     <h4>What you'll walk away with</h4>
-    <ul><li>A crisp picture of your ideal buyer</li><li>Their awareness &amp; sophistication level</li><li>The language they already use in their head</li></ul>` },
+    <ul><li>One specific, sharpened market</li><li>Confidence it's worth building on</li><li>The exact person your VSL speaks to</li></ul>` },
   { name: 'Customer Research', html: `
     <p class="sop-lead">This is where the gold is. We mine real words, not guesses.</p>
     <h4>What this step is</h4>
