@@ -83,13 +83,13 @@ const DUMMY_PROJECTS = ['The Perfect VSL', 'Pre-Diabetes Reversal', 'Faceless Fu
 // swapped for the compiled output of Jim's SOP .md files — nothing else changes.
 const STEP_SOPS = [
   { name: 'Core Desire', html: `
-    <p class="sop-lead">Everything downstream is built on this. Get it right and the whole VSL writes itself.</p>
+    <p class="sop-lead">Everything downstream is built on this. Nail it and the whole VSL writes itself.</p>
     <h4>What this step is</h4>
-    <p>We nail down the <strong>one deep desire</strong> your market is really chasing — the end result they lie awake wanting. Not the product, the outcome.</p>
+    <p>We pin down <strong>which of the 10 Reasons People Buy</strong> your offer delivers — the emotional drivers that make someone actually pull out their wallet. Most strong offers hit <strong>2–3</strong> of them.</p>
     <h4>Why it matters</h4>
-    <p>People don't buy the drill, they buy the hole. Anchor to the core desire and every hook, promise and proof point lands harder.</p>
+    <p>People buy on emotion and justify with logic. Lock in the real reasons they buy, and every hook, promise and proof point downstream lands harder.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>The single dominant desire in one sentence</li><li>The emotional payoff behind it</li><li>The "after" state we'll sell throughout the VSL</li></ul>` },
+    <ul><li>Your 2–3 core desires from the 10 (e.g. make more money, save time, gain praise)</li><li>The emotional fuel for your hooks &amp; pitch</li><li>A rock-solid foundation for every step that follows</li></ul>` },
   { name: 'Market', html: `
     <p class="sop-lead">Who are we actually talking to?</p>
     <h4>What this step is</h4>
