@@ -288,12 +288,38 @@ function openSop(i) {
   document.getElementById('sop-body').scrollTop = 0;
 }
 
+function collapseSop() {
+  document.getElementById('sop-panel').classList.remove('expanded');
+  const bd = document.getElementById('sop-backdrop');
+  if (bd) bd.remove();
+}
+
+function toggleExpandSop() {
+  const panel = document.getElementById('sop-panel');
+  const expanding = !panel.classList.contains('expanded');
+  if (expanding) {
+    if (!document.getElementById('sop-backdrop')) {
+      const bd = document.createElement('div');
+      bd.id = 'sop-backdrop';
+      bd.className = 'sop-backdrop';
+      bd.addEventListener('click', collapseSop);
+      document.body.appendChild(bd);
+    }
+    panel.classList.add('expanded');
+  } else {
+    collapseSop();
+  }
+}
+
 function closeSop() {
+  collapseSop();
   document.getElementById('sop-panel').classList.add('hidden');
   document.querySelectorAll('.step-tile').forEach(t => t.classList.remove('active'));
 }
 
 document.getElementById('sop-close').addEventListener('click', closeSop);
+document.getElementById('sop-expand').addEventListener('click', toggleExpandSop);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (document.getElementById('sop-panel').classList.contains('expanded')) collapseSop(); else if (!document.getElementById('sop-panel').classList.contains('hidden')) closeSop(); } });
 
 function renderVSL() {
   const grid = document.getElementById('vsl-grid');
