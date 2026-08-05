@@ -436,42 +436,32 @@ function openSop(i) {
   document.getElementById('sop-step').textContent = 'Step ' + (i + 1);
   document.getElementById('sop-name').textContent = sop.name;
   document.getElementById('sop-body').innerHTML = sop.html;
-  document.getElementById('sop-panel').classList.remove('hidden');
+  const panel = document.getElementById('sop-panel');
+  if (!document.getElementById('sop-backdrop')) {
+    const bd = document.createElement('div');
+    bd.id = 'sop-backdrop';
+    bd.className = 'sop-backdrop';
+    bd.addEventListener('click', closeSop);
+    document.body.appendChild(bd);
+  }
+  // Open centered from the first painted frame — both classes set before paint, so no jump.
+  panel.classList.remove('hidden');
+  panel.classList.add('expanded');
   document.querySelectorAll('.step-tile').forEach(t => t.classList.toggle('active', +t.dataset.step === i));
   document.getElementById('sop-body').scrollTop = 0;
 }
 
-function collapseSop() {
-  document.getElementById('sop-panel').classList.remove('expanded');
+function closeSop() {
+  const panel = document.getElementById('sop-panel');
+  panel.classList.add('hidden');
+  panel.classList.remove('expanded');
   const bd = document.getElementById('sop-backdrop');
   if (bd) bd.remove();
-}
-
-function toggleExpandSop() {
-  const panel = document.getElementById('sop-panel');
-  const expanding = !panel.classList.contains('expanded');
-  if (expanding) {
-    if (!document.getElementById('sop-backdrop')) {
-      const bd = document.createElement('div');
-      bd.id = 'sop-backdrop';
-      bd.className = 'sop-backdrop';
-      bd.addEventListener('click', collapseSop);
-      document.body.appendChild(bd);
-    }
-    panel.classList.add('expanded');
-  } else {
-    collapseSop();
-  }
-}
-
-function closeSop() {
-  collapseSop();
-  document.getElementById('sop-panel').classList.add('hidden');
   document.querySelectorAll('.step-tile').forEach(t => t.classList.remove('active'));
 }
 
 document.getElementById('sop-close').addEventListener('click', closeSop);
-document.getElementById('sop-expand').addEventListener('click', toggleExpandSop);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.getElementById('sop-panel').classList.contains('hidden')) closeSop(); });
 
 // ---------- SIDEBAR COLLAPSE ----------
 (function initSidebarToggle() {
