@@ -49,13 +49,15 @@ The "because" wants proof ("hundreds of people have used this"). **NEVER invent 
 The Method (7-beat spoken script) is on the "Method" card. Then ask: *"Ready for Step 8?"*
 
 ## Worked example (photography)
-> Right now you're shooting friends for free while people with worse photos land the paid gigs. And it stings.
-> But in the next 30 days…
-> You can learn to take the kind of shots clients happily pay for — without a decade of practice or fancy gear.
-> Then, you can learn to stand out in a market full of iPhone "photographers" — without slashing your prices.
-> And soon, you've got a camera that actually pays you.
-> And you can do this even if you feel like just an amateur. Even if everyone swears the market's too saturated.
-> That's because you can follow one portfolio-first method — using a repeatable shot-framework and a stand-out portfolio — the same simple system others have already used to land their first paying clients.
+*(write it as plain lines — do NOT prefix lines with ">" or any quote marker)*
+
+Right now you're shooting friends for free while people with worse photos land the paid gigs. And it stings.
+But in the next 30 days…
+You can learn to take the kind of shots clients happily pay for — without a decade of practice or fancy gear.
+Then, you can learn to stand out in a market full of iPhone "photographers" — without slashing your prices.
+And soon, you've got a camera that actually pays you.
+And you can do this even if you feel like just an amateur. Even if everyone swears the market's too saturated.
+That's because you can follow one portfolio-first method — using a repeatable shot-framework and a stand-out portfolio — the same simple system others have already used to land their first paying clients.
 
 ## Quality gate (before you push)
 - [ ] Built from Step 6 — not Step 4/5.

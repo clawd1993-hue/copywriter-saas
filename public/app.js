@@ -747,6 +747,7 @@ let history = [];
 // Safe minimal markdown → HTML. Escapes first (no injection), then bold/italic/code.
 function mdToHtml(text) {
   let s = String(text == null ? '' : text)
+    .replace(/^[ \t]*>[ \t]?/gm, '')  // drop markdown blockquote markers ("> ") — they were showing as literal ">"
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   // headings & dividers (line-based, before inline styles) — so the card renders clean, not raw "##"
   s = s.replace(/^\s*###\s+(.+?)\s*$/gm, '<div class="sc-h3">$1</div>');
