@@ -22,7 +22,7 @@ Open the pushed bonus block with a **limited-quantity + free** line, e.g.:
 - Take the bonuses **exactly as packaged in Step 8.2** — the selection/curation already happened there.
 - ⚠️ **Why 8.2, not raw Step 5:** Step 8.2 already (a) excluded anything used as a core deliverable in 8.1 (no bonus duplicates the core), and (b) excluded items reserved for paid upsells. Re-pulling from raw Step 5 re-introduces both bugs.
 - Use the **vehicle name** ← Step 6 in the intro ("when you join [Vehicle Name] today…").
-- Pull the **core deliverable values** from Section 9 (the VSL so far) for the total-value math — i.e. the **🧠 + 🌍 component bullets** that each carry a "(Value $X)". The **🚗 is the Big-Promise lead-in and carries no separate value line**, so don't count it or invent one. Sum however many valued core bullets there actually are (usually 2) — never assume a fixed number.
+- Pull **ALL the core values** from Section 9 (the VSL so far) for the total-value math — the **flagship** (🚗 [Vehicle] complete program, the biggest anchor) **AND** the **🧠 + 🌍 component bullets**. Sum every core piece that shows a "(Value $X)" — don't assume how many there are; add up what's actually on the board.
 
 ## The format (VSL-tight — name + one benefit + value, NOT the full 5-part bullet)
 ```
@@ -39,7 +39,7 @@ And today, you get everything for just **$[price]**.
 *(When a bonus maps to ONE journey step, you can note the step in brackets after the name. For curated/combined bonuses spanning multiple steps, skip the brackets — don't force it.)*
 
 ## Total-value math (do this right)
-- **Grand total = the valued core bullets (the 🧠 + 🌍 component deliverables from Section 9 / Step 8.1) PLUS the Step 8.2 bonuses.** The 🚗 lead-in Big Promise has no separate value line — don't count it or invent one. Add up exactly the values that appear on the board; don't assume there are three. Anchor THAT grand total against the price — never anchor with the bonus value alone.
+- **Grand total = ALL the core values (the flagship 🚗 [Vehicle] program + the 🧠 + 🌍 component bullets, from Section 9 / Step 8.1) PLUS the Step 8.2 bonuses.** Add up exactly the "(Value $X)" figures that appear on the board — however many there are — and anchor THAT grand total against the price. Never anchor with the bonus value alone.
 - If the **price is known**, use it. If not (it's set in Section 12), leave a clear **[your price]** placeholder and tell them in the chat you've left it for the CTA step.
 
 ## How to run it (write → push straight to the card → tweak or move on)
@@ -54,7 +54,7 @@ The Bonuses card is **editable**, so DON'T ask permission — write it and push 
 - Frame as **"free when you join today"** — not part of the core product.
 - **Limited** — open with the scarcity + free hook.
 - Each bonus: name + one clear benefit + a believable-but-impressive value.
-- The core deliverables (Section 9 — the valued 🧠/🌍 bullets) are separate from these bonuses, but BOTH count toward the grand total. Don't assume the core has a fixed number of values; sum what's actually there.
+- The core deliverables (Section 9 — the flagship + 🧠/🌍 bullets) are separate from these bonuses, but BOTH count toward the grand total. Sum what's actually on the board.
 - 3rd-grade words.
 
 ## Quality test

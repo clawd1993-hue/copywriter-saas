@@ -33,7 +33,8 @@ Whatever the Step 8 card shows as the **8.1 Core** IS your pitch. If it's a 🚗
 ```
 Here's exactly what you get:
 
-[🚗 Big-Promise lead-in — "When you join [Vehicle name], you'll finally [dream] — without [failures] — even if [nothing's worked]. Here's everything inside:"]
+[🚗 Big-Promise lead-in — "When you join [Vehicle name], you'll finally [dream] — without [failures] — even if [nothing's worked]. Here's everything you get:"]
+**[Vehicle name] — the complete program.** (Value: $X)   ← the flagship, biggest anchor value
 
 **[🧠 Name]** — [what it is] so you can [outcome], even if [objection], which means [payoff]. (Value: $X)
 
@@ -41,7 +42,7 @@ Here's exactly what you get:
 
 [optional close line: "That's the whole machine — and you're not building any of it."]
 ```
-*(If Step 8.1 packaged more/fewer component bullets, mirror that — the structure follows the board, not a fixed number.)*
+*(Reproduce whatever Step 8.1 has — the flagship value + component bullets. If Step 8.1 packaged more/fewer, mirror that.)*
 
 ## How to run it (write → push straight to the card → tweak or move on)
 The Pitch card is **editable**, so DON'T ask permission — reproduce the core and push straight to the card. Per the section output contract, do NOT reprint it in the chat.
