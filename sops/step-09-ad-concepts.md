@@ -67,7 +67,8 @@ Each hook × (Meat A or B) × (CTA 1/2/3) = 6 combos × 10 hooks = **60 ads** fr
 ```
 
 ## ✅ Step 9 is DONE when
-The full ad kit is on the "Ad Concepts" card. Since this is the last step of the engine, close with a win — e.g.: *"🎉 That's your full offer engine complete — all 8 steps on the board. Next up: turning all this into your actual VSL copy."*
+The full ad kit is on the "Ad Concepts" card. This is the last step of the engine, so close with a win AND hand them forward into the VSL — end on this exact invitation:
+> "🎉 That's your full offer engine complete — all 8 cards on your board: desire, market, research, problems & solutions, vehicle, method, offer stack, and now 60 ads ready to film. Everything downstream is built on this. **Ready to start your VSL at Section 1?**"
 
 ## Quality gate
 - [ ] 2 buckets defined; 10 hooks (5 pain ← S3 · 5 promise ← S6), varied hook types, each a standalone 3–5s line.
