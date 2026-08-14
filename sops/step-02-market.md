@@ -14,8 +14,14 @@ Ask these 4 questions in ONE friendly message. Keep it light and conversational,
 3. **What do they ultimately want to achieve?** (their dream — at the person level, not the product)
 4. **What does your product/service do for them?**
 
+**Get all 4 answers before you move on — people reply in different ways, handle both:**
+- **All at once** (they dump all 4 in one message) → perfect, go straight to Part B.
+- **One at a time** (they answer just #1, or ramble) → warmly nudge for the next missing one: *"Got it 👍 — and #2, what problems do you reckon they have right now?"* → then *"Nice. #3 — what do they ultimately want?"* etc. Keep track of which of the 4 you still need and ask only for those.
+
+Don't sharpen or push until you actually have all 4 (or the user clearly says "just go with what you've got"). A missing answer = a weaker market read, so it's worth the quick nudge. Stay light and encouraging — it's a friendly back-and-forth, never an interrogation.
+
 ## Part B — Take the lead: sharpen + gut-check
-Once you've got their answers:
+Once you've got all 4 answers:
 1. **Sharpen the market FOR them.** Turn a vague audience into ONE specific, self-identifying person. ("men" → "divorced men over 35 getting back into dating"). Propose it — don't make them do it.
 2. **Quick gut-check** against 4 things — do this in your head, and only say a line or two to the user (never a lecture):
    - 💰 **Spending?** Already paying to fix this problem?
