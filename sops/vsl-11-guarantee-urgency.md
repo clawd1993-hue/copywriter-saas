@@ -6,20 +6,23 @@
 > **Pulls from:** OUTSIDE the system — the USER picks the guarantee type + sets the real urgency. So you SUGGEST + ASK; you never assume.
 
 ## This section ASKS first (don't auto-write). Do NOT push on the first turn.
-The guarantee is a strategic choice — the wrong one tanks conversion. So you read their offer, suggest the 2-3 types that fit, and let THEM pick. Then you name it and write it. *(Hormozi: reversing risk is the #1 lever to lift conversion — treat the guarantee like a core deliverable, not an afterthought.)*
+The guarantee is a strategic choice — the wrong one tanks conversion. So you show them ALL 4 types (brief), recommend the best fit, and let THEM pick — then you get the urgency, then you name it and write it. *(Hormozi: reversing risk is the #1 lever to lift conversion — treat the guarantee like a core deliverable, not an afterthought.)*
 
-## Phase 1 — Read the offer, suggest, ASK (first turn: options + questions, NO push)
-Open with the framing: *"Now Section 11: your Guarantee + Urgency. This is risk reversal — the thing that makes a nervous buyer go 'okay, I've got nothing to lose.' There are a few types, and the right one depends on your offer — so let me show you the ones that fit and you pick."*
+## Phase 1 — Show ALL 4 types, recommend, ASK which (first turn: guarantee ONLY, NO push, no urgency yet)
+Open with the framing: *"Now Section 11: your Guarantee + Urgency. This is risk reversal — the thing that makes a nervous buyer go 'okay, I've got nothing to lose.' There are 4 types — here they are, then I'll tell you which fits you best."*
 
-1. **Read the price / risk profile** (from the offer on the board + the VSL so far). If you don't know the price or ticket level, ask one quick question: *"Roughly what are you charging — is this a low-ticket cold offer, or a premium/done-for-you one?"* (it decides which guarantees fit).
-2. **Suggest the 2-3 that FIT** (don't dump all 4, don't default silently). Use this logic:
-   - **Low-ticket + cold traffic** → 🔓 **Unconditional** or a light ✅ **Conditional**.
-   - **High-ticket / done-with-you** → 📈 **Performance** or a bold ✅ **Conditional**.
-   - **Exclusive / can't-be-unseen** → 🚫 **Anti-guarantee**.
-3. Give each suggested type a **one-line plain-English** description (see the 4 types below) and **ask which they want.**
-4. Also ask for the **real urgency**: *"And what's true for urgency — a deadline, limited spots, a price that's about to rise? It has to be real, not made up."*
+1. **List ALL 4 guarantee types**, each in ONE brief plain-English line. Keep the whole message **tight and scannable** — a single line each, don't let it balloon:
+   - 🔓 **Unconditional** — "Try it, don't love it, full refund, no questions." Best for low-ticket / cold traffic.
+   - ✅ **Conditional** — "Do the work and if you don't get [result], you get your money back (or we keep helping free till you do)." Filters tire-kickers, refunds stay rare.
+   - 🚫 **Anti-guarantee** — "All sales final," + a reason why. High-ticket / exclusive only.
+   - 📈 **Performance** — "If I don't get you the result, I don't get paid." Done-with-you / high-ticket.
+2. **Make a recommendation.** Read the price/risk profile from the board (low-ticket cold → Unconditional or light Conditional · high-ticket DWY → Performance or bold Conditional · exclusive → Anti). Name the ONE you'd pick + a one-line why. If you genuinely can't tell the ticket level, give your best read or ask a quick one-liner.
+3. **Ask them to decide:** *"Which one do you want to use?"*
 
-Handle their answers **all-at-once or in parts** (like the other ask-sections): track what you still need (the guarantee pick + the urgency), chase only the missing piece, don't write until you have both (or they say "just go with X").
+**Do NOT ask about urgency in this message** — keep it focused on the guarantee choice so the message stays short. NO push.
+
+## Phase 2 — Once they pick the guarantee, get the real urgency
+Confirm their pick in a line, then ask for the **real urgency**: *"Now — what's true for urgency? A real enrolment deadline, a genuine cap on spots, or a price that's actually going up? It has to be real, not made up."* Handle their answer all-at-once or in parts; don't write until you have it (or they say "just go with what we've got"). NO push yet.
 
 ## The 4 guarantee types (Hormozi) — for your own reference + the plain-English lines
 1. 🔓 **Unconditional** — "Try it. Don't love it? Full refund, no questions." Pay-first trial. **Strongest — best for LOW-TICKET + cold traffic.** (Bonus move: they keep the bonuses even if they refund.)
@@ -27,7 +30,7 @@ Handle their answers **all-at-once or in parts** (like the other ask-sections): 
 3. 🚫 **Anti-guarantee** — "All sales final" + a creative reason why. **For HIGH-TICKET / exclusive** (info that can't be unseen). NOT for a cold low-ticket offer.
 4. 📈 **Implied / Performance** — "If I don't perform, I don't get paid" (revshare / pay-on-result). **For done-with/for-you + high-ticket.**
 
-## Phase 2 — Name it + write it + push (once they've picked + given real urgency)
+## Phase 3 — Name it + write it + push (once they've picked + given real urgency)
 1. **NAME the guarantee** — named guarantees convert better (e.g. "The 30-Day 'Love It or It's Free' Guarantee").
 2. Write it in plain words: the promise + "what you risk = nothing."
 3. Add the **real urgency line** (their deadline / limited spots / price rising + the reason why). Never fake it.
@@ -42,7 +45,8 @@ Handle their answers **all-at-once or in parts** (like the other ask-sections): 
 ```
 
 ## Rules
-- **Suggest options + ASK — never default or assume the type.**
+- **Show all 4 types briefly (one line each), THEN recommend + ASK — never default or assume the type.** Keep the options message tight.
+- **Ask the guarantee first; get urgency in the next message** — don't cram both into one long message.
 - **Name the guarantee.**
 - If **Conditional**, the conditions = the **key success-actions** (filters non-doers, fewer refunds).
 - **Urgency must be REAL** — a true deadline, real limited spots, a real price change. Never invent fake scarcity.
@@ -53,7 +57,7 @@ Handle their answers **all-at-once or in parts** (like the other ask-sections): 
 Does buying feel **risk-free**, AND does the urgency give a **real reason to act NOW**? A vague guarantee or fake urgency = redo.
 
 ## Quality gate
-- [ ] Suggested the 2-3 fitting types and ASKED — did not assume.
+- [ ] Listed all 4 types briefly (one line each), recommended one, and ASKED — did not assume. Urgency asked in a separate follow-up, not crammed in.
 - [ ] Guarantee is NAMED.
 - [ ] If conditional, conditions = the key success-actions.
 - [ ] Urgency is REAL (true deadline/scarcity/price change), not fabricated.
