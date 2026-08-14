@@ -141,6 +141,9 @@ function anthropicRequest(payload) {
       resp.on('data', c => (data += c));
       resp.on('end', () => { try { resolve(JSON.parse(data)); } catch (e) { reject(e); } });
     });
+    // A single API round-trip should never take minutes. If it stalls, abort so the job fails cleanly
+    // (→ user sees an error + can retry) instead of hanging until the client's poll gives up.
+    r.setTimeout(180000, () => r.destroy(new Error('Anthropic request timed out (180s)')));
     r.on('error', reject);
     r.write(body);
     r.end();
