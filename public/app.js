@@ -145,13 +145,24 @@ const STEP_SOPS = [
     <ul><li>The full problem map — every journey step × the 4 value levers</li><li>A named solution for each problem</li><li>The backbone of your Pitch &amp; Bonuses, plus any offer gaps exposed</li></ul>
     <p class="sop-note">💡 <strong>Don't overthink it.</strong> You don't need to use every single one. We'll keep the strongest, remove the weakest and combine where it makes sense in later steps. Just keep moving.</p>` },
   { name: 'Vehicle', html: `
-    <p class="sop-lead">The <em>what</em> — the form your solution takes.</p>
+    <p class="sop-lead">The Big Idea — the <em>new category</em> your offer lives in. It's what makes everything they've already tried the <em>wrong</em> thing.</p>
     <h4>What this step is</h4>
-    <p>We define the vehicle: the specific format that carries the transformation (the challenge, the system, the program, the service).</p>
+    <p>We name your <strong>Vehicle</strong> (aka the New Opportunity) — the fresh category your product belongs to. Not the product, not the steps: the <em>thesis</em> that makes your customer think "oh, THAT's different from everything I've tried."</p>
     <h4>Why it matters</h4>
-    <p>A clear, named vehicle makes the offer feel real and ownable — it's what they're actually buying access to.</p>
+    <p>A better version of the old thing is a hard sell. A whole new <em>category</em> isn't — it quietly explains why everything else failed (wrong category, not their fault) and gives them a new identity to buy into.</p>
+    <h4>The name — a simple formula</h4>
+    <div class="sop-formula"><strong>The [Timeframe] [Dream] [Format]</strong><br><span style="opacity:0.7">e.g. "The 90-Day New Man Blueprint"</span></div>
+    <p>Plus one <strong>positioning</strong> line: "the first [category] for [your people], unlike [what they've tried], it [your superpower]."</p>
+    <h4>The 3 Secrets</h4>
+    <p>Three one-line "belief-breaks" that kill the doubts stopping the sale:</p>
+    <ul>
+      <li>🚗 <strong>Does this new way even work?</strong></li>
+      <li>🧠 <strong>Can <em>I</em> do it?</strong></li>
+      <li>🌍 <strong>Will the world let me?</strong></li>
+    </ul>
+    <p>Each is pulled straight from your real customer research (Step 3) and your solutions (Step 5) — nothing invented.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>Your named vehicle</li><li>What it includes at a glance</li><li>Feeds the Product Overview section</li></ul>` },
+    <ul><li>Your named vehicle + positioning line</li><li>The 3 belief-breaking secrets (your reg-page bullets &amp; ad angles)</li><li>The umbrella concept everything else sells under</li></ul>` },
   { name: 'Method', html: `
     <p class="sop-lead">The <em>how</em> — your unique mechanism.</p>
     <h4>What this step is</h4>
