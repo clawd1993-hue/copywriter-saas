@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
+const crypto = require('crypto');
 const leakguard = require('./leakguard');
 
 const app = express();
@@ -32,7 +33,8 @@ app.get('/api/config', (req, res) => {
   res.json({
     supabaseUrl: process.env.SUPABASE_URL || '',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
-    authEnabled: !!(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY)
+    authEnabled: !!(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY),
+    slowSteps: SLOW_STEPS_PUBLIC   // { stepIndex: { contract, stages } } — tells the client which steps run as background jobs
   });
 });
 
@@ -53,16 +55,42 @@ const STEP_SOP_FILES = {
 };
 
 // Per-step overrides. Step 3 (Customer Research) = real deep research: web tools on + big output cap + high effort.
+// `slow: true` steps run as a background job (contract msg up front + live progress + auto-deliver) instead of a blocking call.
 const STEP_CONFIG = {
   2: {
     maxTokens: 12000,
     effort: 'high',
+    slow: true,
+    contract: "🔎 **This is the big one.** I'm about to search real sources across the web — Reddit, forums, review sites — to capture your avatar's *exact* voice in their own words.\n\nThis is deep research, so give me **3–5 minutes**. You don't have to sit here or ask if I'm done — I'll drop the full research right into this chat the moment it's ready. Even if you close the tab, come back and it'll be waiting.",
+    stages: [
+      'Searching Reddit & forums…',
+      'Reading real customer threads…',
+      'Pulling reviews & testimonials…',
+      'Extracting exact customer language…',
+      'Organizing into the 5 research categories…'
+    ],
     tools: [
       { type: 'web_search_20260209', name: 'web_search', max_uses: 8 },
       { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 8 }
     ]
   }
 };
+
+// What the client is allowed to know about slow steps (contract text + progress stages). No secrets here.
+const SLOW_STEPS_PUBLIC = Object.fromEntries(
+  Object.entries(STEP_CONFIG)
+    .filter(([, c]) => c.slow)
+    .map(([i, c]) => [i, { contract: c.contract || '', stages: c.stages || [] }])
+);
+
+// ---------- BACKGROUND JOBS (for slow steps: decouple long work from the HTTP request) ----------
+const jobs = new Map(); // jobId -> { status:'running'|'done'|'error', userId, reply, push, error, createdAt }
+function newJobId() { return 'job_' + crypto.randomBytes(12).toString('hex'); } // unguessable = ownership by possession
+const JOB_TTL_MS = 60 * 60 * 1000; // keep finished jobs 1h so a returning tab can still collect the result
+setInterval(() => {
+  const now = Date.now();
+  for (const [id, j] of jobs) if (now - j.createdAt > JOB_TTL_MS) jobs.delete(id);
+}, 10 * 60 * 1000).unref();
 const STEP_NAMES = ['Core Desire', 'Market', 'Customer Research', 'Problems & Solutions', 'Vehicle', 'Method', 'Deliverables', 'Ad Concepts'];
 
 function buildSystemPrompt(stepIndex) {
@@ -197,31 +225,53 @@ async function isOnTopic(messages) {
   } catch { return true; } // never block real users if the bouncer errors
 }
 
-// ---------- CHAT ----------
-app.post('/api/chat', async (req, res) => {
-  const messages = (req.body && req.body.messages) || [];
-  let stepIndex = Number.isInteger(req.body && req.body.currentStep) ? req.body.currentStep : 0;
-  if (stepIndex < 0) stepIndex = 0;
-  if (stepIndex > 7) stepIndex = 7;
-
-  // GUARDRAIL 1 — auth: in prod (Supabase configured) require a valid logged-in user
+// ---------- GUARD: auth + rate limit (shared by /api/chat and /api/chat/async) ----------
+// Returns { userId } on success, or { err: {status, body} } to send straight back to the client.
+async function guard(req) {
   let userId = 'local-dev';
   if (AUTH_REQUIRED) {
     const auth = req.headers.authorization || '';
     const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
     const user = await verifyUser(token);
-    if (!user) return res.status(401).json({ reply: '🔒 Please log in to use the copywriting assistant.', push: null });
+    if (!user) return { err: { status: 401, body: { reply: '🔒 Please log in to use the copywriting assistant.', push: null } } };
     userId = user.id;
   }
-
-  // GUARDRAIL 2 — rate limit per user
   const rl = rateCheck(userId);
   if (!rl.ok) {
     const msg = rl.scope === 'hour'
       ? "⏳ Whoa, slow down a sec — you've hit the hourly message limit. Try again shortly."
       : "⏳ You've reached today's message limit. It resets in 24 hours.";
-    return res.status(429).json({ reply: msg, push: null });
+    return { err: { status: 429, body: { reply: msg, push: null } } };
   }
+  return { userId };
+}
+
+function clampStep(v) { let s = Number.isInteger(v) ? v : 0; if (s < 0) s = 0; if (s > 7) s = 7; return s; }
+
+// Run the brain for one step and normalize the result (push extraction + leak-guard).
+// Returns { reply, push }.
+async function runStep(stepIndex, messages) {
+  const cfg = STEP_CONFIG[stepIndex] || {};
+  const raw = await callClaude(buildSystemPrompt(stepIndex), messages, {
+    maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
+  });
+  const { reply, push } = extractPush(raw, stepIndex);
+  // GUARDRAIL 4 — leak-guard: block any verbatim run from confidential source docs (even if jailbroken)
+  if (leakguard.containsLeak(reply, CONFIDENTIAL_SET) ||
+      (push && leakguard.containsLeak(push.content, CONFIDENTIAL_SET))) {
+    return { reply: LEAK_REFUSAL, push: null };
+  }
+  return { reply, push };
+}
+
+// ---------- CHAT ----------
+app.post('/api/chat', async (req, res) => {
+  const messages = (req.body && req.body.messages) || [];
+  const stepIndex = clampStep(req.body && req.body.currentStep);
+
+  // GUARDRAILS 1 & 2 — auth + rate limit
+  const g = await guard(req);
+  if (g.err) return res.status(g.err.status).json(g.err.body);
 
   if (!ANTHROPIC_API_KEY) {
     return res.json({
@@ -236,22 +286,58 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const cfg = STEP_CONFIG[stepIndex] || {};
-    const raw = await callClaude(buildSystemPrompt(stepIndex), messages, {
-      maxTokens: cfg.maxTokens,
-      effort: cfg.effort,
-      tools: cfg.tools
-    });
-    const { reply, push } = extractPush(raw, stepIndex);
-    // GUARDRAIL 4 — leak-guard: block any verbatim run from confidential source docs (even if jailbroken)
-    if (leakguard.containsLeak(reply, CONFIDENTIAL_SET) ||
-        (push && leakguard.containsLeak(push.content, CONFIDENTIAL_SET))) {
-      return res.json({ reply: LEAK_REFUSAL, push: null });
-    }
+    const { reply, push } = await runStep(stepIndex, messages);
     res.json({ reply, push });
   } catch (e) {
     res.status(200).json({ reply: `⚠️ Something went wrong reaching the engine: ${e.message}. Try again in a sec.`, push: null });
   }
+});
+
+// ---------- CHAT (ASYNC / BACKGROUND JOB) — for slow steps like deep research ----------
+// Kicks off the work, returns a jobId + contract message instantly. Client polls /api/chat/status.
+// The work keeps running server-side even if the browser tab closes; result held for JOB_TTL_MS.
+app.post('/api/chat/async', async (req, res) => {
+  const messages = (req.body && req.body.messages) || [];
+  const stepIndex = clampStep(req.body && req.body.currentStep);
+
+  const g = await guard(req);
+  if (g.err) return res.status(g.err.status).json(g.err.body);
+
+  if (!ANTHROPIC_API_KEY) {
+    return res.json({ done: true, reply: "🛠️ The copywriting engine is warming up — it's built and ready, just waiting on its brain to be switched on. Hang tight; Michael's setting it up.", push: null });
+  }
+
+  // GUARDRAIL 3 — bouncer: off-topic never spins up an expensive job
+  if (!(await isOnTopic(messages))) {
+    return res.json({ done: true, reply: "Ha — I only help with your copywriting 🙂 Let's stay on your VSL. Where were we?", push: null });
+  }
+
+  const cfg = STEP_CONFIG[stepIndex] || {};
+  const jobId = newJobId();
+  jobs.set(jobId, { status: 'running', userId: g.userId, reply: null, push: null, error: null, createdAt: Date.now() });
+
+  // fire-and-forget: run in the background, store the result on the job when done
+  (async () => {
+    try {
+      const { reply, push } = await runStep(stepIndex, messages);
+      const j = jobs.get(jobId);
+      if (j) { j.status = 'done'; j.reply = reply; j.push = push; }
+    } catch (e) {
+      const j = jobs.get(jobId);
+      if (j) { j.status = 'error'; j.error = e.message; }
+    }
+  })();
+
+  res.json({ done: false, jobId, contract: cfg.contract || null });
+});
+
+// Poll a background job. jobId is an unguessable token → possession = ownership.
+app.get('/api/chat/status', (req, res) => {
+  const j = jobs.get(req.query.jobId);
+  if (!j) return res.json({ status: 'missing' }); // expired, wrong id, or server restarted
+  if (j.status === 'done') return res.json({ status: 'done', reply: j.reply, push: j.push });
+  if (j.status === 'error') return res.json({ status: 'error', reply: `⚠️ Something went wrong reaching the engine: ${j.error}. Try again.`, push: null });
+  return res.json({ status: 'running' });
 });
 
 app.listen(PORT, () => {

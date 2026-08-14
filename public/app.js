@@ -168,6 +168,7 @@ const STEP_SOPS = [
 // ---------- AUTH STATE ----------
 let sb = null;            // supabase client (null in dummy mode)
 let authEnabled = false;  // true once Supabase keys are configured
+let APP_CONFIG = { slowSteps: {} }; // server config incl. which steps run as background jobs
 let currentUser = null;   // logged-in user {id, email}
 let logInFlight = false;  // guard: onLogin can fire twice (getSession + onAuthStateChange) — block re-entry
 const noteEl = () => document.getElementById('login-note');
@@ -176,6 +177,8 @@ async function initAuth() {
   let cfg = { authEnabled: false };
   try { cfg = await (await fetch('/api/config')).json(); } catch (e) {}
   authEnabled = cfg.authEnabled;
+  APP_CONFIG = cfg;
+  APP_CONFIG.slowSteps = cfg.slowSteps || {};
 
   if (authEnabled && window.supabase) {
     sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
@@ -359,12 +362,14 @@ async function loadThread() {
   }
   if (!msgs.length) {
     greet();  // greeting is visual only — never persisted, shown for a fresh thread
+    resumePendingJobs();
     return;
   }
   msgs.forEach(m => {
     addMsg(m.role === 'user' ? 'user' : 'bot', m.content);
     history.push({ role: m.role, content: m.content });
   });
+  resumePendingJobs();
 }
 
 async function persistMsg(role, content) {
@@ -696,6 +701,110 @@ function greet() {
   addMsg('bot', "👋 Hey, I'm Jimmy — your AI copywriting assistant. Type “I'm ready” when you're ready to start, and I'll walk you through the steps to craft your perfect VSL.");
 }
 
+// Shared: attach the logged-in user's access token so the server can verify them
+async function authHeaders() {
+  const headers = { 'content-type': 'application/json' };
+  if (sb) {
+    try { const { data: s } = await sb.auth.getSession(); if (s && s.session) headers.Authorization = 'Bearer ' + s.session.access_token; } catch (e) {}
+  }
+  return headers;
+}
+
+// Shared: land an assistant reply {reply, push} into the chat + dashboard
+function applyReply(data) {
+  if (!data) return;
+  if (data.reply) { addMsg('bot', data.reply); history.push({ role: 'assistant', content: data.reply }); persistMsg('assistant', data.reply); }
+  if (data.push && typeof data.push.step === 'number') { pushStepContent(data.push.step, data.push.content); openStepContent(data.push.step); }
+}
+
+// ---------- BACKGROUND JOB (slow steps: contract → live progress → auto-deliver, survives tab close) ----------
+function jobStoreKey(step) { return 'job:' + stepContentKey() + ':' + step; }
+const activeJobKeys = new Set(); // guard against double-polling the same job
+
+// A "working" bubble whose caption steps through the stages so it never looks frozen
+function addProgress(stages) {
+  const el = document.createElement('div');
+  el.className = 'msg bot typing progress';
+  el.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span><div class="typing-caption progress-stage"></div>';
+  chatLog.appendChild(el);
+  chatLog.scrollTop = chatLog.scrollHeight;
+  const stageEl = el.querySelector('.progress-stage');
+  const list = (stages && stages.length) ? stages : ['Working…'];
+  let i = 0;
+  const render = () => { stageEl.textContent = '🔎 ' + list[Math.min(i, list.length - 1)]; };
+  render();
+  el._timer = setInterval(() => { i++; render(); }, 25000); // advance ~every 25s
+  el._cleanup = () => clearInterval(el._timer);
+  return el;
+}
+
+function finishJob(step, progress) {
+  if (progress) { if (progress._cleanup) progress._cleanup(); progress.remove(); }
+  activeJobKeys.delete(jobStoreKey(step));
+  try { localStorage.removeItem(jobStoreKey(step)); } catch (e) {}
+}
+
+// Nudge the user when a background result lands (title blink + soft beep + notification if allowed)
+function pingUser() {
+  try {
+    const orig = document.title; let on = false, n = 0;
+    const iv = setInterval(() => { document.title = (on = !on) ? '✅ Research ready!' : orig; if (++n > 12) { clearInterval(iv); document.title = orig; } }, 800);
+    window.addEventListener('focus', () => { clearInterval(iv); document.title = orig; }, { once: true });
+  } catch (e) {}
+  try { const a = new (window.AudioContext || window.webkitAudioContext)(); const o = a.createOscillator(), g = a.createGain(); o.connect(g); g.connect(a.destination); o.frequency.value = 880; g.gain.value = 0.05; o.start(); setTimeout(() => { o.stop(); a.close(); }, 180); } catch (e) {}
+  try { if (window.Notification && Notification.permission === 'granted') new Notification('Jimmy Labs', { body: 'Your customer research is ready 🔎' }); } catch (e) {}
+}
+
+function pollJob(step, jobId, progress) {
+  activeJobKeys.add(jobStoreKey(step));
+  let tries = 0; const MAX = 140; // ~7 min at 3s
+  const tick = async () => {
+    tries++;
+    let data = null;
+    try { data = await (await fetch('/api/chat/status?jobId=' + encodeURIComponent(jobId))).json(); } catch (e) { data = null; }
+    if ((!data || data.status === 'running')) {
+      if (tries >= MAX) { finishJob(step, progress); addMsg('bot', '⏳ This is taking longer than usual — it may still be working. Refresh in a minute to check.'); return; }
+      return setTimeout(tick, 3000);
+    }
+    finishJob(step, progress);
+    if (data.status === 'missing') { addMsg('bot', '⚠️ That research job expired before I could deliver it. Hit send again to re-run.'); return; }
+    applyReply(data);
+    if (data.status === 'done') pingUser();
+  };
+  tick();
+}
+
+async function startSlowJob(step, slowCfg) {
+  try { if (window.Notification && Notification.permission === 'default') Notification.requestPermission(); } catch (e) {}
+  if (slowCfg.contract) { addMsg('bot', slowCfg.contract); history.push({ role: 'assistant', content: slowCfg.contract }); persistMsg('assistant', slowCfg.contract); }
+  const progress = addProgress(slowCfg.stages);
+  try {
+    const r = await fetch('/api/chat/async', { method: 'POST', headers: await authHeaders(), body: JSON.stringify({ messages: history, currentStep: step }) });
+    const data = await r.json();
+    if (data.done) { finishJob(step, progress); applyReply(data); return; } // warming-up / off-topic / immediate reply
+    if (!data.jobId) { finishJob(step, progress); addMsg('bot', '⚠️ Could not start the research. Try again.'); return; }
+    try { localStorage.setItem(jobStoreKey(step), data.jobId); } catch (e) {}
+    pollJob(step, data.jobId, progress);
+  } catch (e) {
+    finishJob(step, progress); addMsg('bot', '⚠️ Could not reach the server.');
+  }
+}
+
+// On (re)opening a project, pick back up any slow job that was still running
+function resumePendingJobs() {
+  const slow = APP_CONFIG.slowSteps || {};
+  Object.keys(slow).forEach(s => {
+    const step = Number(s);
+    const key = jobStoreKey(step);
+    if (activeJobKeys.has(key)) return;
+    let jobId = null;
+    try { jobId = localStorage.getItem(key); } catch (e) {}
+    if (!jobId) return;
+    const progress = addProgress(slow[s].stages);
+    pollJob(step, jobId, progress);
+  });
+}
+
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const text = chatText.value.trim();
@@ -705,6 +814,11 @@ chatForm.addEventListener('submit', async (e) => {
   persistMsg('user', text);
   chatText.value = '';
   chatText.style.height = 'auto';
+
+  // Slow steps (e.g. deep research) run as a background job instead of a blocking request
+  const step = currentStepIndex();
+  const slowCfg = (APP_CONFIG.slowSteps || {})[step];
+  if (slowCfg) { startSlowJob(step, slowCfg); return; }
 
   const typing = document.createElement('div');
   typing.className = 'msg bot typing';
