@@ -435,3 +435,4 @@ body {
 
 /* step tile status dot: green once the AI has pushed content */
 .step-tile.done .dot { background: var(--green); }
+.step-tile.pending .dot { background: #f0a500; box-shadow: 0 0 0 3px rgba(240,165,0,0.18); }  /* amber = partially done (e.g. Step 8 bonuses pending) */

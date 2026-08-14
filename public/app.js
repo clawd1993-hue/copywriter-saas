@@ -683,13 +683,23 @@ function renderStepBody(i) {
   }
 }
 
+// 'empty' | 'pending' (content but [[STEP_PENDING]] — e.g. Step 8 core, bonuses still to come) | 'done'
+function stepStatus(i) {
+  const c = stepContentStore()[i];
+  if (!c) return 'empty';
+  return (typeof c === 'string' && c.includes('[[STEP_PENDING]]')) ? 'pending' : 'done';
+}
+function applyTileStatus(t) {
+  const st = stepStatus(+t.dataset.step);
+  t.classList.toggle('done', st === 'done');
+  t.classList.toggle('pending', st === 'pending');
+}
 function markStepDone(i) {
   const tile = document.querySelector('.step-tile[data-step="' + i + '"]');
-  if (tile) tile.classList.add('done');
+  if (tile) applyTileStatus(tile);
 }
 function refreshStepStatuses() {
-  const store = stepContentStore();
-  document.querySelectorAll('.step-tile').forEach(t => t.classList.toggle('done', !!store[+t.dataset.step]));
+  document.querySelectorAll('.step-tile').forEach(applyTileStatus);
 }
 
 function openStepContent(i) {
