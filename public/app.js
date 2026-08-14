@@ -124,24 +124,25 @@ const STEP_SOPS = [
     <h4>What you'll walk away with</h4>
     <ul><li>Real quotes &amp; language in their voice</li><li>A past → present → future picture of their life</li><li>The emotional ammo for every step after this</li></ul>` },
   { name: 'Problems & Solutions', html: `
-    <p class="sop-lead">Turn every obstacle into a reason to buy. (Steps 4 &amp; 5 combined.)</p>
-    <h4>What this step is</h4>
-    <p>We map the journey your customer takes to the result. At <strong>every step</strong> along the way, we surface the <strong>4 fears</strong> that stop them — then attach a <strong>named solution</strong> to each fear. That stack of solutions becomes your product.</p>
-    <h4>The 4 lenses (every journey step gets all 4)</h4>
+    <p class="sop-lead">Where your product actually gets built — by turning every reason someone <em>won't</em> buy into a reason they will. (Steps 4 &amp; 5 combined.)</p>
+    <h4>First — what is "value"?</h4>
+    <p>People don't buy products, they buy <strong>value</strong>. And value isn't a vibe — Alex Hormozi breaks it into four levers, the <strong>Value Equation</strong>:</p>
+    <div class="sop-formula"><strong>Value =</strong><br>(Dream Outcome × Likelihood of Success)<br>÷ (Time × Effort)</div>
     <ul>
-      <li>🎯 <strong>Dream Outcome</strong> — "Even if I succeed, the result still won't be what I want." <em>(doubt about the destination)</em></li>
-      <li>🎯 <strong>Likelihood</strong> — "Can someone like <em>me</em> actually pull this off?" <em>(doubt about themselves)</em></li>
-      <li>⏰ <strong>Time</strong> — "This'll take too long, I need results now." <em>(doubt about the timeline)</em></li>
-      <li>😩 <strong>Effort</strong> — "This is too hard, confusing, or exhausting." <em>(doubt about the work)</em></li>
+      <li>🎯 <strong>Dream Outcome</strong> — how good the result is</li>
+      <li>🎯 <strong>Likelihood</strong> — how sure they are it'll work <em>for them</em></li>
+      <li>⏰ <strong>Time</strong> — how long it takes <em>(less = more value)</em></li>
+      <li>😩 <strong>Effort</strong> — how hard or painful it is <em>(less = more value)</em></li>
     </ul>
-    <h4>Then: a named solution for each</h4>
-    <p>Every fear becomes a solution using one formula:</p>
-    <p class="sop-formula"><strong>[Named Solution]</strong> — what it is <strong>so you can</strong> [outcome] <strong>even if</strong> [their objection] <strong>which means</strong> [deeper payoff]</p>
-    <p><em>Example:</em> <strong>The Habit-Swap System</strong> — one-for-one daily food swaps so you can drop fat without counting a calorie, even if you've got zero willpower, which means the weight comes off without living in "diet jail."</p>
+    <h4>What we do in this step</h4>
+    <p>We map <strong>every step</strong> your customer takes to get from where they are now (A) to the result they want (B). Then at each step we run it through those 4 levers to surface everything that makes it feel <em>less</em> valuable:</p>
+    <ul><li><em>"Even if I do it, it won't be that great anyway"</em></li><li><em>"Someone like me can't pull it off"</em></li><li><em>"It'll take forever"</em></li><li><em>"It'll be too hard / confusing"</em></li></ul>
+    <p>Then we attach a <strong>named solution</strong> to each one, using this formula:</p>
+    <p class="sop-formula"><strong>[Named Solution]</strong> — what it is <strong>so you can</strong> [outcome] <strong>even if</strong> [objection] <strong>which means</strong> [deeper payoff]</p>
     <h4>Why it matters</h4>
-    <p>A product is only valuable against a problem. Line every fear up against a solution and your Pitch and Bonus stack basically write themselves.</p>
+    <p>This becomes the <strong>outline of how you communicate every part of your product</strong> — each solution answers a real objection. It also exposes <strong>gaps in your offer</strong>: any problem you can't solve yet is a reason someone won't buy.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>A full problem map — every journey step × 4 lenses, in your customer's real words</li><li>A named solution for every problem</li><li>The backbone of your Pitch &amp; Bonuses</li></ul>` },
+    <ul><li>The full problem map — every journey step × the 4 value levers</li><li>A named solution for each problem</li><li>The backbone of your Pitch &amp; Bonuses, plus any offer gaps exposed</li></ul>` },
   { name: 'Vehicle', html: `
     <p class="sop-lead">The <em>what</em> — the form your solution takes.</p>
     <h4>What this step is</h4>
