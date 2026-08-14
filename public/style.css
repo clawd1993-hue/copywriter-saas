@@ -412,6 +412,10 @@ body {
 .sc-badge { background: var(--accent); color: #fff; padding: 3px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; }
 .sc-title { font-weight: 700; font-size: 0.95rem; }
 .sc-body { padding: 16px; font-size: 0.9rem; line-height: 1.55; color: var(--text); }
+.sc-body .sc-h1 { font-size: 1.05rem; font-weight: 800; margin: 4px 0 10px; letter-spacing: -0.01em; }
+.sc-body .sc-h2 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 6px; color: var(--brand, #6c5ce7); }
+.sc-body .sc-h3 { font-size: 0.92rem; font-weight: 700; margin: 12px 0 4px; }
+.sc-body .sc-hr { border: 0; border-top: 1px solid #e9e7f3; margin: 14px 0; }
 .sc-empty { color: var(--text-dim); display: flex; gap: 10px; align-items: flex-start; }
 .sc-empty .sc-spark { font-size: 1.05rem; line-height: 1.4; }
 .sc-empty b { color: var(--accent); }

@@ -692,9 +692,16 @@ let history = [];
 function mdToHtml(text) {
   let s = String(text == null ? '' : text)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // headings & dividers (line-based, before inline styles) — so the card renders clean, not raw "##"
+  s = s.replace(/^\s*###\s+(.+?)\s*$/gm, '<div class="sc-h3">$1</div>');
+  s = s.replace(/^\s*##\s+(.+?)\s*$/gm, '<div class="sc-h2">$1</div>');
+  s = s.replace(/^\s*#\s+(.+?)\s*$/gm, '<div class="sc-h1">$1</div>');
+  s = s.replace(/^\s*(?:---|___|—-)\s*$/gm, '<hr class="sc-hr">');
   s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');   // **bold**
   s = s.replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>'); // *italic*
   s = s.replace(/`([^`]+)`/g, '<code>$1</code>');           // `code`
+  // block elements already force their own line break — drop the trailing newline so pre-wrap doesn't double-space
+  s = s.replace(/(<\/div>|<hr class="sc-hr">)\n/g, '$1');
   return s;
 }
 
