@@ -201,6 +201,8 @@ const STEP_SOPS = [
       <li>🥩 <strong>2 Meats</strong> — a problem-aware story + a solution-aware proof</li>
       <li>📢 <strong>3 CTAs</strong> — near-identical, tiny wording tweaks</li>
     </ul>
+    <h4>Why both problem- &amp; solution-aware</h4>
+    <p>We write for two mindsets: <strong>problem-aware</strong> (they feel the pain but don't know the fix) and <strong>solution-aware</strong> (they already know a solution exists — they just want the best one). Covering both means you speak to <strong>far more of the market</strong>, not just one slice — so your ads reach more people and scale a lot easier.</p>
     <h4>The math</h4>
     <div class="ad-math">
       <div class="ad-brick"><span class="ad-num">10</span><span class="ad-lbl">🎣 Hooks</span></div>
