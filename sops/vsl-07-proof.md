@@ -11,6 +11,8 @@ Open on the transition out of Credibility: *"Now Section 7: Proof. Section 6 was
 ## What it is
 Testimonials / results from real people — the "it's not just HIM" proof. Because most users won't have these ready, you write **realistic placeholders**, clearly marked to swap, so the VSL is never missing its proof.
 
+**If the user already gave you real testimonials/results** (in this chat or on the board), format THOSE cleanly instead of inventing placeholders — real always beats placeholder. Otherwise, default to writing 3 placeholders below.
+
 ## How to write the 3 placeholders (grounded — never hypey)
 Write **3 testimonials**. Format each:
 > **[Name], [avatar descriptor]** — "[relatable starting point] → [specific result + timeframe], [quick tie to the mechanism]."
