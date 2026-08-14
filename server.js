@@ -142,14 +142,17 @@ const VSL_SECTION_NAMES = [
 ];
 // Built section-by-section (mirrors the offer-engine step build). Add the file as each section ships.
 const VSL_SECTION_SOP_FILES = {
-  0: 'vsl-01-hook.md'
+  0: 'vsl-01-hook.md',
+  1: 'vsl-02-shocking-statement.md'
 };
 const VSL_SECTION_CONFIG = {
-  0: { maxTokens: 3000, effort: 'high' }
+  0: { maxTokens: 3000, effort: 'high' },
+  1: { maxTokens: 3000, effort: 'high' }
 };
 // Which offer-engine cards (by step index 0-7) each VSL section must READ to ground its copy.
 const VSL_SECTION_DEPENDENCIES = {
-  0: [2, 4]   // Hook ← Step 3 Customer Research + Step 6 Vehicle
+  0: [2, 4],  // Hook ← Step 3 Customer Research + Step 6 Vehicle
+  1: [2]      // Shocking Statement ← Step 3 Customer Research (objection to flip / pain to expose)
 };
 
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
@@ -166,7 +169,7 @@ function boardGrounding(depIndexes, stepContent) {
   return parts;
 }
 
-function buildSystemPrompt(stepIndex, stepContent) {
+function buildSystemPrompt(stepIndex, stepContent, sectionContent) {
   // VSL copy section (index >= VSL_BASE)
   if (isSection(stepIndex)) {
     const si = secIdx(stepIndex);
@@ -176,6 +179,16 @@ function buildSystemPrompt(stepIndex, stepContent) {
     const parts = boardGrounding(VSL_SECTION_DEPENDENCIES[si] || [], stepContent);
     if (parts.length) {
       sys += '## 📋 THE WORK ALREADY ON YOUR BOARD — read this FIRST and pull from it.\nThis is the REAL material from the offer engine (their exact words, research, and outputs). Ground every line you write in it. Use the avatar\'s actual language; never invent something it doesn\'t contain.\n\n' + parts.join('\n\n') + '\n\n---\n\n';
+    }
+    // Inject the VSL written so far (prior sections) so this section flows and never repeats a line.
+    const scn = (sectionContent && typeof sectionContent === 'object') ? sectionContent : {};
+    const priorParts = [];
+    for (let k = 0; k < si; k++) {
+      let c = scn[k] != null ? scn[k] : scn[String(k)];
+      if (c && typeof c === 'string' && c.trim()) priorParts.push('### Section ' + (k + 1) + ' — ' + (VSL_SECTION_NAMES[k] || '') + ':\n' + c.trim());
+    }
+    if (priorParts.length) {
+      sys += '## ✍️ THE VSL YOU\'VE WRITTEN SO FAR — read it so this section FLOWS from it and never repeats a line.\n\n' + priorParts.join('\n\n') + '\n\n---\n\n';
     }
     const secFile = VSL_SECTION_SOP_FILES[si];
     const secSop = secFile ? readSop(secFile) : '';
@@ -361,9 +374,9 @@ function clampStep(v) {
 
 // Run the brain for one step and normalize the result (push extraction + leak-guard).
 // Returns { reply, push }.
-async function runStep(stepIndex, messages, stepContent) {
+async function runStep(stepIndex, messages, stepContent, sectionContent) {
   const cfg = (isSection(stepIndex) ? VSL_SECTION_CONFIG[secIdx(stepIndex)] : STEP_CONFIG[stepIndex]) || {};
-  const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent), messages, {
+  const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent, sectionContent), messages, {
     maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
   });
   const { reply, push } = extractPush(raw, stepIndex);
@@ -397,7 +410,7 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent);
+    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent, req.body && req.body.sectionContent);
     res.json({ reply, push });
   } catch (e) {
     res.status(200).json({ reply: `⚠️ Something went wrong reaching the engine: ${e.message}. Try again in a sec.`, push: null });
@@ -429,9 +442,10 @@ app.post('/api/chat/async', async (req, res) => {
 
   // fire-and-forget: run in the background, store the result on the job when done
   const jobStepContent = req.body && req.body.stepContent;
+  const jobSectionContent = req.body && req.body.sectionContent;
   (async () => {
     try {
-      const { reply, push } = await runStep(stepIndex, messages, jobStepContent);
+      const { reply, push } = await runStep(stepIndex, messages, jobStepContent, jobSectionContent);
       const j = jobs.get(jobId);
       if (j) { j.status = 'done'; j.reply = reply; j.push = push; }
     } catch (e) {
