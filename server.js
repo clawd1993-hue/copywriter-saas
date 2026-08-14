@@ -54,8 +54,9 @@ const STEP_SOP_FILES = {
   2: 'step-03-customer-research.md',
   3: 'step-04-05-problems-solutions.md',
   4: 'step-06-vehicle.md',
-  5: 'step-07-method.md'
-  // 6: 'step-08-*.md', ... (added step by step)
+  5: 'step-07-method.md',
+  6: 'step-08-deliverables.md'
+  // 7: 'step-09-*.md', ... (added step by step)
 };
 
 // Per-step overrides. Step 3 (Customer Research) = real deep research: web tools on + big output cap + high effort.
@@ -86,6 +87,10 @@ const STEP_CONFIG = {
   // Step 6 (Vehicle) — name + positioning + 3 secrets; compact output but drafts + explains, so bump the default cap a bit.
   4: {
     maxTokens: 4000
+  },
+  // Step 8 (Deliverables/Value Stack) — core + a pile of bonus bullets + values. Raise the cap.
+  6: {
+    maxTokens: 8000
   }
 };
 

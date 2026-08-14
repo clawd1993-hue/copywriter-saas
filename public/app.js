@@ -178,13 +178,19 @@ const STEP_SOPS = [
     <h4>What you'll walk away with</h4>
     <ul><li>Your Method as a short, spoken script (7 beats)</li><li>The exact words for VSL Section 5</li><li>Built entirely from Step 6 — nothing new to figure out</li></ul>` },
   { name: 'Deliverables', html: `
-    <p class="sop-lead">Everything they get, stacked for value.</p>
+    <p class="sop-lead">Where everything becomes the actual <strong>offer</strong> people buy — stacked so the value dwarfs the price.</p>
     <h4>What this step is</h4>
-    <p>We lay out the core deliverables and bonuses, ordered so the perceived value climbs well past the price.</p>
+    <p>We package everything you've built into your <strong>value stack</strong>, in two parts:</p>
+    <ul>
+      <li>🎯 <strong>Core (the 3)</strong> — one deliverable for each big doubt (🚗 the Big Promise, 🧠 internal, 🌍 external). These are your Step 6 pieces, productized.</li>
+      <li>🎁 <strong>Bonuses</strong> — the rest of your Step 4/5 solutions, piled up "PLUS you also get…", each with a value.</li>
+    </ul>
     <h4>Why it matters</h4>
-    <p>A well-built stack makes the price feel like a no-brainer before you ever say a number.</p>
+    <p>The perfect offer = the core kills every belief, the bonuses cover every step → there's <strong>nothing left to compare it to</strong>. That's when the price feels like a no-brainer.</p>
+    <h4>Perceived value</h4>
+    <p>Each piece gets a value = what it'd cost to solve <em>without</em> you (not your price). Stack it biggest-first until the total is 10×+ what you charge.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>Core deliverables (the Pitch)</li><li>The bonus stack</li><li>Value framing for each piece</li></ul>` },
+    <ul><li>Your core offer (locked first) + full bonus stack</li><li>A value on every piece</li><li>The exact stack for your Pitch &amp; Bonuses sections</li></ul>` },
   { name: 'Ad Concepts', html: `
     <p class="sop-lead">Turn the angles into scroll-stopping hooks.</p>
     <h4>What this step is</h4>
@@ -612,7 +618,17 @@ function stepContentKey() { return currentProjectId || currentThreadKey || 'none
 function stepContentStore() { try { return JSON.parse(localStorage.getItem('stepcontent:' + stepContentKey()) || '{}'); } catch (e) { return {}; } }
 function getStepContent(i) { return stepContentStore()[i] || null; }
 // The step the brain should work on = first of the 8 bubbles without pushed content.
-function currentStepIndex() { const s = stepContentStore(); for (let i = 0; i < 8; i++) { if (!s[i]) return i; } return 7; }
+// A step is "still current" if it's empty OR it has content marked [[STEP_PENDING]] (a partial push,
+// e.g. Step 8.1 core with bonuses still to come). This keeps a multi-stage step open until it's finished.
+function currentStepIndex() {
+  const s = stepContentStore();
+  for (let i = 0; i < 8; i++) {
+    const c = s[i];
+    if (!c) return i;
+    if (typeof c === 'string' && c.includes('[[STEP_PENDING]]')) return i;
+  }
+  return 7;
+}
 
 // Render the Problems & Solutions map (lines with ` ||| `) as a Lens | Problem | Solution table.
 function psTableToHtml(text) {
@@ -649,8 +665,9 @@ function psTableToHtml(text) {
 
 function renderStepBody(i) {
   const body = document.getElementById('sc-body');
-  const content = getStepContent(i);
+  let content = getStepContent(i);
   if (content) {
+    content = content.replace(/\[\[STEP_PENDING\]\]/g, '').replace(/\n{3,}/g, '\n\n').trim();  // strip the pending sentinel from display
     body.innerHTML = '';
     const div = document.createElement('div');
     if (content.includes(' ||| ')) {               // Problems & Solutions map → table
