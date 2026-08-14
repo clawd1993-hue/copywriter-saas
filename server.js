@@ -153,7 +153,8 @@ const VSL_SECTION_SOP_FILES = {
   8: 'vsl-09-pitch.md',
   9: 'vsl-10-bonuses.md',
   10: 'vsl-11-guarantee-urgency.md',
-  11: 'vsl-12-cta.md'
+  11: 'vsl-12-cta.md',
+  12: 'vsl-13-ps.md'
 };
 const VSL_SECTION_CONFIG = {
   0: { maxTokens: 3000, effort: 'high' },
@@ -167,7 +168,8 @@ const VSL_SECTION_CONFIG = {
   8: { maxTokens: 3500, effort: 'high' },
   9: { maxTokens: 4000, effort: 'high' },
   10: { maxTokens: 3000, effort: 'high' },
-  11: { maxTokens: 2500, effort: 'high' }
+  11: { maxTokens: 2500, effort: 'high' },
+  12: { maxTokens: 2000, effort: 'high' }
 };
 // Which offer-engine cards (by step index 0-7) each VSL section must READ to ground its copy.
 const VSL_SECTION_DEPENDENCIES = {
@@ -182,7 +184,8 @@ const VSL_SECTION_DEPENDENCIES = {
   8: [6],       // Pitch ← Step 8.1 (the 3 core deliverables: name + built-in even-if + value)
   9: [4, 6],    // Bonuses ← Step 8.2 bonus stack + Vehicle name (core values come from Section 9)
   10: [6],      // Guarantee/Urgency ← offer/price-risk profile (Step 8) to recommend the fitting type; user picks
-  11: [2, 4]    // CTA ← Vehicle name (Step 6) + core benefit (Step 3 desire); price comes from the user
+  11: [2, 4],   // CTA ← Vehicle name (Step 6) + core benefit (Step 3 desire); price comes from the user
+  12: [2, 5]    // P.S. ← Step 3 Desires (#1 dream) + Step 7 Method (compressed)
 };
 
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
