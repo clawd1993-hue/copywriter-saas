@@ -118,9 +118,35 @@ const STEP_NAMES = ['Core Desire', 'Market', 'Customer Research', 'Problems & So
 // UI step labels (Steps 4 & 5 merged into one "4/5" bubble) — so the brain uses the number the USER sees, not index+1.
 const STEP_LABELS = ['1', '2', '3', '4/5', '6', '7', '8', '9'];
 
-function buildSystemPrompt(stepIndex) {
+// Which earlier cards each step must actually READ (by index) — so it grounds in real prior work, not just chat.
+// (Only the steps that synthesise from upstream — early steps gather their own input.)
+const STEP_DEPENDENCIES = {
+  3: [2],           // Step 4/5 ← Customer Research
+  4: [1, 2, 3],     // Step 6 Vehicle ← Market, Research, Problems&Solutions
+  5: [2, 4],        // Step 7 Method ← Research, Vehicle
+  6: [2, 3, 4],     // Step 8 Deliverables ← Research, Problems&Solutions, Vehicle
+  7: [2, 4, 5, 6]   // Step 9 Ad Concepts ← Research, Vehicle, Method, Deliverables
+};
+
+function buildSystemPrompt(stepIndex, stepContent) {
   const stepName = STEP_NAMES[stepIndex] || 'this step';
   let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT STEP: ' + (STEP_LABELS[stepIndex] || (stepIndex + 1)) + ' — ' + stepName + '\n\n';
+
+  // Inject the prior cards THIS step needs to read — grounding. Pull the real material; don't invent.
+  const deps = STEP_DEPENDENCIES[stepIndex] || [];
+  const sc = (stepContent && typeof stepContent === 'object') ? stepContent : {};
+  const boardParts = [];
+  for (const d of deps) {
+    let c = sc[d] != null ? sc[d] : sc[String(d)];
+    if (c && typeof c === 'string') {
+      c = c.replace(/\[\[STEP_PENDING\]\]/g, '').trim();
+      if (c) boardParts.push('### From Step ' + (STEP_LABELS[d] || (d + 1)) + ' — ' + (STEP_NAMES[d] || '') + ':\n' + c);
+    }
+  }
+  if (boardParts.length) {
+    sys += '## 📋 THE WORK ALREADY ON YOUR BOARD — read this FIRST and pull from it.\nThis is the REAL material from earlier steps (their exact words, research, and outputs). Ground everything you write in it. Use its actual language; never invent something that contradicts it or make up details it doesn\'t contain.\n\n' + boardParts.join('\n\n') + '\n\n---\n\n';
+  }
+
   const sopFile = STEP_SOP_FILES[stepIndex];
   const sop = sopFile ? readSop(sopFile) : '';
   if (sop) {
@@ -282,9 +308,9 @@ function clampStep(v) { let s = Number.isInteger(v) ? v : 0; if (s < 0) s = 0; i
 
 // Run the brain for one step and normalize the result (push extraction + leak-guard).
 // Returns { reply, push }.
-async function runStep(stepIndex, messages) {
+async function runStep(stepIndex, messages, stepContent) {
   const cfg = STEP_CONFIG[stepIndex] || {};
-  const raw = await callClaude(buildSystemPrompt(stepIndex), messages, {
+  const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent), messages, {
     maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
   });
   const { reply, push } = extractPush(raw, stepIndex);
@@ -318,7 +344,7 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const { reply, push } = await runStep(stepIndex, messages);
+    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent);
     res.json({ reply, push });
   } catch (e) {
     res.status(200).json({ reply: `⚠️ Something went wrong reaching the engine: ${e.message}. Try again in a sec.`, push: null });
@@ -349,9 +375,10 @@ app.post('/api/chat/async', async (req, res) => {
   jobs.set(jobId, { status: 'running', userId: g.userId, reply: null, push: null, error: null, createdAt: Date.now() });
 
   // fire-and-forget: run in the background, store the result on the job when done
+  const jobStepContent = req.body && req.body.stepContent;
   (async () => {
     try {
-      const { reply, push } = await runStep(stepIndex, messages);
+      const { reply, push } = await runStep(stepIndex, messages, jobStepContent);
       const j = jobs.get(jobId);
       if (j) { j.status = 'done'; j.reply = reply; j.push = push; }
     } catch (e) {
