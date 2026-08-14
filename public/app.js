@@ -766,10 +766,26 @@ async function authHeaders() {
 }
 
 // Shared: land an assistant reply {reply, push} into the chat + dashboard
+// A push to step i is only valid if every earlier step (0..i-1) already has content.
+// Hard invariant: prevents an out-of-order/stray push from filling a later step and corrupting the sequence.
+function canPushStep(i) {
+  if (typeof i !== 'number' || i < 0 || i > 7) return false;
+  const s = stepContentStore();
+  for (let k = 0; k < i; k++) { if (!s[k]) return false; }
+  return true;
+}
+
 function applyReply(data) {
   if (!data) return;
   if (data.reply) { addMsg('bot', data.reply); history.push({ role: 'assistant', content: data.reply }); persistMsg('assistant', data.reply); }
-  if (data.push && typeof data.push.step === 'number') { pushStepContent(data.push.step, data.push.content); openStepContent(data.push.step); }
+  if (data.push && typeof data.push.step === 'number') {
+    if (canPushStep(data.push.step)) {
+      pushStepContent(data.push.step, data.push.content);
+      openStepContent(data.push.step);
+    } else {
+      console.warn('Ignored out-of-order push to step', data.push.step, '— earlier steps not complete');
+    }
+  }
 }
 
 // ---------- BACKGROUND JOB (slow steps: contract → live progress → auto-deliver, survives tab close) ----------
@@ -864,8 +880,10 @@ function resumePendingJobs() {
   });
 }
 
+let chatBusy = false; // in-flight lock: one message can't fire two requests
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  if (chatBusy) return; // ignore re-submits while a request is already running
   const text = chatText.value.trim();
   if (!text) return;
   addMsg('user', text);
@@ -878,6 +896,7 @@ chatForm.addEventListener('submit', async (e) => {
   const step = currentStepIndex();
   const slowCfg = (APP_CONFIG.slowSteps || {})[step];
   if (slowCfg) { startSlowJob(step, slowCfg); return; }
+  chatBusy = true;
 
   const typing = document.createElement('div');
   typing.className = 'msg bot typing';
@@ -912,15 +931,22 @@ chatForm.addEventListener('submit', async (e) => {
     addMsg('bot', data.reply);
     history.push({ role: 'assistant', content: data.reply });
     persistMsg('assistant', data.reply);
-    // Live push: AI approved content → fill the matching bubble instantly (no refresh) + pop it open
+    // Live push: AI approved content → fill the matching bubble instantly (no refresh) + pop it open.
+    // Guarded: never fill a step whose earlier steps aren't done (blocks out-of-order/stray pushes).
     if (data.push && typeof data.push.step === 'number') {
-      pushStepContent(data.push.step, data.push.content);
-      openStepContent(data.push.step);
+      if (canPushStep(data.push.step)) {
+        pushStepContent(data.push.step, data.push.content);
+        openStepContent(data.push.step);
+      } else {
+        console.warn('Ignored out-of-order push to step', data.push.step, '— earlier steps not complete');
+      }
     }
   } catch (err) {
     clearTimeout(slowCaption);
     typing.remove();
     addMsg('bot', '⚠️ Could not reach the server.');
+  } finally {
+    chatBusy = false;
   }
 });
 
