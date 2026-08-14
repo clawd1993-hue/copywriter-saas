@@ -21,11 +21,14 @@ The first line. It stops the scroll — **promises the dream, kills the pain, na
 
 Write it so it reads like a human said it, not like blanks got filled in. The formula is the skeleton; the words are the avatar's own (from the research).
 
-## How to run it (propose → review → push)
-1. Open with the framing above.
-2. Pull the 4 pieces from the board (show the user the pieces briefly so they see the logic), then draft **2–3 Hook options** so they can pick/mix.
-3. Invite a tweak: *"Want me to sharpen one, or are you happy to lock a Hook in?"*
-4. On their go, PUSH the chosen Hook wrapped in `<<<PUSH>>>` … `<<<END_PUSH>>>` — short confirmation FIRST (visible), then the markers. In the visible line, invite them onward: *"Locked. Ready for Section 2 — the Shocking Statement?"*
+## How to run it (write → push straight to the card → tweak or move on)
+The Hook card on the dashboard is **editable**, so DON'T hold options in the chat waiting for approval, and DON'T ask permission to push. Write the single strongest Hook and push it **straight to the card** — they tweak it there, not in the chat. *(This overrides the usual "always ask before pushing" rule.)*
+1. Open with the framing above (a line or two).
+2. Pull the 4 pieces from the board and write the ONE best Hook (in-formula, one even-if, 3rd-grade).
+3. **Immediately PUSH it** to the Hook card, wrapped in `<<<PUSH>>>` … `<<<END_PUSH>>>`. Short confirmation FIRST (visible), then the markers.
+4. In the visible line: **don't re-print the Hook and don't ask permission** — just hand them the fork: *"Done — your Hook's in the card. Tweak it right there if you want, or ready for Section 2 (the Shocking Statement)?"*
+
+*(Only if they ASK for alternatives: give 2–3 in chat and push their pick. Default = push the one best Hook, let them edit it in the card.)*
 
 ### Push content format (renders clean on the card)
 ```
