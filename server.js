@@ -144,18 +144,21 @@ const VSL_SECTION_NAMES = [
 const VSL_SECTION_SOP_FILES = {
   0: 'vsl-01-hook.md',
   1: 'vsl-02-shocking-statement.md',
-  2: 'vsl-03-why-desire.md'
+  2: 'vsl-03-why-desire.md',
+  3: 'vsl-04-why-pain.md'
 };
 const VSL_SECTION_CONFIG = {
   0: { maxTokens: 3000, effort: 'high' },
   1: { maxTokens: 3000, effort: 'high' },
-  2: { maxTokens: 3500, effort: 'high' }
+  2: { maxTokens: 3500, effort: 'high' },
+  3: { maxTokens: 3500, effort: 'high' }
 };
 // Which offer-engine cards (by step index 0-7) each VSL section must READ to ground its copy.
 const VSL_SECTION_DEPENDENCIES = {
   0: [2, 4],  // Hook ← Step 3 Customer Research + Step 6 Vehicle
   1: [2],     // Shocking Statement ← Step 3 Customer Research (objection to flip / pain to expose)
-  2: [2]      // Why (Desire) ← Step 3 Customer Research (desires, motivations, pains, time dimensions)
+  2: [2],     // Why (Desire) ← Step 3 Customer Research (desires, motivations, pains, time dimensions)
+  3: [2]      // Why (Pain) ← Step 3 Customer Research (pains, future fears, motivations, failures)
 };
 
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
