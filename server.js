@@ -50,8 +50,9 @@ const LEAK_REFUSAL = "🔒 Those source files are proprietary, licensed material
 const STEP_SOP_FILES = {
   0: 'step-01-core-desire.md',
   1: 'step-02-market.md',
-  2: 'step-03-customer-research.md'
-  // 3: 'step-04-05-problems-solutions.md', ... (added step by step)
+  2: 'step-03-customer-research.md',
+  3: 'step-04-05-problems-solutions.md'
+  // 4: 'step-06-*.md', ... (added step by step)
 };
 
 // Per-step overrides. Step 3 (Customer Research) = real deep research: web tools on + big output cap + high effort.
@@ -73,6 +74,11 @@ const STEP_CONFIG = {
       { type: 'web_search_20260209', name: 'web_search', max_uses: 8 },
       { type: 'web_fetch_20260209', name: 'web_fetch', max_uses: 8 }
     ]
+  },
+  // Step 4/5 (Problems & Solutions) — big structured output (journey steps × 4 lenses + a named solution each). Raise the cap.
+  3: {
+    maxTokens: 12000,
+    effort: 'high'
   }
 };
 

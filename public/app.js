@@ -126,11 +126,22 @@ const STEP_SOPS = [
   { name: 'Problems & Solutions', html: `
     <p class="sop-lead">Turn every obstacle into a reason to buy. (Steps 4 &amp; 5 combined.)</p>
     <h4>What this step is</h4>
-    <p>We map every problem your market hits on the way to the result, then attach a named solution to each one. The sum of those solutions becomes your product.</p>
+    <p>We map the journey your customer takes to the result. At <strong>every step</strong> along the way, we surface the <strong>4 fears</strong> that stop them — then attach a <strong>named solution</strong> to each fear. That stack of solutions becomes your product.</p>
+    <h4>The 4 lenses (every journey step gets all 4)</h4>
+    <ul>
+      <li>🎯 <strong>Dream Outcome</strong> — "Even if I succeed, the result still won't be what I want." <em>(doubt about the destination)</em></li>
+      <li>🎯 <strong>Likelihood</strong> — "Can someone like <em>me</em> actually pull this off?" <em>(doubt about themselves)</em></li>
+      <li>⏰ <strong>Time</strong> — "This'll take too long, I need results now." <em>(doubt about the timeline)</em></li>
+      <li>😩 <strong>Effort</strong> — "This is too hard, confusing, or exhausting." <em>(doubt about the work)</em></li>
+    </ul>
+    <h4>Then: a named solution for each</h4>
+    <p>Every fear becomes a solution using one formula:</p>
+    <p class="sop-formula"><strong>[Named Solution]</strong> — what it is <strong>so you can</strong> [outcome] <strong>even if</strong> [their objection] <strong>which means</strong> [deeper payoff]</p>
+    <p><em>Example:</em> <strong>The Habit-Swap System</strong> — one-for-one daily food swaps so you can drop fat without counting a calorie, even if you've got zero willpower, which means the weight comes off without living in "diet jail."</p>
     <h4>Why it matters</h4>
-    <p>A product is only valuable against a problem. Line them up and the Pitch and Bonus stack write themselves.</p>
+    <p>A product is only valuable against a problem. Line every fear up against a solution and your Pitch and Bonus stack basically write themselves.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>The full problem map (per step, 4 value-equation lenses)</li><li>A named solution for each problem</li><li>The backbone of your Pitch &amp; Bonuses</li></ul>` },
+    <ul><li>A full problem map — every journey step × 4 lenses, in your customer's real words</li><li>A named solution for every problem</li><li>The backbone of your Pitch &amp; Bonuses</li></ul>` },
   { name: 'Vehicle', html: `
     <p class="sop-lead">The <em>what</em> — the form your solution takes.</p>
     <h4>What this step is</h4>
@@ -829,11 +840,13 @@ chatForm.addEventListener('submit', async (e) => {
   typing.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span>';
   chatLog.appendChild(typing);
   chatLog.scrollTop = chatLog.scrollHeight;
-  // If a reply takes a while (e.g. Step 3 deep research), reveal a "researching" caption so it doesn't feel frozen
+  // If a reply takes a while, reveal an honest caption so it doesn't feel frozen (step-aware)
   const slowCaption = setTimeout(() => {
     const cap = document.createElement('div');
     cap.className = 'typing-caption';
-    cap.textContent = '🔎 Researching real sources… this can take up to a minute';
+    cap.textContent = step === 3
+      ? '✍️ Building your problem map & solutions… this can take a minute'
+      : '⏳ Working on it…';
     typing.appendChild(cap);
     chatLog.scrollTop = chatLog.scrollHeight;
   }, 4000);
