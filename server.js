@@ -53,8 +53,9 @@ const STEP_SOP_FILES = {
   1: 'step-02-market.md',
   2: 'step-03-customer-research.md',
   3: 'step-04-05-problems-solutions.md',
-  4: 'step-06-vehicle.md'
-  // 5: 'step-07-*.md', ... (added step by step)
+  4: 'step-06-vehicle.md',
+  5: 'step-07-method.md'
+  // 6: 'step-08-*.md', ... (added step by step)
 };
 
 // Per-step overrides. Step 3 (Customer Research) = real deep research: web tools on + big output cap + high effort.

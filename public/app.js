@@ -164,13 +164,19 @@ const STEP_SOPS = [
     <h4>What you'll walk away with</h4>
     <ul><li>Your named vehicle + positioning line</li><li>The 3 belief-breaking secrets (your reg-page bullets &amp; ad angles)</li><li>The umbrella concept everything else sells under</li></ul>` },
   { name: 'Method', html: `
-    <p class="sop-lead">The <em>how</em> — your unique mechanism.</p>
+    <p class="sop-lead">The simple path — the one that makes them think <em>"wait… that's it? I can do that."</em></p>
     <h4>What this step is</h4>
-    <p>We articulate the signature method: the step-by-step way your vehicle delivers the result that nobody else has.</p>
+    <p>We take your 3 Secrets from Step 6 and flip them from <em>belief</em> into <em>action</em> — a simple <strong>3-move path</strong> to the dream, written as a short spoken script. It becomes the "Introduce the Method" section of your VSL.</p>
+    <h4>The 3 moves</h4>
+    <ul>
+      <li>🧠 Internal secret → <strong>Move 1</strong> (something they do)</li>
+      <li>🌍 External secret → <strong>Move 2</strong> (something they do)</li>
+      <li>🚗 Vehicle secret → <strong>Move 3 = the dream</strong> (the payoff)</li>
+    </ul>
     <h4>Why it matters</h4>
-    <p>The Method is your "new opportunity." It's why this works when everything else didn't — the heart of the VSL.</p>
+    <p>Complexity kills sales. When the path looks <em>easy</em> — three simple moves to the thing they want — the buyer stops doubting and starts believing. This is the moment they think "I could actually do this."</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>Your method named &amp; framed</li><li>The 3–5 core moving parts</li><li>Feeds "Introduce the Method" &amp; the P.S.</li></ul>` },
+    <ul><li>Your Method as a short, spoken script (7 beats)</li><li>The exact words for VSL Section 5</li><li>Built entirely from Step 6 — nothing new to figure out</li></ul>` },
   { name: 'Deliverables', html: `
     <p class="sop-lead">Everything they get, stacked for value.</p>
     <h4>What this step is</h4>
