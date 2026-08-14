@@ -148,6 +148,10 @@ async function callClaude(system, messages, opts = {}) {
   if (opts.tools) base.tools = opts.tools;
   // map incoming messages once (client sends {role, content:string}); appended assistant turns keep array content
   let convo = messages.map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content }));
+  // Safety net: the model requires the conversation to END on a user turn. Drop any trailing assistant
+  // messages from the INITIAL input (e.g. a client-side contract/greeting bubble). This runs once, before
+  // the loop — the pause_turn resume below deliberately re-adds assistant turns and must not be stripped.
+  while (convo.length && convo[convo.length - 1].role === 'assistant') convo.pop();
 
   let restarts = 0;
   const MAX_RESTARTS = 6; // server-side tool (web search) can pause_turn several times on a deep research run

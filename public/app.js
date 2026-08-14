@@ -776,10 +776,14 @@ function pollJob(step, jobId, progress) {
 
 async function startSlowJob(step, slowCfg) {
   try { if (window.Notification && Notification.permission === 'default') Notification.requestPermission(); } catch (e) {}
+  // Capture the messages to send to the brain BEFORE adding the client-only contract bubble —
+  // the contract is a display message (role assistant); sending it would make the convo end on an
+  // assistant turn, which the model rejects ("must end with a user message").
+  const msgsForServer = history.slice();
   if (slowCfg.contract) { addMsg('bot', slowCfg.contract); history.push({ role: 'assistant', content: slowCfg.contract }); persistMsg('assistant', slowCfg.contract); }
   const progress = addProgress(slowCfg.stages);
   try {
-    const r = await fetch('/api/chat/async', { method: 'POST', headers: await authHeaders(), body: JSON.stringify({ messages: history, currentStep: step }) });
+    const r = await fetch('/api/chat/async', { method: 'POST', headers: await authHeaders(), body: JSON.stringify({ messages: msgsForServer, currentStep: step }) });
     const data = await r.json();
     if (data.done) { finishJob(step, progress); applyReply(data); return; } // warming-up / off-topic / immediate reply
     if (!data.jobId) { finishJob(step, progress); addMsg('bot', '⚠️ Could not start the research. Try again.'); return; }
