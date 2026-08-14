@@ -275,6 +275,15 @@ body {
 .sop-body .sop-lead { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 4px; }
 .sop-body .sop-formula { background: #f4f2fc; border: 1px solid #e2ddf5; border-radius: 8px; padding: 10px 12px; margin: 8px 0; font-size: 0.86rem; color: var(--text); text-align: center; line-height: 1.5; }
 .sop-body .sop-note { background: #f4f2fc; border-radius: 8px; padding: 9px 11px; margin-top: 12px; font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+/* Step 9 — ad assembly-line "math" visual */
+.sop-body .ad-math { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin: 10px 0 4px; }
+.sop-body .ad-brick { display: flex; flex-direction: column; align-items: center; min-width: 54px; padding: 8px 10px; background: #f4f2fc; border: 1px solid #e2ddf5; border-radius: 10px; }
+.sop-body .ad-brick .ad-num { font-size: 1.3rem; font-weight: 800; color: var(--accent); line-height: 1.05; }
+.sop-body .ad-brick .ad-lbl { font-size: 0.68rem; color: var(--text-dim); margin-top: 3px; white-space: nowrap; }
+.sop-body .ad-op { font-size: 1.1rem; font-weight: 800; color: var(--text-dim); }
+.sop-body .ad-brick.ad-result { background: var(--accent); border-color: var(--accent); }
+.sop-body .ad-brick.ad-result .ad-num { color: #fff; }
+.sop-body .ad-brick.ad-result .ad-lbl { color: rgba(255,255,255,0.9); }
 
 /* RIGHT chat */
 .chat { flex: 1 1 0; display: flex; flex-direction: column; background: var(--surface); min-height: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }

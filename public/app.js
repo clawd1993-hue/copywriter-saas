@@ -192,13 +192,30 @@ const STEP_SOPS = [
     <h4>What you'll walk away with</h4>
     <ul><li>Your core offer (locked first) + full bonus stack</li><li>A value on every piece</li><li>The exact stack for your Pitch &amp; Bonuses sections</li></ul>` },
   { name: 'Ad Concepts', html: `
-    <p class="sop-lead">Turn the angles into scroll-stopping hooks.</p>
+    <p class="sop-lead">Your ad <strong>assembly line</strong> — a few modular pieces that combine into dozens of ready ads.</p>
     <h4>What this step is</h4>
-    <p>We translate everything above into ad concepts and hooks that pull the right people into the VSL.</p>
+    <p>We treat ads like <strong>Lego bricks</strong>: interchangeable <strong>Hooks</strong>, <strong>Meat</strong> (the body) and <strong>CTAs</strong>. Write a small set — then mix &amp; match. The combinations do the work.</p>
+    <h4>The 3 bricks</h4>
+    <ul>
+      <li>🎣 <strong>10 Hooks</strong> — 5 problem-aware (pain) + 5 solution-aware (promise)</li>
+      <li>🥩 <strong>2 Meats</strong> — a problem-aware story + a solution-aware proof</li>
+      <li>📢 <strong>3 CTAs</strong> — near-identical, tiny wording tweaks</li>
+    </ul>
+    <h4>The math</h4>
+    <div class="ad-math">
+      <div class="ad-brick"><span class="ad-num">10</span><span class="ad-lbl">🎣 Hooks</span></div>
+      <span class="ad-op">×</span>
+      <div class="ad-brick"><span class="ad-num">2</span><span class="ad-lbl">🥩 Meat</span></div>
+      <span class="ad-op">×</span>
+      <div class="ad-brick"><span class="ad-num">3</span><span class="ad-lbl">📢 CTAs</span></div>
+      <span class="ad-op">=</span>
+      <div class="ad-brick ad-result"><span class="ad-num">60</span><span class="ad-lbl">🎬 Ads</span></div>
+    </div>
+    <p class="sop-note">Write ~15 pieces → walk away with <strong>60 ready ads</strong>. That's the assembly line — never wonder "how do I get enough creatives?" again.</p>
     <h4>Why it matters</h4>
-    <p>The best VSL earns nothing without traffic. Sharp hooks off your research are what get the click.</p>
+    <p>The hook does <strong>80%</strong> of an ad's job. More hook variations = more winners found, faster — for barely any extra work.</p>
     <h4>What you'll walk away with</h4>
-    <ul><li>A batch of hook angles</li><li>Concepts mapped to desires &amp; pains</li><li>Ready-to-test ad ideas</li></ul>` }
+    <ul><li>10 hooks, 2 bodies, 3 CTAs — written for you</li><li>The 60-ad combination matrix</li><li>A shoot list you (or an editor) can run in one session</li></ul>` }
 ];
 
 // ---------- AUTH STATE ----------

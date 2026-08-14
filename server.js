@@ -55,8 +55,9 @@ const STEP_SOP_FILES = {
   3: 'step-04-05-problems-solutions.md',
   4: 'step-06-vehicle.md',
   5: 'step-07-method.md',
-  6: 'step-08-deliverables.md'
-  // 7: 'step-09-*.md', ... (added step by step)
+  6: 'step-08-deliverables.md',
+  7: 'step-09-ad-concepts.md'
+  // (offer engine complete — VSL copy sections next)
 };
 
 // Per-step overrides. Step 3 (Customer Research) = real deep research: web tools on + big output cap + high effort.
@@ -91,6 +92,10 @@ const STEP_CONFIG = {
   // Step 8 (Deliverables/Value Stack) — core + a pile of bonus bullets + values. Raise the cap.
   6: {
     maxTokens: 8000
+  },
+  // Step 9 (Ad Concepts) — 10 hooks + 2 meats + 3 CTAs + matrix. Big kit, raise the cap.
+  7: {
+    maxTokens: 10000
   }
 };
 
@@ -110,10 +115,12 @@ setInterval(() => {
   for (const [id, j] of jobs) if (now - j.createdAt > JOB_TTL_MS) jobs.delete(id);
 }, 10 * 60 * 1000).unref();
 const STEP_NAMES = ['Core Desire', 'Market', 'Customer Research', 'Problems & Solutions', 'Vehicle', 'Method', 'Deliverables', 'Ad Concepts'];
+// UI step labels (Steps 4 & 5 merged into one "4/5" bubble) — so the brain uses the number the USER sees, not index+1.
+const STEP_LABELS = ['1', '2', '3', '4/5', '6', '7', '8', '9'];
 
 function buildSystemPrompt(stepIndex) {
   const stepName = STEP_NAMES[stepIndex] || 'this step';
-  let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT STEP: ' + (stepIndex + 1) + ' — ' + stepName + '\n\n';
+  let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT STEP: ' + (STEP_LABELS[stepIndex] || (stepIndex + 1)) + ' — ' + stepName + '\n\n';
   const sopFile = STEP_SOP_FILES[stepIndex];
   const sop = sopFile ? readSop(sopFile) : '';
   if (sop) {
