@@ -61,7 +61,7 @@ const STEP_CONFIG = {
     maxTokens: 12000,
     effort: 'high',
     slow: true,
-    contract: "🔎 **This is the big one.** I'm about to search real sources across the web — Reddit, forums, review sites — to capture your avatar's *exact* voice in their own words.\n\nThis is deep research, so give me **3–5 minutes**. You don't have to sit here or ask if I'm done — I'll drop the full research right into this chat the moment it's ready. Even if you close the tab, come back and it'll be waiting.",
+    contract: "🔎 **This is the big one.** I'm about to search real sources across the web — Reddit, forums, review sites — to capture your avatar's *exact* voice in their own words.\n\nThis is deep research, so give me **3–5 minutes**. **Just keep this tab open** — you don't need to do a thing or ask if I'm done. I'll drop the full research right into this chat the moment it's ready. ☕",
     stages: [
       'Searching Reddit & forums…',
       'Reading real customer threads…',
