@@ -202,6 +202,10 @@ body {
   background: var(--surface2);
 }
 .vsl-item textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
+/* a section the AI has filled in */
+.vsl-item.done { border-color: #16a34a; }
+.vsl-item.done label::after { content: '✓'; color: #16a34a; font-weight: 700; margin-left: 6px; }
+.vsl-item.done textarea { background: #f0fdf4; }
 
 /* RIGHT column = SOP panel (top) + chat (bottom) */
 .right-col { flex: 1; display: flex; flex-direction: column; min-width: 340px; min-height: 0; gap: 12px; padding: 16px; }

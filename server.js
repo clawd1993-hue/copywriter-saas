@@ -128,21 +128,70 @@ const STEP_DEPENDENCIES = {
   7: [2, 4, 5, 6]   // Step 9 Ad Concepts ← Research, Vehicle, Method, Deliverables
 };
 
+// ---------- VSL COPY SECTIONS (the sales letter — written AFTER the 8-step offer engine) ----------
+// Addressed by index VSL_BASE + sectionIndex (0..12 for the DTS VSL's 13 sections), so section indices
+// never collide with the 0-7 offer-engine steps. Each section grounds in the offer-engine cards it pulls from.
+const VSL_BASE = 100;
+const isSection = (i) => Number.isInteger(i) && i >= VSL_BASE;
+const secIdx = (i) => i - VSL_BASE;
+
+const VSL_SECTION_NAMES = [
+  'Hook', 'Shocking Statement', 'Why (Desire)', 'Why (Pain)', 'Introduce the Method',
+  'Credibility', 'Proof', 'Product Overview', 'Pitch', 'Bonuses',
+  'Guarantee/Urgency', 'CTA', 'P.S.'
+];
+// Built section-by-section (mirrors the offer-engine step build). Add the file as each section ships.
+const VSL_SECTION_SOP_FILES = {
+  0: 'vsl-01-hook.md'
+};
+const VSL_SECTION_CONFIG = {
+  0: { maxTokens: 3000, effort: 'high' }
+};
+// Which offer-engine cards (by step index 0-7) each VSL section must READ to ground its copy.
+const VSL_SECTION_DEPENDENCIES = {
+  0: [2, 4]   // Hook ← Step 3 Customer Research + Step 6 Vehicle
+};
+
+// Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
+function boardGrounding(depIndexes, stepContent) {
+  const sc = (stepContent && typeof stepContent === 'object') ? stepContent : {};
+  const parts = [];
+  for (const d of depIndexes) {
+    let c = sc[d] != null ? sc[d] : sc[String(d)];
+    if (c && typeof c === 'string') {
+      c = c.replace(/\[\[STEP_PENDING\]\]/g, '').trim();
+      if (c) parts.push('### From Step ' + (STEP_LABELS[d] || (d + 1)) + ' — ' + (STEP_NAMES[d] || '') + ':\n' + c);
+    }
+  }
+  return parts;
+}
+
 function buildSystemPrompt(stepIndex, stepContent) {
+  // VSL copy section (index >= VSL_BASE)
+  if (isSection(stepIndex)) {
+    const si = secIdx(stepIndex);
+    const secName = VSL_SECTION_NAMES[si] || 'this section';
+    let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT: WRITING YOUR VSL — Section ' + (si + 1) + ' — ' + secName +
+      '\n\nThe 8-step offer engine is complete. You are now writing the actual sales letter (VSL), one section at a time.\n\n';
+    const parts = boardGrounding(VSL_SECTION_DEPENDENCIES[si] || [], stepContent);
+    if (parts.length) {
+      sys += '## 📋 THE WORK ALREADY ON YOUR BOARD — read this FIRST and pull from it.\nThis is the REAL material from the offer engine (their exact words, research, and outputs). Ground every line you write in it. Use the avatar\'s actual language; never invent something it doesn\'t contain.\n\n' + parts.join('\n\n') + '\n\n---\n\n';
+    }
+    const secFile = VSL_SECTION_SOP_FILES[si];
+    const secSop = secFile ? readSop(secFile) : '';
+    if (secSop) {
+      sys += '### SECTION SOP (follow this exactly for the current section):\n\n' + secSop;
+    } else {
+      sys += "This VSL section's SOP hasn't been loaded into you yet — we're still building it. Let the user know this section is coming soon; don't invent a process.";
+    }
+    return sys;
+  }
+
   const stepName = STEP_NAMES[stepIndex] || 'this step';
   let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT STEP: ' + (STEP_LABELS[stepIndex] || (stepIndex + 1)) + ' — ' + stepName + '\n\n';
 
   // Inject the prior cards THIS step needs to read — grounding. Pull the real material; don't invent.
-  const deps = STEP_DEPENDENCIES[stepIndex] || [];
-  const sc = (stepContent && typeof stepContent === 'object') ? stepContent : {};
-  const boardParts = [];
-  for (const d of deps) {
-    let c = sc[d] != null ? sc[d] : sc[String(d)];
-    if (c && typeof c === 'string') {
-      c = c.replace(/\[\[STEP_PENDING\]\]/g, '').trim();
-      if (c) boardParts.push('### From Step ' + (STEP_LABELS[d] || (d + 1)) + ' — ' + (STEP_NAMES[d] || '') + ':\n' + c);
-    }
-  }
+  const boardParts = boardGrounding(STEP_DEPENDENCIES[stepIndex] || [], stepContent);
   if (boardParts.length) {
     sys += '## 📋 THE WORK ALREADY ON YOUR BOARD — read this FIRST and pull from it.\nThis is the REAL material from earlier steps (their exact words, research, and outputs). Ground everything you write in it. Use its actual language; never invent something that contradicts it or make up details it doesn\'t contain.\n\n' + boardParts.join('\n\n') + '\n\n---\n\n';
   }
@@ -304,12 +353,16 @@ async function guard(req) {
   return { userId };
 }
 
-function clampStep(v) { let s = Number.isInteger(v) ? v : 0; if (s < 0) s = 0; if (s > 7) s = 7; return s; }
+function clampStep(v) {
+  let s = Number.isInteger(v) ? v : 0;
+  if (isSection(s)) { let k = secIdx(s); if (k < 0) k = 0; if (k > VSL_SECTION_NAMES.length - 1) k = VSL_SECTION_NAMES.length - 1; return VSL_BASE + k; }
+  if (s < 0) s = 0; if (s > 7) s = 7; return s;
+}
 
 // Run the brain for one step and normalize the result (push extraction + leak-guard).
 // Returns { reply, push }.
 async function runStep(stepIndex, messages, stepContent) {
-  const cfg = STEP_CONFIG[stepIndex] || {};
+  const cfg = (isSection(stepIndex) ? VSL_SECTION_CONFIG[secIdx(stepIndex)] : STEP_CONFIG[stepIndex]) || {};
   const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent), messages, {
     maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
   });

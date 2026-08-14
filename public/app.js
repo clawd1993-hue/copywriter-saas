@@ -7,6 +7,9 @@ const STEP_NAMES = [
 ];
 const STEP_LABELS = ['1', '2', '3', '4/5', '6', '7', '8', '9'];
 
+// VSL copy sections are addressed as VSL_BASE + sectionIndex, so they never collide with the 0-7 offer steps.
+const VSL_BASE = 100;
+
 // ---------- COPYWRITING SECTIONS — UNIQUE PER PROJECT TYPE ----------
 // Mirrored from Jim's dashboard. `source` = which step(s) feed each section
 // (this is the wiring the brain will use to push step output into the right bubble).
@@ -649,6 +652,46 @@ function currentStepIndex() {
   return 7;
 }
 
+// ---------- VSL SECTIONS: content store + progression (mirrors the step-content machinery) ----------
+function sectionStore() { try { return JSON.parse(localStorage.getItem('sectioncontent:' + stepContentKey()) || '{}'); } catch (e) { return {}; } }
+function getSectionContent(i) { return sectionStore()[i] || null; }
+// The whole 8-step offer engine is finished = every bubble has real (non-pending) content.
+function engineComplete() {
+  const s = stepContentStore();
+  for (let i = 0; i < 8; i++) { const c = s[i]; if (!c || (typeof c === 'string' && c.includes('[[STEP_PENDING]]'))) return false; }
+  return true;
+}
+// First VSL section (of the current project type) with no pushed content yet.
+function firstEmptySection() {
+  const store = sectionStore();
+  const n = getSections(currentProjectType).length;
+  for (let i = 0; i < n; i++) { if (!store[i]) return i; }
+  return n - 1;
+}
+// The single thing the brain should work on next: an offer-engine step until the engine's done,
+// then a VSL section (VSL_BASE + i).
+function currentWorkIndex() {
+  return engineComplete() ? (VSL_BASE + firstEmptySection()) : currentStepIndex();
+}
+// A section push to i is valid only if the engine is done AND sections 0..i-1 are already filled.
+function canPushSection(i) {
+  if (typeof i !== 'number' || i < 0 || i >= getSections(currentProjectType).length) return false;
+  if (!engineComplete()) return false;
+  const s = sectionStore();
+  for (let k = 0; k < i; k++) { if (!s[k]) return false; }
+  return true;
+}
+function pushSectionContent(i, content) {
+  const store = sectionStore();
+  store[i] = content;
+  localStorage.setItem('sectioncontent:' + stepContentKey(), JSON.stringify(store));
+  renderVSL();
+  const grid = document.getElementById('vsl-grid');
+  const item = grid && grid.children[i];
+  if (item) item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+window.pushSectionContent = pushSectionContent;
+
 // Render the Problems & Solutions map (lines with ` ||| `) as a Lens | Problem | Solution table.
 function psTableToHtml(text) {
   const lines = String(text == null ? '' : text).split('\n');
@@ -766,22 +809,27 @@ function renderVSL() {
   const grid = document.getElementById('vsl-grid');
   grid.innerHTML = '';
   const sections = getSections(currentProjectType);
+  const store = sectionStore();
+  let done = 0;
   sections.forEach((s, i) => {
+    const content = store[i];
     const item = document.createElement('div');
-    item.className = 'vsl-item';
+    item.className = 'vsl-item' + (content ? ' done' : '');
     item.innerHTML =
       `<label><span class="vsl-num">${i + 1}.</span> ${s.name} ` +
       `<span class="vsl-source">[${s.source}]</span></label>` +
       `<textarea placeholder="Write your ${s.name.toLowerCase()} here..."></textarea>`;
+    const ta = item.querySelector('textarea');
+    if (content) { ta.value = content; done++; }   // set as .value (no HTML injection) — the AI-pushed copy, still editable
     grid.appendChild(item);
   });
-  // framework badges reflect the project type + its section count
+  // framework badges reflect the project type + its section count + how many are filled
   const label = TYPE_BADGE[currentProjectType] || 'DTS VSL';
   const isWebinar = currentProjectType === 'dts-webinar';
   const secBadge = document.getElementById('sections-badge');
   if (secBadge) secBadge.textContent = label + ' · ' + sections.length + ' sections';
   const fwBadge = document.getElementById('fw-badge');
-  if (fwBadge) fwBadge.textContent = label + (isWebinar ? ' Script · 0/' : ' Draft · 0/') + sections.length;
+  if (fwBadge) fwBadge.textContent = label + (isWebinar ? ' Script · ' : ' Draft · ') + done + '/' + sections.length;
 }
 
 // ---------- CHAT ----------
@@ -841,17 +889,26 @@ function canPushStep(i) {
   return true;
 }
 
+// Route an approved push to the right place: a VSL section (>= VSL_BASE) or an offer-engine step (0-7).
+// Both are guarded so a stray/out-of-order push can't corrupt the sequence.
+function applyPush(push) {
+  if (!push || typeof push.step !== 'number') return;
+  if (push.step >= VSL_BASE) {
+    const i = push.step - VSL_BASE;
+    if (canPushSection(i)) pushSectionContent(i, push.content);
+    else console.warn('Ignored out-of-order VSL section push', i, '— engine or earlier sections not complete');
+  } else if (canPushStep(push.step)) {
+    pushStepContent(push.step, push.content);
+    openStepContent(push.step);
+  } else {
+    console.warn('Ignored out-of-order push to step', push.step, '— earlier steps not complete');
+  }
+}
+
 function applyReply(data) {
   if (!data) return;
   if (data.reply) { addMsg('bot', data.reply); history.push({ role: 'assistant', content: data.reply }); persistMsg('assistant', data.reply); }
-  if (data.push && typeof data.push.step === 'number') {
-    if (canPushStep(data.push.step)) {
-      pushStepContent(data.push.step, data.push.content);
-      openStepContent(data.push.step);
-    } else {
-      console.warn('Ignored out-of-order push to step', data.push.step, '— earlier steps not complete');
-    }
-  }
+  applyPush(data.push);
 }
 
 // ---------- BACKGROUND JOB (slow steps: contract → live progress → auto-deliver, survives tab close) ----------
@@ -958,8 +1015,9 @@ chatForm.addEventListener('submit', async (e) => {
   chatText.value = '';
   chatText.style.height = 'auto';
 
-  // Slow steps (e.g. deep research) run as a background job instead of a blocking request
-  const step = currentStepIndex();
+  // Slow steps (e.g. deep research) run as a background job instead of a blocking request.
+  // Work item = an offer-engine step until the engine's done, then a VSL section (>= VSL_BASE).
+  const step = currentWorkIndex();
   const slowCfg = (APP_CONFIG.slowSteps || {})[step];
   if (slowCfg) { startSlowJob(step, slowCfg); return; }
   chatBusy = true;
@@ -989,7 +1047,7 @@ chatForm.addEventListener('submit', async (e) => {
     const r = await fetch('/api/chat', {
       method: 'POST',
       headers,
-      body: JSON.stringify({ messages: history, currentStep: currentStepIndex(), stepContent: stepContentStore() })
+      body: JSON.stringify({ messages: history, currentStep: step, stepContent: stepContentStore() })
     });
     const data = await r.json();
     clearTimeout(slowCaption);
@@ -997,16 +1055,9 @@ chatForm.addEventListener('submit', async (e) => {
     addMsg('bot', data.reply);
     history.push({ role: 'assistant', content: data.reply });
     persistMsg('assistant', data.reply);
-    // Live push: AI approved content → fill the matching bubble instantly (no refresh) + pop it open.
-    // Guarded: never fill a step whose earlier steps aren't done (blocks out-of-order/stray pushes).
-    if (data.push && typeof data.push.step === 'number') {
-      if (canPushStep(data.push.step)) {
-        pushStepContent(data.push.step, data.push.content);
-        openStepContent(data.push.step);
-      } else {
-        console.warn('Ignored out-of-order push to step', data.push.step, '— earlier steps not complete');
-      }
-    }
+    // Live push: AI approved content → fill the matching bubble/section instantly (no refresh).
+    // Guarded: never fill a step/section whose predecessors aren't done (blocks out-of-order/stray pushes).
+    applyPush(data.push);
   } catch (err) {
     clearTimeout(slowCaption);
     typing.remove();
