@@ -595,14 +595,51 @@ function getStepContent(i) { return stepContentStore()[i] || null; }
 // The step the brain should work on = first of the 8 bubbles without pushed content.
 function currentStepIndex() { const s = stepContentStore(); for (let i = 0; i < 8; i++) { if (!s[i]) return i; } return 7; }
 
+// Render the Problems & Solutions map (lines with ` ||| `) as a Lens | Problem | Solution table.
+function psTableToHtml(text) {
+  const lines = String(text == null ? '' : text).split('\n');
+  let out = '', rows = '';
+  const flush = () => {
+    if (rows) {
+      out += '<table class="ps-table"><thead><tr><th>Lens</th><th>Problem</th><th>Solution</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      rows = '';
+    }
+  };
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) continue;
+    if (line.includes(' ||| ')) {
+      const parts = line.split(' ||| ');
+      const lens = mdToHtml(parts[0] || '');
+      const prob = mdToHtml(parts[1] || '');
+      const sol = mdToHtml(parts.slice(2).join(' ||| ') || '');
+      rows += '<tr><td class="ps-lens">' + lens + '</td><td class="ps-problem">' + prob + '</td><td class="ps-solution">' + sol + '</td></tr>';
+    } else if (line.startsWith('## ')) {           // journey-step section header — full-width row
+      rows += '<tr class="ps-section"><td colspan="3">' + mdToHtml(line.slice(3)) + '</td></tr>';
+    } else if (line.startsWith('# ')) {             // title
+      flush();
+      out += '<div class="ps-title">' + mdToHtml(line.slice(2)) + '</div>';
+    } else {                                        // intro prose (e.g. "Market: …")
+      flush();
+      out += '<p class="ps-note">' + mdToHtml(line) + '</p>';
+    }
+  }
+  flush();
+  return out;
+}
+
 function renderStepBody(i) {
   const body = document.getElementById('sc-body');
   const content = getStepContent(i);
   if (content) {
     body.innerHTML = '';
     const div = document.createElement('div');
-    div.style.whiteSpace = 'pre-wrap';
-    div.innerHTML = mdToHtml(content);
+    if (content.includes(' ||| ')) {               // Problems & Solutions map → table
+      div.innerHTML = psTableToHtml(content);
+    } else {
+      div.style.whiteSpace = 'pre-wrap';
+      div.innerHTML = mdToHtml(content);
+    }
     body.appendChild(div);
   } else {
     body.innerHTML = '<div class="sc-empty"><span class="sc-spark">✨</span>' +

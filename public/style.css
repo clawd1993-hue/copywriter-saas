@@ -416,6 +416,17 @@ body {
 .sc-body .sc-h2 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 6px; color: var(--brand, #6c5ce7); }
 .sc-body .sc-h3 { font-size: 0.92rem; font-weight: 700; margin: 12px 0 4px; }
 .sc-body .sc-hr { border: 0; border-top: 1px solid #e9e7f3; margin: 14px 0; }
+/* Problems & Solutions table */
+.sc-body .ps-title { font-size: 1.05rem; font-weight: 800; margin: 2px 0 8px; letter-spacing: -0.01em; }
+.sc-body .ps-note { color: var(--text-dim); margin: 0 0 14px; }
+.sc-body .ps-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; line-height: 1.45; }
+.sc-body .ps-table th { text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); font-weight: 700; padding: 0 10px 8px; border-bottom: 1px solid #e9e7f3; }
+.sc-body .ps-table td { vertical-align: top; padding: 12px 10px; border-bottom: 1px solid #f0eef8; }
+.sc-body .ps-table .ps-lens { width: 15%; font-weight: 600; }
+.sc-body .ps-table .ps-problem { width: 37%; font-style: italic; }
+.sc-body .ps-table .ps-solution { width: 48%; }
+.sc-body .ps-table .ps-solution strong { color: #00a884; font-style: normal; }
+.sc-body .ps-table tr.ps-section td { background: #f4f2fc; color: var(--brand, #6c5ce7); font-weight: 700; text-transform: uppercase; font-size: 0.74rem; letter-spacing: 0.03em; padding: 9px 10px; border-bottom: 1px solid #e2ddf5; }
 .sc-empty { color: var(--text-dim); display: flex; gap: 10px; align-items: flex-start; }
 .sc-empty .sc-spark { font-size: 1.05rem; line-height: 1.4; }
 .sc-empty b { color: var(--accent); }

@@ -33,31 +33,37 @@ Each problem is the customer's fear in their OWN voice — pull the language fro
 - **What it is** = a deliverable: guide, playbook, template, script, toolkit, protocol, system, quiz, diagnostic, checklist, framework, vault.
 - **so you can** = solves the SPECIFIC problem it's paired with. **even if** = their REAL Step-3 objection. **which means** = emotional/identity/status payoff, second person ("you").
 
-### Output format (so the card reads clean) — follow this exactly
-Group by journey step. Under each step, list the 4 lenses; under each fear, its paired solution with a `➜`. Use this shape:
+### Output format — follow this EXACTLY (it renders as a 3-column table: Lens | Problem | Solution)
+Start with a title line and a one-line market note. Then ONE section per journey step: a `## ` header for the step name, followed by exactly 4 rows (one per lens). **Each row is a SINGLE line with three parts separated by ` ||| ` (space-pipe-pipe-pipe-space):**
 
+`[emoji] [Lens name] ||| "[the fear, in their words]" ||| **[Named Solution]** — [what it is] so you can [outcome] even if [objection] which means [payoff].`
+
+Exact shape:
 ```
-## Step 1 — [step name]
+# Problems & Solutions Map
+Market: [one line describing the customer]
 
-🎯 Dream Outcome — "[the fear, in their words]"
-➜ **[Named Solution]** — [what it is] so you can [outcome] even if [objection] which means [payoff].
+## [Journey step 1 name]
+🎯 Dream Outcome ||| "[fear]" ||| **[Named Solution]** — [full Edwards formula]
+🎯 Likelihood ||| "[fear]" ||| **[Named Solution]** — [full Edwards formula]
+⏰ Time ||| "[fear]" ||| **[Named Solution]** — [full Edwards formula]
+😩 Effort ||| "[fear]" ||| **[Named Solution]** — [full Edwards formula]
 
-🎯 Likelihood — "[the fear]"
-➜ **[Named Solution]** — …
-
-⏰ Time — "[the fear]"
-➜ **[Named Solution]** — …
-
-😩 Effort — "[the fear]"
-➜ **[Named Solution]** — …
-
----
+## [Journey step 2 name]
+🎯 Dream Outcome ||| "[fear]" ||| **[Named Solution]** — …
+… (all 4 lenses) …
 ```
-(Repeat the block for every journey step, `---` divider between steps.)
+(Repeat one `## ` section per journey step.)
 
-**Worked example (one lens, paired):**
-> 🎯 Dream Outcome — "Even if I finally learn manual mode, I'll still just be a guy with a camera who knows his settings — technically correct photos nobody stops to look at."
-> ➜ **The Scroll-Stopper Framework** — a shot-and-story system so you can take photos people actually stop and stare at, even if you're self-taught and feel like just a hobbyist, which means you're finally the photographer people remember, not the guy with a nice camera.
+**Format rules — do not break these (the table breaks if you do):**
+- Every lens row has EXACTLY two ` ||| ` separators = three parts (Lens, Problem, Solution). No more, no fewer.
+- Keep each row on ONE line. Never put a line break inside a row — the whole solution formula stays on the same line as its problem.
+- Never use the `|` character anywhere except as the ` ||| ` separators (don't write "either/or" as "a|b", etc.).
+- No `➜`, no `---` dividers — the `## ` headers and `|||` rows are the only structure.
+- The bold **Named Solution** goes at the START of the solution cell.
+
+**Worked example (one row):**
+`🎯 Dream Outcome ||| "Even if I finally learn manual mode, I'll still just be a guy with a camera who knows his settings — photos nobody stops to look at." ||| **The Scroll-Stopper Framework** — a shot-and-story system so you can take photos people actually stop and stare at, even if you're self-taught and feel like a hobbyist, which means you're finally the photographer people remember, not the guy with a nice camera.`
 
 ---
 
