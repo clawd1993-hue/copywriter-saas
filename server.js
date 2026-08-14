@@ -193,7 +193,12 @@ function buildSystemPrompt(stepIndex, stepContent, sectionContent) {
     const si = secIdx(stepIndex);
     const secName = VSL_SECTION_NAMES[si] || 'this section';
     let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT: WRITING YOUR VSL — Section ' + (si + 1) + ' — ' + secName +
-      '\n\nThe 8-step offer engine is complete. You are now writing the actual sales letter (VSL), one section at a time.\n\n';
+      '\n\nThe 8-step offer engine is complete. You are now writing the actual sales letter (VSL), one section at a time.\n\n' +
+      '### HOW YOU REPLY FOR A VSL SECTION (output contract — follow exactly):\n' +
+      '- The finished section copy goes ONLY inside the `<<<PUSH>>>` … `<<<END_PUSH>>>` block — it lands in the editable card on their dashboard.\n' +
+      '- Do NOT reprint, quote, preview, or list that copy in your visible chat message. Never paste the section text (or the testimonials/lines) into the chat — that clutters it and duplicates the card.\n' +
+      '- Your visible chat message is ONLY: a short framing line (what this section does), a brief confirmation it\'s in the card, and the fork to the next section. Keep it tight.\n' +
+      '- Exception: sections that must gather info first (e.g. Credibility) still ask their questions in the chat — the "don\'t reprint" rule applies to the finished section copy you push.\n\n';
     const parts = boardGrounding(VSL_SECTION_DEPENDENCIES[si] || [], stepContent);
     if (parts.length) {
       sys += '## 📋 THE WORK ALREADY ON YOUR BOARD — read this FIRST and pull from it.\nThis is the REAL material from the offer engine (their exact words, research, and outputs). Ground every line you write in it. Use the avatar\'s actual language; never invent something it doesn\'t contain.\n\n' + parts.join('\n\n') + '\n\n---\n\n';
