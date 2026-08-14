@@ -274,6 +274,7 @@ body {
 .sop-body ol.sop-reasons li { margin-bottom: 3px; font-size: 0.88rem; }
 .sop-body .sop-lead { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 4px; }
 .sop-body .sop-formula { background: #f4f2fc; border: 1px solid #e2ddf5; border-radius: 8px; padding: 10px 12px; margin: 8px 0; font-size: 0.86rem; color: var(--text); text-align: center; line-height: 1.5; }
+.sop-body .sop-note { background: #f4f2fc; border-radius: 8px; padding: 9px 11px; margin-top: 12px; font-size: 0.85rem; color: var(--text); line-height: 1.5; }
 
 /* RIGHT chat */
 .chat { flex: 1 1 0; display: flex; flex-direction: column; background: var(--surface); min-height: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
