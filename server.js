@@ -149,7 +149,8 @@ const VSL_SECTION_SOP_FILES = {
   4: 'vsl-05-introduce-method.md',
   5: 'vsl-06-credibility.md',
   6: 'vsl-07-proof.md',
-  7: 'vsl-08-product-overview.md'
+  7: 'vsl-08-product-overview.md',
+  8: 'vsl-09-pitch.md'
 };
 const VSL_SECTION_CONFIG = {
   0: { maxTokens: 3000, effort: 'high' },
@@ -159,7 +160,8 @@ const VSL_SECTION_CONFIG = {
   4: { maxTokens: 3500, effort: 'high' },
   5: { maxTokens: 3000, effort: 'high' },
   6: { maxTokens: 3000, effort: 'high' },
-  7: { maxTokens: 3500, effort: 'high' }
+  7: { maxTokens: 3500, effort: 'high' },
+  8: { maxTokens: 3500, effort: 'high' }
 };
 // Which offer-engine cards (by step index 0-7) each VSL section must READ to ground its copy.
 const VSL_SECTION_DEPENDENCIES = {
@@ -170,7 +172,8 @@ const VSL_SECTION_DEPENDENCIES = {
   4: [5],       // Introduce the Method ← Step 7 Method (the 7-beat spoken script; use beats 2-7)
   5: [1, 2, 4], // Credibility ← Market (avatar) + Research (pains to mirror) + Vehicle (the discovery)
   6: [2, 4],    // Proof ← Research (avatars/starting points) + Vehicle (mechanism to tie results to)
-  7: [4]        // Product Overview ← Step 6 Vehicle ONLY (name + positioning + 3 belief-breaks)
+  7: [4],       // Product Overview ← Step 6 Vehicle ONLY (name + positioning + 3 belief-breaks)
+  8: [6]        // Pitch ← Step 8.1 (the 3 core deliverables: name + built-in even-if + value)
 };
 
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
