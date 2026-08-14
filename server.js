@@ -146,22 +146,25 @@ const VSL_SECTION_SOP_FILES = {
   1: 'vsl-02-shocking-statement.md',
   2: 'vsl-03-why-desire.md',
   3: 'vsl-04-why-pain.md',
-  4: 'vsl-05-introduce-method.md'
+  4: 'vsl-05-introduce-method.md',
+  5: 'vsl-06-credibility.md'
 };
 const VSL_SECTION_CONFIG = {
   0: { maxTokens: 3000, effort: 'high' },
   1: { maxTokens: 3000, effort: 'high' },
   2: { maxTokens: 3500, effort: 'high' },
   3: { maxTokens: 3500, effort: 'high' },
-  4: { maxTokens: 3500, effort: 'high' }
+  4: { maxTokens: 3500, effort: 'high' },
+  5: { maxTokens: 3000, effort: 'high' }
 };
 // Which offer-engine cards (by step index 0-7) each VSL section must READ to ground its copy.
 const VSL_SECTION_DEPENDENCIES = {
-  0: [2, 4],  // Hook ← Step 3 Customer Research + Step 6 Vehicle
-  1: [2],     // Shocking Statement ← Step 3 Customer Research (objection to flip / pain to expose)
-  2: [2],     // Why (Desire) ← Step 3 Customer Research (desires, motivations, pains, time dimensions)
-  3: [2],     // Why (Pain) ← Step 3 Customer Research (pains, future fears, motivations, failures)
-  4: [5]      // Introduce the Method ← Step 7 Method (the 7-beat spoken script; use beats 2-7)
+  0: [2, 4],   // Hook ← Step 3 Customer Research + Step 6 Vehicle
+  1: [2],      // Shocking Statement ← Step 3 Customer Research (objection to flip / pain to expose)
+  2: [2],      // Why (Desire) ← Step 3 Customer Research (desires, motivations, pains, time dimensions)
+  3: [2],      // Why (Pain) ← Step 3 Customer Research (pains, future fears, motivations, failures)
+  4: [5],      // Introduce the Method ← Step 7 Method (the 7-beat spoken script; use beats 2-7)
+  5: [1, 2, 4] // Credibility ← Market (avatar) + Research (pains to mirror) + Vehicle (the discovery)
 };
 
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
