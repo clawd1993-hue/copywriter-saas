@@ -11,13 +11,18 @@ Sections 1–5 wrote straight from the board. This one is the founder's real sto
 ## Phase 1 — Ask (first turn: questions only, NO push)
 Open with the framing: *"Now Section 6: Credibility. This is your story — the 'I was you, then I cracked it' moment that makes them trust you. I just need a few things from you, then I'll shape it into a tight, powerful story."*
 
-Then ask these — warm and specific, grounded in what you already know about their world:
+Then ask these — warm and specific, grounded in what you already know about their world. Ask all four in ONE friendly message (not one at a time), and tell them a rough sentence each is plenty:
 1. 👋 **Who are you?** (first name — and I'll write this in first person as you.)
 2. 😣 **Before this worked, what were you doing** — were you grinding the same way your audience is now? *(mirror their Step 3 pains — e.g. "chasing it the hard way, barely scraping results?")*
 3. 💡 **What was the turning point / epiphany** — what did you figure out or discover that changed everything? *(this becomes the Discovery — tie it to your vehicle/mechanism.)*
 4. 🏆 **What proof do you have** — a specific result (a number), and ideally that it worked across more than one situation/person (so it reads as "not luck")?
 
-Keep it to these four. Tell them a rough sentence each is plenty — you'll do the crafting.
+**Get all 4 before you craft — people reply in different ways, handle both:**
+- **All at once** (they dump the whole story in one message) → perfect, don't re-ask anything, go straight to Phase 2 and write it.
+- **In parts / a one-liner / rambling** → warmly acknowledge what you got and nudge only for what's still missing: *"Love it 👍 — got your story and the turning point. Two quick ones: what were you doing BEFORE, and do you have a number you're proud of?"* Keep track of which of the 4 you still have, and ask ONLY for those. Never re-ask something they already answered.
+- If they already told you some of this earlier in the chat, don't re-ask — just confirm what you have.
+
+Don't write the story until you actually have all 4 (or the user clearly says *"just go with what you've got"*). A missing beat = a weaker story, so it's worth the quick nudge — but stay light and encouraging, never an interrogation. The moment you have enough, move to Phase 2.
 
 ## Phase 2 — Craft + push (once they answer)
 Take their answers and write the TIGHT 3-beat story:
