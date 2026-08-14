@@ -141,9 +141,9 @@ function anthropicRequest(payload) {
       resp.on('data', c => (data += c));
       resp.on('end', () => { try { resolve(JSON.parse(data)); } catch (e) { reject(e); } });
     });
-    // A single API round-trip should never take minutes. If it stalls, abort so the job fails cleanly
-    // (→ user sees an error + can retry) instead of hanging until the client's poll gives up.
-    r.setTimeout(180000, () => r.destroy(new Error('Anthropic request timed out (180s)')));
+    // Backstop for a truly hung connection. Step 3 deep-research turns legitimately run 3-4 min
+    // (many web_search/web_fetch calls in one turn), so keep this well above that — only catch real hangs.
+    r.setTimeout(600000, () => r.destroy(new Error('Anthropic request timed out (10 min)')));
     r.on('error', reject);
     r.write(body);
     r.end();

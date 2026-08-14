@@ -829,7 +829,7 @@ function pingUser() {
 
 function pollJob(step, jobId, progress) {
   activeJobKeys.add(jobStoreKey(step));
-  let tries = 0; const MAX = 140; // ~7 min at 3s
+  let tries = 0; const MAX = 220; // ~11 min at 3s — deep research can take several minutes
   const tick = async () => {
     tries++;
     let data = null;
