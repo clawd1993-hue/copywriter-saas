@@ -143,7 +143,7 @@ const STEP_SOPS = [
     <p>This becomes your <strong>free bonus stack</strong> — the pile of bonuses that answers every objection and pushes your prospect over the edge to actually buy. Each solution answers a real objection, and it also exposes <strong>gaps in your offer</strong>: any problem you can't solve yet is a reason someone won't buy.</p>
     <h4>What you'll walk away with</h4>
     <ul><li>The full problem map — every journey step × the 4 value levers</li><li>A named solution for each problem</li><li>The backbone of your Pitch &amp; Bonuses, plus any offer gaps exposed</li></ul>
-    <p class="sop-note">💡 <strong>Don't overthink it.</strong> You don't need to use every single one — we'll refine later. Keep the strongest, combine where it makes sense, and keep moving. This is a first pass, not the final cut.</p>` },
+    <p class="sop-note">💡 <strong>Don't overthink it.</strong> You don't need to use every single one. We'll keep the strongest, remove the weakest and combine where it makes sense in later steps. Just keep moving.</p>` },
   { name: 'Vehicle', html: `
     <p class="sop-lead">The <em>what</em> — the form your solution takes.</p>
     <h4>What this step is</h4>
