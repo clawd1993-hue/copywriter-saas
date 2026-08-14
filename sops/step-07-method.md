@@ -17,8 +17,8 @@ The Method = your Step 6 secrets flipped from **belief → action**, landing on 
 Pull every blank from **Step 6** (+ Step 3 Pains for the stakes). Easy verbs, 3rd-grade, short spoken sentences — read it aloud; if you stumble, cut it.
 
 1. **Stakes ← Step 3 Pains:** "Right now you're **[pain]**. And it's hard."
-2. **The turn ← timeframe (from the Vehicle name):** "But in the next **[timeframe]**, you can turn it around."
-3. **Move 1 ← 🧠 internal secret:** "First, you can learn to **[🧠 opposite desire]** — without **[the old failed way in the 🧠 secret]**."
+2. **The turn ← timeframe (from the Vehicle name):** "But in the next **[timeframe]**…" *(let it trail off — do NOT add "you can turn it around" or any filler tail.)*
+3. **Move 1 ← 🧠 internal secret (starts with "You can"):** "You can learn to **[🧠 opposite desire]** — without **[the old failed way in the 🧠 secret]**." *(No "First,". It flows straight out of the "…next [timeframe]…" line.)*
 4. **Move 2 ← 🌍 external secret:** "Then, you can learn to **[🌍 opposite desire]** — without **[the old failed way in the 🌍 secret]**."
 5. **Move 3 = the dream ← 🚗:** "And soon, you **[🚗 dream]**." *(plain + emotional, not a tactic)*
 6. **Even-if close ← 🧠 + 🌍 objections:** "And you can do this even if **[🧠 objection]**. Even if **[🌍 objection]**."
@@ -50,8 +50,8 @@ The Method (7-beat spoken script) is on the "Method" card. Then ask: *"Ready for
 
 ## Worked example (photography)
 > Right now you're shooting friends for free while people with worse photos land the paid gigs. And it stings.
-> But in the next 30 days, you can turn it around.
-> First, you can learn to take the kind of shots clients happily pay for — without a decade of practice or fancy gear.
+> But in the next 30 days…
+> You can learn to take the kind of shots clients happily pay for — without a decade of practice or fancy gear.
 > Then, you can learn to stand out in a market full of iPhone "photographers" — without slashing your prices.
 > And soon, you've got a camera that actually pays you.
 > And you can do this even if you feel like just an amateur. Even if everyone swears the market's too saturated.
