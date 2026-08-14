@@ -140,7 +140,7 @@ const STEP_SOPS = [
     <p>Then we attach a <strong>named solution</strong> to each one, using this formula:</p>
     <p class="sop-formula"><strong>[Named Solution]</strong> — what it is <strong>so you can</strong> [outcome] <strong>even if</strong> [objection] <strong>which means</strong> [deeper payoff]</p>
     <h4>Why it matters</h4>
-    <p>This becomes the <strong>outline of how you communicate every part of your product</strong> — each solution answers a real objection. It also exposes <strong>gaps in your offer</strong>: any problem you can't solve yet is a reason someone won't buy.</p>
+    <p>This becomes your <strong>free bonus stack</strong> — the pile of bonuses that answers every objection and pushes your prospect over the edge to actually buy. Each solution answers a real objection, and it also exposes <strong>gaps in your offer</strong>: any problem you can't solve yet is a reason someone won't buy.</p>
     <h4>What you'll walk away with</h4>
     <ul><li>The full problem map — every journey step × the 4 value levers</li><li>A named solution for each problem</li><li>The backbone of your Pitch &amp; Bonuses, plus any offer gaps exposed</li></ul>` },
   { name: 'Vehicle', html: `
