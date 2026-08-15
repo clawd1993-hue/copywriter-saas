@@ -356,9 +356,55 @@ async function loadProjects() {
     const { data: created } = await sb.from('projects').insert({ title: 'My First VSL' }).select().single();
     if (created) data.push(created);
   }
-  data.forEach((p, i) => addProjectItem(p.title, i === 0, p.id));
+  data.forEach((p, i) => {
+    // DB is the source of truth — hydrate the local cache so the rest of the app (which reads localStorage) just works,
+    // and cross-device / cache-clear can never lose a user's cards again.
+    hydrateFromDB(p);
+    addProjectItem(p.title, i === 0, p.id, p.project_type || 'dts-vsl');
+  });
   const first = list.querySelector('.project-item');
   if (first) selectProject(first);
+}
+
+// Sync a project row between the DB (source of truth) and localStorage (working cache).
+// SAFE MIGRATION: DB wins ONLY when it actually has data. If the DB is empty but localStorage has content
+// (existing pre-migration projects), we KEEP the local content and BACKFILL it up to the DB — never wipe.
+function hydrateFromDB(p) {
+  if (!p || !p.id) return;
+  try {
+    const lsType = projectTypes()[p.id];
+    const lsStepRaw = localStorage.getItem('stepcontent:' + p.id);
+    const lsSecRaw  = localStorage.getItem('sectioncontent:' + p.id);
+    const dbStep = (p.step_content && typeof p.step_content === 'object') ? p.step_content : {};
+    const dbSec  = (p.section_content && typeof p.section_content === 'object') ? p.section_content : {};
+    const dbHasStep = Object.keys(dbStep).length > 0;
+    const dbHasSec  = Object.keys(dbSec).length > 0;
+    const lsStepHas = lsStepRaw && lsStepRaw !== '{}';
+    const lsSecHas  = lsSecRaw && lsSecRaw !== '{}';
+
+    // TYPE: DB default is 'dts-vsl'. Trust localStorage if it disagrees (pre-migration projects), otherwise take DB.
+    if (!lsType && p.project_type) saveProjectType(p.id, p.project_type);
+
+    // CONTENT: DB wins only when populated; otherwise leave the local cache untouched.
+    if (dbHasStep) localStorage.setItem('stepcontent:' + p.id, JSON.stringify(dbStep));
+    if (dbHasSec)  localStorage.setItem('sectioncontent:' + p.id, JSON.stringify(dbSec));
+
+    // ONE-TIME BACKFILL: DB empty but local has work → push local up so it's protected forever.
+    if (sb) {
+      const patch = {};
+      if (!dbHasStep && lsStepHas) { try { patch.step_content = JSON.parse(lsStepRaw); } catch (e) {} }
+      if (!dbHasSec  && lsSecHas)  { try { patch.section_content = JSON.parse(lsSecRaw); } catch (e) {} }
+      if (lsType && lsType !== 'dts-vsl' && (!p.project_type || p.project_type === 'dts-vsl')) patch.project_type = lsType;
+      if (Object.keys(patch).length) sb.from('projects').update(patch).eq('id', p.id).then(() => {}, () => {});
+    }
+  } catch (e) { console.warn('hydrate failed', e); }
+}
+
+// Persist a card field ('step_content' | 'section_content') for the current project up to the DB.
+async function persistCardsToDB(field, obj) {
+  if (!sb || !currentProjectId) return; // dummy mode = localStorage only, nothing to sync
+  try { await sb.from('projects').update({ [field]: obj }).eq('id', currentProjectId); }
+  catch (e) { console.warn('card persist failed', e); }
 }
 
 function addProjectItem(name, active, id, type, prepend) {
@@ -505,7 +551,7 @@ document.getElementById('np-create').addEventListener('click', async () => {
   try {
     let id = null;
     if (sb) {
-      const { data, error } = await sb.from('projects').insert({ title: name }).select().single();
+      const { data, error } = await sb.from('projects').insert({ title: name, project_type: type }).select().single();
       if (error) {
         // monthly cap (DB trigger) or other insert failure — don't create a phantom local project
         const capped = /PROJECT_LIMIT_REACHED/i.test(error.message || '');
@@ -561,6 +607,8 @@ document.getElementById('del-confirm').addEventListener('click', async () => {
       await sb.from('projects').delete().eq('id', id);
     }
     localStorage.removeItem('thread:' + key);
+    localStorage.removeItem('stepcontent:' + key);      // clear cached cards too — no stale collisions
+    localStorage.removeItem('sectioncontent:' + key);
     const types = projectTypes();
     if (id && types[id]) { delete types[id]; localStorage.setItem('projectTypes', JSON.stringify(types)); }
     el.remove();
@@ -683,6 +731,7 @@ function pushSectionContent(i, content) {
   const store = sectionStore();
   store[i] = content;
   localStorage.setItem('sectioncontent:' + stepContentKey(), JSON.stringify(store));
+  persistCardsToDB('section_content', store);   // DB = source of truth (survives device switch / cache clear)
   renderVSL();
   const grid = document.getElementById('vsl-grid');
   const item = grid && grid.children[i];
@@ -783,6 +832,7 @@ function pushStepContent(i, content) {
   const store = stepContentStore();
   store[i] = content;
   localStorage.setItem('stepcontent:' + stepContentKey(), JSON.stringify(store));
+  persistCardsToDB('step_content', store);   // DB = source of truth (survives device switch / cache clear)
   markStepDone(i);
   const panel = document.getElementById('step-content');
   if (panel.classList.contains('open') && +panel.dataset.step === i) renderStepBody(i);

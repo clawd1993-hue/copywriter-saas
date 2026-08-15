@@ -4,11 +4,19 @@
 
 -- PROJECTS: one row per project, owned by the logged-in user
 create table if not exists public.projects (
-  id          uuid primary key default gen_random_uuid(),
-  user_id     uuid not null default auth.uid() references auth.users(id) on delete cascade,
-  title       text not null default 'Untitled Project',
-  created_at  timestamptz not null default now()
+  id           uuid primary key default gen_random_uuid(),
+  user_id      uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  title        text not null default 'Untitled Project',
+  project_type text not null default 'dts-vsl',      -- dts-vsl | call-booker | dts-webinar (drives which section SOPs run)
+  step_content    jsonb not null default '{}'::jsonb, -- the 8-step offer-engine cards {index: content}
+  section_content jsonb not null default '{}'::jsonb, -- the VSL/webinar section cards {index: content}
+  created_at   timestamptz not null default now()
 );
+
+-- MIGRATION (safe to re-run): add the columns to an existing projects table if they're missing.
+alter table public.projects add column if not exists project_type    text  not null default 'dts-vsl';
+alter table public.projects add column if not exists step_content    jsonb not null default '{}'::jsonb;
+alter table public.projects add column if not exists section_content jsonb not null default '{}'::jsonb;
 
 -- MESSAGES: one row per chat message, tied to a project
 create table if not exists public.messages (
