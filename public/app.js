@@ -243,9 +243,9 @@ async function initAuth() {
     // real login: show email + password fields, relabel button
     document.getElementById('email-fields').classList.remove('hidden');
     const g = document.getElementById('google-btn');
-    g.innerHTML = 'Sign in / Sign up';
+    g.innerHTML = location.search.includes('paid=1') ? 'Create your login' : 'Sign in';
     g.classList.add('plain');
-    noteEl().textContent = 'Enter your email + a password to start. New here? It signs you up automatically.';
+    noteEl().textContent = 'Already purchased? Enter your email + password to sign in.';
     const { data } = await sb.auth.getSession();
     if (data.session) { onLogin(data.session.user); }
     sb.auth.onAuthStateChange((_e, session) => {
@@ -315,7 +315,7 @@ document.getElementById('google-btn').addEventListener('click', async () => {
   } catch (e) {
     showErr('Something went wrong — try again.');
   } finally {
-    btn.disabled = false; btn.textContent = 'Sign in / Sign up';
+    btn.disabled = false; btn.textContent = location.search.includes('paid=1') ? 'Create your login' : 'Sign in';
   }
 });
 
