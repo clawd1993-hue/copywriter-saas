@@ -677,9 +677,7 @@ function currentWorkIndex() {
 function canPushSection(i) {
   if (typeof i !== 'number' || i < 0 || i >= getSections(currentProjectType).length) return false;
   if (!engineComplete()) return false;
-  const s = sectionStore();
-  for (let k = 0; k < i; k++) { if (!s[k]) return false; }
-  return true;
+  return true; // sections are independent — don't block a valid push just because an earlier section is still empty
 }
 function pushSectionContent(i, content) {
   const store = sectionStore();
@@ -896,7 +894,8 @@ function applyPush(push) {
   if (push.step >= VSL_BASE) {
     const i = push.step - VSL_BASE;
     if (canPushSection(i)) pushSectionContent(i, push.content);
-    else console.warn('Ignored out-of-order VSL section push', i, '— engine or earlier sections not complete');
+    // Never fail silently: if we can't auto-fill the card, tell the user + hand them the copy to paste.
+    else addMsg('bot', "⚠️ I wrote it, but couldn't auto-fill the card (finish the 8-step engine first). Here it is to paste:\n\n" + push.content);
   } else if (canPushStep(push.step)) {
     pushStepContent(push.step, push.content);
     openStepContent(push.step);
