@@ -1,7 +1,7 @@
 # Webinar SOP — THE 3 SECRETS (one template, powers Sections 6, 7 & 8)
 
 > **When to load:** Webinar Sections 6 / 7 / 8 — the belief-breaking core AND the teaching heart, where the sale is actually made *by giving real value.* This ONE template runs 3×.
-> **Which secret am I writing?** The current section tells you: **Section 6 = Secret #1 (🚗) · Section 7 = Secret #2 (🌍) · Section 8 = Secret #3 (🧠).** Pull THAT one secret from the 3 Secrets Intro (§5) — in the order 🚗 → 🌍 → 🧠. Write **only that secret's** full segment (don't do all three).
+> **Which secret am I writing?** The current section tells you: **Section 6 = Secret #1 · Section 7 = Secret #2 · Section 8 = Secret #3.** Pull THAT one secret from the **3 Secrets Intro (§5), in the EXACT ORDER §5 lists them.** 🚗 (the vehicle) is ALWAYS Secret #1; **#2 and #3 follow whatever order §5 has** — do NOT assume external-before-internal or vice-versa, just match §5. Write **only that secret's** full segment (don't do all three).
 > **Pulls from:** **Step 6** (the secret — outcome/without/even-if) + **Step 5** (the mechanism it teaches, the secret's "using…") + Step 3 (for the failure/objection) + **you** (the proof). *(NOT Step 7 — that's the VSL's compression.)*
 
 ## Opening framing (say this, in your own words)

@@ -226,7 +226,7 @@ const CALL_BOOKER_SET = {
 const WEBINAR_SET = {
   names: [
     'Hook (Bold Promise)', 'Credibility (Origin Story)', 'Future Pace', 'Set the Frame', '3 Secrets Intro',
-    'Secret 1 (🚗 — The New Way)', 'Secret 2 (🌍 — External)', 'Secret 3 (🧠 — Internal)',
+    'Secret 1 (🚗 — The New Way)', 'Secret 2', 'Secret 3',
     'Transition to the Offer', 'Product Overview', 'The Pitch', 'Bonuses', 'Trial Closes',
     'Price — Anchor, Drop & Reason-Why', 'Objection Crush', 'Guarantee & Urgency', 'Re-Stack', 'CTA',
     'Future-Pace Close', 'P.S.'
