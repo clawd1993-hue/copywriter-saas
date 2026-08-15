@@ -239,7 +239,8 @@ const WEBINAR_SET = {
     4: 'webinar-05-three-secrets-intro.md',
     5: 'webinar-secret-template.md',   // Section 6 = Secret #1 (🚗)
     6: 'webinar-secret-template.md',   // Section 7 = Secret #2 (🌍)
-    7: 'webinar-secret-template.md'    // Section 8 = Secret #3 (🧠) — same template, writes the 🧠 secret
+    7: 'webinar-secret-template.md',   // Section 8 = Secret #3 (🧠)
+    8: 'webinar-09-transition.md'
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
@@ -249,7 +250,8 @@ const WEBINAR_SET = {
     4: { maxTokens: 3000, effort: 'high' },
     5: { maxTokens: 5000, effort: 'high' },
     6: { maxTokens: 5000, effort: 'high' },
-    7: { maxTokens: 5000, effort: 'high' }
+    7: { maxTokens: 5000, effort: 'high' },
+    8: { maxTokens: 2500, effort: 'high' }
   },
   deps: {
     0: [2, 4],     // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
@@ -259,7 +261,8 @@ const WEBINAR_SET = {
     4: [4],        // 3 Secrets Intro ← Step 6 Part B (the 3 full-formula secret lines), vehicle-first
     5: [2, 3, 4],  // Secret #1 (🚗) ← Step 6 (the secret) + Step 5 (mechanism) + Step 3 (failure/objection)
     6: [2, 3, 4],  // Secret #2 (🌍) ← same sources; writes the 🌍 external secret
-    7: [2, 3, 4]   // Secret #3 (🧠) ← same sources; writes the 🧠 internal secret
+    7: [2, 3, 4],  // Secret #3 (🧠) ← same sources; writes the 🧠 internal secret
+    8: [5, 6]      // Transition ← the method (§5-8 / Step 7 DIY path) + product (Step 8.1 shortcut)
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
