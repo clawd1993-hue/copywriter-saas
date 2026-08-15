@@ -372,6 +372,7 @@ function anthropicRequest(payload) {
       }
     };
     const r = https.request(reqOpts, resp => {
+      resp.setEncoding('utf8'); // decode as UTF-8 with multibyte-safe chunk boundaries (fixes mangled emojis → �)
       let data = '';
       resp.on('data', c => (data += c));
       resp.on('end', () => { try { resolve(JSON.parse(data)); } catch (e) { reject(e); } });
@@ -424,6 +425,7 @@ function verifyUser(token) {
       hostname: u.hostname, path: u.pathname, method: 'GET',
       headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + token }
     }, resp => {
+      resp.setEncoding('utf8'); // multibyte-safe
       let d = '';
       resp.on('data', c => (d += c));
       resp.on('end', () => {
