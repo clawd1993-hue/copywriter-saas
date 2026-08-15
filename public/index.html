@@ -232,14 +232,15 @@
         <h3>Redo this section?</h3>
         <button id="sec-close" class="sop-icon-btn" title="Close">✕</button>
       </div>
-      <p class="np-sub">This clears the copy in “<b><span id="sec-name"></span></b>” so you can generate it fresh. Your other sections stay untouched — just tell Jimmy to redo it after.</p>
+      <p class="np-sub">This clears the copy in “<b><span id="sec-name"></span></b>” so you can generate it fresh. Your other sections stay untouched — just tell Jimmy to redo it after. Type <b>DELETE</b> to confirm.</p>
+      <input id="sec-input" class="np-name-input" type="text" placeholder="Type DELETE" autocapitalize="characters" autocomplete="off" />
       <div class="np-actions">
         <button id="sec-cancel" class="np-btn np-btn-ghost">Cancel</button>
-        <button id="sec-confirm" class="np-btn np-btn-danger">Clear &amp; redo</button>
+        <button id="sec-confirm" class="np-btn np-btn-danger" disabled>Clear &amp; redo</button>
       </div>
     </div>
   </div>
 
-  <script src="app.js?v=44"></script>
+  <script src="app.js?v=45"></script>
 </body>
 </html>

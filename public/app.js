@@ -908,17 +908,26 @@ let secTargetIndex = null;
 function openSecModal(i, name) {
   secTargetIndex = i;
   document.getElementById('sec-name').textContent = name || ('Section ' + (i + 1));
+  const inp = document.getElementById('sec-input');
+  if (inp) inp.value = '';
+  const c = document.getElementById('sec-confirm');
+  if (c) c.disabled = true;
   document.getElementById('sec-modal').classList.remove('hidden');
+  if (inp) setTimeout(() => inp.focus(), 40);
 }
 function closeSecModal() { document.getElementById('sec-modal').classList.add('hidden'); secTargetIndex = null; }
 (function wireSecModal() {
   const cancel = document.getElementById('sec-cancel'), close = document.getElementById('sec-close'),
-        confirm = document.getElementById('sec-confirm'), modal = document.getElementById('sec-modal');
+        confirm = document.getElementById('sec-confirm'), modal = document.getElementById('sec-modal'),
+        input = document.getElementById('sec-input');
   if (!modal) return;
   cancel && cancel.addEventListener('click', closeSecModal);
   close && close.addEventListener('click', closeSecModal);
   modal.addEventListener('click', e => { if (e.target.id === 'sec-modal') closeSecModal(); });
+  input && input.addEventListener('input', e => { confirm.disabled = e.target.value !== 'DELETE'; });
+  input && input.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.value === 'DELETE') confirm.click(); });
   confirm && confirm.addEventListener('click', () => {
+    if (confirm.disabled) return;
     if (secTargetIndex != null) clearSection(secTargetIndex);
     closeSecModal();
   });
