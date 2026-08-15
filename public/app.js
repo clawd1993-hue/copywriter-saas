@@ -977,7 +977,7 @@ async function startSlowJob(step, slowCfg) {
   if (slowCfg.contract) { addMsg('bot', slowCfg.contract); history.push({ role: 'assistant', content: slowCfg.contract }); persistMsg('assistant', slowCfg.contract); }
   const progress = addProgress(slowCfg.stages);
   try {
-    const r = await fetch('/api/chat/async', { method: 'POST', headers: await authHeaders(), body: JSON.stringify({ messages: msgsForServer, currentStep: step, stepContent: stepContentStore(), sectionContent: sectionStore() }) });
+    const r = await fetch('/api/chat/async', { method: 'POST', headers: await authHeaders(), body: JSON.stringify({ messages: msgsForServer, currentStep: step, stepContent: stepContentStore(), sectionContent: sectionStore(), projectType: currentProjectType }) });
     const data = await r.json();
     if (data.done) { finishJob(step, progress); applyReply(data); return; } // warming-up / off-topic / immediate reply
     if (!data.jobId) { finishJob(step, progress); addMsg('bot', '⚠️ Could not start the research. Try again.'); return; }
@@ -1047,7 +1047,7 @@ chatForm.addEventListener('submit', async (e) => {
     const r = await fetch('/api/chat', {
       method: 'POST',
       headers,
-      body: JSON.stringify({ messages: history, currentStep: step, stepContent: stepContentStore(), sectionContent: sectionStore() })
+      body: JSON.stringify({ messages: history, currentStep: step, stepContent: stepContentStore(), sectionContent: sectionStore(), projectType: currentProjectType })
     });
     const data = await r.json();
     clearTimeout(slowCaption);

@@ -188,6 +188,42 @@ const VSL_SECTION_DEPENDENCIES = {
   12: [2, 5]    // P.S. ← Step 3 Desires (#1 dream) + Step 7 Method (compressed)
 };
 
+// ---------- PER-PROJECT-TYPE SECTION REGISTRY ----------
+// The 9 offer-engine STEP SOPs are universal (all types). The SECTION SOPs differ by project type.
+// dts-vsl = the base (13 sections). call-booker reuses sections 0-7 verbatim and overrides 8-13 (+ Qualify).
+// dts-webinar = TODO. Falls back to dts-vsl if a type isn't registered.
+const DTS_VSL_SET = {
+  names: VSL_SECTION_NAMES,
+  sopFiles: VSL_SECTION_SOP_FILES,
+  config: VSL_SECTION_CONFIG,
+  deps: VSL_SECTION_DEPENDENCIES
+};
+const pickKeys = (obj, keys) => keys.reduce((o, k) => { o[k] = obj[k]; return o; }, {});
+const CALL_BOOKER_SET = {
+  names: [
+    'Hook', 'Shocking Statement', 'Why (Desire)', 'Why (Pain)', 'Introduce the Method',
+    'Credibility', 'Proof', 'Product Overview', 'Pitch', 'Bonuses',
+    'Who This Is For', 'Guarantee/Urgency', 'CTA', 'P.S.'
+  ],
+  sopFiles: {
+    ...pickKeys(VSL_SECTION_SOP_FILES, [0, 1, 2, 3, 4, 5, 6, 7]),
+    8: 'cb-09-pitch.md', 9: 'cb-10-bonuses.md', 10: 'cb-11-qualify.md',
+    11: 'cb-12-guarantee-urgency.md', 12: 'cb-13-cta.md', 13: 'cb-14-ps.md'
+  },
+  config: {
+    ...pickKeys(VSL_SECTION_CONFIG, [0, 1, 2, 3, 4, 5, 6, 7]),
+    8: { maxTokens: 3500, effort: 'high' }, 9: { maxTokens: 4000, effort: 'high' },
+    10: { maxTokens: 3000, effort: 'high' }, 11: { maxTokens: 3000, effort: 'high' },
+    12: { maxTokens: 2500, effort: 'high' }, 13: { maxTokens: 2000, effort: 'high' }
+  },
+  deps: {
+    ...pickKeys(VSL_SECTION_DEPENDENCIES, [0, 1, 2, 3, 4, 5, 6, 7]),
+    8: [6], 9: [4, 6], 10: [1, 2], 11: [6], 12: [2, 4], 13: [2, 5]
+  }
+};
+const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET };
+function sectionSet(projectType) { return SECTION_REGISTRY[projectType] || DTS_VSL_SET; }
+
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
 function boardGrounding(depIndexes, stepContent) {
   const sc = (stepContent && typeof stepContent === 'object') ? stepContent : {};
@@ -202,11 +238,12 @@ function boardGrounding(depIndexes, stepContent) {
   return parts;
 }
 
-function buildSystemPrompt(stepIndex, stepContent, sectionContent) {
+function buildSystemPrompt(stepIndex, stepContent, sectionContent, projectType) {
   // VSL copy section (index >= VSL_BASE)
   if (isSection(stepIndex)) {
+    const set = sectionSet(projectType);
     const si = secIdx(stepIndex);
-    const secName = VSL_SECTION_NAMES[si] || 'this section';
+    const secName = set.names[si] || 'this section';
     let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT: WRITING YOUR VSL — Section ' + (si + 1) + ' — ' + secName +
       '\n\nThe 8-step offer engine is complete. You are now writing the actual sales letter (VSL), one section at a time.\n\n' +
       '### HOW YOU REPLY FOR A VSL SECTION (output contract — follow exactly):\n' +
@@ -214,7 +251,7 @@ function buildSystemPrompt(stepIndex, stepContent, sectionContent) {
       '- Do NOT reprint, quote, preview, or list that copy in your visible chat message. Never paste the section text (or the testimonials/lines) into the chat — that clutters it and duplicates the card.\n' +
       '- Your visible chat message is ONLY: a short framing line (what this section does), a brief confirmation it\'s in the card, and the fork to the next section. Keep it tight.\n' +
       '- Exception: sections that must gather info first (e.g. Credibility) still ask their questions in the chat — the "don\'t reprint" rule applies to the finished section copy you push.\n\n';
-    const parts = boardGrounding(VSL_SECTION_DEPENDENCIES[si] || [], stepContent);
+    const parts = boardGrounding(set.deps[si] || [], stepContent);
     if (parts.length) {
       sys += '## 📋 THE WORK ALREADY ON YOUR BOARD — read this FIRST and pull from it.\nThis is the REAL material from the offer engine (their exact words, research, and outputs). Ground every line you write in it. Use the avatar\'s actual language; never invent something it doesn\'t contain.\n\n' + parts.join('\n\n') + '\n\n---\n\n';
     }
@@ -223,12 +260,12 @@ function buildSystemPrompt(stepIndex, stepContent, sectionContent) {
     const priorParts = [];
     for (let k = 0; k < si; k++) {
       let c = scn[k] != null ? scn[k] : scn[String(k)];
-      if (c && typeof c === 'string' && c.trim()) priorParts.push('### Section ' + (k + 1) + ' — ' + (VSL_SECTION_NAMES[k] || '') + ':\n' + c.trim());
+      if (c && typeof c === 'string' && c.trim()) priorParts.push('### Section ' + (k + 1) + ' — ' + (set.names[k] || '') + ':\n' + c.trim());
     }
     if (priorParts.length) {
       sys += '## ✍️ THE VSL YOU\'VE WRITTEN SO FAR — read it so this section FLOWS from it and never repeats a line.\n\n' + priorParts.join('\n\n') + '\n\n---\n\n';
     }
-    const secFile = VSL_SECTION_SOP_FILES[si];
+    const secFile = set.sopFiles[si];
     const secSop = secFile ? readSop(secFile) : '';
     if (secSop) {
       sys += '### SECTION SOP (follow this exactly for the current section):\n\n' + secSop;
@@ -406,15 +443,15 @@ async function guard(req) {
 
 function clampStep(v) {
   let s = Number.isInteger(v) ? v : 0;
-  if (isSection(s)) { let k = secIdx(s); if (k < 0) k = 0; if (k > VSL_SECTION_NAMES.length - 1) k = VSL_SECTION_NAMES.length - 1; return VSL_BASE + k; }
+  if (isSection(s)) { let k = secIdx(s); if (k < 0) k = 0; if (k > 19) k = 19; return VSL_BASE + k; } // up to 20 sections (webinar)
   if (s < 0) s = 0; if (s > 7) s = 7; return s;
 }
 
 // Run the brain for one step and normalize the result (push extraction + leak-guard).
 // Returns { reply, push }.
-async function runStep(stepIndex, messages, stepContent, sectionContent) {
-  const cfg = (isSection(stepIndex) ? VSL_SECTION_CONFIG[secIdx(stepIndex)] : STEP_CONFIG[stepIndex]) || {};
-  const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent, sectionContent), messages, {
+async function runStep(stepIndex, messages, stepContent, sectionContent, projectType) {
+  const cfg = (isSection(stepIndex) ? sectionSet(projectType).config[secIdx(stepIndex)] : STEP_CONFIG[stepIndex]) || {};
+  const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent, sectionContent, projectType), messages, {
     maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
   });
   const { reply, push } = extractPush(raw, stepIndex);
@@ -448,7 +485,7 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent, req.body && req.body.sectionContent);
+    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent, req.body && req.body.sectionContent, req.body && req.body.projectType);
     res.json({ reply, push });
   } catch (e) {
     res.status(200).json({ reply: `⚠️ Something went wrong reaching the engine: ${e.message}. Try again in a sec.`, push: null });
@@ -481,9 +518,10 @@ app.post('/api/chat/async', async (req, res) => {
   // fire-and-forget: run in the background, store the result on the job when done
   const jobStepContent = req.body && req.body.stepContent;
   const jobSectionContent = req.body && req.body.sectionContent;
+  const jobProjectType = req.body && req.body.projectType;
   (async () => {
     try {
-      const { reply, push } = await runStep(stepIndex, messages, jobStepContent, jobSectionContent);
+      const { reply, push } = await runStep(stepIndex, messages, jobStepContent, jobSectionContent, jobProjectType);
       const j = jobs.get(jobId);
       if (j) { j.status = 'done'; j.reply = reply; j.push = push; }
     } catch (e) {
