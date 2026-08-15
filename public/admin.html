@@ -34,9 +34,23 @@
 <body>
 <header>
   <h1>📊 Jimmy Labs — Admin</h1>
+  <nav id="nav" style="display:none;margin-left:20px;display:flex;gap:8px">
+    <button class="tab" data-tab="costs">💰 Costs</button>
+    <button class="tab" data-tab="users">👥 Users</button>
+  </nav>
   <span class="who" id="who"></span>
 </header>
 <main id="main"><div class="msg" id="status">Checking access…</div></main>
+<style>
+  .tab{background:#222634;color:var(--muted)}
+  .tab.active{background:var(--accent);color:#fff}
+  .bar{height:6px;border-radius:4px;background:#222634;overflow:hidden;margin-top:4px}
+  .bar > i{display:block;height:100%;background:var(--green)}
+  .bar > i.warn{background:#d29922}.bar > i.hot{background:#f85149}
+  .st{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600}
+  .st.none{background:#2a2f3a;color:#9aa0aa}.st.active{background:#12331d;color:#3fb950}
+  .st.past_due{background:#3a2a12;color:#d29922}.st.canceled{background:#3a1a1a;color:#f85149}
+</style>
 
 <script>
 const $ = s => document.querySelector(s);
@@ -52,13 +66,48 @@ async function boot() {
   const session = data && data.session;
   if (!session) { $('#status').innerHTML = 'Not logged in. <a href="/" style="color:var(--accent)">Log in on the main app</a>, then come back here.'; return; }
   $('#who').textContent = session.user.email;
-  let payload;
+  const H = { headers: { Authorization: 'Bearer ' + session.access_token } };
+  let usage, usersData;
   try {
-    const r = await fetch('/api/admin/usage', { headers: { Authorization: 'Bearer ' + session.access_token } });
+    const r = await fetch('/api/admin/usage', H);
     if (r.status === 403) { $('#status').innerHTML = '🔒 <b>' + session.user.email + '</b> is not an admin account.'; return; }
-    payload = await r.json();
-  } catch (e) { $('#status').textContent = 'Could not load usage data.'; return; }
-  render(payload);
+    usage = await r.json();
+    usersData = await (await fetch('/api/admin/users', H)).json();
+  } catch (e) { $('#status').textContent = 'Could not load admin data.'; return; }
+  $('#nav').style.display = 'flex';
+  window._usage = usage; window._users = usersData;
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => show(b.dataset.tab));
+  show('users');
+}
+
+function show(tab) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  if (tab === 'users') renderUsers(window._users); else render(window._usage);
+}
+
+function renderUsers(d) {
+  const cap = d.cap || 50;
+  const rows = (d.users || []).map(u => {
+    const pct = Math.min(100, (Number(u.month_cost) / cap) * 100);
+    const cls = pct >= 90 ? 'hot' : pct >= 60 ? 'warn' : '';
+    const dt = (u.created_at || '').slice(0, 10);
+    return `<tr>
+      <td>${u.email || '—'}</td>
+      <td><span class="st ${u.status || 'none'}">${u.status || 'none'}</span></td>
+      <td class="num">${k(u.projects)}</td>
+      <td class="num">${money(u.month_cost)} <span class="sub">/ ${money(cap)}</span><div class="bar"><i class="${cls}" style="width:${pct}%"></i></div></td>
+      <td class="sub">${dt}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="5" class="sub">No users yet.</td></tr>';
+  $('#main').innerHTML = `
+    <div class="tiles">
+      <div class="tile"><div class="k">Total users</div><div class="v">${k((d.users||[]).length)}</div></div>
+      <div class="tile"><div class="k">Paying (active)</div><div class="v green">${k((d.users||[]).filter(u=>u.status==='active').length)}</div></div>
+      <div class="tile"><div class="k">Per-user cap</div><div class="v">${money(cap)}</div><div class="sub">/ month</div></div>
+    </div>
+    <h2>All users</h2>
+    <table><thead><tr><th>Email</th><th>Status</th><th class="num">Projects</th><th class="num">This-month spend</th><th>Joined</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="sub" style="margin-top:12px">Status is <b>none</b> for everyone until Stripe billing is wired — then it flips to active / past_due / canceled automatically.</p>`;
 }
 
 function render(d) {

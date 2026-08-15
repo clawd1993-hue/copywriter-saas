@@ -766,6 +766,19 @@ app.get('/api/admin/usage', async (req, res) => {
   });
 });
 
+app.get('/api/admin/users', async (req, res) => {
+  if (!(await requireAdmin(req, res))) return;
+  const u = new URL(SUPABASE_URL + '/rest/v1/rpc/admin_users');
+  const r = https.request({
+    hostname: u.hostname, path: u.pathname, method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY, 'Content-Length': 2 }
+  }, resp => {
+    let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c);
+    resp.on('end', () => { try { res.json({ users: JSON.parse(d) || [], cap: USER_MONTHLY_CAP }); } catch { res.json({ users: [], cap: USER_MONTHLY_CAP }); } });
+  });
+  r.on('error', () => res.json({ users: [], cap: USER_MONTHLY_CAP })); r.write('{}'); r.end();
+});
+
 // Serve the admin dashboard at /admin (gated client-side by login + server-side by ADMIN_EMAILS).
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
 
