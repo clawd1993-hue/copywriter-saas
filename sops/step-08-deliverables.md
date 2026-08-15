@@ -24,7 +24,7 @@ Only after their go, run 8.1.
 The core covers all 3 beliefs: **🚗 = the Big Promise (lead-in / container), 🧠 + 🌍 = the 2 component bullets.** Pull the existing names — do NOT re-describe.
 
 **Format (Edwards bullet):**
-- **🚗 lead-in:** "When you join **[Vehicle name ← Part A]**, you'll finally **[dream ← 🚗]** — without **[failures ← 🚗]** — even if **[nothing's worked ← 🚗]**. Here's everything inside…"  *(the flagship carries NO dollar value — the two components carry the values.)*
+- **🚗 lead-in + flagship value:** "When you join **[Vehicle name ← Part A]**, you'll finally **[dream ← 🚗]** — without **[failures ← 🚗]** — even if **[nothing's worked ← 🚗]**. Here's everything inside…"  The flagship (the main program/system) carries the **biggest** value in the stack — give it a believable big anchor: **[Vehicle name] *(Value: $X — biggest anchor)***.
 - **🧠 + 🌍 bullets:** "Inside, you'll **[get / learn]** **[Name ← the mechanism]** so you can **[outcome ← belief]** — even if **[objection ← belief]** — which means **[payoff ← Step 3 Motivations]**. *(Value $X)*"  *("get" = tool/kit · "learn" = skill/method.)*
 
 **Coverage check:** all 3 beliefs covered (🚗 lead-in + 🧠 + 🌍). If one isn't → flag the hole.
@@ -41,6 +41,7 @@ Your message structure:
 
    ## 🎯 Core Offer
    [🚗 Big Promise lead-in]
+   **[Vehicle name] — the main program** *(Value $X — biggest anchor)*
 
    [🧠 component bullet] *(Value $X)*
 

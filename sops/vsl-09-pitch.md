@@ -23,12 +23,12 @@ If Step 8.1's core is a flagship + 2 component bullets, that's your pitch: roadm
 
 ## Grounding (pull from the Step 8 card — never invent)
 - Read the **8.1 Core** off the Step 8 Deliverables card (← Step 8, in the board context).
-- Use the **exact names, bullets, and dollar values** from Step 8.1 for the 🧠/🌍 components. The **flagship (roadmap) carries a value only if Step 8.1 gave it one** — otherwise leave it valueless; the two components carry the values.
+- Use the **exact names, bullets, and dollar values** from Step 8.1 for the 🧠/🌍 components. The **flagship (roadmap) carries the biggest anchor value** — use Step 8.1's if present, otherwise assign a believable big one.
 - Also read **the VSL so far** — flow out of Section 8's hand-off, and keep the "even if"s here MICRO (deliverable-specific), not a repeat of Section 8's macro belief-breaks.
 
 ## The format (reveal it as 3 real things they get — not a slide)
 ```
-[🚗 flagship lead-in — "When you join [Vehicle name], you'll get a step-by-step [roadmap / blueprint / system] to [dream ← 🚗] — without [failures ← 🚗] — even if [nothing's worked ← 🚗]."]
+[🚗 flagship lead-in — "When you join [Vehicle name], you'll get a step-by-step [roadmap / blueprint / system] to [dream ← 🚗] — without [failures ← 🚗] — even if [nothing's worked ← 🚗]. (Value: $X)"]
 
 And you'll get…
 
@@ -38,7 +38,7 @@ And you'll get…
 
 [close line: "That's the whole [path/machine] — [both halves in a phrase]. And you're not figuring any of it out on your own."]
 ```
-*(The flagship is **Deliverable #1** — a tangible roadmap named in the lead-in; the transition into the components is **"And you'll get…"**. Tack a value on the roadmap line ONLY if Step 8.1 gave it one; otherwise the two components carry the values. Mirror the 🧠/🌍 bullets from Step 8.1.)*
+*(The flagship is **Deliverable #1** — a tangible roadmap named in the lead-in, and it carries the **biggest** value (the anchor): tack a "(Value: $X)" on the roadmap line — use Step 8.1's if present, otherwise assign a believable big one. Transition into the components with **"And you'll get…"**. Mirror the 🧠/🌍 bullets from Step 8.1.)*
 
 ## How to run it (write → push straight to the card → tweak or move on)
 The Pitch card is **editable**, so DON'T ask permission — reproduce the core and push straight to the card. Per the section output contract, do NOT reprint it in the chat.
@@ -60,7 +60,7 @@ The Pitch card is **editable**, so DON'T ask permission — reproduce the core a
 Does the reveal match the core that's on the board — and does each piece make them think *"that alone is worth it"* while quietly killing a doubt? If you added, dropped, or renumbered anything vs Step 8.1 — you broke the rule; mirror it instead.
 
 ## Quality gate
-- [ ] Flagship framed as a tangible roadmap/blueprint (Deliverable #1) in the lead-in — a concrete thing, not a vague "you'll finally…"; transition is **"And you'll get…"**.
+- [ ] Flagship framed as a tangible roadmap/blueprint (Deliverable #1) in the lead-in — a concrete thing, not a vague "you'll finally…"; carries the biggest anchor value; transition is **"And you'll get…"**.
 - [ ] 🧠/🌍 bullets mirrored from Step 8.1 — nothing invented, promoted, or re-counted.
 - [ ] Each component bullet = name + full Edwards formula + the value from Step 8.1.
 - [ ] "even if"s are micro (deliverable-specific), not a repeat of Section 8.
