@@ -814,6 +814,34 @@ function subWrite(method, query, bodyObj, prefer) {
 const upsertSubscriber = (row) => subWrite('POST', '?on_conflict=user_id', row, 'resolution=merge-duplicates,return=minimal');
 const updateSubByCustomer = (customer, patch) => subWrite('PATCH', '?stripe_customer_id=eq.' + encodeURIComponent(customer), patch);
 
+// The login gate is the allowed_emails whitelist. Payment adds the email; cancel removes it.
+function allowedWrite(method, query, bodyObj) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) return resolve(false);
+    const u = new URL(SUPABASE_URL + '/rest/v1/allowed_emails' + (query || ''));
+    const body = bodyObj ? JSON.stringify(bodyObj) : '';
+    const headers = { apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY, Prefer: 'resolution=merge-duplicates,return=minimal' };
+    if (body) { headers['Content-Type'] = 'application/json'; headers['Content-Length'] = Buffer.byteLength(body); }
+    const r = https.request({ hostname: u.hostname, path: u.pathname + u.search, method, headers }, resp => { resp.on('data', () => {}); resp.on('end', () => resolve(resp.statusCode < 300)); });
+    r.on('error', () => resolve(false)); if (body) r.write(body); r.end();
+  });
+}
+const grantAccess = (email) => email ? allowedWrite('POST', '?on_conflict=email', { email: email.toLowerCase(), note: 'stripe' }) : Promise.resolve(false);
+const revokeAccess = (email) => email ? allowedWrite('DELETE', '?email=eq.' + encodeURIComponent(email.toLowerCase())) : Promise.resolve(false);
+
+function subscriberByCustomer(customer) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !customer) return resolve(null);
+    const u = new URL(SUPABASE_URL + '/rest/v1/subscribers');
+    u.searchParams.set('stripe_customer_id', 'eq.' + customer);
+    u.searchParams.set('select', '*');
+    https.get({ hostname: u.hostname, path: u.pathname + u.search, headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY } }, resp => {
+      let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c);
+      resp.on('end', () => { try { const a = JSON.parse(d); resolve(Array.isArray(a) && a[0] ? a[0] : null); } catch { resolve(null); } });
+    }).on('error', () => resolve(null));
+  });
+}
+
 // Verify Stripe's webhook signature (HMAC-SHA256 over `${timestamp}.${rawBody}`). No SDK needed.
 function verifyStripeSig(rawBody, sigHeader, secret) {
   try {
@@ -837,19 +865,26 @@ async function handleStripeWebhook(req, res) {
         const userId = (obj.metadata && obj.metadata.user_id) || obj.client_reference_id;
         const email = (obj.customer_details && obj.customer_details.email) || obj.customer_email || null;
         if (userId) await upsertSubscriber({ user_id: userId, email, stripe_customer_id: obj.customer || null, status: 'trialing' });
+        await grantAccess(email); // ← unlock the app (adds to allowed_emails)
         break;
       }
       case 'customer.subscription.created':
       case 'customer.subscription.updated': {
         const cpe = obj.current_period_end ? new Date(obj.current_period_end * 1000).toISOString() : null;
         await updateSubByCustomer(obj.customer, { status: obj.status, current_period_end: cpe });
+        // keep access in sync with a live subscription (trialing/active/past_due all keep access; hard-lock only on delete)
+        if (obj.status === 'active' || obj.status === 'trialing') {
+          const s = await subscriberByCustomer(obj.customer); if (s && s.email) await grantAccess(s.email);
+        }
         break;
       }
-      case 'customer.subscription.deleted':
+      case 'customer.subscription.deleted': {
         await updateSubByCustomer(obj.customer, { status: 'canceled' });
+        const s = await subscriberByCustomer(obj.customer); if (s && s.email) await revokeAccess(s.email); // ← lock the app
         break;
+      }
       case 'invoice.payment_failed':
-        await updateSubByCustomer(obj.customer, { status: 'past_due' });
+        await updateSubByCustomer(obj.customer, { status: 'past_due' }); // grace: keep access while Stripe retries
         break;
       case 'invoice.paid':
         await updateSubByCustomer(obj.customer, { status: 'active' });

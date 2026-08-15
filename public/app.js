@@ -300,14 +300,14 @@ async function onLogin(user) {
   // doubled chat greeting + doubled project list. Block the second caller.
   if (currentUser || logInFlight) return;
   logInFlight = true;
-  // BOUNCER: only approved (paid) emails get in — catches existing accounts too
+  // BOUNCER: only approved (paid) emails get in — catches existing accounts too.
+  // Not approved → show the paywall (keep the session so they can check out), don't sign them out.
   if (sb) {
     const { data: ok } = await sb.from('allowed_emails').select('email').limit(1);
     if (!ok || ok.length === 0) {
-      await sb.auth.signOut();
       currentUser = null;
       logInFlight = false;
-      showErr("This email isn't approved yet. You need to purchase access first.");
+      showPaywall(user);
       return;
     }
   }
@@ -317,6 +317,39 @@ async function onLogin(user) {
   const av = document.querySelector('.avatar');
   if (av) { av.textContent = (currentUser.name || 'U')[0].toUpperCase(); av.title = currentUser.email; }
   boot(true);
+}
+
+// Paywall screen — shown to a logged-in user whose email isn't approved yet. Keeps the session so checkout can authenticate.
+function showPaywall(user) {
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.add('hidden');
+  let el = document.getElementById('paywall');
+  if (!el) { el = document.createElement('div'); el.id = 'paywall'; document.body.appendChild(el); }
+  el.setAttribute('style', 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0f1115;color:#e8eaed;font-family:-apple-system,Segoe UI,Roboto,sans-serif;z-index:9999;padding:24px;');
+  el.innerHTML = `
+    <div style="max-width:440px;width:100%;background:#191c22;border:1px solid #262a32;border-radius:16px;padding:32px;text-align:center">
+      <div style="font-size:26px;font-weight:800;margin-bottom:6px">🔒 Unlock Jimmy Labs</div>
+      <p style="color:#9aa0aa;margin:0 0 22px;font-size:15px;line-height:1.5">Get full access to Jimmy — your AI copywriting partner. Build unlimited VSLs, webinars, and call-booker funnels.</p>
+      <div style="background:#0f1115;border:1px solid #262a32;border-radius:12px;padding:16px;margin-bottom:22px">
+        <div style="font-size:30px;font-weight:800">$1,997 <span style="font-size:15px;color:#9aa0aa;font-weight:500">setup</span></div>
+        <div style="color:#3fb950;font-size:14px;margin-top:4px">then $97/mo — first month free (30-day trial)</div>
+      </div>
+      <button id="pw-buy" style="width:100%;background:#7c5cff;color:#fff;border:0;border-radius:10px;padding:14px;font-size:16px;font-weight:700;cursor:pointer">Get Access →</button>
+      <div style="margin-top:16px;font-size:13px;color:#9aa0aa">Signed in as ${(user && user.email) || ''} · <a id="pw-logout" href="#" style="color:#7c5cff">log out</a></div>
+    </div>`;
+  el.classList.remove('hidden');
+  document.getElementById('pw-buy').onclick = async () => {
+    const btn = document.getElementById('pw-buy');
+    btn.disabled = true; btn.textContent = 'Redirecting to secure checkout…';
+    try {
+      const r = await fetch('/api/checkout', { method: 'POST', headers: await authHeaders() });
+      const j = await r.json();
+      if (j.url) { location.href = j.url; return; }
+      btn.disabled = false; btn.textContent = 'Get Access →';
+      alert(j.error || 'Could not start checkout — try again.');
+    } catch (e) { btn.disabled = false; btn.textContent = 'Get Access →'; alert('Network error — try again.'); }
+  };
+  document.getElementById('pw-logout').onclick = async (e) => { e.preventDefault(); try { await sb.auth.signOut(); } catch (_) {} location.reload(); };
 }
 
 function enterDummy() {
