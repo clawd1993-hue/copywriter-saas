@@ -14,6 +14,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || ''; // server-only: writes usage logs + admin reads (bypasses RLS)
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+const USER_MONTHLY_CAP = Number(process.env.USER_MONTHLY_CAP || 50); // hard $ ceiling of API cost per user per month (0 = off)
 const AUTH_REQUIRED = !!SUPABASE_URL; // once Supabase is configured (prod), every chat call must be from a logged-in user
 
 // $ per 1M tokens by model: input / output / cache-read / cache-write. Used to price each Claude call for the admin panel.
@@ -568,6 +569,20 @@ async function isOnTopic(messages) {
 
 // ---------- GUARD: auth + rate limit (shared by /api/chat and /api/chat/async) ----------
 // Returns { userId } on success, or { err: {status, body} } to send straight back to the client.
+// Server-side sum of a user's month-to-date API cost (via the RPC — the DB does the sum, fast).
+function userMonthCost(userId) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !userId || userId === 'local-dev') return resolve(0);
+    const u = new URL(SUPABASE_URL + '/rest/v1/rpc/user_month_cost');
+    const body = JSON.stringify({ uid: userId });
+    const r = https.request({
+      hostname: u.hostname, path: u.pathname, method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY, 'Content-Length': Buffer.byteLength(body) }
+    }, resp => { let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c); resp.on('end', () => { const n = Number(d); resolve(Number.isFinite(n) ? n : 0); }); });
+    r.on('error', () => resolve(0)); r.write(body); r.end();
+  });
+}
+
 async function guard(req) {
   let userId = 'local-dev';
   if (AUTH_REQUIRED) {
@@ -584,6 +599,13 @@ async function guard(req) {
       ? "⏳ Whoa, slow down a sec — you've hit the hourly message limit. Try again shortly."
       : "⏳ You've reached today's message limit. It resets in 24 hours.";
     return { err: { status: 429, body: { reply: msg, push: null } } };
+  }
+  // Hard fair-use spend cap: no single user can cost more than USER_MONTHLY_CAP in API usage per month.
+  if (AUTH_REQUIRED && USER_MONTHLY_CAP > 0) {
+    const spent = await userMonthCost(userId);
+    if (spent >= USER_MONTHLY_CAP) {
+      return { err: { status: 429, body: { reply: "🎉 You've hit this month's fair-use limit — it keeps Jimmy fast for everyone. Your access resets on the 1st. If you need more, reply here and we'll sort you out.", push: null } } };
+    }
   }
   return { userId, email: typeof email !== 'undefined' ? email : null };
 }
