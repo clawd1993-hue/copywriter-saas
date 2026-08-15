@@ -245,7 +245,8 @@ const WEBINAR_SET = {
     10: 'webinar-11-pitch-stack.md',
     11: 'webinar-12-bonuses.md',
     12: 'webinar-13-trial-closes.md',
-    13: 'webinar-14-price.md'
+    13: 'webinar-14-price.md',
+    14: 'webinar-15-objection-crush.md'
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
@@ -261,7 +262,8 @@ const WEBINAR_SET = {
     10: { maxTokens: 3500, effort: 'high' },
     11: { maxTokens: 3500, effort: 'high' },
     12: { maxTokens: 2000, effort: 'high' },
-    13: { maxTokens: 3000, effort: 'high' }
+    13: { maxTokens: 3000, effort: 'high' },
+    14: { maxTokens: 3500, effort: 'high' }
   },
   deps: {
     0: [2, 4],     // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
@@ -277,7 +279,8 @@ const WEBINAR_SET = {
     10: [6],       // The Pitch/Stack ← Step 8.1 (flagship + 🧠/🌍 components + values)
     11: [4, 6],    // Bonuses ← Step 8.2 bonus stack + vehicle name
     12: [2, 6],     // Trial Closes ← Step 8 wins + Step 3 dream
-    13: [2, 6]     // Price ← Step 8 values (stack sum) + Step 2/3 economics (ROI); price+reason from user
+    13: [2, 6],     // Price ← Step 8 values (stack sum) + Step 2/3 economics (ROI); price+reason from user
+    14: [2, 3]     // Objection Crush ← Step 3 objections + Step 4 problems
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
