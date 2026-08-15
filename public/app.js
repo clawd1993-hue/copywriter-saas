@@ -341,7 +341,41 @@ async function onLogin(user) {
   document.getElementById('app').classList.remove('hidden');
   const av = document.querySelector('.avatar');
   if (av) { av.textContent = (currentUser.name || 'U')[0].toUpperCase(); av.title = currentUser.email; }
+  wireAccountMenu();
   boot(true);
+}
+
+// Account dropdown (avatar → Billing / Log out)
+let accountMenuWired = false;
+function wireAccountMenu() {
+  if (accountMenuWired) return;
+  const btn = document.getElementById('avatar-btn');
+  const dd = document.getElementById('avatar-dropdown');
+  if (!btn || !dd) return;
+  accountMenuWired = true;
+  const emailEl = document.getElementById('avatar-dd-email');
+  if (emailEl) emailEl.textContent = (currentUser && currentUser.email) || '';
+  btn.onclick = (e) => { e.stopPropagation(); dd.classList.toggle('hidden'); };
+  document.addEventListener('click', (e) => {
+    if (!dd.classList.contains('hidden') && !dd.contains(e.target) && e.target !== btn) dd.classList.add('hidden');
+  });
+  document.getElementById('menu-billing').onclick = async () => {
+    const item = document.getElementById('menu-billing');
+    const label = item.textContent; item.textContent = 'Opening…'; item.disabled = true;
+    try {
+      const r = await fetch('/api/billing-portal', { method: 'POST', headers: await authHeaders() });
+      const j = await r.json();
+      if (j.url) { location.href = j.url; return; }
+      alert(j.error === 'no billing account yet'
+        ? 'No billing account found yet. If you just signed up, give it a minute — or contact support@themilliondollarvsl.com.'
+        : (j.error || 'Could not open billing — try again.'));
+    } catch (_) { alert('Network error — try again.'); }
+    item.textContent = label; item.disabled = false;
+  };
+  document.getElementById('menu-logout').onclick = async () => {
+    try { await sb.auth.signOut(); } catch (_) {}
+    location.reload();
+  };
 }
 
 // Paywall screen — shown to a logged-in user whose email isn't approved yet. Keeps the session so checkout can authenticate.

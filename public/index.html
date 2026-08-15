@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jimmy Lab</title>
-  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="style.css?v=21">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -38,7 +38,14 @@
       <div class="topbar-right">
         <span class="plan-pill">Elite · 20 projects/mo</span>
         <button id="help-btn" class="help-btn" title="Help &amp; training" aria-label="Help">?</button>
-        <div class="avatar" title="clawd1993@gmail.com">M</div>
+        <div class="avatar-menu">
+          <button class="avatar" id="avatar-btn" title="Account">M</button>
+          <div id="avatar-dropdown" class="avatar-dropdown hidden">
+            <div class="avatar-dd-email" id="avatar-dd-email"></div>
+            <button id="menu-billing" class="avatar-dd-item">💳 Billing</button>
+            <button id="menu-logout" class="avatar-dd-item">Log out</button>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -187,6 +194,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=39"></script>
+  <script src="app.js?v=40"></script>
 </body>
 </html>
