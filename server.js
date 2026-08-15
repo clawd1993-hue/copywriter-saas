@@ -235,19 +235,22 @@ const WEBINAR_SET = {
     0: 'webinar-01-hook.md',
     1: 'webinar-02-credibility.md',
     2: 'webinar-03-future-pace.md',
-    3: 'webinar-04-set-the-frame.md'
+    3: 'webinar-04-set-the-frame.md',
+    4: 'webinar-05-three-secrets-intro.md'
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
     1: { maxTokens: 3500, effort: 'high' },
     2: { maxTokens: 3000, effort: 'high' },
-    3: { maxTokens: 2500, effort: 'high' }
+    3: { maxTokens: 2500, effort: 'high' },
+    4: { maxTokens: 3000, effort: 'high' }
   },
   deps: {
     0: [2, 4],  // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
     1: [2, 4],  // Credibility (Origin Story) ← Step 3 Failed Attempts + Step 6 Vehicle (for the words)
     2: [2],     // Future Pace ← Step 3 Desires & Motivations (the deep dream)
-    3: [4]      // Set the Frame ← Step 6 Vehicle (the precise new opportunity) + Big Domino from §1
+    3: [4],     // Set the Frame ← Step 6 Vehicle (the precise new opportunity) + Big Domino from §1
+    4: [4]      // 3 Secrets Intro ← Step 6 Part B (the 3 full-formula secret lines), vehicle-first
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
