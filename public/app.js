@@ -586,24 +586,38 @@ function wireNewProject() {
 }
 
 // ---------- HOME / "What do you want to build?" screen ----------
+// The home screen lives inside .workspace next to the sidebar, so we toggle only the .split
+// (board + chat) — the project sidebar stays visible so users can always jump back.
+function hasProjects() { return !!document.querySelector('.project-item'); }
 function showHome() {
-  const ws = document.querySelector('.workspace');
+  const split = document.querySelector('.split');
   const home = document.getElementById('home-screen');
-  if (ws) ws.style.display = 'none';
+  const closeBtn = document.getElementById('home-close');
+  if (split) split.style.display = 'none';
   if (home) home.classList.remove('hidden');
+  // only offer a close/back button if there's actually a project to return to
+  if (closeBtn) closeBtn.classList.toggle('hidden', !hasProjects());
   document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
 }
 function hideHome() {
-  const ws = document.querySelector('.workspace');
+  const split = document.querySelector('.split');
   const home = document.getElementById('home-screen');
-  if (ws) ws.style.display = '';
+  if (split) split.style.display = '';
   if (home) home.classList.add('hidden');
+}
+// Close the home screen and return to the current/first project (only used when one exists).
+function closeHomeToProject() {
+  const active = document.querySelector('.project-item.active') || document.querySelector('.project-item');
+  if (active) selectProject(active); // selectProject calls hideHome()
+  else hideHome();
 }
 (function wireHome() {
   const homeBtn = document.getElementById('home-btn');
   const brand = document.getElementById('brand-home');
+  const closeBtn = document.getElementById('home-close');
   if (homeBtn) homeBtn.addEventListener('click', showHome);
   if (brand) brand.addEventListener('click', showHome);
+  if (closeBtn) closeBtn.addEventListener('click', closeHomeToProject);
   document.querySelectorAll('.home-type').forEach(card => {
     // open the name modal OVER the home screen; hideHome() only runs on successful create,
     // so cancelling returns the user to the home chooser instead of a blank workspace.
