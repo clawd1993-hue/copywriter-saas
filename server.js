@@ -15,6 +15,25 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || ''; // server-only: writes usage logs + admin reads (bypasses RLS)
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 const USER_MONTHLY_CAP = Number(process.env.USER_MONTHLY_CAP || 50); // hard $ ceiling of API cost per user per month (0 = off)
+// ---------- Stripe (billing) ----------
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || '';       // restricted key (rk_live_…) — checkout + billing only
+const STRIPE_PRICE_SETUP = process.env.STRIPE_PRICE_SETUP || '';     // $1,997 one-off setup fee
+const STRIPE_PRICE_SUB = process.env.STRIPE_PRICE_SUB || '';         // $97/mo recurring
+const STRIPE_TRIAL_DAYS = Number(process.env.STRIPE_TRIAL_DAYS || 30);
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || ''; // whsec_… (set after registering the webhook in Stripe)
+const APP_URL = process.env.APP_URL || 'https://jimmylab.ai';
+
+// Call the Stripe REST API (form-encoded, raw https — same lean style as the rest of the server).
+function stripeRequest(pathname, method, formStr) {
+  return new Promise((resolve, reject) => {
+    const body = formStr || '';
+    const r = https.request({
+      hostname: 'api.stripe.com', path: pathname, method,
+      headers: { Authorization: 'Bearer ' + STRIPE_SECRET_KEY, 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) }
+    }, resp => { let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c); resp.on('end', () => { try { resolve(JSON.parse(d)); } catch (e) { reject(e); } }); });
+    r.on('error', reject); r.write(body); r.end();
+  });
+}
 const AUTH_REQUIRED = !!SUPABASE_URL; // once Supabase is configured (prod), every chat call must be from a logged-in user
 
 // $ per 1M tokens by model: input / output / cache-read / cache-write. Used to price each Claude call for the admin panel.
@@ -61,6 +80,9 @@ const MAX_OUTPUT_TOKENS = 2000;   // output cap — no giant dumps
 const RATE_PER_HOUR = 40;         // per-user message cap
 const RATE_PER_DAY = 200;
 const rateLog = new Map();        // userId -> [timestamps ms] (in-memory; single Render instance)
+
+// Stripe webhook — MUST see the raw body for signature verification, so register it before express.json().
+app.post('/api/stripe/webhook', express.raw({ type: '*/*' }), (req, res) => handleStripeWebhook(req, res));
 
 app.use(express.json({ limit: '1mb' }));
 // admin.* subdomain → serve the admin dashboard at its root (must run BEFORE static, which would otherwise serve index.html)
@@ -706,6 +728,136 @@ app.post('/api/chat/async', async (req, res) => {
 
   res.json({ done: false, jobId, contract: cfg.contract || null });
 });
+
+// ---------- BILLING: create a Checkout Session (setup fee + trialing subscription) ----------
+app.post('/api/checkout', async (req, res) => {
+  const auth = req.headers.authorization || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
+  const user = await verifyUser(token);
+  if (!user) return res.status(401).json({ error: 'login required' });
+  if (!STRIPE_SECRET_KEY || !STRIPE_PRICE_SETUP || !STRIPE_PRICE_SUB) return res.status(500).json({ error: 'billing not configured' });
+  const p = new URLSearchParams();
+  p.set('mode', 'subscription');
+  p.set('line_items[0][price]', STRIPE_PRICE_SETUP);   // $1,997 one-off (charged at checkout)
+  p.set('line_items[0][quantity]', '1');
+  p.set('line_items[1][price]', STRIPE_PRICE_SUB);      // $97/mo recurring
+  p.set('line_items[1][quantity]', '1');
+  p.set('subscription_data[trial_period_days]', String(STRIPE_TRIAL_DAYS)); // first $97 after 30 days
+  p.set('subscription_data[metadata][user_id]', user.id);
+  p.set('metadata[user_id]', user.id);
+  p.set('client_reference_id', user.id);
+  if (user.email) p.set('customer_email', user.email);
+  p.set('success_url', APP_URL + '/?welcome=1');
+  p.set('cancel_url', APP_URL + '/?checkout=cancelled');
+  try {
+    const j = await stripeRequest('/v1/checkout/sessions', 'POST', p.toString());
+    if (j.error) return res.status(400).json({ error: j.error.message });
+    res.json({ url: j.url });
+  } catch (e) { res.status(500).json({ error: 'stripe error' }); }
+});
+
+// ---------- BILLING: self-serve customer portal (update card / cancel) ----------
+app.post('/api/billing-portal', async (req, res) => {
+  const auth = req.headers.authorization || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
+  const user = await verifyUser(token);
+  if (!user) return res.status(401).json({ error: 'login required' });
+  // find the user's stripe customer id from subscribers
+  const sub = await subscriberByUser(user.id);
+  if (!sub || !sub.stripe_customer_id) return res.status(400).json({ error: 'no billing account yet' });
+  const p = new URLSearchParams();
+  p.set('customer', sub.stripe_customer_id);
+  p.set('return_url', APP_URL + '/');
+  try {
+    const j = await stripeRequest('/v1/billing_portal/sessions', 'POST', p.toString());
+    if (j.error) return res.status(400).json({ error: j.error.message });
+    res.json({ url: j.url });
+  } catch (e) { res.status(500).json({ error: 'stripe error' }); }
+});
+
+// ---------- BILLING: read the current user's subscription status (drives the paywall gate) ----------
+function subscriberByUser(userId) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !userId) return resolve(null);
+    const u = new URL(SUPABASE_URL + '/rest/v1/subscribers');
+    u.searchParams.set('user_id', 'eq.' + userId);
+    u.searchParams.set('select', '*');
+    https.get({ hostname: u.hostname, path: u.pathname + u.search, headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY } }, resp => {
+      let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c);
+      resp.on('end', () => { try { const a = JSON.parse(d); resolve(Array.isArray(a) && a[0] ? a[0] : null); } catch { resolve(null); } });
+    }).on('error', () => resolve(null));
+  });
+}
+
+app.get('/api/subscription', async (req, res) => {
+  const auth = req.headers.authorization || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
+  const user = await verifyUser(token);
+  if (!user) return res.status(401).json({ status: 'none' });
+  const sub = await subscriberByUser(user.id);
+  const status = (sub && sub.status) || 'none';
+  const active = status === 'active' || status === 'trialing';
+  res.json({ status, active, hasBilling: !!(sub && sub.stripe_customer_id) });
+});
+
+// Write to the subscribers table with the service key (bypasses RLS). merge = upsert on user_id.
+function subWrite(method, query, bodyObj, prefer) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) return resolve(false);
+    const u = new URL(SUPABASE_URL + '/rest/v1/subscribers' + (query || ''));
+    const body = JSON.stringify({ ...bodyObj, updated_at: new Date().toISOString() });
+    const headers = { 'Content-Type': 'application/json', apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY, 'Content-Length': Buffer.byteLength(body), Prefer: prefer || 'return=minimal' };
+    const r = https.request({ hostname: u.hostname, path: u.pathname + u.search, method, headers }, resp => { resp.on('data', () => {}); resp.on('end', () => resolve(resp.statusCode < 300)); });
+    r.on('error', () => resolve(false)); r.write(body); r.end();
+  });
+}
+const upsertSubscriber = (row) => subWrite('POST', '?on_conflict=user_id', row, 'resolution=merge-duplicates,return=minimal');
+const updateSubByCustomer = (customer, patch) => subWrite('PATCH', '?stripe_customer_id=eq.' + encodeURIComponent(customer), patch);
+
+// Verify Stripe's webhook signature (HMAC-SHA256 over `${timestamp}.${rawBody}`). No SDK needed.
+function verifyStripeSig(rawBody, sigHeader, secret) {
+  try {
+    const parts = Object.fromEntries((sigHeader || '').split(',').map(kv => kv.split('=')));
+    const signed = parts.t + '.' + rawBody;
+    const expected = crypto.createHmac('sha256', secret).update(signed, 'utf8').digest('hex');
+    const a = Buffer.from(expected), b = Buffer.from(parts.v1 || '');
+    return a.length === b.length && crypto.timingSafeEqual(a, b);
+  } catch (e) { return false; }
+}
+
+async function handleStripeWebhook(req, res) {
+  const raw = req.body && req.body.toString ? req.body.toString('utf8') : '';
+  const sig = req.headers['stripe-signature'] || '';
+  if (STRIPE_WEBHOOK_SECRET && !verifyStripeSig(raw, sig, STRIPE_WEBHOOK_SECRET)) return res.status(400).send('bad signature');
+  let evt; try { evt = JSON.parse(raw); } catch (e) { return res.status(400).send('bad payload'); }
+  const obj = (evt.data && evt.data.object) || {};
+  try {
+    switch (evt.type) {
+      case 'checkout.session.completed': {
+        const userId = (obj.metadata && obj.metadata.user_id) || obj.client_reference_id;
+        const email = (obj.customer_details && obj.customer_details.email) || obj.customer_email || null;
+        if (userId) await upsertSubscriber({ user_id: userId, email, stripe_customer_id: obj.customer || null, status: 'trialing' });
+        break;
+      }
+      case 'customer.subscription.created':
+      case 'customer.subscription.updated': {
+        const cpe = obj.current_period_end ? new Date(obj.current_period_end * 1000).toISOString() : null;
+        await updateSubByCustomer(obj.customer, { status: obj.status, current_period_end: cpe });
+        break;
+      }
+      case 'customer.subscription.deleted':
+        await updateSubByCustomer(obj.customer, { status: 'canceled' });
+        break;
+      case 'invoice.payment_failed':
+        await updateSubByCustomer(obj.customer, { status: 'past_due' });
+        break;
+      case 'invoice.paid':
+        await updateSubByCustomer(obj.customer, { status: 'active' });
+        break;
+    }
+  } catch (e) { /* never fail the webhook — Stripe retries on non-2xx */ }
+  res.json({ received: true });
+}
 
 // ---------- ADMIN: usage / cost dashboard (gated to ADMIN_EMAILS) ----------
 function adminFetchUsage(sinceIso) {
