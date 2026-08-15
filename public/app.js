@@ -278,9 +278,9 @@ function showErr(msg) { const e = document.getElementById('login-error'); if (e)
       const r = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
       const j = await r.json();
       if (j.url) { location.href = j.url; return; }
-      b.disabled = false; b.textContent = 'Get Access — $1,997 + $97/mo';
+      b.disabled = false; b.textContent = 'Get Access';
       showErr(j.error || 'Could not open checkout — try again.');
-    } catch (e) { b.disabled = false; b.textContent = 'Get Access — $1,997 + $97/mo'; showErr('Network error — try again.'); }
+    } catch (e) { b.disabled = false; b.textContent = 'Get Access'; showErr('Network error — try again.'); }
   });
 })();
 
