@@ -11,8 +11,20 @@ The price + the reason-why are the user's — you can't invent them.
 ## Phase 1 — Ask (first turn: get price + reason, NO push)
 Open with the framing: *"Now Section 14: the Price. This is anchor-high → drop → justify. I just need a few real numbers from you:"* Then ask (handle all-at-once or in parts; don't write until you have the price + a reason):
 1. 💵 **The real price** — "What are they actually paying?"
-2. 🧾 **The reason-why** — "Why is it this accessible / discounted? (a real reason — you want to fill your next cohort, a launch special, you'd rather have case studies than max margin, etc.)"
+2. 🧾 **The reason-why** — "Why is it this accessible / discounted?" **← ALWAYS hand them the menu below with this question. Never leave them blank.**
 3. 📈 **ROI input** — "Roughly what's ONE result worth to them? (one new client, one sale, a small % lift) — so the math shows the price pays for itself."
+
+### 🧾 The reason-why menu (ALWAYS show this when you ask #2 — don't make them think it up cold)
+A price cut with no reason reads as "cheap / desperate." A **real reason** ("magnetic reason why" — Hormozi) makes the same price feel like a gift. Present these as a pick-list, then recommend the best fit:
+- 🌱 **Founding / case-study price** — "I want my first wave of success stories, so I'd rather have 100 wins than max margin." *(usually the strongest for a launch — recommend this first)*
+- 🚪 **Filling the cohort** — "I only take X people per round and I want the room full and buzzing."
+- 🚀 **Launch / it's new** — "This is the first time I'm opening it, so early members get the founding rate."
+- 🎁 **Warm-audience thank-you** — "You showed up and watched this whole thing — this price is my thank-you to people who take action."
+- 💡 **Mission / accessibility** — "I want this in as many hands as possible, not locked behind a price only rich people can pay."
+- 💰 **Back-end economics** — "I make my money when you win and stick around, not on the front end — so I keep this low on purpose."
+- 📅 **Seasonal / deadline** — "It's [reason/season], so the price reflects that for a limited window."
+
+**Then:** *"Which of these is actually TRUE for you? Pick one (or tell me yours) — it just has to be real."* Recommend the founding/case-study angle by default for a first launch.
 
 ## Phase 2 — Write: anchor in TWO layers, THEN drop (once you have the numbers)
 1. **Stack sum** ← Step 8 / §11-12: add core + bonuses → *"$[total] in value"*, vs a **real alternative** (*"a copywriter charges $10k for just one of these"*).
@@ -41,6 +53,7 @@ Does the price feel like a **mistake in the buyer's favor** (~10x gap), AND does
 
 ## Quality gate
 - [ ] Asked for the real price + reason-why + ROI input first (didn't invent).
+- [ ] Handed over the reason-why menu (didn't leave them to think it up cold) + recommended the fit.
 - [ ] Anchors in 2 layers (stack sum vs alternative + conservative ROI), then drops.
 - [ ] Real reason-why on the drop; price is the user's number.
 - [ ] Hands into Objection Crush; spoken tone, 3rd-grade.
