@@ -967,6 +967,30 @@ app.get('/api/admin/users', async (req, res) => {
   r.on('error', () => res.json({ users: [], cap: USER_MONTHLY_CAP })); r.write('{}'); r.end();
 });
 
+// Admin: read-only view of ONE user's projects + generated content (for finding glitches/bugs).
+function sbAdminGet(pathAndQuery) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) return resolve(null);
+    const u = new URL(SUPABASE_URL + pathAndQuery);
+    https.get({ hostname: u.hostname, path: u.pathname + u.search, headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY } }, resp => {
+      let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c);
+      resp.on('end', () => { try { resolve(JSON.parse(d)); } catch { resolve(null); } });
+    }).on('error', () => resolve(null));
+  });
+}
+app.get('/api/admin/user-detail', async (req, res) => {
+  if (!(await requireAdmin(req, res))) return;
+  const email = (req.query.email || '').toString().trim().toLowerCase();
+  if (!email) return res.status(400).json({ error: 'email required' });
+  // resolve the auth user id from email (GoTrue admin list; per_page caps at 1000 — fine for early stage)
+  const list = await sbAdminGet('/auth/v1/admin/users?per_page=1000');
+  const users = (list && (list.users || (Array.isArray(list) ? list : []))) || [];
+  const match = users.find(u => (u.email || '').toLowerCase() === email);
+  if (!match) return res.json({ email, projects: [] });
+  const projects = await sbAdminGet('/rest/v1/projects?user_id=eq.' + match.id + '&select=id,title,project_type,step_content,section_content,created_at&order=created_at.desc') || [];
+  res.json({ email, userId: match.id, projects: Array.isArray(projects) ? projects : [] });
+});
+
 // Serve the admin dashboard at /admin (gated client-side by login + server-side by ADMIN_EMAILS).
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
 
