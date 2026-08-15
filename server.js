@@ -250,7 +250,8 @@ const WEBINAR_SET = {
     15: 'webinar-16-guarantee-urgency.md',
     16: 'webinar-17-restack.md',
     17: 'webinar-18-cta.md',
-    18: 'webinar-19-future-pace.md'
+    18: 'webinar-19-future-pace.md',
+    19: 'webinar-20-ps.md'
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
@@ -271,7 +272,8 @@ const WEBINAR_SET = {
     15: { maxTokens: 2500, effort: 'high' },
     16: { maxTokens: 2500, effort: 'high' },
     17: { maxTokens: 2500, effort: 'high' },
-    18: { maxTokens: 2500, effort: 'high' }
+    18: { maxTokens: 2500, effort: 'high' },
+    19: { maxTokens: 1500, effort: 'high' }
   },
   deps: {
     0: [2, 4],     // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
@@ -292,7 +294,8 @@ const WEBINAR_SET = {
     15: [6],       // Guarantee/Urgency ← offer (Step 8); type+terms+urgency from user
     16: [6],       // Re-Stack ← Step 8 (full stack = §11 core + §12 bonuses)
     17: [0],       // CTA ← Step 1 (dream) / Step 3 pains for two-choices; link+price+button from user
-    18: [0, 2]     // Future-Pace ← Step 1 dream + Step 3 research (after-world scenes)
+    18: [0, 2],    // Future-Pace ← Step 1 dream + Step 3 research (after-world scenes)
+    19: [0, 5]     // P.S. ← Step 1 dream + Step 7 method (3 moves) + §16 urgency
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
