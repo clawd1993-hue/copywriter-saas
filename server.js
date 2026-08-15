@@ -238,7 +238,8 @@ const WEBINAR_SET = {
     3: 'webinar-04-set-the-frame.md',
     4: 'webinar-05-three-secrets-intro.md',
     5: 'webinar-secret-template.md',   // Section 6 = Secret #1 (🚗)
-    6: 'webinar-secret-template.md'    // Section 7 = Secret #2 (🌍) — same template, writes the 🌍 secret
+    6: 'webinar-secret-template.md',   // Section 7 = Secret #2 (🌍)
+    7: 'webinar-secret-template.md'    // Section 8 = Secret #3 (🧠) — same template, writes the 🧠 secret
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
@@ -247,7 +248,8 @@ const WEBINAR_SET = {
     3: { maxTokens: 2500, effort: 'high' },
     4: { maxTokens: 3000, effort: 'high' },
     5: { maxTokens: 5000, effort: 'high' },
-    6: { maxTokens: 5000, effort: 'high' }
+    6: { maxTokens: 5000, effort: 'high' },
+    7: { maxTokens: 5000, effort: 'high' }
   },
   deps: {
     0: [2, 4],     // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
@@ -256,7 +258,8 @@ const WEBINAR_SET = {
     3: [4],        // Set the Frame ← Step 6 Vehicle (the precise new opportunity) + Big Domino from §1
     4: [4],        // 3 Secrets Intro ← Step 6 Part B (the 3 full-formula secret lines), vehicle-first
     5: [2, 3, 4],  // Secret #1 (🚗) ← Step 6 (the secret) + Step 5 (mechanism) + Step 3 (failure/objection)
-    6: [2, 3, 4]   // Secret #2 (🌍) ← same sources; writes the 🌍 external secret
+    6: [2, 3, 4],  // Secret #2 (🌍) ← same sources; writes the 🌍 external secret
+    7: [2, 3, 4]   // Secret #3 (🧠) ← same sources; writes the 🧠 internal secret
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
