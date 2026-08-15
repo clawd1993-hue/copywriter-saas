@@ -280,6 +280,7 @@ function buildSystemPrompt(stepIndex, stepContent, sectionContent, projectType) 
       '\n\nThe 8-step offer engine is complete. You are now writing the actual sales letter (VSL), one section at a time.\n\n' +
       '### HOW YOU REPLY FOR A VSL SECTION (output contract — follow exactly):\n' +
       '- The finished section copy goes ONLY inside the `<<<PUSH>>>` … `<<<END_PUSH>>>` block — it lands in the editable card on their dashboard.\n' +
+      '- The pushed content is the FINISHED COPY ONLY. Do NOT prefix it with a section title/label/heading (no "SECTION 1 — HOOK", no "**PITCH**"), no stage directions or meta notes (no "(spoken open…)"), and no leading "---" divider. The card already shows the section name — start straight with the actual copy.\n' +
       '- Do NOT reprint, quote, preview, or list that copy in your visible chat message. Never paste the section text (or the testimonials/lines) into the chat — that clutters it and duplicates the card.\n' +
       '- Your visible chat message is ONLY: a short framing line (what this section does), a brief confirmation it\'s in the card, and the fork to the next section. Keep it tight.\n' +
       '- Exception: sections that must gather info first (e.g. Credibility) still ask their questions in the chat — the "don\'t reprint" rule applies to the finished section copy you push.\n\n';
