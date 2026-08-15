@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jimmy Lab</title>
-  <link rel="stylesheet" href="style.css?v=24">
+  <link rel="stylesheet" href="style.css?v=25">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -225,6 +225,21 @@
     </div>
   </div>
 
-  <script src="app.js?v=43"></script>
+  <!-- CLEAR / REDO SECTION MODAL -->
+  <div id="sec-modal" class="np-modal hidden">
+    <div class="np-modal-card">
+      <div class="np-modal-head">
+        <h3>Redo this section?</h3>
+        <button id="sec-close" class="sop-icon-btn" title="Close">✕</button>
+      </div>
+      <p class="np-sub">This clears the copy in “<b><span id="sec-name"></span></b>” so you can generate it fresh. Your other sections stay untouched — just tell Jimmy to redo it after.</p>
+      <div class="np-actions">
+        <button id="sec-cancel" class="np-btn np-btn-ghost">Cancel</button>
+        <button id="sec-confirm" class="np-btn np-btn-danger">Clear &amp; redo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=44"></script>
 </body>
 </html>

@@ -230,10 +230,19 @@ body {
 
 .vsl-grid { display: flex; flex-direction: column; gap: 12px; }
 .vsl-item {
+  position: relative;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 10px; padding: 12px; box-shadow: var(--shadow);
 }
-.vsl-item label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+.vsl-trash {
+  position: absolute; top: 8px; right: 8px;
+  background: transparent; border: 0; color: var(--grey); cursor: pointer;
+  padding: 4px; border-radius: 6px; line-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.vsl-trash:hover { background: #fee2e2; color: #dc2626; }
+.vsl-item label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; padding-right: 26px; }
 .vsl-item .vsl-num { color: var(--accent); }
 .vsl-item .vsl-source { color: var(--grey); font-weight: 400; font-size: 0.72rem; }
 .vsl-item textarea {

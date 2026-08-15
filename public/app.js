@@ -895,6 +895,35 @@ function pushSectionContent(i, content) {
 }
 window.pushSectionContent = pushSectionContent;
 
+// Clear ONE section's saved copy → back to blank so it can be redone. Other sections untouched.
+function clearSection(i) {
+  const store = sectionStore();
+  delete store[i];
+  localStorage.setItem('sectioncontent:' + stepContentKey(), JSON.stringify(store));
+  persistCardsToDB('section_content', store);   // DB = source of truth
+  renderVSL();
+}
+// Section-clear confirm modal
+let secTargetIndex = null;
+function openSecModal(i, name) {
+  secTargetIndex = i;
+  document.getElementById('sec-name').textContent = name || ('Section ' + (i + 1));
+  document.getElementById('sec-modal').classList.remove('hidden');
+}
+function closeSecModal() { document.getElementById('sec-modal').classList.add('hidden'); secTargetIndex = null; }
+(function wireSecModal() {
+  const cancel = document.getElementById('sec-cancel'), close = document.getElementById('sec-close'),
+        confirm = document.getElementById('sec-confirm'), modal = document.getElementById('sec-modal');
+  if (!modal) return;
+  cancel && cancel.addEventListener('click', closeSecModal);
+  close && close.addEventListener('click', closeSecModal);
+  modal.addEventListener('click', e => { if (e.target.id === 'sec-modal') closeSecModal(); });
+  confirm && confirm.addEventListener('click', () => {
+    if (secTargetIndex != null) clearSection(secTargetIndex);
+    closeSecModal();
+  });
+})();
+
 // Render the Problems & Solutions map (lines with ` ||| `) as a Lens | Problem | Solution table.
 function psTableToHtml(text) {
   const lines = String(text == null ? '' : text).split('\n');
@@ -1022,9 +1051,12 @@ function renderVSL() {
     item.innerHTML =
       `<label><span class="vsl-num">${i + 1}.</span> ${s.name} ` +
       `<span class="vsl-source">[${s.source}]</span></label>` +
+      (content ? `<button class="vsl-trash" title="Clear this section to redo it" aria-label="Clear section"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>` : '') +
       `<textarea placeholder="Write your ${s.name.toLowerCase()} here..."></textarea>`;
     const ta = item.querySelector('textarea');
     if (content) { ta.value = content; done++; }   // set as .value (no HTML injection) — the AI-pushed copy, still editable
+    const trash = item.querySelector('.vsl-trash');
+    if (trash) trash.addEventListener('click', (e) => { e.stopPropagation(); openSecModal(i, s.name); });
     grid.appendChild(item);
   });
   // framework badges reflect the project type + its section count + how many are filled
