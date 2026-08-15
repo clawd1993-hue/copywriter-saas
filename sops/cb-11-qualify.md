@@ -11,6 +11,8 @@
 ## What it is
 The filter. They've seen everything they get (Pitch) and every objection crushed (Bonuses) — desire is peaked. Now you say who the call is *for* and who it's *NOT* for. **Take-away selling** — people want what screens them in. It also frames the call as *exclusive*, not a desperate pitch.
 
+**Why it sits here:** desire is maxed right after the stack. Qualifying converts *"I want that"* → *"that's me, I qualify"* → **book**. It also frames the call as exclusive, not a desperate pitch.
+
 ## How to write it
 1. **Open with the turn** — signal you're about to filter: *"This isn't for everyone, so let me be straight about who it's for."*
 2. List **3–4 "FOR you if…"** ← Step 2 (who they are) + Step 3 (their situation/desire).
@@ -32,6 +34,20 @@ This is NOT for you if:
 
 If that first list sounds like you, here's your next step…
 ```
+
+## Worked example (match this voice)
+> This isn't for everyone, so let me be straight.
+>
+> **This is for you if:**
+> - You're a coach, consultant, or course creator already making sales — you just want a video that sells for you, at scale.
+> - You've only ever closed people who already know you, and you're ready to sell cold strangers.
+> - You'll actually follow an 8-step process instead of chasing the next shiny tactic.
+>
+> **This is NOT for you if:**
+> - You've never sold anything yet — you need a proven offer first.
+> - You want a magic button with zero work.
+>
+> If that first list is you, here's your next step…
 
 ## How to run it (write → push → tweak or move on)
 Editable card, direct-push, don't reprint in chat.
