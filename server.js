@@ -12,7 +12,48 @@ const MODEL = 'claude-opus-5';        // main brain — swappable, SOPs/memory s
 const BOUNCER_MODEL = 'claude-haiku-4-5'; // cheap gatekeeper — classifies on/off-topic before the expensive call
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || ''; // server-only: writes usage logs + admin reads (bypasses RLS)
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 const AUTH_REQUIRED = !!SUPABASE_URL; // once Supabase is configured (prod), every chat call must be from a logged-in user
+
+// $ per 1M tokens by model: input / output / cache-read / cache-write. Used to price each Claude call for the admin panel.
+const PRICING = {
+  'claude-opus-5':    { in: 5, out: 25, cr: 0.5, cc: 6.25 },
+  'claude-haiku-4-5': { in: 1, out: 5,  cr: 0.1, cc: 1.25 }
+};
+
+// Fire-and-forget: price a Claude response's token usage and log one row to usage_events. Never blocks or throws into the request.
+function logUsage(ctx, usage, model) {
+  try {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !usage || !ctx) return;
+    const p = PRICING[model] || PRICING['claude-opus-5'];
+    const inp = usage.input_tokens || 0, out = usage.output_tokens || 0;
+    const cr = usage.cache_read_input_tokens || 0, cc = usage.cache_creation_input_tokens || 0;
+    if (!inp && !out && !cr && !cc) return;
+    const cost = (inp * p.in + out * p.out + cr * p.cr + cc * p.cc) / 1e6;
+    const row = {
+      user_id: ctx.userId && ctx.userId !== 'local-dev' ? ctx.userId : null,
+      user_email: ctx.email || null,
+      project_id: ctx.projectId || null,
+      project_type: ctx.projectType || null,
+      step: ctx.step || null,
+      model,
+      input_tokens: inp, output_tokens: out, cache_read_tokens: cr, cache_creation_tokens: cc,
+      cost_usd: Number(cost.toFixed(5))
+    };
+    const u = new URL(SUPABASE_URL + '/rest/v1/usage_events');
+    const body = JSON.stringify(row);
+    const r = https.request({
+      hostname: u.hostname, path: u.pathname, method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', apikey: SUPABASE_SERVICE_KEY,
+        Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY, Prefer: 'return=minimal',
+        'Content-Length': Buffer.byteLength(body)
+      }
+    }, resp => { resp.on('data', () => {}); resp.on('end', () => {}); });
+    r.on('error', () => {}); r.write(body); r.end();
+  } catch (e) { /* logging must never break a chat */ }
+}
 
 // ---------- GUARDRAILS: config ----------
 const MAX_OUTPUT_TOKENS = 2000;   // output cap — no giant dumps
@@ -434,10 +475,19 @@ async function callClaude(system, messages, opts = {}) {
 
   let restarts = 0;
   const MAX_RESTARTS = 6; // server-side tool (web search) can pause_turn several times on a deep research run
+  // Accumulate token usage across every request in the loop (pause_turn resumes are billed too), then log once.
+  const acc = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 };
+  const finish = (text) => { if (opts.usageCtx) logUsage(opts.usageCtx, acc, model); return text; };
   while (true) {
     const j = await anthropicRequest({ ...base, messages: convo });
+    if (j.usage) {
+      acc.input_tokens += j.usage.input_tokens || 0;
+      acc.output_tokens += j.usage.output_tokens || 0;
+      acc.cache_read_input_tokens += j.usage.cache_read_input_tokens || 0;
+      acc.cache_creation_input_tokens += j.usage.cache_creation_input_tokens || 0;
+    }
     if (j.type === 'error' || j.error) throw new Error((j.error && j.error.message) || 'API error');
-    if (j.stop_reason === 'refusal') return "I can't help with that particular request — let's keep it to your copy. Type 'I'm ready' to continue.";
+    if (j.stop_reason === 'refusal') return finish("I can't help with that particular request — let's keep it to your copy. Type 'I'm ready' to continue.");
     // server-side web search paused mid-loop → append the paused assistant turn and resume (API auto-continues)
     if (j.stop_reason === 'pause_turn' && restarts < MAX_RESTARTS) {
       convo = convo.concat([{ role: 'assistant', content: j.content }]);
@@ -445,7 +495,7 @@ async function callClaude(system, messages, opts = {}) {
       continue;
     }
     const text = (j.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();
-    return text || '(no reply)';
+    return finish(text || '(no reply)');
   }
 }
 
@@ -519,6 +569,7 @@ async function guard(req) {
     const user = await verifyUser(token);
     if (!user) return { err: { status: 401, body: { reply: '🔒 Please log in to use the copywriting assistant.', push: null } } };
     userId = user.id;
+    var email = user.email;
   }
   const rl = rateCheck(userId);
   if (!rl.ok) {
@@ -527,7 +578,7 @@ async function guard(req) {
       : "⏳ You've reached today's message limit. It resets in 24 hours.";
     return { err: { status: 429, body: { reply: msg, push: null } } };
   }
-  return { userId };
+  return { userId, email: typeof email !== 'undefined' ? email : null };
 }
 
 function clampStep(v) {
@@ -538,11 +589,13 @@ function clampStep(v) {
 
 // Run the brain for one step and normalize the result (push extraction + leak-guard).
 // Returns { reply, push }.
-async function runStep(stepIndex, messages, stepContent, sectionContent, projectType) {
+async function runStep(stepIndex, messages, stepContent, sectionContent, projectType, usageCtx) {
   const secSet = isSection(stepIndex) ? sectionSet(projectType) : null;
   const cfg = (isSection(stepIndex) ? (secSet && secSet.config[secIdx(stepIndex)]) : STEP_CONFIG[stepIndex]) || {};
+  const stepLabel = isSection(stepIndex) ? ('Section ' + (secIdx(stepIndex) + 1)) : ('Step ' + (STEP_LABELS[stepIndex] || stepIndex));
+  const ctx = usageCtx ? { ...usageCtx, projectType: projectType || null, step: stepLabel } : null;
   const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent, sectionContent, projectType), messages, {
-    maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
+    maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools, usageCtx: ctx
   });
   const { reply, push } = extractPush(raw, stepIndex);
   // GUARDRAIL 4 — leak-guard: block any verbatim run from confidential source docs (even if jailbroken)
@@ -575,7 +628,8 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent, req.body && req.body.sectionContent, req.body && req.body.projectType);
+    const usageCtx = { userId: g.userId, email: g.email, projectId: (req.body && req.body.projectId) || null };
+    const { reply, push } = await runStep(stepIndex, messages, req.body && req.body.stepContent, req.body && req.body.sectionContent, req.body && req.body.projectType, usageCtx);
     res.json({ reply, push });
   } catch (e) {
     res.status(200).json({ reply: `⚠️ Something went wrong reaching the engine: ${e.message}. Try again in a sec.`, push: null });
@@ -609,9 +663,10 @@ app.post('/api/chat/async', async (req, res) => {
   const jobStepContent = req.body && req.body.stepContent;
   const jobSectionContent = req.body && req.body.sectionContent;
   const jobProjectType = req.body && req.body.projectType;
+  const jobUsageCtx = { userId: g.userId, email: g.email, projectId: (req.body && req.body.projectId) || null };
   (async () => {
     try {
-      const { reply, push } = await runStep(stepIndex, messages, jobStepContent, jobSectionContent, jobProjectType);
+      const { reply, push } = await runStep(stepIndex, messages, jobStepContent, jobSectionContent, jobProjectType, jobUsageCtx);
       const j = jobs.get(jobId);
       if (j) { j.status = 'done'; j.reply = reply; j.push = push; }
     } catch (e) {
@@ -622,6 +677,68 @@ app.post('/api/chat/async', async (req, res) => {
 
   res.json({ done: false, jobId, contract: cfg.contract || null });
 });
+
+// ---------- ADMIN: usage / cost dashboard (gated to ADMIN_EMAILS) ----------
+function adminFetchUsage(sinceIso) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) return resolve([]);
+    const u = new URL(SUPABASE_URL + '/rest/v1/usage_events');
+    u.searchParams.set('select', 'user_email,project_id,project_type,step,model,input_tokens,output_tokens,cache_read_tokens,cache_creation_tokens,cost_usd,created_at');
+    u.searchParams.set('created_at', 'gte.' + sinceIso);
+    u.searchParams.set('order', 'created_at.desc');
+    u.searchParams.set('limit', '20000');
+    https.get({ hostname: u.hostname, path: u.pathname + u.search, headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY } }, resp => {
+      let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c);
+      resp.on('end', () => { try { resolve(JSON.parse(d) || []); } catch { resolve([]); } });
+    }).on('error', () => resolve([]));
+  });
+}
+
+async function requireAdmin(req, res) {
+  const auth = req.headers.authorization || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
+  const user = await verifyUser(token);
+  if (!user || !ADMIN_EMAILS.includes((user.email || '').toLowerCase())) {
+    res.status(403).json({ error: 'forbidden' });
+    return null;
+  }
+  return user;
+}
+
+app.get('/api/admin/usage', async (req, res) => {
+  if (!(await requireAdmin(req, res))) return;
+  const now = new Date();
+  const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString();
+  const rows = await adminFetchUsage(monthStart);
+  let total = 0; const byUser = {}, byProject = {}, byStep = {};
+  for (const r of rows) {
+    const c = Number(r.cost_usd) || 0; total += c;
+    const ue = r.user_email || 'unknown';
+    (byUser[ue] = byUser[ue] || { cost: 0, calls: 0, inTok: 0, outTok: 0 });
+    byUser[ue].cost += c; byUser[ue].calls++; byUser[ue].inTok += r.input_tokens || 0; byUser[ue].outTok += r.output_tokens || 0;
+    const pid = r.project_id || '—';
+    (byProject[pid] = byProject[pid] || { cost: 0, calls: 0, email: r.user_email, type: r.project_type });
+    byProject[pid].cost += c; byProject[pid].calls++;
+    const st = r.step || '?';
+    (byStep[st] = byStep[st] || { cost: 0, calls: 0 });
+    byStep[st].cost += c; byStep[st].calls++;
+  }
+  const projectCount = Object.keys(byProject).filter(k => k !== '—').length;
+  res.json({
+    month: monthStart.slice(0, 7),
+    totalCost: Number(total.toFixed(4)),
+    calls: rows.length,
+    userCount: Object.keys(byUser).length,
+    projectCount,
+    avgPerProject: projectCount ? Number((total / projectCount).toFixed(4)) : 0,
+    topUsers: Object.entries(byUser).map(([email, v]) => ({ email, ...v, cost: Number(v.cost.toFixed(4)) })).sort((a, b) => b.cost - a.cost),
+    topProjects: Object.entries(byProject).map(([id, v]) => ({ id, ...v, cost: Number(v.cost.toFixed(4)) })).sort((a, b) => b.cost - a.cost).slice(0, 60),
+    steps: Object.entries(byStep).map(([step, v]) => ({ step, ...v, cost: Number(v.cost.toFixed(4)) })).sort((a, b) => b.cost - a.cost)
+  });
+});
+
+// Serve the admin dashboard at /admin (gated client-side by login + server-side by ADMIN_EMAILS).
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
 
 // Poll a background job. jobId is an unguessable token → possession = ownership.
 app.get('/api/chat/status', (req, res) => {

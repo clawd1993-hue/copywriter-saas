@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jimmy Labs — Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root { --bg:#0f1115; --card:#191c22; --line:#262a32; --text:#e8eaed; --muted:#9aa0aa; --accent:#7c5cff; --green:#3fb950; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; }
+  header { padding:20px 24px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; }
+  header h1 { font-size:18px; margin:0; }
+  header .who { margin-left:auto; color:var(--muted); font-size:13px; }
+  main { padding:24px; max-width:1100px; margin:0 auto; }
+  .msg { color:var(--muted); padding:40px; text-align:center; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:24px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .tile .k { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+  .tile .v { font-size:26px; font-weight:700; margin-top:6px; }
+  .tile .v.green { color:var(--green); }
+  h2 { font-size:14px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:26px 0 10px; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  th,td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); font-size:14px; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
+  tr:last-child td { border-bottom:none; }
+  td.num,th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .cost { color:var(--green); font-weight:600; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:20px; background:#222634; font-size:12px; color:var(--muted); }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:8px 14px; font-size:14px; cursor:pointer; }
+  .sub { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>📊 Jimmy Labs — Admin</h1>
+  <span class="who" id="who"></span>
+</header>
+<main id="main"><div class="msg" id="status">Checking access…</div></main>
+
+<script>
+const $ = s => document.querySelector(s);
+const money = n => '$' + (Number(n)||0).toFixed(2);
+const k = n => (Number(n)||0).toLocaleString();
+
+async function boot() {
+  let cfg = {};
+  try { cfg = await (await fetch('/api/config')).json(); } catch (e) {}
+  if (!cfg.authEnabled || !window.supabase) { $('#status').textContent = 'Auth not configured.'; return; }
+  const sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+  const { data } = await sb.auth.getSession();
+  const session = data && data.session;
+  if (!session) { $('#status').innerHTML = 'Not logged in. <a href="/" style="color:var(--accent)">Log in on the main app</a>, then come back here.'; return; }
+  $('#who').textContent = session.user.email;
+  let payload;
+  try {
+    const r = await fetch('/api/admin/usage', { headers: { Authorization: 'Bearer ' + session.access_token } });
+    if (r.status === 403) { $('#status').innerHTML = '🔒 <b>' + session.user.email + '</b> is not an admin account.'; return; }
+    payload = await r.json();
+  } catch (e) { $('#status').textContent = 'Could not load usage data.'; return; }
+  render(payload);
+}
+
+function render(d) {
+  const tiles = `
+    <div class="tiles">
+      <div class="tile"><div class="k">This month spend</div><div class="v green">${money(d.totalCost)}</div><div class="sub">${d.month}</div></div>
+      <div class="tile"><div class="k">Avg / project</div><div class="v">${money(d.avgPerProject)}</div><div class="sub">real cost per VSL</div></div>
+      <div class="tile"><div class="k">Projects built</div><div class="v">${k(d.projectCount)}</div></div>
+      <div class="tile"><div class="k">Active users</div><div class="v">${k(d.userCount)}</div></div>
+      <div class="tile"><div class="k">Total calls</div><div class="v">${k(d.calls)}</div></div>
+    </div>`;
+
+  const users = `
+    <h2>Cost per user (top spenders)</h2>
+    <table><thead><tr><th>User</th><th class="num">Cost</th><th class="num">Calls</th><th class="num">In tok</th><th class="num">Out tok</th></tr></thead><tbody>
+    ${(d.topUsers||[]).map(u => `<tr><td>${u.email||'—'}</td><td class="num cost">${money(u.cost)}</td><td class="num">${k(u.calls)}</td><td class="num">${k(u.inTok)}</td><td class="num">${k(u.outTok)}</td></tr>`).join('') || '<tr><td colspan="5" class="sub">No usage yet — build a VSL to see data.</td></tr>'}
+    </tbody></table>`;
+
+  const steps = `
+    <h2>Cost by step / section</h2>
+    <table><thead><tr><th>Step</th><th class="num">Cost</th><th class="num">Calls</th><th class="num">Avg/call</th></tr></thead><tbody>
+    ${(d.steps||[]).map(s => `<tr><td>${s.step}</td><td class="num cost">${money(s.cost)}</td><td class="num">${k(s.calls)}</td><td class="num">${money(s.calls? s.cost/s.calls : 0)}</td></tr>`).join('') || '<tr><td colspan="4" class="sub">No data yet.</td></tr>'}
+    </tbody></table>`;
+
+  const projects = `
+    <h2>Cost per project (top 60)</h2>
+    <table><thead><tr><th>Project</th><th>Type</th><th>User</th><th class="num">Cost</th><th class="num">Calls</th></tr></thead><tbody>
+    ${(d.topProjects||[]).map(p => `<tr><td class="sub">${(p.id||'—').slice(0,8)}</td><td><span class="pill">${p.type||'?'}</span></td><td class="sub">${p.email||'—'}</td><td class="num cost">${money(p.cost)}</td><td class="num">${k(p.calls)}</td></tr>`).join('') || '<tr><td colspan="5" class="sub">No data yet.</td></tr>'}
+    </tbody></table>`;
+
+  $('#main').innerHTML = tiles + users + steps + projects;
+}
+
+boot();
+</script>
+</body>
+</html>
