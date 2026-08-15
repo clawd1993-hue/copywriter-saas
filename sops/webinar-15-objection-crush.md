@@ -19,7 +19,9 @@ Ask: *"Two quick things so this lands: (1) any proof/testimonials/results I can 
 5. 🤨 **Skepticism / "is it legit / will it work"** → proof (if given) + the guarantee (hands toward §16).
 6. ⏳ **"I'll do it later"** → the cost of waiting — the window's closing / competitors pulling ahead.
 7. 🙋 **"Why you / why trust this"** → credibility (results, track record).
-*(+ any project-specific objection straight from Step 3.)*
+8. 🤔 **"I need to think about it"** (the stall) → thinking changes nothing; the **guarantee** removes the risk, so there's genuinely nothing to think about — decide inside with zero downside.
+9. 👥 **"Let me talk to my spouse / partner"** → they'll thank you when you come home with [result]; and because of the guarantee, this isn't gambling the family money — it's a protected decision.
+*(+ any project-specific objection straight from Step 3 — in the customer's OWN words.)*
 
 ## How to write it
 Each = one short beat: *"Now, maybe you're thinking [objection in THEIR words]… here's the thing: [1–2 sentence reframe]."* **Don't argue — reframe.** Use their real words from Step 3/4.
@@ -33,7 +35,7 @@ Editable card, direct-push after the light ask. Don't reprint in chat.
 ## Rules
 - **Name each objection before they do** — in their words (← Step 3/4).
 - One short beat each — reframe, don't argue.
-- Cover the 7 universal + any Step 3-specific objection.
+- Cover the 9 universal + any Step 3-specific objection.
 - Lean on the guarantee for skepticism if there's no proof.
 - Hand into Guarantee/Urgency.
 - Spoken tone, 3rd-grade.
@@ -43,6 +45,6 @@ Is every top Step 3/4 objection **named AND answered**? Any objection left unspo
 
 ## Quality gate
 - [ ] Asked for proof + any audience-specific objection first.
-- [ ] Crushes the 7 universal objections + Step 3-specific ones, each named in their words + reframed in 1–2 sentences.
+- [ ] Crushes the 9 universal objections + Step 3-specific ones, each named in their words + reframed in 1–2 sentences.
 - [ ] Reframes (doesn't argue); leans on guarantee if no proof.
 - [ ] Hands into Guarantee/Urgency; spoken tone, 3rd-grade.
