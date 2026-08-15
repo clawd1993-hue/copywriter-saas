@@ -234,17 +234,20 @@ const WEBINAR_SET = {
   sopFiles: {
     0: 'webinar-01-hook.md',
     1: 'webinar-02-credibility.md',
-    2: 'webinar-03-future-pace.md'
+    2: 'webinar-03-future-pace.md',
+    3: 'webinar-04-set-the-frame.md'
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
     1: { maxTokens: 3500, effort: 'high' },
-    2: { maxTokens: 3000, effort: 'high' }
+    2: { maxTokens: 3000, effort: 'high' },
+    3: { maxTokens: 2500, effort: 'high' }
   },
   deps: {
     0: [2, 4],  // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
     1: [2, 4],  // Credibility (Origin Story) ← Step 3 Failed Attempts + Step 6 Vehicle (for the words)
-    2: [2]      // Future Pace ← Step 3 Desires & Motivations (the deep dream)
+    2: [2],     // Future Pace ← Step 3 Desires & Motivations (the deep dream)
+    3: [4]      // Set the Frame ← Step 6 Vehicle (the precise new opportunity) + Big Domino from §1
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
