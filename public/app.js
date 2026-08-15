@@ -246,6 +246,7 @@ async function initAuth() {
     g.innerHTML = location.search.includes('paid=1') ? 'Create your login' : 'Sign in';
     g.classList.add('plain');
     noteEl().textContent = 'Already purchased? Enter your email + password to sign in.';
+    const fl = document.getElementById('forgot-link'); if (fl) fl.classList.remove('hidden');
     const { data } = await sb.auth.getSession();
     if (data.session) { onLogin(data.session.user); }
     sb.auth.onAuthStateChange((_e, session) => {
@@ -281,6 +282,27 @@ function showErr(msg) { const e = document.getElementById('login-error'); if (e)
       b.disabled = false; b.textContent = 'Get Access';
       showErr(j.error || 'Could not open checkout — try again.');
     } catch (e) { b.disabled = false; b.textContent = 'Get Access'; showErr('Network error — try again.'); }
+  });
+})();
+
+// ---------- FORGOT PASSWORD ----------
+(function wireForgot() {
+  const link = document.getElementById('forgot-link');
+  if (!link) return;
+  link.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (!(authEnabled && sb)) return;
+    showErr('');
+    const email = (document.getElementById('email-input').value || '').trim();
+    if (!email) { showErr('Enter your email above first, then tap "Forgot password?"'); return; }
+    link.textContent = 'Sending…';
+    try {
+      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/reset.html' });
+      const err = document.getElementById('login-error');
+      if (error) { showErr(error.message || 'Could not send reset email — try again.'); }
+      else if (err) { err.style.color = '#059669'; err.textContent = '✅ Check your email for a password reset link.'; }
+    } catch (_) { showErr('Network error — try again.'); }
+    finally { link.textContent = 'Forgot password?'; }
   });
 })();
 

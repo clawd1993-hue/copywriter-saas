@@ -141,6 +141,9 @@ body {
 .home-type-desc { color: var(--text-dim); font-size: .9rem; line-height: 1.4; flex: 1; }
 .home-type-price { color: var(--accent); font-weight: 600; font-size: .82rem; margin-top: 4px; }
 #brand-home { cursor: pointer; }
+.forgot-link { display: inline-block; margin-top: 12px; font-size: 13px; color: #7c5cff; text-decoration: none; cursor: pointer; }
+.forgot-link:hover { text-decoration: underline; }
+.forgot-link.hidden { display: none; }
 
 /* ---------- SIDEBAR ---------- */
 .sidebar {
