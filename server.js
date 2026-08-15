@@ -242,7 +242,8 @@ const WEBINAR_SET = {
     7: 'webinar-secret-template.md',   // Section 8 = Secret #3 (🧠)
     8: 'webinar-09-transition.md',
     9: 'webinar-10-product-overview.md',
-    10: 'webinar-11-pitch-stack.md'
+    10: 'webinar-11-pitch-stack.md',
+    11: 'webinar-12-bonuses.md'
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
@@ -255,7 +256,8 @@ const WEBINAR_SET = {
     7: { maxTokens: 5000, effort: 'high' },
     8: { maxTokens: 2500, effort: 'high' },
     9: { maxTokens: 2500, effort: 'high' },
-    10: { maxTokens: 3500, effort: 'high' }
+    10: { maxTokens: 3500, effort: 'high' },
+    11: { maxTokens: 3500, effort: 'high' }
   },
   deps: {
     0: [2, 4],     // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
@@ -268,7 +270,8 @@ const WEBINAR_SET = {
     7: [2, 3, 4],  // Secret #3 (🧠) ← same sources; writes the 🧠 internal secret
     8: [5, 6],     // Transition ← the method (§5-8 / Step 7 DIY path) + product (Step 8.1 shortcut)
     9: [6],        // Product Overview ← Step 8.1 (flagship name + 🚗 Big Promise)
-    10: [6]        // The Pitch/Stack ← Step 8.1 (flagship + 🧠/🌍 components + values)
+    10: [6],       // The Pitch/Stack ← Step 8.1 (flagship + 🧠/🌍 components + values)
+    11: [4, 6]     // Bonuses ← Step 8.2 bonus stack + vehicle name
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
