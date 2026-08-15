@@ -232,13 +232,16 @@ const WEBINAR_SET = {
     'Future-Pace Close', 'P.S.'
   ],
   sopFiles: {
-    0: 'webinar-01-hook.md'
+    0: 'webinar-01-hook.md',
+    1: 'webinar-02-credibility.md'
   },
   config: {
-    0: { maxTokens: 3500, effort: 'high' }
+    0: { maxTokens: 3500, effort: 'high' },
+    1: { maxTokens: 3500, effort: 'high' }
   },
   deps: {
-    0: [2, 4]   // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
+    0: [2, 4],  // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
+    1: [2, 4]   // Credibility (Origin Story) ← Step 3 Failed Attempts + Step 6 Vehicle (for the words)
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
