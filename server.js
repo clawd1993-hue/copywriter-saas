@@ -221,7 +221,27 @@ const CALL_BOOKER_SET = {
     8: [6], 9: [4, 6], 10: [1, 2], 11: [6], 12: [2, 4], 13: [2, 5]
   }
 };
-const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET };
+// Webinar = a SEPARATE 20-section brain (Brunson Perfect Webinar). Does NOT reuse DTS sections.
+// Built section-by-section; unbuilt sections fall through to "coming soon".
+const WEBINAR_SET = {
+  names: [
+    'Hook (Bold Promise)', 'Credibility (Origin Story)', 'Future Pace', 'Set the Frame', '3 Secrets Intro',
+    'Secret 1 — The Vehicle', 'Secret 2 — Become the Only Choice', 'Secret 3 — The Fill-in-the-Blank VSL',
+    'Transition to the Offer', 'Product Overview', 'The Pitch', 'Bonuses', 'Trial Closes',
+    'Price — Anchor, Drop & Reason-Why', 'Objection Crush', 'Guarantee & Urgency', 'Re-Stack', 'CTA',
+    'Future-Pace Close', 'P.S.'
+  ],
+  sopFiles: {
+    0: 'webinar-01-hook.md'
+  },
+  config: {
+    0: { maxTokens: 3500, effort: 'high' }
+  },
+  deps: {
+    0: [2, 4]   // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
+  }
+};
+const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
 // dts-vsl (or empty/legacy) → the DTS set. A KNOWN-but-unbuilt type (e.g. dts-webinar) → null → "coming soon",
 // so dts-vsl sections NEVER leak into another project type.
 function sectionSet(projectType) {
