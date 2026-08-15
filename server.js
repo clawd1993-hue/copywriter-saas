@@ -988,7 +988,16 @@ app.get('/api/admin/user-detail', async (req, res) => {
   const match = users.find(u => (u.email || '').toLowerCase() === email);
   if (!match) return res.json({ email, projects: [] });
   const projects = await sbAdminGet('/rest/v1/projects?user_id=eq.' + match.id + '&select=id,title,project_type,step_content,section_content,created_at&order=created_at.desc') || [];
-  res.json({ email, userId: match.id, projects: Array.isArray(projects) ? projects : [] });
+  const projList = Array.isArray(projects) ? projects : [];
+  // pull the full chat thread for each project so admin can see the conversation (where it got jenky)
+  if (projList.length) {
+    const ids = projList.map(p => p.id).join(',');
+    const msgs = await sbAdminGet('/rest/v1/messages?project_id=in.(' + ids + ')&select=project_id,role,content,created_at&order=created_at.asc') || [];
+    const byProject = {};
+    for (const m of (Array.isArray(msgs) ? msgs : [])) (byProject[m.project_id] = byProject[m.project_id] || []).push(m);
+    for (const p of projList) p.messages = byProject[p.id] || [];
+  }
+  res.json({ email, userId: match.id, projects: projList });
 });
 
 // Serve the admin dashboard at /admin (gated client-side by login + server-side by ADMIN_EMAILS).
