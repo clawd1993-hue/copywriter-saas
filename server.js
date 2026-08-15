@@ -222,7 +222,12 @@ const CALL_BOOKER_SET = {
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET };
-function sectionSet(projectType) { return SECTION_REGISTRY[projectType] || DTS_VSL_SET; }
+// dts-vsl (or empty/legacy) → the DTS set. A KNOWN-but-unbuilt type (e.g. dts-webinar) → null → "coming soon",
+// so dts-vsl sections NEVER leak into another project type.
+function sectionSet(projectType) {
+  if (!projectType || projectType === 'dts-vsl') return DTS_VSL_SET;
+  return SECTION_REGISTRY[projectType] || null;
+}
 
 // Pull the requested offer-engine cards out of the client-sent stepContent map as grounding text.
 function boardGrounding(depIndexes, stepContent) {
@@ -242,6 +247,10 @@ function buildSystemPrompt(stepIndex, stepContent, sectionContent, projectType) 
   // VSL copy section (index >= VSL_BASE)
   if (isSection(stepIndex)) {
     const set = sectionSet(projectType);
+    if (!set) {
+      // Known project type whose section SOPs aren't built yet (e.g. dts-webinar). Do NOT borrow another type's SOPs.
+      return CORE_BRAIN + '\n\n---\n\n## CURRENT: WRITING YOUR VSL\n\nThe sections for THIS project type aren\'t built into you yet — we\'re still building them. Tell the user this project type\'s sections are coming soon. Do NOT invent a process, and do NOT use another project type\'s sections.';
+    }
     const si = secIdx(stepIndex);
     const secName = set.names[si] || 'this section';
     let sys = CORE_BRAIN + '\n\n---\n\n## CURRENT: WRITING YOUR VSL — Section ' + (si + 1) + ' — ' + secName +
@@ -450,7 +459,8 @@ function clampStep(v) {
 // Run the brain for one step and normalize the result (push extraction + leak-guard).
 // Returns { reply, push }.
 async function runStep(stepIndex, messages, stepContent, sectionContent, projectType) {
-  const cfg = (isSection(stepIndex) ? sectionSet(projectType).config[secIdx(stepIndex)] : STEP_CONFIG[stepIndex]) || {};
+  const secSet = isSection(stepIndex) ? sectionSet(projectType) : null;
+  const cfg = (isSection(stepIndex) ? (secSet && secSet.config[secIdx(stepIndex)]) : STEP_CONFIG[stepIndex]) || {};
   const raw = await callClaude(buildSystemPrompt(stepIndex, stepContent, sectionContent, projectType), messages, {
     maxTokens: cfg.maxTokens, effort: cfg.effort, tools: cfg.tools
   });
