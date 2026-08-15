@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jimmy Lab</title>
-  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="stylesheet" href="style.css?v=22">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -34,8 +34,9 @@
   <div id="app" class="app hidden">
     <!-- Top bar -->
     <header class="topbar">
-      <div class="brand">✍️ Jimmy Lab</div>
+      <div class="brand" id="brand-home" title="Home">✍️ Jimmy Lab</div>
       <div class="topbar-right">
+        <button id="home-btn" class="help-btn" title="Home" aria-label="Home">🏠</button>
         <span class="plan-pill">Elite · 20 projects/mo</span>
         <button id="help-btn" class="help-btn" title="Help &amp; training" aria-label="Help">?</button>
         <div class="avatar-menu">
@@ -129,6 +130,34 @@
         </section>
       </main>
     </div>
+
+    <!-- HOME / "What do you want to build?" screen -->
+    <div id="home-screen" class="home-screen hidden">
+      <div class="home-inner">
+        <h1 class="home-h1">What do you want to build?</h1>
+        <p class="home-sub">Pick your funnel and Jimmy writes the whole thing with you — step by step.</p>
+        <div class="home-types">
+          <button class="home-type" data-type="dts-vsl">
+            <div class="home-type-emoji">🎯</div>
+            <div class="home-type-name">Direct-To-Sale VSL</div>
+            <div class="home-type-desc">Sell a low-ticket digital product on autopilot</div>
+            <div class="home-type-price">$0–$497</div>
+          </button>
+          <button class="home-type" data-type="dts-webinar">
+            <div class="home-type-emoji">🎤</div>
+            <div class="home-type-name">Direct-To-Sale Webinar</div>
+            <div class="home-type-desc">Sell a mid-ticket offer on autopilot</div>
+            <div class="home-type-price">$497–$1,997</div>
+          </button>
+          <button class="home-type" data-type="call-booker">
+            <div class="home-type-emoji">📞</div>
+            <div class="home-type-name">Call-Booker VSL</div>
+            <div class="home-type-desc">Book sales calls for high-ticket offers</div>
+            <div class="home-type-price">$1,997–$10k+</div>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- HELP / TRAINING MODAL -->
@@ -194,6 +223,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=40"></script>
+  <script src="app.js?v=41"></script>
 </body>
 </html>

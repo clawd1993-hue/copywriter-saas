@@ -444,9 +444,9 @@ async function loadProjects() {
   const { data, error } = await sb.from('projects').select('*').order('created_at', { ascending: false });
   if (error) { console.warn(error); return; }
   if (!data.length) {
-    // first-time user: make them a starter project
-    const { data: created } = await sb.from('projects').insert({ title: 'My First VSL' }).select().single();
-    if (created) data.push(created);
+    // first-time user: no auto-project — show the "What do you want to build?" home screen instead
+    showHome();
+    return;
   }
   data.forEach((p, i) => {
     // DB is the source of truth — hydrate the local cache so the rest of the app (which reads localStorage) just works,
@@ -529,6 +529,7 @@ let currentThreadKey = null;   // localStorage key for dummy-mode threads
 let currentProjectType = 'dts-vsl';  // drives which copywriting section set renders
 
 function selectProject(el) {
+  hideHome(); // clicking any project returns to the workspace
   document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
   const name = el.dataset.name;
@@ -581,8 +582,34 @@ async function persistMsg(role, content) {
 function wireNewProject() {
   const btn = document.getElementById('new-project-btn');
   if (!btn) return;
-  btn.onclick = openNpModal;
+  btn.onclick = () => openNpModal();
 }
+
+// ---------- HOME / "What do you want to build?" screen ----------
+function showHome() {
+  const ws = document.querySelector('.workspace');
+  const home = document.getElementById('home-screen');
+  if (ws) ws.style.display = 'none';
+  if (home) home.classList.remove('hidden');
+  document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+}
+function hideHome() {
+  const ws = document.querySelector('.workspace');
+  const home = document.getElementById('home-screen');
+  if (ws) ws.style.display = '';
+  if (home) home.classList.add('hidden');
+}
+(function wireHome() {
+  const homeBtn = document.getElementById('home-btn');
+  const brand = document.getElementById('brand-home');
+  if (homeBtn) homeBtn.addEventListener('click', showHome);
+  if (brand) brand.addEventListener('click', showHome);
+  document.querySelectorAll('.home-type').forEach(card => {
+    // open the name modal OVER the home screen; hideHome() only runs on successful create,
+    // so cancelling returns the user to the home chooser instead of a blank workspace.
+    card.addEventListener('click', () => openNpModal(card.dataset.type));
+  });
+})();
 
 // ---------- HELP / TRAINING MODAL ----------
 (function wireHelpModal() {
@@ -601,9 +628,9 @@ let npSelectedType = null;
 function projectTypes() { try { return JSON.parse(localStorage.getItem('projectTypes') || '{}'); } catch (e) { return {}; } }
 function saveProjectType(id, type) { if (!id) return; const m = projectTypes(); m[id] = type; localStorage.setItem('projectTypes', JSON.stringify(m)); }
 
-function openNpModal() {
-  npSelectedType = null;
-  document.querySelectorAll('.np-type').forEach(t => t.classList.remove('selected'));
+function openNpModal(preType) {
+  npSelectedType = (typeof preType === 'string') ? preType : null;
+  document.querySelectorAll('.np-type').forEach(t => t.classList.toggle('selected', npSelectedType && t.dataset.type === npSelectedType));
   const nameEl = document.getElementById('np-name');
   nameEl.value = '';
   const cbtn = document.getElementById('np-create');
@@ -656,6 +683,7 @@ document.getElementById('np-create').addEventListener('click', async () => {
       id = data && data.id;
     }
     saveProjectType(id, type);
+    hideHome(); // if they started from the home screen, drop into the workspace
     const el = addProjectItem(name, true, id, type, true); // prepend — newest on top, like ChatGPT
     selectProject(el);
     closeNpModal();

@@ -123,6 +123,22 @@ body {
 
 .workspace { flex: 1; display: flex; min-height: 0; }
 
+/* HOME / "What do you want to build?" screen */
+.home-screen { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; overflow: auto; }
+.home-screen.hidden { display: none; }
+.home-inner { max-width: 940px; width: 100%; text-align: center; }
+.home-h1 { font-size: 2rem; margin: 0 0 10px; color: var(--text); }
+.home-sub { color: var(--text-dim); font-size: 1.05rem; margin: 0 0 36px; }
+.home-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; text-align: left; }
+@media (max-width: 820px) { .home-types { grid-template-columns: 1fr; } }
+.home-type { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 26px 22px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; transition: border-color .15s, transform .15s, box-shadow .15s; font: inherit; color: inherit; }
+.home-type:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.home-type-emoji { font-size: 1.9rem; }
+.home-type-name { font-weight: 700; font-size: 1.05rem; color: var(--text); }
+.home-type-desc { color: var(--text-dim); font-size: .9rem; line-height: 1.4; flex: 1; }
+.home-type-price { color: var(--accent); font-weight: 600; font-size: .82rem; margin-top: 4px; }
+#brand-home { cursor: pointer; }
+
 /* ---------- SIDEBAR ---------- */
 .sidebar {
   width: 230px;
