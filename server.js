@@ -226,7 +226,7 @@ const CALL_BOOKER_SET = {
 const WEBINAR_SET = {
   names: [
     'Hook (Bold Promise)', 'Credibility (Origin Story)', 'Future Pace', 'Set the Frame', '3 Secrets Intro',
-    'Secret 1 — The Vehicle', 'Secret 2 — Become the Only Choice', 'Secret 3 — The Fill-in-the-Blank VSL',
+    'Secret 1 (🚗 — The New Way)', 'Secret 2 (🌍 — External)', 'Secret 3 (🧠 — Internal)',
     'Transition to the Offer', 'Product Overview', 'The Pitch', 'Bonuses', 'Trial Closes',
     'Price — Anchor, Drop & Reason-Why', 'Objection Crush', 'Guarantee & Urgency', 'Re-Stack', 'CTA',
     'Future-Pace Close', 'P.S.'
@@ -236,21 +236,24 @@ const WEBINAR_SET = {
     1: 'webinar-02-credibility.md',
     2: 'webinar-03-future-pace.md',
     3: 'webinar-04-set-the-frame.md',
-    4: 'webinar-05-three-secrets-intro.md'
+    4: 'webinar-05-three-secrets-intro.md',
+    5: 'webinar-secret-template.md'   // Section 6 = Secret #1 (🚗). Same template powers 7/8 when added.
   },
   config: {
     0: { maxTokens: 3500, effort: 'high' },
     1: { maxTokens: 3500, effort: 'high' },
     2: { maxTokens: 3000, effort: 'high' },
     3: { maxTokens: 2500, effort: 'high' },
-    4: { maxTokens: 3000, effort: 'high' }
+    4: { maxTokens: 3000, effort: 'high' },
+    5: { maxTokens: 5000, effort: 'high' }
   },
   deps: {
-    0: [2, 4],  // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
-    1: [2, 4],  // Credibility (Origin Story) ← Step 3 Failed Attempts + Step 6 Vehicle (for the words)
-    2: [2],     // Future Pace ← Step 3 Desires & Motivations (the deep dream)
-    3: [4],     // Set the Frame ← Step 6 Vehicle (the precise new opportunity) + Big Domino from §1
-    4: [4]      // 3 Secrets Intro ← Step 6 Part B (the 3 full-formula secret lines), vehicle-first
+    0: [2, 4],     // Hook (Bold Promise) ← Step 3 (desire+pain) + Step 6 (vehicle / Big Domino belief)
+    1: [2, 4],     // Credibility (Origin Story) ← Step 3 Failed Attempts + Step 6 Vehicle (for the words)
+    2: [2],        // Future Pace ← Step 3 Desires & Motivations (the deep dream)
+    3: [4],        // Set the Frame ← Step 6 Vehicle (the precise new opportunity) + Big Domino from §1
+    4: [4],        // 3 Secrets Intro ← Step 6 Part B (the 3 full-formula secret lines), vehicle-first
+    5: [2, 3, 4]   // Secret #1 (🚗) ← Step 6 (the secret) + Step 5 (mechanism) + Step 3 (failure/objection)
   }
 };
 const SECTION_REGISTRY = { 'dts-vsl': DTS_VSL_SET, 'call-booker': CALL_BOOKER_SET, 'dts-webinar': WEBINAR_SET };
