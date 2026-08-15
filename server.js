@@ -62,6 +62,13 @@ const RATE_PER_DAY = 200;
 const rateLog = new Map();        // userId -> [timestamps ms] (in-memory; single Render instance)
 
 app.use(express.json({ limit: '1mb' }));
+// admin.* subdomain → serve the admin dashboard at its root (must run BEFORE static, which would otherwise serve index.html)
+app.use((req, res, next) => {
+  if (req.method === 'GET' && (req.path === '/' || req.path === '') && /^admin\./i.test(req.hostname || '')) {
+    return res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+  }
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public'), {
   setHeaders(res, filePath) {
     // Don't let the browser cache the app shell/code — so deploys show up without a hard-refresh
