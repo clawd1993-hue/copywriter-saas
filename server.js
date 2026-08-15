@@ -730,12 +730,11 @@ app.post('/api/chat/async', async (req, res) => {
 });
 
 // ---------- BILLING: create a Checkout Session (setup fee + trialing subscription) ----------
+// PUBLIC — this app is pay-first (a DB trigger blocks signup until the email is approved), so checkout
+// happens BEFORE an account exists. Payment approves the email; then the customer signs up with it.
 app.post('/api/checkout', async (req, res) => {
-  const auth = req.headers.authorization || '';
-  const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
-  const user = await verifyUser(token);
-  if (!user) return res.status(401).json({ error: 'login required' });
   if (!STRIPE_SECRET_KEY || !STRIPE_PRICE_SETUP || !STRIPE_PRICE_SUB) return res.status(500).json({ error: 'billing not configured' });
+  const email = ((req.body && req.body.email) || '').trim().toLowerCase();
   const p = new URLSearchParams();
   p.set('mode', 'subscription');
   p.set('line_items[0][price]', STRIPE_PRICE_SETUP);   // $1,997 one-off (charged at checkout)
@@ -743,11 +742,8 @@ app.post('/api/checkout', async (req, res) => {
   p.set('line_items[1][price]', STRIPE_PRICE_SUB);      // $97/mo recurring
   p.set('line_items[1][quantity]', '1');
   p.set('subscription_data[trial_period_days]', String(STRIPE_TRIAL_DAYS)); // first $97 after 30 days
-  p.set('subscription_data[metadata][user_id]', user.id);
-  p.set('metadata[user_id]', user.id);
-  p.set('client_reference_id', user.id);
-  if (user.email) p.set('customer_email', user.email);
-  p.set('success_url', APP_URL + '/?welcome=1');
+  if (email) p.set('customer_email', email);
+  p.set('success_url', APP_URL + '/?paid=1');
   p.set('cancel_url', APP_URL + '/?checkout=cancelled');
   try {
     const j = await stripeRequest('/v1/checkout/sessions', 'POST', p.toString());
@@ -812,6 +808,7 @@ function subWrite(method, query, bodyObj, prefer) {
   });
 }
 const upsertSubscriber = (row) => subWrite('POST', '?on_conflict=user_id', row, 'resolution=merge-duplicates,return=minimal');
+const upsertSubscriberByEmail = (row) => subWrite('POST', '?on_conflict=email', row, 'resolution=merge-duplicates,return=minimal');
 const updateSubByCustomer = (customer, patch) => subWrite('PATCH', '?stripe_customer_id=eq.' + encodeURIComponent(customer), patch);
 
 // The login gate is the allowed_emails whitelist. Payment adds the email; cancel removes it.
@@ -862,10 +859,10 @@ async function handleStripeWebhook(req, res) {
   try {
     switch (evt.type) {
       case 'checkout.session.completed': {
-        const userId = (obj.metadata && obj.metadata.user_id) || obj.client_reference_id;
         const email = (obj.customer_details && obj.customer_details.email) || obj.customer_email || null;
-        if (userId) await upsertSubscriber({ user_id: userId, email, stripe_customer_id: obj.customer || null, status: 'trialing' });
-        await grantAccess(email); // ← unlock the app (adds to allowed_emails)
+        // Pay-first: no account exists yet — key the subscriber by email, link user_id later at signup.
+        if (email) await upsertSubscriberByEmail({ email: email.toLowerCase(), stripe_customer_id: obj.customer || null, status: 'trialing' });
+        await grantAccess(email); // ← approves the email so they can now sign up + log in
         break;
       }
       case 'customer.subscription.created':

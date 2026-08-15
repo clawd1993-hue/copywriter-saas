@@ -259,6 +259,31 @@ async function initAuth() {
 
 function showErr(msg) { const e = document.getElementById('login-error'); if (e) e.textContent = msg || ''; }
 
+// After a successful payment, Stripe returns to /?paid=1 — tell them to create their login now.
+(function paidBanner() {
+  if (!location.search.includes('paid=1')) return;
+  const err = document.getElementById('login-error');
+  if (err) { err.style.color = '#059669'; err.textContent = '✅ Payment received! Create your login below using the same email you just paid with.'; }
+  const buy = document.getElementById('buy-block'); if (buy) buy.style.display = 'none';
+})();
+
+// Public "Get Access" — pay-first checkout (no login needed; approves the email so they can then sign up).
+(function wireBuy() {
+  const b = document.getElementById('buy-btn');
+  if (!b) return;
+  b.addEventListener('click', async () => {
+    const email = (document.getElementById('email-input') && document.getElementById('email-input').value || '').trim();
+    b.disabled = true; b.textContent = 'Opening secure checkout…';
+    try {
+      const r = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+      const j = await r.json();
+      if (j.url) { location.href = j.url; return; }
+      b.disabled = false; b.textContent = 'Get Access — $1,997 + $97/mo';
+      showErr(j.error || 'Could not open checkout — try again.');
+    } catch (e) { b.disabled = false; b.textContent = 'Get Access — $1,997 + $97/mo'; showErr('Network error — try again.'); }
+  });
+})();
+
 // ---------- LOGIN ----------
 document.getElementById('google-btn').addEventListener('click', async () => {
   if (!(authEnabled && sb)) { enterDummy(); return; }   // demo: just walk in
