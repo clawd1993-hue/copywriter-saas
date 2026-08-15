@@ -126,6 +126,16 @@ function renderUsers(d) {
 }
 
 const esc = s => String(s == null ? '' : s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+// lightweight markdown → HTML so stored outputs read cleanly (no raw ** and ## noise)
+function mdLite(s) {
+  let t = esc(s == null ? '' : String(s));
+  t = t.replace(/^\s*#{1,6}\s?(.*)$/gm, '<div style="font-weight:700;font-size:1.05em;margin:8px 0 2px">$1</div>');
+  t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  t = t.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+  t = t.replace(/^\s*[-•]\s+(.*)$/gm, '<div style="padding-left:14px">• $1</div>');
+  t = t.replace(/\n{2,}/g, '<br><br>').replace(/\n/g, '<br>');
+  return t;
+}
 const TYPE_LABEL = { 'dts-vsl':'Direct-To-Sale VSL', 'dts-webinar':'Direct-To-Sale Webinar', 'call-booker':'Call-Booker VSL' };
 
 async function viewUser(email) {
@@ -145,13 +155,13 @@ async function viewUser(email) {
     const block = (label, obj) => {
       const keys = Object.keys(obj);
       if (!keys.length) return `<div class="sub" style="margin:6px 0">No ${label.toLowerCase()} yet.</div>`;
-      return keys.map(kk => `<details style="margin:6px 0"><summary><b>${label} ${esc(kk)}</b> <span class="sub">(${(String(obj[kk]||'').length).toLocaleString()} chars)</span></summary><pre style="white-space:pre-wrap;background:#0f1115;border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:6px;font-size:12px;overflow:auto;max-height:340px">${esc(obj[kk])}</pre></details>`).join('');
+      return keys.map(kk => `<details style="margin:6px 0"><summary><b>${label} ${esc(kk)}</b> <span class="sub">(${(String(obj[kk]||'').length).toLocaleString()} chars)</span></summary><div style="background:#0f1115;border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:6px;font-size:13px;line-height:1.5;overflow:auto;max-height:360px">${mdLite(obj[kk])}</div></details>`).join('');
     };
     const msgs = Array.isArray(p.messages) ? p.messages : [];
     const chat = msgs.length ? msgs.map(mm => {
       const isUser = mm.role === 'user';
       return `<div style="margin:6px 0;display:flex;${isUser?'justify-content:flex-end':''}">
-        <div style="max-width:85%;background:${isUser?'var(--accent)':'#0f1115'};color:${isUser?'#fff':'var(--text)'};border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:12.5px;white-space:pre-wrap">${esc(mm.content)}</div>
+        <div style="max-width:85%;background:${isUser?'var(--accent)':'#0f1115'};color:${isUser?'#fff':'var(--text)'};border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:12.5px;line-height:1.5">${mdLite(mm.content)}</div>
       </div>`;
     }).join('') : '<div class="sub" style="margin:6px 0">No chat messages yet.</div>';
     return `<div style="border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px">
