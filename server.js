@@ -743,7 +743,7 @@ app.post('/api/checkout', async (req, res) => {
   p.set('line_items[1][quantity]', '1');
   p.set('subscription_data[trial_period_days]', String(STRIPE_TRIAL_DAYS)); // first $97 after 30 days
   // Plain-language reassurance shown on the checkout page (above the Pay button).
-  p.set('custom_text[submit][message]', "You're getting Jimmy Lab — $1,997 today, then $97/month starting after your 30-day free trial. Cancel anytime in one click. Pausing or cancelling never deletes your projects — your work is always safe.");
+  p.set('custom_text[submit][message]', "You're getting Jimmy Lab — $1,997 today, then $97/month starting 30 days from now. Cancel anytime in one click. Pausing or cancelling never deletes your projects — your work is always safe.");
   if (email) p.set('customer_email', email);
   p.set('success_url', APP_URL + '/?paid=1');
   p.set('cancel_url', APP_URL + '/?checkout=cancelled');
@@ -967,6 +967,11 @@ app.get('/api/admin/users', async (req, res) => {
 
 // Serve the admin dashboard at /admin (gated client-side by login + server-side by ADMIN_EMAILS).
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
+
+// Legal pages (clean URLs)
+app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'public', 'terms.html')));
+app.get('/privacy', (req, res) => res.sendFile(path.join(__dirname, 'public', 'privacy.html')));
+app.get('/refund', (req, res) => res.sendFile(path.join(__dirname, 'public', 'refund.html')));
 
 // Poll a background job. jobId is an unguessable token → possession = ownership.
 app.get('/api/chat/status', (req, res) => {
