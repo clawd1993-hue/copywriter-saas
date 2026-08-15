@@ -24,10 +24,10 @@ Only after their go, run 8.1.
 The core covers all 3 beliefs: **🚗 = the Big Promise (lead-in / container), 🧠 + 🌍 = the 2 component bullets.** Pull the existing names — do NOT re-describe.
 
 **Format (Edwards bullet):**
-- **🚗 lead-in + flagship value:** "When you join **[Vehicle name ← Part A]**, you'll finally **[dream ← 🚗]** — without **[failures ← 🚗]** — even if **[nothing's worked ← 🚗]**. Here's everything you get:" — then anchor the flagship itself as the headline item with the **biggest** perceived value: **[Vehicle name] — the complete program/system *(Value: $X)*** *(this is the main program; give it the largest value in the stack).*
+- **🚗 lead-in:** "When you join **[Vehicle name ← Part A]**, you'll finally **[dream ← 🚗]** — without **[failures ← 🚗]** — even if **[nothing's worked ← 🚗]**. Here's everything inside…"  *(the flagship carries NO dollar value — the two components carry the values.)*
 - **🧠 + 🌍 bullets:** "Inside, you'll **[get / learn]** **[Name ← the mechanism]** so you can **[outcome ← belief]** — even if **[objection ← belief]** — which means **[payoff ← Step 3 Motivations]**. *(Value $X)*"  *("get" = tool/kit · "learn" = skill/method.)*
 
-**Coverage check:** all 3 beliefs covered (🚗 lead-in + 🧠 + 🌍). If one isn't → flag the hole. **Every core piece — flagship + both components — carries a value.**
+**Coverage check:** all 3 beliefs covered (🚗 lead-in + 🧠 + 🌍). If one isn't → flag the hole.
 
 ## Delivering 8.1 — DON'T ask to push, just do it
 The core pulls entirely from stuff already defined (Step 6/5), so there's nothing to approve — **build it and AUTO-PUSH it** (a PENDING push). This OVERRIDES core-brain's "always ask before pushing" — for the 8.1 core only. Then in the **same message**, jump straight into the bonuses (8.2) and lead the user.
@@ -41,7 +41,6 @@ Your message structure:
 
    ## 🎯 Core Offer
    [🚗 Big Promise lead-in]
-   **[Vehicle name] — the complete program** *(Value $X — the biggest anchor)*
 
    [🧠 component bullet] *(Value $X)*
 
