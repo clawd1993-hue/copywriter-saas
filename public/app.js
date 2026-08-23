@@ -536,13 +536,62 @@ function addProjectItem(name, active, id, type, prepend) {
   trash.title = 'Delete project';
   trash.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
   trash.addEventListener('click', (e) => { e.stopPropagation(); openDeleteModal(el); });
+  const edit = document.createElement('button');
+  edit.className = 'pi-edit';
+  edit.title = 'Rename project';
+  edit.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>';
+  edit.addEventListener('click', (e) => { e.stopPropagation(); startRename(el); });
   el.appendChild(nameSpan);
+  el.appendChild(edit);
   el.appendChild(trash);
   el.onclick = () => selectProject(el);
   if (prepend && list.firstChild) list.insertBefore(el, list.firstChild);
   else list.appendChild(el);
   if (active) document.getElementById('project-name').textContent = name;
   return el;
+}
+
+// ---------- PROJECT RENAME (inline: pencil → input → Enter/blur saves, Esc cancels) ----------
+function startRename(el) {
+  const nameSpan = el.querySelector('.pi-name');
+  if (!nameSpan || el.querySelector('.pi-rename-input')) return; // already renaming
+  const oldName = el.dataset.name;
+  const input = document.createElement('input');
+  input.className = 'pi-rename-input';
+  input.value = oldName;
+  input.maxLength = 60;
+  nameSpan.style.display = 'none';
+  el.insertBefore(input, nameSpan);
+  input.focus();
+  input.select();
+  input.addEventListener('click', (e) => e.stopPropagation());
+  let done = false;
+  const finish = async (save) => {
+    if (done) return; done = true;
+    const newName = input.value.trim();
+    input.remove();
+    nameSpan.style.display = '';
+    if (!save || !newName || newName === oldName) return;
+    // optimistic UI update
+    el.dataset.name = newName;
+    nameSpan.textContent = newName;
+    if (el.classList.contains('active')) document.getElementById('project-name').textContent = newName;
+    // persist (real projects only — RLS scopes it to the user's own row)
+    if (sb && el.dataset.id) {
+      const { error } = await sb.from('projects').update({ title: newName }).eq('id', el.dataset.id);
+      if (error) { // revert on failure
+        console.warn('rename failed', error);
+        el.dataset.name = oldName;
+        nameSpan.textContent = oldName;
+        if (el.classList.contains('active')) document.getElementById('project-name').textContent = oldName;
+      }
+    }
+  };
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); finish(true); }
+    else if (e.key === 'Escape') { e.preventDefault(); finish(false); }
+  });
+  input.addEventListener('blur', () => finish(true));
 }
 
 // ---------- PROJECT SELECTION + PER-PROJECT CHAT THREAD ----------
