@@ -615,7 +615,9 @@ async function guard(req) {
     userId = user.id;
     var email = user.email;
   }
-  const rl = rateCheck(userId);
+  // Admins (owner) are exempt from rate limits + the monthly spend cap.
+  const isAdmin = AUTH_REQUIRED && ADMIN_EMAILS.includes((email || '').toLowerCase());
+  const rl = isAdmin ? { ok: true } : rateCheck(userId);
   if (!rl.ok) {
     const msg = rl.scope === 'hour'
       ? "⏳ Whoa, slow down a sec — you've hit the hourly message limit. Try again shortly."
@@ -623,7 +625,7 @@ async function guard(req) {
     return { err: { status: 429, body: { reply: msg, push: null } } };
   }
   // Hard fair-use spend cap: no single user can cost more than USER_MONTHLY_CAP in API usage per month.
-  if (AUTH_REQUIRED && USER_MONTHLY_CAP > 0) {
+  if (AUTH_REQUIRED && USER_MONTHLY_CAP > 0 && !isAdmin) {
     const spent = await userMonthCost(userId);
     if (spent >= USER_MONTHLY_CAP) {
       return { err: { status: 429, body: { reply: "🎉 You've hit this month's fair-use limit — it keeps Jimmy fast for everyone. Your access resets on the 1st. If you need more, reply here and we'll sort you out.", push: null } } };
