@@ -77,7 +77,7 @@ function logUsage(ctx, usage, model) {
 
 // ---------- GUARDRAILS: config ----------
 const MAX_OUTPUT_TOKENS = 2000;   // output cap — no giant dumps
-const RATE_PER_HOUR = 40;         // per-user message cap
+const RATE_PER_HOUR = 80;         // per-user message cap (raised 40→80 2026-08-23: a full webinar build needs more than 40/hr)
 const RATE_PER_DAY = 200;
 const rateLog = new Map();        // userId -> [timestamps ms] (in-memory; single Render instance)
 
