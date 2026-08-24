@@ -624,6 +624,14 @@ async function guard(req) {
       : "⏳ You've reached today's message limit. It resets in 24 hours.";
     return { err: { status: 429, body: { reply: msg, push: null } } };
   }
+  // BILLING GATE: failed payment (past_due) → block the brain until the card is fixed.
+  // Frontend shows the un-closable billing-block overlay on 402; this is the server-side enforcement.
+  if (AUTH_REQUIRED && !isAdmin) {
+    const sub = await subscriberByUser(userId);
+    if (sub && sub.status === 'past_due') {
+      return { err: { status: 402, body: { reply: "💳 Your last payment didn't go through, so access is paused. Update your payment method and you'll be back in seconds — all your work is safe.", code: 'past_due', push: null } } };
+    }
+  }
   // Hard fair-use spend cap: no single user can cost more than USER_MONTHLY_CAP in API usage per month.
   if (AUTH_REQUIRED && USER_MONTHLY_CAP > 0 && !isAdmin) {
     const spent = await userMonthCost(userId);

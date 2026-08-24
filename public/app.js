@@ -358,6 +358,17 @@ async function onLogin(user) {
       return;
     }
   }
+  // BILLING GATE: failed payment (past_due) → hard block. Un-closable overlay, only way forward = fix the card.
+  try {
+    const r = await fetch('/api/subscription', { headers: await authHeaders() });
+    const j = await r.json();
+    if (j && j.status === 'past_due') {
+      currentUser = null;
+      logInFlight = false;
+      showBillingBlock(user);
+      return;
+    }
+  } catch (_) { /* subscription check failing should never lock a paying user out */ }
   currentUser = { id: user.id, email: user.email, name: (user.user_metadata && user.user_metadata.name) || user.email };
   document.getElementById('login').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
@@ -395,6 +406,40 @@ function wireAccountMenu() {
     item.textContent = label; item.disabled = false;
   };
   document.getElementById('menu-logout').onclick = async () => {
+    try { await sb.auth.signOut(); } catch (_) {}
+    location.reload();
+  };
+}
+
+// Billing-block screen — un-closable overlay for past_due users (failed payment). No close button,
+// no way into the app: the only actions are "Update payment method" (→ Stripe billing portal) or log out.
+function showBillingBlock(user) {
+  const email = (user && user.email) || (currentUser && currentUser.email) || '';
+  const loginEl = document.getElementById('login'); if (loginEl) loginEl.classList.add('hidden');
+  const appEl = document.getElementById('app'); if (appEl) appEl.classList.add('hidden');
+  let el = document.getElementById('billing-block');
+  if (!el) { el = document.createElement('div'); el.id = 'billing-block'; document.body.appendChild(el); }
+  el.setAttribute('style', 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0f1115;color:#e8eaed;font-family:-apple-system,Segoe UI,Roboto,sans-serif;z-index:100000;padding:24px;');
+  el.innerHTML = `
+    <div style="max-width:440px;width:100%;background:#191c22;border:1px solid #262a32;border-radius:16px;padding:32px;text-align:center">
+      <div style="font-size:26px;font-weight:800;margin-bottom:6px">💳 Payment issue</div>
+      <p style="color:#9aa0aa;margin:0 0 22px;font-size:15px;line-height:1.5">Your last payment didn't go through, so your access is paused. Update your payment method and you'll be back in seconds — all your projects are safe and waiting.</p>
+      <button id="bb-fix" style="width:100%;background:#7c5cff;color:#fff;border:0;border-radius:10px;padding:14px;font-size:16px;font-weight:700;cursor:pointer">Update payment method →</button>
+      <div style="margin-top:16px;font-size:13px;color:#9aa0aa">${email} · <a id="bb-logout" href="#" style="color:#7c5cff">log out</a></div>
+    </div>`;
+  document.getElementById('bb-fix').onclick = async () => {
+    const btn = document.getElementById('bb-fix');
+    btn.disabled = true; btn.textContent = 'Opening secure billing…';
+    try {
+      const r = await fetch('/api/billing-portal', { method: 'POST', headers: await authHeaders() });
+      const j = await r.json();
+      if (j.url) { location.href = j.url; return; }
+      alert(j.error || 'Could not open billing — try again or contact support@themilliondollarvsl.com.');
+    } catch (_) { alert('Network error — try again.'); }
+    btn.disabled = false; btn.textContent = 'Update payment method →';
+  };
+  document.getElementById('bb-logout').onclick = async (e) => {
+    e.preventDefault();
     try { await sb.auth.signOut(); } catch (_) {}
     location.reload();
   };
@@ -1274,6 +1319,7 @@ async function startSlowJob(step, slowCfg) {
   try {
     const r = await fetch('/api/chat/async', { method: 'POST', headers: await authHeaders(), body: JSON.stringify({ messages: msgsForServer, currentStep: step, stepContent: stepContentStore(), sectionContent: sectionStore(), projectType: currentProjectType, projectId: currentProjectId }) });
     const data = await r.json();
+    if (r.status === 402) { finishJob(step, progress); addMsg('bot', data.reply || '💳 Payment issue — access paused.'); showBillingBlock(); return; }
     if (data.done) { finishJob(step, progress); applyReply(data); return; } // warming-up / off-topic / immediate reply
     if (!data.jobId) { finishJob(step, progress); addMsg('bot', '⚠️ Could not start the research. Try again.'); return; }
     try { localStorage.setItem(jobStoreKey(step), data.jobId); } catch (e) {}
@@ -1347,6 +1393,7 @@ chatForm.addEventListener('submit', async (e) => {
     const data = await r.json();
     clearTimeout(slowCaption);
     typing.remove();
+    if (r.status === 402) { addMsg('bot', data.reply || '💳 Payment issue — access paused.'); showBillingBlock(); return; }
     addMsg('bot', data.reply);
     history.push({ role: 'assistant', content: data.reply });
     persistMsg('assistant', data.reply);
