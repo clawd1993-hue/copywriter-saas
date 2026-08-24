@@ -753,7 +753,7 @@ app.post('/api/checkout', async (req, res) => {
   p.set('line_items[1][quantity]', '1');
   p.set('subscription_data[trial_period_days]', String(STRIPE_TRIAL_DAYS)); // first $97 after 30 days
   // Plain-language reassurance shown on the checkout page (above the Pay button).
-  p.set('custom_text[submit][message]', "You're getting Jimmy Lab — $1,997 today, then $97/month starting 30 days from now. Cancel anytime in one click. Pausing or cancelling never deletes your projects — your work is always safe.");
+  p.set('custom_text[submit][message]', "You're getting Jimmy Lab — the total above is exactly what you'll pay today (including any promo code), then the monthly plan starts 30 days from now. Cancel anytime in one click. Pausing or cancelling never deletes your projects — your work is always safe.");
   p.set('consent_collection[terms_of_service]', 'required'); // "I agree to Terms of Service" checkbox (links to jimmylab.ai/terms set in Stripe)
   p.set('allow_promotion_codes', 'true'); // enables "Add promotion code" field (for $0 test runs + future launch codes)
   if (email) p.set('customer_email', email);
