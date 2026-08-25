@@ -884,7 +884,7 @@ function sendWelcomeEmail(email) {
   return new Promise((resolve) => {
     if (!RESEND_API_KEY || !email) return resolve(false);
     const body = JSON.stringify({
-      from: 'Jimmy Lab <noreply@jimmylab.ai>',
+      from: 'Michael Laurens <noreply@jimmylab.ai>',
       to: [email],
       reply_to: 'support@themilliondollarvsl.com',
       subject: "\u{1F389} You're in \u2014 create your Jimmy Lab login",
