@@ -853,6 +853,50 @@ function subscriberByCustomer(customer) {
   });
 }
 
+// ---------- WELCOME EMAIL (Resend): sent once on checkout.session.completed ----------
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+function welcomeEmailHtml() {
+  return `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f5f6fa;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+<div style="max-width:560px;margin:0 auto;padding:40px 20px">
+  <div style="text-align:center;padding-bottom:24px;font-size:22px;font-weight:800;color:#1a1a24">&#9997;&#65039; Jimmy Lab</div>
+  <div style="background:#ffffff;border:1px solid #e0e2ec;border-radius:16px;padding:40px 36px;box-shadow:0 2px 12px rgba(20,20,40,0.06)">
+    <div style="font-size:40px;text-align:center;margin-bottom:8px">&#127881;</div>
+    <h1 style="margin:0 0 14px;font-size:26px;color:#1a1a24;text-align:center">Congratulations &mdash; you're in!</h1>
+    <p style="margin:0 0 24px;font-size:15.5px;line-height:1.65;color:#6b6b80;text-align:center">Welcome to <b style="color:#1a1a24">Jimmy Lab</b> &mdash; your AI copywriting partner. One quick step and you're building your first VSL.</p>
+    <div style="background:#f5f6fa;border:1px solid #e0e2ec;border-radius:12px;padding:18px 20px;margin-bottom:28px">
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#1a1a24"><b>&#9888;&#65039; Important:</b> create your login using <b>this exact email address</b> &mdash; it's the one your access is registered to.</p>
+    </div>
+    <div style="text-align:center;margin-bottom:30px">
+      <a href="https://jimmylab.ai/?paid=1" style="display:inline-block;background:#6c5ce7;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:16px 42px;border-radius:12px">Create your login &rarr;</a>
+    </div>
+    <div style="border-top:1px solid #eef0f6;padding-top:24px">
+      <p style="margin:0 0 12px;font-size:14px;font-weight:800;color:#1a1a24">What happens next:</p>
+      <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#6b6b80">1. Create your login (button above)</p>
+      <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#6b6b80">2. Pick what to build &mdash; VSL, webinar or call-booker funnel</p>
+      <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#6b6b80">3. Let Jimmy lead &mdash; he'll walk you through it one message at a time</p>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:13px;color:#a0a0b0;line-height:1.7;padding-top:24px">Questions or issues? Just reply to this email &mdash; it goes straight to our support team.<br>Jimmy Lab &middot; support@themilliondollarvsl.com</p>
+</div>
+</body></html>`;
+}
+function sendWelcomeEmail(email) {
+  return new Promise((resolve) => {
+    if (!RESEND_API_KEY || !email) return resolve(false);
+    const body = JSON.stringify({
+      from: 'Jimmy Lab <noreply@jimmylab.ai>',
+      to: [email],
+      reply_to: 'support@themilliondollarvsl.com',
+      subject: "\u{1F389} You're in \u2014 create your Jimmy Lab login",
+      html: welcomeEmailHtml()
+    });
+    const r = https.request({ hostname: 'api.resend.com', path: '/emails', method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + RESEND_API_KEY, 'User-Agent': 'jimmylab-server', 'Content-Length': Buffer.byteLength(body) } },
+      resp => { resp.on('data', () => {}); resp.on('end', () => resolve(resp.statusCode < 300)); });
+    r.on('error', () => resolve(false)); r.write(body); r.end();
+  });
+}
+
 // Verify Stripe's webhook signature (HMAC-SHA256 over `${timestamp}.${rawBody}`). No SDK needed.
 function verifyStripeSig(rawBody, sigHeader, secret) {
   try {
@@ -877,6 +921,7 @@ async function handleStripeWebhook(req, res) {
         // Pay-first: no account exists yet — key the subscriber by email, link user_id later at signup.
         if (email) await upsertSubscriberByEmail({ email: email.toLowerCase(), stripe_customer_id: obj.customer || null, status: 'trialing' });
         await grantAccess(email); // ← approves the email so they can now sign up + log in
+        sendWelcomeEmail(email);  // ← congrats email w/ create-login link (fire-and-forget; never blocks the webhook)
         break;
       }
       case 'customer.subscription.created':
