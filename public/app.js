@@ -751,7 +751,7 @@ function closeHomeToProject() {
   window.openHelpModal = open; // so it can auto-pop on new project creation
   openBtn.addEventListener('click', open);
   document.getElementById('help-close').addEventListener('click', close);
-  modal.addEventListener('click', e => { if (e.target.id === 'help-modal') close(); });
+  // NOTE: intentionally NO backdrop-click close — only the ✕ closes it, so they can't accidentally dismiss the walkthrough.
 })();
 
 // ---------- NEW PROJECT MODAL ----------
