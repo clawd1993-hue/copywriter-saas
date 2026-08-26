@@ -747,7 +747,11 @@ function closeHomeToProject() {
   const openBtn = document.getElementById('help-btn');
   if (!modal || !openBtn) return;
   const open = () => modal.classList.remove('hidden');
-  const close = () => modal.classList.add('hidden');
+  const close = () => {
+    modal.classList.add('hidden');
+    const f = modal.querySelector('iframe');
+    if (f) f.src = f.src; // reload the iframe to stop the video/audio on close
+  };
   window.openHelpModal = open; // so it can auto-pop on new project creation
   openBtn.addEventListener('click', open);
   document.getElementById('help-close').addEventListener('click', close);
