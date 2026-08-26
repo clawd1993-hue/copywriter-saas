@@ -748,6 +748,7 @@ function closeHomeToProject() {
   if (!modal || !openBtn) return;
   const open = () => modal.classList.remove('hidden');
   const close = () => modal.classList.add('hidden');
+  window.openHelpModal = open; // so it can auto-pop on new project creation
   openBtn.addEventListener('click', open);
   document.getElementById('help-close').addEventListener('click', close);
   modal.addEventListener('click', e => { if (e.target.id === 'help-modal') close(); });
@@ -817,6 +818,7 @@ document.getElementById('np-create').addEventListener('click', async () => {
     const el = addProjectItem(name, true, id, type, true); // prepend — newest on top, like ChatGPT
     selectProject(el);
     closeNpModal();
+    if (window.openHelpModal) window.openHelpModal(); // pop the walkthrough video on every new project
   } catch (e) {
     if (errEl) errEl.textContent = 'Could not create the project — try again.';
     cbtn.disabled = false; cbtn.textContent = 'Create Project';
