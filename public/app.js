@@ -818,7 +818,7 @@ document.getElementById('np-create').addEventListener('click', async () => {
     const el = addProjectItem(name, true, id, type, true); // prepend — newest on top, like ChatGPT
     selectProject(el);
     closeNpModal();
-    if (window.openHelpModal) window.openHelpModal(); // pop the walkthrough video on every new project
+    setTimeout(() => { if (window.openHelpModal) window.openHelpModal(); }, 700); // brief beat so they see the project land, then the walkthrough pops
   } catch (e) {
     if (errEl) errEl.textContent = 'Could not create the project — try again.';
     cbtn.disabled = false; cbtn.textContent = 'Create Project';
