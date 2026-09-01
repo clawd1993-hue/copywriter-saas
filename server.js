@@ -869,11 +869,12 @@ function welcomeEmailHtml() {
     <div style="text-align:center;margin-bottom:30px">
       <a href="https://jimmylab.ai/?paid=1" style="display:inline-block;background:#6c5ce7;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:16px 42px;border-radius:12px">Create your login &rarr;</a>
     </div>
-    <div style="border-top:1px solid #eef0f6;padding-top:24px">
-      <p style="margin:0 0 12px;font-size:14px;font-weight:800;color:#1a1a24">What happens next:</p>
-      <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#6b6b80">1. Create your login (button above)</p>
-      <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#6b6b80">2. Pick what to build &mdash; VSL, webinar or call-booker funnel</p>
-      <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#6b6b80">3. Let Jimmy lead &mdash; he'll walk you through it one message at a time</p>
+    <div style="border-top:1px solid #eef0f6;padding-top:28px">
+      <p style="margin:0 0 10px;font-size:18px;font-weight:800;color:#1a1a24;text-align:center">&#128222; Your Private Onboarding Call Is Included</p>
+      <p style="margin:0 0 20px;font-size:14.5px;line-height:1.65;color:#6b6b80;text-align:center">Don't build blind. Book a free 1-on-1 deep-dive &mdash; we'll nail down your offer, pick the funnel that scales, and get your first money-making VSL mapped before you write a word. This is the fastest path from &ldquo;I just bought this&rdquo; to &ldquo;this is printing.&rdquo;</p>
+      <div style="text-align:center">
+        <a href="https://calendly.com/themilliondollarvsl-support/30min" style="display:inline-block;background:#1a1a24;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:16px 42px;border-radius:12px">Book My Deep-Dive Call &rarr;</a>
+      </div>
     </div>
   </div>
   <p style="text-align:center;font-size:13px;color:#a0a0b0;line-height:1.7;padding-top:24px">Questions or issues? Just reply to this email &mdash; it goes straight to our support team.<br>Jimmy Lab &middot; support@themilliondollarvsl.com</p>
