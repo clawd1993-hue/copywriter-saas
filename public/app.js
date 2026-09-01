@@ -675,9 +675,11 @@ async function loadThread() {
   }
   if (!msgs.length) {
     greet();  // greeting is visual only — never persisted, shown for a fresh thread
+    showStartHint();  // fresh project → point the user at the chat box
     resumePendingJobs();
     return;
   }
+  hideStartHint();
   msgs.forEach(m => {
     addMsg(m.role === 'user' ? 'user' : 'bot', m.content);
     history.push({ role: m.role, content: m.content });
@@ -903,6 +905,7 @@ function openSop(i) {
   document.getElementById('sop-name').textContent = sop.name;
   document.getElementById('sop-body').innerHTML = sop.html;
   document.getElementById('sop-panel').classList.remove('hidden');
+  hideStartHint();  // step guide takes the top slot — don't stack with the coach-mark
   document.querySelectorAll('.step-tile').forEach(t => t.classList.toggle('active', +t.dataset.step === i));
   document.getElementById('sop-body').scrollTop = 0;
 }
@@ -1356,6 +1359,7 @@ chatForm.addEventListener('submit', async (e) => {
   if (chatBusy) return; // ignore re-submits while a request is already running
   const text = chatText.value.trim();
   if (!text) return;
+  hideStartHint();  // user engaged — coach-mark's job is done
   addMsg('user', text);
   history.push({ role: 'user', content: text });
   persistMsg('user', text);
@@ -1420,3 +1424,16 @@ chatText.addEventListener('input', () => {
   chatText.style.height = 'auto';
   chatText.style.height = Math.min(chatText.scrollHeight, 120) + 'px';
 });
+
+// Enter sends, Shift+Enter = newline
+chatText.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+    e.preventDefault();
+    if (typeof chatForm.requestSubmit === 'function') chatForm.requestSubmit();
+    else chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+  }
+});
+
+// Start-hint coach-mark: visible only on a fresh/empty project
+function showStartHint() { const h = document.getElementById('start-hint'); if (h) h.classList.remove('hidden'); }
+function hideStartHint() { const h = document.getElementById('start-hint'); if (h) h.classList.add('hidden'); }
