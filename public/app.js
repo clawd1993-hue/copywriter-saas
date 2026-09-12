@@ -1437,3 +1437,132 @@ chatText.addEventListener('keydown', (e) => {
 // Start-hint coach-mark: visible only on a fresh/empty project
 function showStartHint() { const h = document.getElementById('start-hint'); if (h) h.classList.remove('hidden'); }
 function hideStartHint() { const h = document.getElementById('start-hint'); if (h) h.classList.add('hidden'); }
+
+// ---------- EXPORT TO .DOCX ----------
+// Builds a real Word document from the current project's offer-engine steps + copywriting sections
+// using the `docx` library (loaded via CDN as window.docx). Falls back gracefully if the lib is missing.
+
+// Parse a single line of inline markdown (**bold**, *italic*, `code`) into an array of docx TextRuns.
+function inlineRuns(text, base) {
+  base = base || {};
+  const runs = [];
+  const src = String(text == null ? '' : text);
+  // token pattern: **bold**, *italic*, `code`
+  const re = /(\*\*[^*]+\*\*|`[^`]+`|\*(?!\s)[^*]+\*)/g;
+  let last = 0, m;
+  const plain = (t) => { if (t) runs.push(new docx.TextRun(Object.assign({ text: t }, base))); };
+  while ((m = re.exec(src)) !== null) {
+    plain(src.slice(last, m.index));
+    const tok = m[0];
+    if (tok.startsWith('**')) runs.push(new docx.TextRun(Object.assign({ text: tok.slice(2, -2), bold: true }, base)));
+    else if (tok.startsWith('`')) runs.push(new docx.TextRun(Object.assign({ text: tok.slice(1, -1), font: 'Courier New' }, base)));
+    else runs.push(new docx.TextRun(Object.assign({ text: tok.slice(1, -1), italics: true }, base)));
+    last = re.lastIndex;
+  }
+  plain(src.slice(last));
+  if (!runs.length) runs.push(new docx.TextRun(Object.assign({ text: '' }, base)));
+  return runs;
+}
+
+// Convert one content string (markdown, possibly with " ||| " tables) into docx block elements.
+function mdToDocx(content) {
+  const out = [];
+  const lines = String(content == null ? '' : content).replace(/\[\[STEP_PENDING\]\]/g, '').split('\n');
+  let tableRows = null; // collecting " ||| " rows
+  const flushTable = () => {
+    if (!tableRows || !tableRows.length) { tableRows = null; return; }
+    const rows = tableRows.map((cells, ri) =>
+      new docx.TableRow({
+        children: cells.map((cell) => new docx.TableCell({
+          width: { size: Math.floor(100 / cells.length), type: docx.WidthType.PERCENTAGE },
+          shading: ri === 0 ? { fill: 'EDE7FF' } : undefined,
+          children: [new docx.Paragraph({ children: inlineRuns(cell, ri === 0 ? { bold: true } : {}) })]
+        }))
+      })
+    );
+    out.push(new docx.Table({ width: { size: 100, type: docx.WidthType.PERCENTAGE }, rows }));
+    out.push(new docx.Paragraph({ text: '', spacing: { after: 120 } }));
+    tableRows = null;
+  };
+  for (const raw of lines) {
+    const line = raw.replace(/\s+$/,'');
+    const t = line.trim();
+    if (t.includes(' ||| ')) { if (!tableRows) tableRows = []; tableRows.push(t.split(' ||| ')); continue; }
+    flushTable();
+    if (!t) { out.push(new docx.Paragraph({ text: '' })); continue; }
+    if (/^###\s+/.test(t)) { out.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_3, children: inlineRuns(t.replace(/^###\s+/, '')) })); continue; }
+    if (/^##\s+/.test(t))  { out.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_2, children: inlineRuns(t.replace(/^##\s+/, '')) })); continue; }
+    if (/^#\s+/.test(t))   { out.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_1, children: inlineRuns(t.replace(/^#\s+/, '')) })); continue; }
+    if (/^(?:---|___|—-)$/.test(t)) { out.push(new docx.Paragraph({ text: '', border: { bottom: { color: 'CCCCCC', space: 1, style: docx.BorderStyle.SINGLE, size: 6 } } })); continue; }
+    const bullet = t.match(/^[-*•]\s+(.*)$/);
+    if (bullet) { out.push(new docx.Paragraph({ bullet: { level: 0 }, children: inlineRuns(bullet[1]) })); continue; }
+    const numbered = t.match(/^\d+[.)]\s+(.*)$/);
+    if (numbered) { out.push(new docx.Paragraph({ children: inlineRuns(t) })); continue; }
+    out.push(new docx.Paragraph({ children: inlineRuns(t) }));
+  }
+  flushTable();
+  return out;
+}
+
+function exportProjectDocx() {
+  const btn = document.getElementById('export-btn');
+  if (typeof docx === 'undefined' || !docx.Document) { alert('Export tool is still loading — give it a second and try again.'); return; }
+  const title = (document.getElementById('project-name').textContent || 'Jimmy Lab Project').trim();
+  const typeLabel = TYPE_BADGE[currentProjectType] || 'Project';
+  const steps = stepContentStore();
+  const sections = sectionStore();
+  const secDefs = getSections(currentProjectType);
+
+  const children = [];
+  children.push(new docx.Paragraph({ heading: docx.HeadingLevel.TITLE, children: inlineRuns(title) }));
+  children.push(new docx.Paragraph({ children: [new docx.TextRun({ text: typeLabel + '  ·  Exported from Jimmy Lab  ·  ' + new Date().toLocaleDateString(), color: '888888', size: 18 })], spacing: { after: 240 } }));
+
+  // 1) The copywriting script (the actual sales letter) — this is the headline deliverable.
+  const filledSections = secDefs.map((s, i) => ({ s, i, c: sections[i] })).filter(x => x.c && String(x.c).trim());
+  if (filledSections.length) {
+    children.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_1, children: inlineRuns(typeLabel + ' Script'), spacing: { before: 120, after: 120 } }));
+    filledSections.forEach(({ s, i, c }) => {
+      children.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_2, children: inlineRuns((i + 1) + '. ' + s.name), spacing: { before: 200, after: 80 } }));
+      mdToDocx(c).forEach(el => children.push(el));
+    });
+  }
+
+  // 2) The offer foundation (8-step system) — appendix / working notes.
+  const filledSteps = STEP_NAMES.map((nm, i) => ({ nm, i, c: steps[i] })).filter(x => x.c && String(x.c).trim());
+  if (filledSteps.length) {
+    children.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_1, children: inlineRuns('Offer Foundation — 8-Step System'), spacing: { before: 360, after: 120 }, pageBreakBefore: true }));
+    filledSteps.forEach(({ nm, i, c }) => {
+      children.push(new docx.Paragraph({ heading: docx.HeadingLevel.HEADING_2, children: inlineRuns('Step ' + STEP_LABELS[i] + ' — ' + nm), spacing: { before: 200, after: 80 } }));
+      mdToDocx(c).forEach(el => children.push(el));
+    });
+  }
+
+  if (!filledSections.length && !filledSteps.length) { alert('Nothing to export yet — this project has no saved content. Work through a few steps with Jimmy first.'); return; }
+
+  const doc = new docx.Document({
+    creator: 'Jimmy Lab',
+    title: title,
+    styles: { default: { document: { run: { font: 'Calibri', size: 22 } } } },
+    sections: [{ properties: {}, children }]
+  });
+
+  if (btn) { btn.disabled = true; btn.classList.add('busy'); }
+  docx.Packer.toBlob(doc).then((blob) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = title.replace(/[\\/:*?"<>|]+/g, '').trim().slice(0, 80) + '.docx';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    if (btn) { btn.disabled = false; btn.classList.remove('busy'); }
+  }).catch((e) => {
+    console.error('docx export failed', e);
+    alert('Sorry — export failed to generate. Try again.');
+    if (btn) { btn.disabled = false; btn.classList.remove('busy'); }
+  });
+}
+
+(function wireExport() {
+  const btn = document.getElementById('export-btn');
+  if (btn) btn.addEventListener('click', exportProjectDocx);
+})();

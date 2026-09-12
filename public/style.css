@@ -201,8 +201,18 @@ body {
 
 /* LEFT board */
 .board { flex: 1.15; overflow-y: auto; padding: 22px; border-right: 1px solid var(--border); }
-.board-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.board-head { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
 .board-head h2 { font-size: 1.3rem; }
+.board-head #fw-badge { margin-left: auto; }
+.export-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent); color: #fff; border: 0;
+  padding: 7px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: filter .15s, opacity .15s;
+}
+.export-btn:hover { filter: brightness(1.08); }
+.export-btn:disabled, .export-btn.busy { opacity: .55; cursor: default; }
+.export-btn svg { flex: 0 0 auto; }
 .badge {
   background: var(--grey); color: #fff;
   padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
