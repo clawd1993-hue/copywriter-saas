@@ -998,6 +998,16 @@ function pushSectionContent(i, content) {
 }
 window.pushSectionContent = pushSectionContent;
 
+// Persist a MANUAL textarea edit for section i. Reads the store fresh each time so concurrent
+// edits to different sections never clobber each other. Empty → remove the key.
+const secSaveTimers = {};
+function saveSectionEdit(i, value) {
+  const store = sectionStore();
+  if (value && value.trim()) store[i] = value; else delete store[i];
+  localStorage.setItem('sectioncontent:' + stepContentKey(), JSON.stringify(store));
+  persistCardsToDB('section_content', store);   // DB = source of truth (survives refresh / device switch)
+}
+
 // Clear ONE section's saved copy → back to blank so it can be redone. Other sections untouched.
 function clearSection(i) {
   const store = sectionStore();
@@ -1167,6 +1177,13 @@ function renderVSL() {
       `<textarea placeholder="Write your ${s.name.toLowerCase()} here..."></textarea>`;
     const ta = item.querySelector('textarea');
     if (content) { ta.value = content; done++; }   // set as .value (no HTML injection) — the AI-pushed copy, still editable
+    // AUTOSAVE manual edits so hand-typed copy survives a refresh (debounced on input + on blur).
+    ta.addEventListener('input', () => {
+      item.classList.toggle('done', !!ta.value.trim());
+      clearTimeout(secSaveTimers[i]);
+      secSaveTimers[i] = setTimeout(() => saveSectionEdit(i, ta.value), 500);
+    });
+    ta.addEventListener('blur', () => { clearTimeout(secSaveTimers[i]); saveSectionEdit(i, ta.value); });
     const trash = item.querySelector('.vsl-trash');
     if (trash) trash.addEventListener('click', (e) => { e.stopPropagation(); openSecModal(i, s.name); });
     grid.appendChild(item);
