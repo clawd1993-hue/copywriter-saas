@@ -1,0 +1,482 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NOVA·AI — Preview</title><style>html,body{margin:0;padding:0;background:#fff;-webkit-text-size-adjust:100%}</style></head><body><!-- NOVA·AI — BLOCK 1 (paste into a Custom JS/HTML element) -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Grand+Hotel&display=swap" rel="stylesheet">
+<style>
+.nv{width:100%;max-width:none;box-sizing:border-box;text-align:left}
+.nv,.nv *{box-sizing:border-box}
+.nv h1,.nv h2,.nv h3,.nv p,.nv ul{margin:0;padding:0}
+.nv a{text-decoration:none}
+.nv img{max-width:100%;height:auto}
+.nv{--bg:#FFFFFF;
+    --bg2:#FAF8FF;
+    --card:#FFFFFF;
+    --line:rgba(88,52,190,.14);
+    --violet:#8B5CF6;
+    --magenta:#2563EB;
+    --cyan:#22D3EE;
+    --lime:#16A34A;
+    --txt:#120A2E;
+    --muted:#5B5478;
+    --grad:linear-gradient(100deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);
+    --gradsoft:linear-gradient(100deg,rgba(124,58,237,.10),rgba(59,130,246,.08),rgba(34,211,238,.10));}
+.nv *{margin:0;padding:0;box-sizing:border-box}
+.nv{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.nv h1,.nv h2,.nv h3,.nv .dsp{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1.1;letter-spacing:-.02em}
+.nv .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+.nv .grad-txt{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nv .pop{color:var(--lime)}
+.nv .mag{color:var(--magenta)}
+.nv .ribbon{background:var(--grad);text-align:center;font-weight:700;font-size:13px;letter-spacing:.08em;padding:9px;text-transform:uppercase;color:#fff}
+.nv .nav{display:flex;align-items:center;justify-content:center;gap:10px;padding:22px}
+.nv .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px}
+.nv .logo .mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(59,130,246,.5)}
+.nv .logo .mark span{font-size:18px}
+.nv .nvsec{padding:54px 0;position:relative}
+.nv .center{text-align:center}
+.nv .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#6D28D9;background:rgba(139,92,246,.10);border:1px solid rgba(139,92,246,.30);padding:7px 14px;border-radius:100px;margin-bottom:20px}
+.nv .hero{background:radial-gradient(1100px 520px at 50% -8%,rgba(139,92,246,.18),transparent 60%),radial-gradient(800px 420px at 85% 20%,rgba(59,130,246,.14),transparent 60%),var(--bg);padding-top:12px;text-align:center}
+.nv .hero h1{font-size:46px;font-weight:700;margin:14px auto 18px;max-width:640px}
+.nv .hero .sub{color:var(--muted);font-size:19px;max-width:520px;margin:0 auto 8px}
+.nv .video{max-width:620px;margin:30px auto 26px;aspect-ratio:16/9;border-radius:18px;background:linear-gradient(160deg,#1b1440,#0d0a22);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px -30px rgba(139,92,246,.6);position:relative;overflow:hidden}
+.nv .video:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(59,130,246,.14),transparent 60%)}
+.nv .play{width:78px;height:78px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 40px rgba(59,130,246,.6)}
+.nv .play:after{content:"";margin-left:6px;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent #fff}
+.nv .vtag{position:absolute;bottom:14px;left:14px;font-size:12px;font-weight:600;color:var(--muted);z-index:1;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:8px}
+.nv .cta{display:inline-block;background:var(--grad);color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:14px;text-decoration:none;box-shadow:0 18px 50px -12px rgba(59,130,246,.6);transition:.2s;text-transform:uppercase;letter-spacing:.01em}
+.nv .cta:hover{transform:translateY(-2px)}
+.nv .cta small{display:block;font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.85);margin-top:3px;text-transform:uppercase}
+.nv .gline{margin-top:14px}
+.nv .gbadge{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:100px;background:#fff;border:1px solid rgba(22,163,74,.35);box-shadow:0 6px 18px -10px rgba(22,163,74,.5);font-size:13.5px;font-weight:700;color:#15803D;letter-spacing:.01em}
+.nv .gbadge .seal{width:28px;height:28px;flex:none;background:var(--grad);clip-path:polygon(50.0% 0.0%,60.4% 11.4%,75.0% 6.7%,78.3% 21.7%,93.3% 25.0%,88.6% 39.6%,100.0% 50.0%,88.6% 60.4%,93.3% 75.0%,78.3% 78.3%,75.0% 93.3%,60.4% 88.6%,50.0% 100.0%,39.6% 88.6%,25.0% 93.3%,21.7% 78.3%,6.7% 75.0%,11.4% 60.4%,0.0% 50.0%,11.4% 39.6%,6.7% 25.0%,21.7% 21.7%,25.0% 6.7%,39.6% 11.4%);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.nv .cta-note{color:var(--muted);font-size:13.5px;margin-top:14px}
+.nv .band{background:var(--gradsoft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nv .band h2{font-size:30px}
+.nv .proof{position:relative;max-width:560px;margin:26px auto 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -25px rgba(88,52,190,.5);background:#fff}
+.nv .proof img{display:block;width:100%;height:auto}
+.nv .ptag{position:absolute;left:14px;bottom:14px;background:rgba(18,10,46,.86);color:#fff;font-size:11.5px;font-weight:600;padding:7px 11px;border-radius:100px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px)}
+.nv .ptag b{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#A3E635}
+.nv .pdot{width:9px;height:9px;border-radius:50%;background:#A3E635;box-shadow:0 0 10px #A3E635;flex:none}
+.nv .pcap{color:var(--muted);font-size:13px;margin-top:22px;font-weight:600}
+.nv .collage{max-width:820px;margin:36px auto 0;padding:0 8px}
+.nv .collage img{width:100%;height:auto;display:block}
+.nv .collage .m{display:none}
+.nv .bignum{font-size:64px;font-weight:700;display:block;margin:6px 0}
+.nv h2.sec{font-size:34px;text-align:center;max-width:600px;margin:0 auto 14px}
+.nv .lead{color:var(--muted);font-size:18px;text-align:center;max-width:560px;margin:0 auto}
+.nv .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;text-align:center}
+.nv .step{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(88,52,190,.25);border-radius:18px;padding:22px 16px 24px;position:relative}
+.nv .step .n{display:inline-flex;width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;align-items:center;justify-content:center;font-size:16px;margin:0 auto 10px}
+.nv .step h3{font-size:18px;margin-bottom:6px}
+.nv .step p{color:var(--muted);font-size:14.5px}
+.nv .step .arrow{position:absolute;right:-20px;top:150px;width:22px;height:22px;z-index:2;color:#3B82F6;font-size:22px;line-height:22px;font-weight:700}
+.nv .step:last-child .arrow{display:none}
+.nv .ph{width:150px;height:296px;margin:0 auto 16px;border-radius:26px;background:#0d0a22;padding:7px;box-shadow:0 22px 40px -22px rgba(88,52,190,.7),inset 0 0 0 1px rgba(255,255,255,.08);position:relative}
+.nv .ph:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#0d0a22;border-radius:0 0 10px 10px;z-index:3}
+.nv .scr{border-radius:20px;height:100%;overflow:hidden;position:relative;background:#fff;text-align:left;font-size:9px;line-height:1.3;color:#120A2E}
+.nv .s1{padding:22px 10px 10px;display:flex;flex-direction:column;align-items:center}
+.nv .ig{display:flex;align-items:center;gap:4px;margin-bottom:8px}
+.nv .ig .glyph{display:block;flex:none}
+.nv .ig .wm{font-family:'Grand Hotel','Space Grotesk',cursive;font-weight:400;font-size:16px;line-height:1;margin-top:2px}
+.nv .s1 .ttl{font-weight:800;font-size:10.5px;text-align:center;line-height:1.2;margin-bottom:8px}
+.nv .s1 .av{width:44px;height:44px;border-radius:50%;border:2px dashed #C4B5FD;background:#F5F3FF;position:relative;overflow:hidden;margin-bottom:3px}
+.nv .s1 .av:before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:#C4B5FD}
+.nv .s1 .av:after{content:"";position:absolute;top:26px;left:50%;transform:translateX(-50%);width:28px;height:20px;border-radius:14px 14px 0 0;background:#C4B5FD}
+.nv .s1 .nf{font-size:7.5px;color:#6D28D9;font-weight:700;margin-bottom:8px}
+.nv .s1 .fld{width:100%;border:1px solid rgba(88,52,190,.25);border-radius:7px;padding:5px 6px;font-size:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;background:#fff}
+.nv .s1 .fld em{font-style:normal;color:#15803D;font-weight:800;font-size:7.5px}
+.nv .s1 .fld i{font-style:normal;color:#9CA3AF}
+.nv .s1 .btn{width:100%;background:var(--grad);color:#fff;border-radius:7px;padding:6px 0;text-align:center;font-weight:800;font-size:9px;margin-top:3px}
+.nv .s1 .foot{margin-top:auto;font-size:7px;color:#5B5478;text-align:center}
+.nv .s2{background:#0d0a22;color:#fff;height:100%;position:relative}
+.nv .s2 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.nv .s2 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),transparent 30%,transparent 55%,rgba(0,0,0,.72))}
+.nv .s2 .top{position:absolute;top:22px;left:0;right:0;display:flex;justify-content:space-between;padding:0 9px;font-size:8.5px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.nv .s2 .rail{position:absolute;right:6px;bottom:52px;display:flex;flex-direction:column;gap:9px;align-items:center;text-align:center;font-size:7px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.nv .s2 .rail svg{width:15px;height:15px;display:block;margin:0 auto 1px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.nv .s2 .rail .liked svg{fill:#FF3B5C}
+.nv .s2 .meta{position:absolute;left:8px;right:34px;bottom:10px;font-size:7.5px;line-height:1.35;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.nv .s2 .meta .u{display:flex;align-items:center;gap:4px;font-weight:800;font-size:8px;margin-bottom:3px}
+.nv .s2 .meta .u i{width:12px;height:12px;border-radius:50%;background:var(--grad);flex:none;border:1px solid #fff}
+.nv .s2 .meta .u b{border:1px solid #fff;border-radius:3px;padding:0 4px;font-size:6.5px;font-weight:700}
+.nv .s2 .meta .au{opacity:.85;margin-top:2px}
+.nv .tag{position:absolute;left:-26px;top:200px;z-index:4;background:#fff;color:#120A2E;border:1.5px solid #7C3AED;border-radius:100px;padding:5px 10px;font-size:10.5px;font-weight:800;box-shadow:0 10px 24px -8px rgba(88,52,190,.55);white-space:nowrap;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif}
+.nv .tag:before{content:"✨";margin-right:3px}
+.nv .tag:after{content:"";position:absolute;right:-16px;top:50%;width:14px;height:2px;background:#7C3AED;transform:translateY(-50%)}
+.nv .tag i{position:absolute;right:-22px;top:50%;width:8px;height:8px;border-radius:50%;background:#7C3AED;transform:translateY(-50%);box-shadow:0 0 0 3px rgba(124,58,237,.25)}
+.nv .s3{background:linear-gradient(160deg,#7C3AED,#3B82F6 55%,#22D3EE);padding:24px 7px 8px}
+.nv .s3 .tm{text-align:center;color:#fff;font-weight:700;font-size:22px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1;margin-bottom:8px}
+.nv .s3 .pay{background:rgba(255,255,255,.92);border-radius:8px;padding:5px 6px;margin-bottom:4px;display:flex;gap:5px;align-items:center}
+.nv .s3 .pay i{flex:none;width:14px;height:14px;border-radius:4px;background:#635BFF;color:#fff;font-style:normal;font-weight:800;font-size:8px;display:flex;align-items:center;justify-content:center}
+.nv .s3 .pay b{display:block;font-size:7.5px}
+.nv .s3 .pay span{font-size:7px;color:#5B5478}
+.nv .s3 .pay em{font-style:normal;color:#15803D;font-weight:800}
+.nv .pill{display:inline-block;margin-top:18px;background:rgba(22,163,74,.10);border:1px solid rgba(22,163,74,.35);color:var(--lime);font-weight:600;font-size:14px;padding:10px 16px;border-radius:100px}
+.nv .phone{max-width:300px;margin:32px auto 0;background:#0d0a22;border:1px solid var(--line);border-radius:30px;padding:14px;box-shadow:0 30px 70px -25px rgba(139,92,246,.5)}
+.nv .phone .screen{background:linear-gradient(160deg,#17123a,#0b0820);border-radius:20px;padding:20px;text-align:center}
+.nv .cashline{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:26px;color:#A3E635;margin:8px 0}
+.nv .notif{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#F5F3FF;border-radius:12px;padding:11px 13px;text-align:left;font-size:13px;margin-top:9px;display:flex;gap:9px;align-items:center}
+.nv .notif .dot{width:26px;height:26px;border-radius:7px;background:var(--grad);flex:none}
+.nv .nolist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.nv .noitem{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 48px;position:relative;font-weight:500;font-size:15px}
+.nv .noitem:before{content:"✕";position:absolute;left:16px;top:15px;width:22px;height:22px;border-radius:50%;background:rgba(37,99,235,.14);color:var(--magenta);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nv .quotebox{background:var(--gradsoft);border:1px solid var(--line);border-radius:18px;padding:34px;text-align:center;margin-top:10px}
+.nv .quotebox p{font-size:19px;max-width:520px;margin:0 auto}
+.nv .quotebox strong{color:var(--txt)}
+.nv .gold{display:grid;gap:14px;margin-top:34px}
+.nv .gitem{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(88,52,190,.22);border-radius:14px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+.nv .gitem .ic{font-size:26px;flex:none;width:48px;height:48px;border-radius:12px;background:var(--gradsoft);display:flex;align-items:center;justify-content:center}
+.nv .gitem h3{font-size:17px;margin-bottom:4px}
+.nv .gitem p{color:var(--muted);font-size:14.5px}
+.nv .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.nv .rcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.nv .rcard .amt{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;color:var(--lime)}
+.nv .rcard .who{color:var(--muted);font-size:12.5px;margin-top:3px}
+.nv .rcard .stars{color:#F59E0B;font-size:13px;margin-top:6px}
+.nv .guar{display:flex;gap:20px;align-items:center;background:var(--bg2);border:1px solid rgba(22,163,74,.35);border-radius:18px;padding:28px}
+.nv .guar .badge{flex:none;width:92px;height:92px;border-radius:50%;background:var(--gradsoft);border:2px solid var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;text-align:center;font-size:13px;line-height:1.1;color:var(--lime)}
+.nv .guar h3{font-size:22px;margin-bottom:6px}
+.nv .guar p{color:var(--muted);font-size:15px}
+.nv .scar{text-align:center;background:var(--gradsoft);border:1px solid var(--line);border-radius:18px;padding:32px}
+.nv .scar .num{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:52px}
+.nv .stack{background:#fff;box-shadow:0 20px 60px -25px rgba(88,52,190,.35);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:26px}
+.nv .srow{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line);font-size:15.5px}
+.nv .srow .v{color:var(--muted);font-weight:600}
+.nv .stotal{display:flex;justify-content:space-between;padding:18px 22px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;border-bottom:1px solid var(--line)}
+.nv .sreg{display:flex;justify-content:space-between;padding:14px 22px;color:var(--muted);font-size:15px}
+.nv .sreg s{opacity:.7}
+.nv .sfinal{background:var(--gradsoft);padding:24px 22px;text-align:center}
+.nv .sfinal .big{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:40px}
+.nv .faq{margin-top:30px;display:grid;gap:12px}
+.nv .fitem{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.nv .fitem h3{font-size:16.5px;margin-bottom:7px;display:flex;gap:10px}
+.nv .fitem h3:before{content:"?";flex:none;width:22px;height:22px;border-radius:6px;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nv .fitem p{color:var(--muted);font-size:14.5px}
+.nv .footer{border-top:1px solid var(--line);padding:40px 0 60px;text-align:center;color:var(--muted);font-size:12.5px}
+.nv .footer .flogo{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;color:var(--txt);margin-bottom:12px}
+.nv .footer a{color:#6D28D9;text-decoration:none}
+.nv .footer .disc{max-width:640px;margin:18px auto 0;font-size:11px;opacity:.7;line-height:1.6}
+@media(max-width:640px){.nv .nvsec{padding:40px 0}
+.nv .cta{font-size:16px;padding:18px 20px;white-space:nowrap;max-width:100%}
+.nv .cta small{white-space:normal;letter-spacing:.08em}
+.nv .gbadge{font-size:12.5px}
+.nv .ribbon{font-size:10.5px;letter-spacing:.04em;padding:8px 6px;white-space:nowrap}
+.nv .hero h1{font-size:33px}
+.nv h2.sec,.nv .band h2{font-size:26px}
+.nv .bignum{font-size:46px}
+.nv .collage .d{display:none}
+.nv .collage .m{display:block}
+.nv .ptag{font-size:10.5px;padding:6px 9px}
+.nv .ptag b{font-size:12px}
+.nv .nolist,.nv .results,.nv .steps{grid-template-columns:1fr}
+.nv .step .arrow{display:none}
+.nv .guar{flex-direction:column;text-align:center}
+}
+
+</style>
+<div class="nv">
+<div class="ribbon">⚡ Live Cohort Now Enrolling — Only 30 Spots</div>
+
+
+<!-- HERO -->
+<div class="nvsec hero">
+  <div class="wrap">
+    <span class="eyebrow">Watch The Case Study Below! 👇</span>
+    <h1>How I Make <span class="grad-txt">$500/Day</span> Posting AI‑Generated Content <span class="mag">(Without Showing My Face)</span></h1>
+        <div class="video">
+      <div class="play"></div>
+      <div class="vtag">▶ Watch: the 10‑day AI creator system</div>
+    </div>
+    <a href="#checkout" class="cta">Get Access For Just $6.95<small>1‑on‑1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>100% First‑Sale Guarantee</span></div>
+  </div>
+</div>
+
+<!-- STAT BAND -->
+<div class="nvsec band center">
+  <div class="wrap">
+    <h2>That's How I Went From <span class="grad-txt">$0 to $347K</span> In 90 Days!</h2>
+    <div class="proof"><img src="https://facelessreelslab-assets.onrender.com/stripe-347k.jpg?v=2" alt="Payment processor showing $347,740.88 gross revenue"><div class="ptag"><span class="pdot"></span>Gross revenue · <b>$347,740.88</b></div></div>
+    <div class="pcap">📸 Straight from my payment processor</div>
+    <h2 style="margin-top:34px">And How <span class="grad-txt">2,842+ People</span> In The Challenge Are Now Doing The Same Thing.</h2>
+    <div class="collage">
+      <img class="d" src="https://facelessreelslab-assets.onrender.com/testimonials-desktop.png" alt="Real member results from the challenge">
+      <img class="m" src="https://facelessreelslab-assets.onrender.com/testimonials-mobile.png?v=2" alt="Real member results from the challenge">
+    </div>
+  </div>
+</div>
+
+<!-- MECHANISM -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">The New Way</span>
+    <h2 class="sec">Want An Extra <span class="grad-txt">$1K+ Per Week?</span></h2>
+    <p class="lead">If you have a phone and an internet connection, AI can now create scroll‑stopping content for you — so you can build a faceless account and get paid, without ever filming a thing.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="ph"><div class="scr s1">
+          <div class="ig"><svg class="glyph" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><defs><linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFDC80"/><stop offset=".3" stop-color="#F77737"/><stop offset=".55" stop-color="#E1306C"/><stop offset=".8" stop-color="#C13584"/><stop offset="1" stop-color="#5851DB"/></linearGradient></defs><rect width="24" height="24" rx="6.5" fill="url(#igg)"/><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="16.1" cy="7.9" r="1.05" fill="#fff"/></svg><span class="wm">Instagram</span></div>
+          <div class="ttl">Create new account</div>
+          <div class="av"></div>
+          <div class="nf">No face. No photo needed.</div>
+          <div class="fld"><span>ai.creator.daily</span><em>✓ available</em></div>
+          <div class="fld"><i>Password</i><i>••••••</i></div>
+          <div class="btn">Sign up</div>
+          <div class="foot">Brand-new · 0 followers · faceless</div>
+        </div></div>
+        <span class="n">1</span><h3>Spin up a brand‑new faceless account</h3><p>No followers, no face, no filming. Fresh start on any phone.</p>
+        <div class="arrow">➜</div>
+      </div>
+      <div class="step">
+        <div class="ph"><span class="tag">AI Avatar<i></i></span><div class="scr s2">
+          <img class="bg" src="https://facelessreelslab-assets.onrender.com/ai-avatar-selfie.jpg?v=4" alt="AI avatar talking to camera">
+          <div class="shade"></div>
+          <div class="top"><span>Reels</span><span>📷</span></div>
+          <div class="rail">
+            <div class="liked"><svg viewBox="0 0 24 24"><path d="M12 21.4 3.9 13.3a5 5 0 0 1 7.1-7.1l1 1 1-1a5 5 0 1 1 7.1 7.1z"/></svg>48.2K</div>
+            <div><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.3 1.1 4.4 2.9 5.9L4 21l4.6-2.2c1.1.3 2.2.5 3.4.5 5.5 0 10-3.8 10-8.5S17.5 3 12 3z"/></svg>1,204</div>
+            <div><svg viewBox="0 0 24 24"><path d="M3 11.5 21 3l-6 18-3.5-7.5z"/></svg>9.8K</div>
+            <div><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg></div>
+          </div>
+          <div class="meta">
+            <div class="u"><i></i>ai.creator.daily <b>Follow</b></div>
+            <div>POV: best meal plans of 2027 🥗 #diet</div>
+          </div>
+        </div></div>
+        <span class="n">2</span><h3>Let AI generate the content</h3><p>Our AI writes the scripts, captions and creates the videos for you — unlimited, done‑for‑you, in minutes.</p>
+        <div class="arrow">➜</div>
+      </div>
+      <div class="step">
+        <div class="ph"><div class="scr s3">
+          <div class="tm">9:41</div>
+          <div class="pay"><i>S</i><div><b>Stripe · <em>$47.00</em></b><span>You received a payment</span></div></div>
+          <div class="pay"><i>S</i><div><b>Stripe · <em>$97.00</em></b><span>You received a payment</span></div></div>
+          <div class="pay"><i>S</i><div><b>Stripe · <em>$27.00</em></b><span>You received a payment</span></div></div>
+          <div class="pay"><i>S</i><div><b>Stripe · <em>$47.00</em></b><span>You received a payment</span></div></div>
+          <div class="pay"><i>S</i><div><b>Stripe · <em>$147.00</em></b><span>You received a payment</span></div></div>
+          <div class="pay"><i>S</i><div><b>Stripe · <em>$47.00</em></b><span>You received a payment</span></div></div>
+        </div></div>
+        <span class="n">3</span><h3>Sell pre‑built digital products as your own</h3><p>Keep 100% of every sale. It's not affiliate marketing — it's <strong style="color:var(--txt)">Premium AI Dropshipping</strong>.</p>
+      </div>
+    </div>
+    <div class="pill">✅ All you need is a smartphone + internet connection</div>
+  </div>
+</div>
+
+<!-- PHONE PROOF -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <h2 class="sec">One student ran this and made <span class="pop">$1,496.65</span> as a total beginner</h2>
+    <div class="phone">
+      <div class="screen">
+        <div style="font-size:13px;color:#A8A3C7">Today's earnings</div>
+        <div class="cashline">+$1,496.65 💸</div>
+        <div class="notif"><span class="dot"></span><div><strong>Ca‑ching!</strong> New sale · $58.00</div></div>
+        <div class="notif"><span class="dot"></span><div><strong>Ca‑ching!</strong> New sale · $58.00</div></div>
+        <div class="notif"><span class="dot"></span><div><strong>Ca‑ching!</strong> New sale · $97.00</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- YOU CAN TOO -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="quotebox">
+      <p><strong>You can do this too.</strong> Even if you've never made a penny online… never posted a single video… or you're working two jobs right now. Once the AI system is set up, it works <strong>for you</strong> — while you sleep, travel, or live your life.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NO LIST -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">Zero Barriers</span>
+    <h2 class="sec">I Call It The <span class="grad-txt">Nova Creator System</span> — Because It Requires NO:</h2>
+    <div class="nolist" style="text-align:left">
+      <div class="noitem">Showing your face</div>
+      <div class="noitem">Content creation skills</div>
+      <div class="noitem">Existing audience or followers</div>
+      <div class="noitem">Being US‑based (works anywhere)</div>
+      <div class="noitem">Sitting at a computer all day</div>
+      <div class="noitem">Anyone but yourself to report to</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA MID -->
+<div class="nvsec center" style="padding-top:0">
+  <div class="wrap">
+    <a href="#checkout" class="cta">Get Access For Just $6.95<small>1‑on‑1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>100% First‑Sale Guarantee</span></div>
+  </div>
+</div>
+
+<!-- EASY WAY -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <h2 class="sec">This Is The Easy Way To Make Money In <span class="grad-txt">2026</span></h2>
+    <p class="lead">The Nova Creator System is a shortcut. You post AI content built to go viral. You resell proven products. And you skip all the trial‑and‑error and go straight to making money. I call it <strong style="color:var(--txt)">"Consistent Profit With Confidence."</strong></p>
+  </div>
+</div>
+
+<!-- DREAM -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="quotebox">
+      <p>I genuinely believe an extra <strong>$10–20K a month</strong> can change anyone's life. Provide for your family. Take the trip you've always dreamed of. Buy the car. Once this is set up and running, the opportunities open up — and you can finally breathe.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHALLENGE BREAKDOWN -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">The 10‑Day Challenge</span>
+    <h2 class="sec">Copy &amp; Paste This Exact System For Yourself</h2>
+    <div class="steps" style="text-align:left">
+      <div class="step"><span class="n">1</span><h3>What we'll be doing 📱</h3><p>We build your faceless AI account and set you up to sell digital products — 10–20 minutes a day, on your own schedule, from your couch.</p></div>
+      <div class="step"><span class="n">2</span><h3>How you get paid 💰</h3><p>Every sale is paid out to you via PayPal or bank transfer. You keep the commission.</p></div>
+      <div class="step"><span class="n">3</span><h3>What you need ✅</h3><p>An internet connection and a smartphone (iPhone 8+ / Android). That's it.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<div class="nvsec band">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Inside The Challenge</span>
+    <h2 class="sec">A Fraction Of The Gold You'll Unlock</h2></div>
+    <div class="gold">
+      <div class="gitem"><span class="ic">🚀</span><div><h3>The $10K AI Playbook</h3><p>Exactly how I went from $0 to $10K with AI content — and how to duplicate it.</p></div></div>
+      <div class="gitem"><span class="ic">🤖</span><div><h3>The Faceless AI Formula</h3><p>We build your faceless account together and set the right foundation for growth.</p></div></div>
+      <div class="gitem"><span class="ic">🎬</span><div><h3>Unlimited AI Content Engine</h3><p>While everyone else "brainstorms," your AI writes the scripts, captions and creates the videos — done‑for‑you.</p></div></div>
+      <div class="gitem"><span class="ic">💎</span><div><h3>Picking Profitable Products</h3><p>We help you pick the best‑selling digital product to resell so you profit without lifting a finger.</p></div></div>
+      <div class="gitem"><span class="ic">💬</span><div><h3>Automated Sales Chatbot</h3><p>Our AI chatbot messages your followers and drops the link to your product automatically.</p></div></div>
+      <div class="gitem"><span class="ic">📈</span><div><h3>Scale To $25K+/Month</h3><p>Work with us 1‑on‑1 to automate the whole thing and scale your monthly income.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">Real Members</span>
+    <h2 class="sec">Some Results From The Challenge</h2>
+    <div class="results">
+      <div class="rcard"><div class="amt">$1,496</div><div class="who">@ai.creator_j</div><div class="stars">★★★★★</div></div>
+      <div class="rcard"><div class="amt">$820</div><div class="who">first week</div><div class="stars">★★★★★</div></div>
+      <div class="rcard"><div class="amt">$3,210</div><div class="who">month 1</div><div class="stars">★★★★★</div></div>
+      <div class="rcard"><div class="amt">$540</div><div class="who">day 6</div><div class="stars">★★★★★</div></div>
+      <div class="rcard"><div class="amt">$2,050</div><div class="who">@nova.mel</div><div class="stars">★★★★★</div></div>
+      <div class="rcard"><div class="amt">$970</div><div class="who">total beginner</div><div class="stars">★★★★★</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GUARANTEE -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="guar">
+      <div class="badge">FIRST SALE<br>GUARANTEE</div>
+      <div>
+        <h3>We help you make your first sale — 100% guaranteed</h3>
+        <p>You get everything we talked about. And if you complete the challenge and it still hasn't worked, message us and we'll work with you 1‑on‑1 until you make your first sale. You have nothing to lose.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCARCITY -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="scar">
+      <div class="num grad-txt">30</div>
+      <h3 class="sec" style="margin-bottom:10px">We Only Take 30 New Members At A Time</h3>
+      <p class="lead">So we can make sure everyone gets 1‑on‑1 support and 10x's their investment. This price is only on this page — anywhere else it's the full retail of <strong style="color:var(--txt)">$197</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE STACK -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <span class="eyebrow">Today Only · 95% Off</span>
+    <h2 class="sec">Everything You Get When You Join</h2>
+    <div class="stack" style="text-align:left">
+      <div class="srow"><span>🚀 The $10K AI Playbook</span><span class="v">$199</span></div>
+      <div class="srow"><span>🤖 The Faceless AI Formula</span><span class="v">$399</span></div>
+      <div class="srow"><span>🎬 Unlimited AI Content Engine</span><span class="v">$149</span></div>
+      <div class="srow"><span>💎 Profitable Product Picks</span><span class="v">$97</span></div>
+      <div class="srow"><span>💬 Automated Sales Chatbot</span><span class="v">$297</span></div>
+      <div class="srow"><span>📈 Paid Traffic Mastery</span><span class="v">$199</span></div>
+      <div class="stotal"><span>Total Value</span><span>$1,340</span></div>
+      <div class="sreg"><span>Regular Price</span><span><s>$97</s></span></div>
+      <div class="sfinal">
+        <div style="color:var(--muted);font-size:14px;margin-bottom:4px">Get instant access today for only</div>
+        <div class="big grad-txt">$6.95</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:4px">Delivered instantly · start in the next 5 minutes</div>
+      </div>
+    </div>
+    <div style="margin-top:26px"><a href="#checkout" class="cta">Get Access For Just $6.95<small>1‑on‑1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>100% First‑Sale Guarantee</span></div></div>
+  </div>
+</div>
+</div>
+<section id="checkout" style="background:#fff;margin:0 auto;max-width:560px;padding:34px 24px;text-align:center;font-family:Arial;color:#94a3b8;border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7"><div style="font-size:13px;letter-spacing:.05em;text-transform:uppercase">— native ClickFunnels order form sits here —</div></section><!-- NOVA·AI — BLOCK 2 (paste into a Custom JS/HTML element, below the order form) -->
+<script>
+/* NOVA·AI full-bleed fit v2: ClickFunnels wraps custom HTML in padded/fixed-width rows, which on phones pushes the
+   block right and creates a sideways scroll. This strips padding/width limits from every ancestor of each .nv block,
+   pins each .nv to exactly the viewport width at x=0, and hard-disables horizontal scrolling. */
+(function(){function imp(el,k,v){try{el.style.setProperty(k,v,'important')}catch(e){}}
+function fit(){var vw=document.documentElement.clientWidth;
+document.querySelectorAll('.nv').forEach(function(n){
+  for(var a=n.parentElement;a&&a!==document.body;a=a.parentElement){imp(a,'padding-left','0');imp(a,'padding-right','0');imp(a,'margin-left','0');imp(a,'margin-right','0');imp(a,'max-width','100%');imp(a,'min-width','0');imp(a,'width','auto');imp(a,'box-sizing','border-box');}
+  imp(n,'margin-left','0px');n.style.width='';var l=n.getBoundingClientRect().left+(window.pageXOffset||0);
+  imp(n,'margin-left',(-l)+'px');imp(n,'width',vw+'px');imp(n,'max-width','none');});
+[document.documentElement,document.body].forEach(function(el){imp(el,'overflow-x','hidden');imp(el,'max-width','100vw');imp(el,'touch-action','pan-y pinch-zoom');});
+if(window.pageXOffset)window.scrollTo(0,window.pageYOffset);}
+['DOMContentLoaded','load','resize','orientationchange'].forEach(function(e){window.addEventListener(e,fit)});fit();setTimeout(fit,300);setTimeout(fit,1200);setTimeout(fit,3000);setTimeout(fit,6000);})();
+</script>
+<style>#nova-next{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}</style>
+<script>
+/* NOVA·AI CTA proxy: every .cta button clicks the hidden native ClickFunnels button with CSS ID "nova-next"
+   (set that button's action to "Go to next step"). If no such button exists, the CTA falls back to scrolling to #checkout. */
+document.addEventListener('click',function(e){
+  var a=e.target.closest('.nv a.cta'); if(!a) return;
+  var host=document.getElementById('nova-next'); if(!host) return;
+  var btn=host.matches('a,button')?host:host.querySelector('a,button'); if(!btn) return;
+  e.preventDefault(); btn.click();
+});
+</script>
+<div class="nv">
+<!-- FAQ -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">FAQ</span><h2 class="sec">Still Got Questions?</h2></div>
+    <div class="faq">
+      <div class="fitem"><h3>How much time do I need?</h3><p>The 10‑day challenge is built to work even if you only have a few minutes a day. The AI does the heavy lifting.</p></div>
+      <div class="fitem"><h3>Do I need to film or buy equipment?</h3><p>No. The AI creates the content for you. All you need is a smartphone, internet, and this challenge.</p></div>
+      <div class="fitem"><h3>Do I need online business experience?</h3><p>None. We teach you everything from scratch and hand you the exact content and products to sell.</p></div>
+      <div class="fitem"><h3>How fast can I start?</h3><p>You can start executing 2 minutes after signing up. Everything's ready to go from the moment you join.</p></div>
+      <div class="fitem"><h3>I don't have a product — should I still join?</h3><p>Yes! We give you our products to resell. You earn around $50 per sale — the goal is just 10 sales a day.</p></div>
+      <div class="fitem"><h3>I have no audience. Will this work?</h3><p>Absolutely. Most members start with zero followers and use the AI system to land their first sales within days.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="nvsec center" style="padding-top:0">
+  <div class="wrap">
+    <a href="#checkout" class="cta">Join The Challenge — $6.95<small>1‑on‑1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>100% First‑Sale Guarantee</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="wrap">
+    <div class="flogo">◆ NOVA·AI</div>
+    <div>Privacy Policy · Terms &amp; Conditions · Contact: support@novacreator.ai</div>
+    <div class="disc">This site is not part of, or endorsed by, Facebook, Google, Instagram or any social media platform. All product names, logos and brands are property of their respective owners. *Earnings and income statements are aspirational only and not a guarantee of results. Individual results will vary and depend on your effort, experience, and market conditions. Always do your own due diligence before making business decisions. © 2026 Nova Creator Labs LLC.</div>
+  </div>
+</div>
+</div>
+</body></html>
