@@ -69,19 +69,32 @@
 .nv .step p{color:var(--muted);font-size:14.5px}
 .nv .step .arrow{position:absolute;right:-20px;top:150px;width:22px;height:22px;z-index:2;color:#3B82F6;font-size:22px;line-height:22px;font-weight:700}
 .nv .step:last-child .arrow{display:none}
-.nv .bundle{max-width:720px;margin:34px auto 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;text-align:center}
-.nv .bcover{position:relative;border-radius:16px;padding:22px 16px;color:#fff;background:linear-gradient(155deg,#1b1350,#0d0a22);border:1px solid rgba(139,92,246,.35);box-shadow:0 16px 40px -18px rgba(88,52,190,.6);overflow:hidden;min-height:158px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
-.nv .bcover:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--grad)}
-.nv .bmain{grid-column:1/-1;min-height:236px;background:linear-gradient(135deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);border:none;padding:30px 22px}
-.nv .bmain:before{display:none}
-.nv .bmain .bbrand{font-size:11.5px;letter-spacing:.22em;font-weight:700;opacity:.92;text-transform:uppercase}
-.nv .bmain .btitle{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:31px;font-weight:700;line-height:1.05;margin:6px 0}
-.nv .bmain .bsub{font-size:14.5px;opacity:.95;max-width:380px}
-.nv .bplay{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;margin-top:14px}
-.nv .bplay:after{content:"";margin-left:5px;border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff}
-.nv .bicon{font-size:30px}
-.nv .bct{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:16px}
-.nv .bcs{font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.35}
+.nv .devbundle{position:relative;max-width:720px;height:430px;margin:38px auto 0}
+.nv .dv{position:absolute}
+.nv .imac{left:50%;bottom:0;transform:translateX(-50%);width:360px;z-index:3;text-align:center}
+.nv .imscreen{aspect-ratio:16/10;border:12px solid #16132e;border-radius:16px;background:linear-gradient(135deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);box-shadow:0 34px 60px -22px rgba(88,52,190,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:14px}
+.nv .imbrand{font-size:11px;letter-spacing:.22em;font-weight:700;opacity:.92}
+.nv .imtitle{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:25px;line-height:1.05;margin:7px 0 12px}
+.nv .implay{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.85);position:relative}
+.nv .implay:after{content:"";position:absolute;top:50%;left:53%;transform:translate(-50%,-50%);border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff}
+.nv .imneck{width:46px;height:30px;background:linear-gradient(#dcdcea,#b7b7cc);margin:-2px auto 0}
+.nv .imbase{width:168px;height:14px;border-radius:40%/100%;background:#c3c3d6;margin:0 auto}
+.nv .laptop{left:0;bottom:34px;width:300px;z-index:1;transform:rotate(-3deg)}
+.nv .lpscreen{background:#12102a;border:8px solid #1d1938;border-bottom:none;border-radius:12px 12px 0 0;padding:14px 13px;height:182px;overflow:hidden}
+.nv .lptitle{color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;margin-bottom:9px}
+.nv .lprow{display:flex;gap:9px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:7px 9px;margin-bottom:7px}
+.nv .lpp{width:22px;height:22px;flex:none;border-radius:6px;background:var(--grad);position:relative}
+.nv .lpp:after{content:"";position:absolute;top:50%;left:54%;transform:translate(-50%,-50%);border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #fff}
+.nv .lprow b{color:#fff;font-size:11.5px;display:block;line-height:1.2}
+.nv .lprow i{color:#9a94c0;font-size:9.5px;font-style:normal}
+.nv .lpbase{height:11px;width:118%;margin-left:-9%;background:linear-gradient(#d2d2e0,#b4b4c8);border-radius:0 0 12px 12px;box-shadow:0 16px 26px -14px rgba(0,0,0,.45)}
+.nv .ebooks{right:2px;bottom:52px;z-index:2;display:flex;align-items:flex-end}
+.nv .ebk{width:122px;height:166px;border-radius:5px 11px 11px 5px;box-shadow:0 18px 34px -14px rgba(20,10,50,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-align:center;padding:12px;border-left:5px solid rgba(255,255,255,.28)}
+.nv .ebk span{font-size:27px}
+.nv .ebk b{font-size:12.5px;line-height:1.2;font-weight:700}
+.nv .ebk1{background:linear-gradient(160deg,#8B5CF6,#5B21B6)}
+.nv .ebk2{background:linear-gradient(160deg,#3B82F6,#1E3A8A);margin-left:-44px;transform:translateY(-16px)}
+.nv .ebk3{background:linear-gradient(160deg,#22D3EE,#0E7490);margin-left:-44px;transform:translateY(-6px)}
 .nv .ph{width:150px;height:296px;margin:0 auto 16px;border-radius:26px;background:#0d0a22;padding:7px;box-shadow:0 22px 40px -22px rgba(88,52,190,.7),inset 0 0 0 1px rgba(255,255,255,.08);position:relative}
 .nv .ph:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#0d0a22;border-radius:0 0 10px 10px;z-index:3}
 .nv .scr{border-radius:20px;height:100%;overflow:hidden;position:relative;background:#fff;text-align:left;font-size:9px;line-height:1.3;color:#120A2E}
@@ -186,8 +199,13 @@
 .nv .ptag{font-size:10.5px;padding:6px 9px}
 .nv .ptag b{font-size:12px}
 .nv .nolist,.nv .results,.nv .steps{grid-template-columns:1fr}
-.nv .bundle{grid-template-columns:1fr}
-.nv .bmain .btitle{font-size:27px}
+.nv .devbundle{height:auto;display:flex;flex-direction:column;align-items:center;gap:26px;overflow:hidden;max-width:100%}
+.nv .devbundle .dv{position:static;transform:none!important;margin:0}
+.nv .imac{order:1;width:min(330px,88vw)}
+.nv .imtitle{font-size:23px}
+.nv .ebooks{order:2}
+.nv .ebk2,.nv .ebk3{margin-left:-40px}
+.nv .laptop{order:3;width:min(290px,82vw)}
 .nv .studentrow{flex-direction:column;gap:14px}
 .nv .studentrow h2.sec{text-align:center}
 .nv .studentrow .proofimg{width:100%;max-width:430px}
@@ -371,16 +389,34 @@
   <div class="wrap center">
     <span class="eyebrow">The 10‑Day Challenge</span>
     <h2 class="sec">Copy &amp; Paste This Exact System For Yourself</h2>
-    <div class="bundle">
-      <div class="bcover bmain">
-        <div class="bbrand">NOVA·AI presents</div>
-        <div class="btitle">The AI Creator System</div>
-        <div class="bsub">Your complete faceless AI influencer playbook — build it, post it, get paid.</div>
-        <div class="bplay"></div>
+    <div class="devbundle">
+      <!-- laptop (curriculum) back-left -->
+      <div class="dv laptop">
+        <div class="lpscreen">
+          <div class="lptitle">Course Curriculum</div>
+          <div class="lprow"><span class="lpp"></span><div><b>Module 1</b><i>4 lessons</i></div></div>
+          <div class="lprow"><span class="lpp"></span><div><b>Module 2</b><i>5 lessons</i></div></div>
+          <div class="lprow"><span class="lpp"></span><div><b>Module 3</b><i>6 lessons</i></div></div>
+          <div class="lprow"><span class="lpp"></span><div><b>Module 4</b><i>4 lessons</i></div></div>
+        </div>
+        <div class="lpbase"></div>
       </div>
-      <div class="bcover"><span class="bicon">📢</span><div class="bct">Paid Ads Mastery</div><div class="bcs">Turn your posts into paid traffic on Meta &amp; Instagram.</div></div>
-      <div class="bcover"><span class="bicon">🤖</span><div class="bct">The Faceless AI System</div><div class="bcs">Grow on Instagram without ever showing your face.</div></div>
-      <div class="bcover"><span class="bicon">💰</span><div class="bct">The $10K Strategy</div><div class="bcs">The exact path from $0 to your first $10K online.</div></div>
+      <!-- ebooks right -->
+      <div class="dv ebooks">
+        <div class="ebk ebk1"><span>📢</span><b>Paid Ads Mastery</b></div>
+        <div class="ebk ebk2"><span>🤖</span><b>The Faceless AI System</b></div>
+        <div class="ebk ebk3"><span>💰</span><b>The $10K Strategy</b></div>
+      </div>
+      <!-- iMac (VSL) hero center-front -->
+      <div class="dv imac">
+        <div class="imscreen">
+          <div class="imbrand">NOVA·AI PRESENTS</div>
+          <div class="imtitle">The AI Creator System</div>
+          <div class="implay"></div>
+        </div>
+        <div class="imneck"></div>
+        <div class="imbase"></div>
+      </div>
     </div>
     <div class="steps" style="text-align:left">
       <div class="step"><span class="n">1</span><h3>What we'll be doing 📱</h3><p>We'll build your faceless AI account and set you up to sell digital products — 10–20 minutes a day, on your own schedule, from your couch.</p></div>
