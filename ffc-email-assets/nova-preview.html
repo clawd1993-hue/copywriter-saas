@@ -523,15 +523,22 @@
    1) If a hidden native CF button with ID "nova-next" exists (jump-to-next-step pages), click it.
    2) Otherwise (on-page checkout): smooth-scroll to the native ClickFunnels order form,
       which must have Element ID "checkout" (falls back to any element whose id/class contains
-      "checkout" or "order-form"). */
+      "checkout" or "order-form").
+   Self-correcting: lazy-loaded images between the CTA and the form can grow the page mid-scroll
+      and make a long scroll undershoot. So we re-aim a few times over ~1.8s, but only while still
+      off-target (won't yank the user once they've arrived or if they scroll away themselves). */
+function novaFindCheckout(){return document.getElementById('checkout')||
+  document.querySelector('[id*="checkout" i],[class*="checkout" i],[class*="order-form" i]');}
 document.addEventListener('click',function(e){
   var a=e.target.closest('.nv a.cta'); if(!a) return;
   var host=document.getElementById('nova-next');
   if(host){var btn=host.matches('a,button')?host:host.querySelector('a,button');
     if(btn){e.preventDefault();btn.click();return;}}
-  var t=document.getElementById('checkout')||
-        document.querySelector('[id*="checkout" i],[class*="checkout" i],[class*="order-form" i]');
-  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  var t=novaFindCheckout(); if(!t) return;
+  e.preventDefault();
+  var aim=function(){var el=novaFindCheckout(); if(!el) return;
+    if(Math.abs(el.getBoundingClientRect().top)>60){el.scrollIntoView({behavior:'smooth',block:'start'});}};
+  aim();[300,700,1200,1800].forEach(function(ms){setTimeout(aim,ms);});
 });
 </script>
 <div class="nv">
