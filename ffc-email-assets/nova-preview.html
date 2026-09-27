@@ -159,8 +159,8 @@
 .nv .gitem h3{font-size:17px;margin-bottom:4px}
 .nv .gitem p{color:var(--muted);font-size:14.5px}
 .nv .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
-.nv .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;align-items:start}
-.nv .rgrid img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block}
+.nv .rgrid{column-count:3;column-gap:12px;margin-top:30px}
+.nv .rgrid img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block;margin:0 0 12px;break-inside:avoid}
 .nv .rcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
 .nv .rcard .amt{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;color:var(--lime)}
 .nv .rcard .who{color:var(--muted);font-size:12.5px;margin-top:3px}
@@ -204,7 +204,8 @@
 .nv .ptag{font-size:10.5px;padding:6px 9px}
 .nv .ptag b{font-size:12px}
 .nv .nolist,.nv .results,.nv .steps{grid-template-columns:1fr}
-.nv .rgrid{grid-template-columns:repeat(2,1fr);gap:8px}
+.nv .rgrid{column-count:2;column-gap:8px}
+.nv .rgrid img{margin-bottom:8px}
 .nv .devbundle{height:auto;display:flex;flex-direction:column;align-items:center;gap:26px;overflow:hidden;max-width:100%}
 .nv .devbundle .dv{position:static;transform:none!important;margin:0}
 .nv .imac{order:1;width:min(330px,88vw)}
