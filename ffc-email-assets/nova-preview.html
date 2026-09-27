@@ -159,8 +159,9 @@
 .nv .gitem h3{font-size:17px;margin-bottom:4px}
 .nv .gitem p{color:var(--muted);font-size:14.5px}
 .nv .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
-.nv .rgrid{column-count:3;column-gap:12px;margin-top:30px}
-.nv .rgrid img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block;margin:0 0 12px;break-inside:avoid}
+.nv .rgrid{display:flex;gap:12px;margin-top:30px;align-items:flex-start}
+.nv .rcol{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.nv .rcol img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block}
 .nv .rcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
 .nv .rcard .amt{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;color:var(--lime)}
 .nv .rcard .who{color:var(--muted);font-size:12.5px;margin-top:3px}
@@ -204,8 +205,7 @@
 .nv .ptag{font-size:10.5px;padding:6px 9px}
 .nv .ptag b{font-size:12px}
 .nv .nolist,.nv .results,.nv .steps{grid-template-columns:1fr}
-.nv .rgrid{column-count:2;column-gap:8px}
-.nv .rgrid img{margin-bottom:8px}
+.nv .rgrid{flex-direction:column;gap:10px}
 .nv .devbundle{height:auto;display:flex;flex-direction:column;align-items:center;gap:26px;overflow:hidden;max-width:100%}
 .nv .devbundle .dv{position:static;transform:none!important;margin:0}
 .nv .imac{order:1;width:min(330px,88vw)}
@@ -441,15 +441,21 @@
     <span class="eyebrow">Real Members</span>
     <h2 class="sec">Some Results From The Challenge</h2>
     <div class="rgrid">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-1.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-2.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-3.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-4.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-5.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-6.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-7.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-8.jpg?v=1" alt="Member result" loading="lazy">
-      <img src="https://facelessreelslab-assets.onrender.com/nova-result-9.jpg?v=1" alt="Member result" loading="lazy">
+      <div class="rcol">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-2.jpg?v=1" alt="Member result" loading="lazy">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-3.jpg?v=1" alt="Member result" loading="lazy">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-4.jpg?v=1" alt="Member result" loading="lazy">
+      </div>
+      <div class="rcol">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-8.jpg?v=1" alt="Member result" loading="lazy">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-7.jpg?v=1" alt="Member result" loading="lazy">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-5.jpg?v=1" alt="Member result" loading="lazy">
+      </div>
+      <div class="rcol">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-6.jpg?v=1" alt="Member result" loading="lazy">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-9.jpg?v=1" alt="Member result" loading="lazy">
+        <img src="https://facelessreelslab-assets.onrender.com/nova-result-1.jpg?v=1" alt="Member result" loading="lazy">
+      </div>
     </div>
   </div>
 </div>
