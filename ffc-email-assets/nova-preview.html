@@ -536,9 +536,17 @@ document.addEventListener('click',function(e){
     if(btn){e.preventDefault();btn.click();return;}}
   var t=novaFindCheckout(); if(!t) return;
   e.preventDefault();
-  var aim=function(){var el=novaFindCheckout(); if(!el) return;
-    if(Math.abs(el.getBoundingClientRect().top)>60){el.scrollIntoView({behavior:'smooth',block:'start'});}};
-  aim();[300,700,1200,1800].forEach(function(ms){setTimeout(aim,ms);});
+  var stop=false;
+  function cancel(){stop=true;
+    window.removeEventListener('wheel',cancel);window.removeEventListener('touchmove',cancel);window.removeEventListener('keydown',cancel);}
+  /* the moment the user scrolls themselves, quit auto-correcting so we never yank them back */
+  window.addEventListener('wheel',cancel,{passive:true});
+  window.addEventListener('touchmove',cancel,{passive:true});
+  window.addEventListener('keydown',cancel);
+  var aim=function(){if(stop) return; var el=novaFindCheckout(); if(!el) return;
+    if(Math.abs(el.getBoundingClientRect().top)>80){el.scrollIntoView({behavior:'smooth',block:'start'});}};
+  aim();[350,800,1300].forEach(function(ms){setTimeout(aim,ms);});
+  setTimeout(cancel,1500);
 });
 </script>
 <div class="nv">
