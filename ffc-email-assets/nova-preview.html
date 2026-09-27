@@ -512,21 +512,12 @@
 </div>
 
 <section id="checkout" style="background:#fff;margin:0 auto;max-width:560px;padding:34px 24px;text-align:center;font-family:Arial;color:#94a3b8;border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7"><div style="font-size:13px;letter-spacing:.05em;text-transform:uppercase">— native ClickFunnels order form sits here —</div></section><!-- NOVA·AI — BLOCK 2 (paste into a Custom JS/HTML element, below the order form) -->
-<script>
-/* NOVA·AI full-bleed fit v2: ClickFunnels wraps custom HTML in padded/fixed-width rows, which on phones pushes the
-   block right and creates a sideways scroll. This strips padding/width limits from every ancestor of each .nv block,
-   pins each .nv to exactly the viewport width at x=0, and hard-disables horizontal scrolling. */
-(function(){function imp(el,k,v){try{el.style.setProperty(k,v,'important')}catch(e){}}
-function fit(){var vw=document.documentElement.clientWidth;
-document.querySelectorAll('.nv').forEach(function(n){
-  for(var a=n.parentElement;a&&a!==document.body;a=a.parentElement){imp(a,'padding-left','0');imp(a,'padding-right','0');imp(a,'margin-left','0');imp(a,'margin-right','0');imp(a,'max-width','100%');imp(a,'min-width','0');imp(a,'width','auto');imp(a,'box-sizing','border-box');}
-  imp(n,'margin-left','0px');n.style.width='';var l=n.getBoundingClientRect().left+(window.pageXOffset||0);
-  imp(n,'margin-left',(-l)+'px');imp(n,'width',vw+'px');imp(n,'max-width','none');});
-[document.documentElement,document.body].forEach(function(el){imp(el,'overflow-x','hidden');imp(el,'max-width','100vw');imp(el,'touch-action','pan-y pinch-zoom');});
-if(window.pageXOffset)window.scrollTo(0,window.pageYOffset);}
-['DOMContentLoaded','load','resize','orientationchange'].forEach(function(e){window.addEventListener(e,fit)});fit();setTimeout(fit,300);setTimeout(fit,1200);setTimeout(fit,3000);setTimeout(fit,6000);})();
-</script>
-<style>#nova-next{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}</style>
+<style>
+/* NOVA·AI full-bleed v3 — pure CSS (no JS layout mutation, so it never interferes with CF's
+   scroll-to-form on checkout submit). On phones each .nv breaks out of CF's padded row to the
+   full viewport width, centered. Global rule → covers every custom-HTML block on the page. */
+@media(max-width:640px){.nv{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;box-sizing:border-box}}
+#nova-next{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}</style>
 <script>
 /* NOVA·AI CTA behavior:
    1) If a hidden native CF button with ID "nova-next" exists (jump-to-next-step pages), click it.
