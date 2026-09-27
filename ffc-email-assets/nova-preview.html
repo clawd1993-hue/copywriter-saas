@@ -528,13 +528,19 @@ if(window.pageXOffset)window.scrollTo(0,window.pageYOffset);}
 </script>
 <style>#nova-next{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}</style>
 <script>
-/* NOVA·AI CTA proxy: every .cta button clicks the hidden native ClickFunnels button with CSS ID "nova-next"
-   (set that button's action to "Go to next step"). If no such button exists, the CTA falls back to scrolling to #checkout. */
+/* NOVA·AI CTA behavior:
+   1) If a hidden native CF button with ID "nova-next" exists (jump-to-next-step pages), click it.
+   2) Otherwise (on-page checkout): smooth-scroll to the native ClickFunnels order form,
+      which must have Element ID "checkout" (falls back to any element whose id/class contains
+      "checkout" or "order-form"). */
 document.addEventListener('click',function(e){
   var a=e.target.closest('.nv a.cta'); if(!a) return;
-  var host=document.getElementById('nova-next'); if(!host) return;
-  var btn=host.matches('a,button')?host:host.querySelector('a,button'); if(!btn) return;
-  e.preventDefault(); btn.click();
+  var host=document.getElementById('nova-next');
+  if(host){var btn=host.matches('a,button')?host:host.querySelector('a,button');
+    if(btn){e.preventDefault();btn.click();return;}}
+  var t=document.getElementById('checkout')||
+        document.querySelector('[id*="checkout" i],[class*="checkout" i],[class*="order-form" i]');
+  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
 });
 </script>
 <div class="nv">
