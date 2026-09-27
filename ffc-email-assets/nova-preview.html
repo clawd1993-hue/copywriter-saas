@@ -69,7 +69,7 @@
 .nv .step p{color:var(--muted);font-size:14.5px}
 .nv .step .arrow{position:absolute;right:-20px;top:150px;width:22px;height:22px;z-index:2;color:#3B82F6;font-size:22px;line-height:22px;font-weight:700}
 .nv .step:last-child .arrow{display:none}
-.nv .devbundle{position:relative;max-width:720px;height:430px;margin:38px auto 0}
+.nv .devbundle{position:relative;max-width:850px;height:420px;margin:38px auto 0}
 .nv .dv{position:absolute}
 .nv .imac{left:50%;bottom:0;transform:translateX(-50%);width:360px;z-index:3;text-align:center}
 .nv .imscreen{aspect-ratio:16/10;border:12px solid #16132e;border-radius:16px;background:linear-gradient(135deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);box-shadow:0 34px 60px -22px rgba(88,52,190,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:14px}
@@ -89,12 +89,12 @@
 .nv .lprow i{color:#9a94c0;font-size:9.5px;font-style:normal}
 .nv .lpbase{height:11px;width:118%;margin-left:-9%;background:linear-gradient(#d2d2e0,#b4b4c8);border-radius:0 0 12px 12px;box-shadow:0 16px 26px -14px rgba(0,0,0,.45)}
 .nv .ebooks{right:2px;bottom:52px;z-index:2;display:flex;align-items:flex-end}
-.nv .ebk{width:122px;height:166px;border-radius:5px 11px 11px 5px;box-shadow:0 18px 34px -14px rgba(20,10,50,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-align:center;padding:12px;border-left:5px solid rgba(255,255,255,.28)}
+.nv .ebk{width:112px;height:150px;border-radius:5px 11px 11px 5px;box-shadow:0 18px 34px -14px rgba(20,10,50,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-align:center;padding:12px;border-left:5px solid rgba(255,255,255,.28)}
 .nv .ebk span{font-size:27px}
 .nv .ebk b{font-size:12.5px;line-height:1.2;font-weight:700}
 .nv .ebk1{background:linear-gradient(160deg,#8B5CF6,#5B21B6)}
-.nv .ebk2{background:linear-gradient(160deg,#3B82F6,#1E3A8A);margin-left:-44px;transform:translateY(-16px)}
-.nv .ebk3{background:linear-gradient(160deg,#22D3EE,#0E7490);margin-left:-44px;transform:translateY(-6px)}
+.nv .ebk2{background:linear-gradient(160deg,#3B82F6,#1E3A8A);margin-left:-30px;transform:translateY(-14px)}
+.nv .ebk3{background:linear-gradient(160deg,#22D3EE,#0E7490);margin-left:-30px;transform:translateY(-4px)}
 .nv .ph{width:150px;height:296px;margin:0 auto 16px;border-radius:26px;background:#0d0a22;padding:7px;box-shadow:0 22px 40px -22px rgba(88,52,190,.7),inset 0 0 0 1px rgba(255,255,255,.08);position:relative}
 .nv .ph:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#0d0a22;border-radius:0 0 10px 10px;z-index:3}
 .nv .scr{border-radius:20px;height:100%;overflow:hidden;position:relative;background:#fff;text-align:left;font-size:9px;line-height:1.3;color:#120A2E}
@@ -203,8 +203,9 @@
 .nv .devbundle .dv{position:static;transform:none!important;margin:0}
 .nv .imac{order:1;width:min(330px,88vw)}
 .nv .imtitle{font-size:23px}
-.nv .ebooks{order:2}
-.nv .ebk2,.nv .ebk3{margin-left:-40px}
+.nv .ebooks{order:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:min(340px,92vw);align-items:stretch}
+.nv .ebk{width:auto;height:auto;min-height:128px}
+.nv .ebk2,.nv .ebk3{margin-left:0;transform:none}
 .nv .laptop{order:3;width:min(290px,82vw)}
 .nv .studentrow{flex-direction:column;gap:14px}
 .nv .studentrow h2.sec{text-align:center}
