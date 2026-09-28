@@ -1,0 +1,515 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Faceless Reels Lab — Compliant Preview</title><style>html,body{margin:0;padding:0;background:#fff}</style></head><body><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Grand+Hotel&display=swap" rel="stylesheet">
+<style>
+.nv{width:100%;max-width:none;box-sizing:border-box;text-align:left}
+.nv,.nv *{box-sizing:border-box}
+.nv h1,.nv h2,.nv h3,.nv p,.nv ul{margin:0;padding:0}
+.nv a{text-decoration:none}
+.nv img{max-width:100%;height:auto}
+.nv{--bg:#FFFFFF;
+    --bg2:#FAF8FF;
+    --card:#FFFFFF;
+    --line:rgba(88,52,190,.14);
+    --violet:#8B5CF6;
+    --magenta:#2563EB;
+    --cyan:#22D3EE;
+    --lime:#16A34A;
+    --txt:#120A2E;
+    --muted:#5B5478;
+    --grad:linear-gradient(100deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);
+    --gradsoft:linear-gradient(100deg,rgba(124,58,237,.10),rgba(59,130,246,.08),rgba(34,211,238,.10));}
+.nv *{margin:0;padding:0;box-sizing:border-box}
+.nv{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.nv h1,.nv h2,.nv h3,.nv .dsp{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1.1;letter-spacing:-.02em}
+.nv .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+.nv .grad-txt{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nv .pop{color:var(--lime)}
+.nv .mag{color:var(--magenta)}
+.nv .ribbon{background:var(--grad);text-align:center;font-weight:700;font-size:13px;letter-spacing:.08em;padding:9px;text-transform:uppercase;color:#fff}
+.nv .nav{display:flex;align-items:center;justify-content:center;gap:10px;padding:22px}
+.nv .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px}
+.nv .logo .mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(59,130,246,.5)}
+.nv .logo .mark span{font-size:18px}
+.nv .nvsec{padding:54px 0;position:relative}
+.nv .center{text-align:center}
+.nv .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#6D28D9;background:rgba(139,92,246,.10);border:1px solid rgba(139,92,246,.30);padding:7px 14px;border-radius:100px;margin-bottom:20px}
+.nv .hero{background:radial-gradient(1100px 520px at 50% -8%,rgba(139,92,246,.18),transparent 60%),radial-gradient(800px 420px at 85% 20%,rgba(59,130,246,.14),transparent 60%),var(--bg);padding-top:12px;text-align:center}
+.nv .hero h1{font-size:46px;font-weight:700;margin:14px auto 18px;max-width:640px}
+.nv .hero .sub{color:var(--muted);font-size:19px;max-width:520px;margin:0 auto 8px}
+.nv .video{max-width:620px;margin:30px auto 26px;aspect-ratio:16/9;border-radius:18px;background:linear-gradient(160deg,#1b1440,#0d0a22);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px -30px rgba(139,92,246,.6);position:relative;overflow:hidden}
+.nv .video:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(59,130,246,.14),transparent 60%)}
+.nv .play{width:78px;height:78px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 40px rgba(59,130,246,.6)}
+.nv .play:after{content:"";margin-left:6px;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent #fff}
+.nv .vtag{position:absolute;bottom:14px;left:14px;font-size:12px;font-weight:600;color:var(--muted);z-index:1;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:8px}
+.nv .cta{display:inline-block;background:var(--grad);color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:14px;text-decoration:none;box-shadow:0 18px 50px -12px rgba(59,130,246,.6);transition:.2s;text-transform:uppercase;letter-spacing:.01em}
+.nv .cta:hover{transform:translateY(-2px)}
+.nv .cta small{display:block;font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.85);margin-top:3px;text-transform:uppercase}
+.nv .gline{margin-top:14px}
+.nv .gbadge{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:100px;background:#fff;border:1px solid rgba(22,163,74,.35);box-shadow:0 6px 18px -10px rgba(22,163,74,.5);font-size:13.5px;font-weight:700;color:#15803D;letter-spacing:.01em}
+.nv .gbadge .seal{width:28px;height:28px;flex:none;background:var(--grad);clip-path:polygon(50.0% 0.0%,60.4% 11.4%,75.0% 6.7%,78.3% 21.7%,93.3% 25.0%,88.6% 39.6%,100.0% 50.0%,88.6% 60.4%,93.3% 75.0%,78.3% 78.3%,75.0% 93.3%,60.4% 88.6%,50.0% 100.0%,39.6% 88.6%,25.0% 93.3%,21.7% 78.3%,6.7% 75.0%,11.4% 60.4%,0.0% 50.0%,11.4% 39.6%,6.7% 25.0%,21.7% 21.7%,25.0% 6.7%,39.6% 11.4%);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.nv .cta-note{color:var(--muted);font-size:13.5px;margin-top:14px}
+.nv .band{background:var(--gradsoft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nv .band h2{font-size:30px}
+.nv .proof{position:relative;max-width:560px;margin:26px auto 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -25px rgba(88,52,190,.5);background:#fff}
+.nv .proof img{display:block;width:100%;height:auto}
+.nv .ptag{position:absolute;left:14px;bottom:14px;background:rgba(18,10,46,.86);color:#fff;font-size:11.5px;font-weight:600;padding:7px 11px;border-radius:100px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px)}
+.nv .ptag b{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#A3E635}
+.nv .pdot{width:9px;height:9px;border-radius:50%;background:#A3E635;box-shadow:0 0 10px #A3E635;flex:none}
+.nv .pcap{color:var(--muted);font-size:13px;margin-top:22px;font-weight:600}
+.nv .collage{max-width:820px;margin:36px auto 0;padding:0 8px}
+.nv .collage img{width:100%;height:auto;display:block}
+.nv .collage .m{display:none}
+.nv .bignum{font-size:64px;font-weight:700;display:block;margin:6px 0}
+.nv h2.sec{font-size:34px;text-align:center;max-width:600px;margin:0 auto 14px}
+.nv .lead{color:var(--muted);font-size:18px;text-align:center;max-width:560px;margin:0 auto}
+.nv .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;text-align:center}
+.nv .step{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(88,52,190,.25);border-radius:18px;padding:22px 16px 24px;position:relative}
+.nv .step .n{display:inline-flex;width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;align-items:center;justify-content:center;font-size:16px;margin:0 auto 10px}
+.nv .step h3{font-size:18px;margin-bottom:6px}
+.nv .step p{color:var(--muted);font-size:14.5px}
+.nv .step .arrow{position:absolute;right:-20px;top:150px;width:22px;height:22px;z-index:2;color:#3B82F6;font-size:22px;line-height:22px;font-weight:700}
+.nv .step:last-child .arrow{display:none}
+.nv .devbundle{position:relative;max-width:850px;height:420px;margin:38px auto 0}
+.nv .dv{position:absolute}
+.nv .imac{left:50%;bottom:0;transform:translateX(-50%);width:338px;z-index:3;text-align:center}
+.nv .imscreen{aspect-ratio:16/10;border:12px solid #16132e;border-radius:16px;background:linear-gradient(135deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);box-shadow:0 34px 60px -22px rgba(88,52,190,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:14px}
+.nv .imbrand{font-size:11px;letter-spacing:.22em;font-weight:700;opacity:.92}
+.nv .imtitle{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:25px;line-height:1.05;margin:7px 0 12px}
+.nv .implay{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.85);position:relative}
+.nv .implay:after{content:"";position:absolute;top:50%;left:53%;transform:translate(-50%,-50%);border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff}
+.nv .imneck{width:46px;height:30px;background:linear-gradient(#dcdcea,#b7b7cc);margin:-2px auto 0}
+.nv .imbase{width:168px;height:14px;border-radius:40%/100%;background:#c3c3d6;margin:0 auto}
+.nv .laptop{left:0;bottom:34px;width:300px;z-index:1;transform:rotate(-3deg)}
+.nv .lpscreen{background:#12102a;border:8px solid #1d1938;border-bottom:none;border-radius:12px 12px 0 0;padding:14px 13px;height:182px;overflow:hidden}
+.nv .lptitle{color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;margin-bottom:9px}
+.nv .lprow{display:flex;gap:9px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:7px 9px;margin-bottom:7px}
+.nv .lpp{width:22px;height:22px;flex:none;border-radius:6px;background:var(--grad);position:relative}
+.nv .lpp:after{content:"";position:absolute;top:50%;left:54%;transform:translate(-50%,-50%);border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #fff}
+.nv .lprow b{color:#fff;font-size:11.5px;display:block;line-height:1.2}
+.nv .lprow i{color:#9a94c0;font-size:9.5px;font-style:normal}
+.nv .lpbase{height:11px;width:118%;margin-left:-9%;background:linear-gradient(#d2d2e0,#b4b4c8);border-radius:0 0 12px 12px;box-shadow:0 16px 26px -14px rgba(0,0,0,.45)}
+.nv .ebooks{right:2px;bottom:52px;z-index:2;display:flex;align-items:flex-end}
+.nv .ebk{width:100px;height:150px;border-radius:5px 11px 11px 5px;box-shadow:0 18px 34px -14px rgba(20,10,50,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-align:center;padding:12px;border-left:5px solid rgba(255,255,255,.28)}
+.nv .ebk span{font-size:27px}
+.nv .ebk b{font-size:12.5px;line-height:1.2;font-weight:700}
+.nv .ebk1{background:linear-gradient(160deg,#8B5CF6,#5B21B6)}
+.nv .ebk2{background:linear-gradient(160deg,#3B82F6,#1E3A8A);margin-left:-28px;transform:translateY(-13px)}
+.nv .ebk3{background:linear-gradient(160deg,#22D3EE,#0E7490);margin-left:-28px;transform:translateY(-4px)}
+.nv .ph{width:150px;height:296px;margin:0 auto 16px;border-radius:26px;background:#0d0a22;padding:7px;box-shadow:0 22px 40px -22px rgba(88,52,190,.7),inset 0 0 0 1px rgba(255,255,255,.08);position:relative}
+.nv .ph:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#0d0a22;border-radius:0 0 10px 10px;z-index:3}
+.nv .scr{border-radius:20px;height:100%;overflow:hidden;position:relative;background:#fff;text-align:left;font-size:9px;line-height:1.3;color:#120A2E}
+.nv .s1{padding:22px 10px 10px;display:flex;flex-direction:column;align-items:center}
+.nv .ig{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:8px}
+.nv .ig .glyph{display:block;flex:none}
+.nv .ig .wm{font-family:'Grand Hotel','Space Grotesk',cursive;font-weight:400;font-size:16px;line-height:1;margin-top:2px}
+.nv .s1 .ttl{font-weight:800;font-size:10.5px;text-align:center;line-height:1.2;margin-bottom:8px}
+.nv .s1 .av{width:44px;height:44px;border-radius:50%;border:2px dashed #C4B5FD;background:#F5F3FF;position:relative;overflow:hidden;margin-bottom:3px}
+.nv .s1 .av:before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:#C4B5FD}
+.nv .s1 .av:after{content:"";position:absolute;top:26px;left:50%;transform:translateX(-50%);width:28px;height:20px;border-radius:14px 14px 0 0;background:#C4B5FD}
+.nv .s1 .nf{font-size:7.5px;color:#6D28D9;font-weight:700;margin-bottom:8px}
+.nv .s1 .fld{width:100%;border:1px solid rgba(88,52,190,.25);border-radius:7px;padding:5px 6px;font-size:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;background:#fff}
+.nv .s1 .fld em{font-style:normal;color:#15803D;font-weight:800;font-size:7.5px}
+.nv .s1 .fld i{font-style:normal;color:#9CA3AF}
+.nv .s1 .btn{width:100%;background:var(--grad);color:#fff;border-radius:7px;padding:6px 0;text-align:center;font-weight:800;font-size:9px;margin-top:3px}
+.nv .s1 .foot{margin-top:auto;font-size:7px;color:#5B5478;text-align:center}
+.nv .s2{background:#0d0a22;color:#fff;height:100%;position:relative}
+.nv .s2 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.nv .s2 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),transparent 30%,transparent 55%,rgba(0,0,0,.72))}
+.nv .s2 .top{position:absolute;top:22px;left:0;right:0;display:flex;justify-content:space-between;padding:0 9px;font-size:8.5px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.nv .s2 .rail{position:absolute;right:6px;bottom:52px;display:flex;flex-direction:column;gap:9px;align-items:center;text-align:center;font-size:7px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.nv .s2 .rail svg{width:15px;height:15px;display:block;margin:0 auto 1px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.nv .s2 .rail .liked svg{fill:#FF3B5C}
+.nv .s2 .meta{position:absolute;left:8px;right:34px;bottom:10px;font-size:7.5px;line-height:1.35;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.nv .s2 .meta .u{display:flex;align-items:center;gap:4px;font-weight:800;font-size:8px;margin-bottom:3px}
+.nv .s2 .meta .u i{width:12px;height:12px;border-radius:50%;background:var(--grad);flex:none;border:1px solid #fff}
+.nv .s2 .meta .u b{border:1px solid #fff;border-radius:3px;padding:0 4px;font-size:6.5px;font-weight:700}
+.nv .s2 .meta .au{opacity:.85;margin-top:2px}
+.nv .tag{position:absolute;left:-26px;top:136px;z-index:4;background:#fff;color:#120A2E;border:1.5px solid #7C3AED;border-radius:100px;padding:5px 10px;font-size:10.5px;font-weight:800;box-shadow:0 10px 24px -8px rgba(88,52,190,.55);white-space:nowrap;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif}
+.nv .tag:before{content:"✨";margin-right:3px}
+.nv .tag:after{content:"";position:absolute;right:-16px;top:50%;width:14px;height:2px;background:#7C3AED;transform:translateY(-50%)}
+.nv .tag i{position:absolute;right:-22px;top:50%;width:8px;height:8px;border-radius:50%;background:#7C3AED;transform:translateY(-50%);box-shadow:0 0 0 3px rgba(124,58,237,.25)}
+.nv .s3{background:linear-gradient(160deg,#7C3AED,#3B82F6 55%,#22D3EE);padding:24px 7px 8px}
+.nv .s3 .tm{text-align:center;color:#fff;font-weight:700;font-size:22px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1;margin-bottom:8px}
+.nv .s3 .pay{background:rgba(255,255,255,.92);border-radius:8px;padding:5px 6px;margin-bottom:4px;display:flex;gap:5px;align-items:center}
+.nv .s3 .pay i{flex:none;width:14px;height:14px;border-radius:4px;background:#635BFF;color:#fff;font-style:normal;font-weight:800;font-size:8px;display:flex;align-items:center;justify-content:center}
+.nv .s3 .pay b{display:block;font-size:7.5px}
+.nv .s3 .pay span{font-size:7px;color:#5B5478}
+.nv .s3 .pay em{font-style:normal;color:#15803D;font-weight:800}
+.nv .pill{display:inline-block;margin-top:18px;background:rgba(22,163,74,.10);border:1px solid rgba(22,163,74,.35);color:var(--lime);font-weight:600;font-size:14px;padding:10px 16px;border-radius:100px}
+.nv .phone{max-width:300px;margin:32px auto 0;background:#0d0a22;border:1px solid var(--line);border-radius:30px;padding:14px;box-shadow:0 30px 70px -25px rgba(139,92,246,.5)}
+.nv .phone .screen{background:linear-gradient(160deg,#17123a,#0b0820);border-radius:20px;padding:20px;text-align:center}
+.nv .cashline{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:26px;color:#A3E635;margin:8px 0}
+.nv .proofimg{display:block;width:100%;max-width:430px;margin:26px auto 0}
+.nv .studentrow{display:flex;flex-direction:row-reverse;align-items:center;gap:44px;max-width:880px;margin:0 auto}
+.nv .studentrow .proofimg{flex:0 0 auto;width:46%;max-width:400px;margin:0}
+.nv .studentrow h2.sec{flex:1;text-align:left;max-width:none;margin:0}
+.nv .notif{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#F5F3FF;border-radius:12px;padding:11px 13px;text-align:left;font-size:13px;margin-top:9px;display:flex;gap:9px;align-items:center}
+.nv .notif .dot{width:26px;height:26px;border-radius:7px;background:var(--grad);flex:none}
+.nv .nolist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.nv .noitem{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 48px;position:relative;font-weight:500;font-size:15px}
+.nv .noitem:before{content:"✕";position:absolute;left:16px;top:15px;width:22px;height:22px;border-radius:50%;background:rgba(37,99,235,.14);color:var(--magenta);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nv .quotebox{background:var(--gradsoft);border:1px solid var(--line);border-radius:18px;padding:34px;text-align:center;margin-top:10px}
+.nv .quotebox p{font-size:19px;max-width:520px;margin:0 auto}
+.nv .quotebox strong{color:var(--txt)}
+.nv .lifeimg{display:block;width:100%;max-width:720px;margin:0 auto;border-radius:16px}
+.nv .clockimg{max-width:470px}
+.nv .gold{display:grid;gap:14px;margin-top:34px}
+.nv .gitem{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(88,52,190,.22);border-radius:14px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+.nv .gitem .ic{font-size:26px;flex:none;width:48px;height:48px;border-radius:12px;background:var(--gradsoft);display:flex;align-items:center;justify-content:center}
+.nv .gitem h3{font-size:17px;margin-bottom:4px}
+.nv .gitem p{color:var(--muted);font-size:14.5px}
+.nv .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.nv .rgrid{display:flex;gap:12px;margin-top:30px;align-items:flex-start}
+.nv .rcol{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.nv .rcol img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block}
+.nv .rcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.nv .rcard .amt{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;color:var(--lime)}
+.nv .rcard .who{color:var(--muted);font-size:12.5px;margin-top:3px}
+.nv .rcard .stars{color:#F59E0B;font-size:13px;margin-top:6px}
+.nv .guar{display:flex;gap:20px;align-items:center;background:var(--bg2);border:1px solid rgba(22,163,74,.35);border-radius:18px;padding:28px}
+.nv .guar .badge{flex:none;width:92px;height:92px;border-radius:50%;background:var(--gradsoft);border:2px solid var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;text-align:center;font-size:13px;line-height:1.1;color:var(--lime)}
+.nv .guar h3{font-size:22px;margin-bottom:6px}
+.nv .guar p{color:var(--muted);font-size:15px}
+.nv .scar{text-align:center;background:var(--gradsoft);border:1px solid var(--line);border-radius:18px;padding:32px}
+.nv .scar .num{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:52px}
+.nv .stack{background:#fff;box-shadow:0 20px 60px -25px rgba(88,52,190,.35);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:26px}
+.nv .srow{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line);font-size:15.5px}
+.nv .srow .v{color:var(--muted);font-weight:600}
+.nv .stotal{display:flex;justify-content:space-between;padding:18px 22px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;border-bottom:1px solid var(--line)}
+.nv .sreg{display:flex;justify-content:space-between;padding:14px 22px;color:var(--muted);font-size:15px}
+.nv .sreg s{opacity:.7}
+.nv .sfinal{background:var(--gradsoft);padding:24px 22px;text-align:center}
+.nv .sfinal .big{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:40px}
+.nv .faq{margin-top:30px;display:grid;gap:12px}
+.nv .fitem{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.nv .fitem h3{font-size:16.5px;margin-bottom:7px;display:flex;gap:10px}
+.nv .fitem h3:before{content:"?";flex:none;width:22px;height:22px;border-radius:6px;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nv .fitem p{color:var(--muted);font-size:14.5px}
+.nv .footer{border-top:1px solid var(--line);padding:40px 0 60px;text-align:center;color:var(--muted);font-size:12.5px}
+.nv .footer .flogo{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;color:var(--txt);margin-bottom:12px}
+.nv .footer a{color:#6D28D9;text-decoration:none}
+.nv .footer .disc{max-width:640px;margin:18px auto 0;font-size:11px;opacity:.7;line-height:1.6}
+.nv .dreamrow{display:flex;align-items:center;gap:40px;max-width:900px;margin:0 auto}
+.nv .dreamrow img{width:44%;max-width:380px;flex:none}
+.nv .dreamrow h2{flex:1;font-size:32px;text-align:left}
+@media(max-width:640px){.nv .nvsec{padding:40px 0}
+.nv .cta{font-size:16px;padding:18px 20px;white-space:nowrap;max-width:100%}
+.nv .cta small{white-space:normal;letter-spacing:.08em}
+.nv .gbadge{font-size:12.5px}
+.nv .ribbon{font-size:10.5px;letter-spacing:.04em;padding:8px 6px;white-space:nowrap}
+.nv .hero h1{font-size:33px}
+.nv h2.sec,.nv .band h2{font-size:26px}
+.nv .bignum{font-size:46px}
+.nv .collage .d{display:none}
+.nv .collage .m{display:block}
+.nv .ptag{font-size:10.5px;padding:6px 9px}
+.nv .ptag b{font-size:12px}
+.nv .nolist,.nv .results,.nv .steps{grid-template-columns:1fr}
+.nv .rgrid{flex-direction:column;gap:10px}
+.nv .devbundle{height:auto;display:flex;flex-direction:column;align-items:center;gap:26px;overflow:hidden;max-width:100%}
+.nv .devbundle .dv{position:static;transform:none!important;margin:0}
+.nv .imac{order:1;width:min(330px,88vw)}
+.nv .imtitle{font-size:23px}
+.nv .ebooks{order:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:min(340px,92vw);align-items:stretch}
+.nv .ebk{width:auto;height:auto;min-height:128px}
+.nv .ebk2,.nv .ebk3{margin-left:0;transform:none}
+.nv .laptop{order:3;width:min(290px,82vw)}
+.nv .studentrow{flex-direction:column;gap:14px}
+.nv .studentrow h2.sec{text-align:center}
+.nv .studentrow .proofimg{width:100%;max-width:430px}
+.nv .quotebox p{font-size:17px}
+.nv .step h3.fit1{white-space:nowrap;font-size:clamp(12px,3.9vw,18px);letter-spacing:-.3px}
+.nv .step .arrow{display:none}
+.nv .guar{flex-direction:column;text-align:center}
+.nv .dreamrow{flex-direction:column;gap:22px}
+.nv .dreamrow img{width:84vw;max-width:84vw;margin-left:auto;margin-right:auto}
+.nv .dreamrow h2{text-align:center;font-size:26px}
+}
+</style>
+<div class="nv">
+<div class="ribbon">🎬 Faceless Reels Lab — The 10-Day Faceless Challenge</div>
+
+<div class="nav"><div class="logo"><span class="mark"><span>🎬</span></span>Faceless Reels Lab</div></div>
+
+<!-- HERO -->
+<div class="nvsec hero" style="padding-top:4px">
+  <div class="wrap">
+    <span class="eyebrow">Watch The Free Training Below 👇</span>
+    <h1>Learn The Faceless Instagram System For Re-Posting Viral Reels <span class="mag">(Without Ever Showing Your Face)</span></h1>
+    <p class="sub">A beginner-friendly 10-day challenge that teaches you the skills step-by-step — get started for less than a cup of coffee. <br><strong style="color:var(--txt)">1-on-1 chat support included.</strong></p>
+    <div class="video">
+      <div class="play"></div>
+      <div class="vtag">▶ Watch: how the faceless system works</div>
+    </div>
+    <a href="#checkout" class="cta">Get Access For Just $6.95<small>1-on-1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>30-Day Money-Back Guarantee</span></div>
+    <div class="cta-note">Educational program. Results vary and are not guaranteed.</div>
+  </div>
+</div>
+
+<!-- COMMUNITY / LEARN BAND (no income claims) -->
+<div class="nvsec band center">
+  <div class="wrap">
+    <h2>Join <span class="grad-txt">2,800+ Students</span> Learning The Faceless Reels System</h2>
+    <p class="lead" style="margin-top:14px">Inside the challenge you'll learn — hands-on, one step at a time — how to set up a faceless Instagram page, re-post viral-style content using our template reels, and offer proven digital products under your own brand. No camera. No prior experience. What you get out of it depends on the work you put in.</p>
+    <div class="pill" style="margin-top:24px">✅ Beginner-friendly · step-by-step · 1-on-1 support</div>
+  </div>
+</div>
+
+<!-- MECHANISM (3 step, compliant) -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">The System</span>
+    <h2 class="sec">Here's The 3-Step Faceless Reels System You'll Learn</h2>
+    <p class="lead">If you have a phone and an internet connection, you can learn to build a faceless account and share content — without ever filming yourself.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="ph"><div class="scr s1">
+          <div class="ig"><svg class="glyph" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><defs><linearGradient id="igg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFDC80"/><stop offset=".3" stop-color="#F77737"/><stop offset=".55" stop-color="#E1306C"/><stop offset=".8" stop-color="#C13584"/><stop offset="1" stop-color="#5851DB"/></linearGradient></defs><rect width="24" height="24" rx="6.5" fill="url(#igg)"/><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="16.1" cy="7.9" r="1.05" fill="#fff"/></svg></div>
+          <div class="ttl">Create new account</div>
+          <div class="av"></div>
+          <div class="nf">No face. No photo needed.</div>
+          <div class="fld"><span>faceless.reels.daily</span><em>✓ available</em></div>
+          <div class="fld"><i>Password</i><i>••••••</i></div>
+          <div class="btn">Sign up</div>
+          <div class="foot">Brand-new · 0 followers · faceless</div>
+        </div></div>
+        <span class="n">1</span><h3>Set up a faceless account</h3><p>No followers, no face, no filming. A fresh start on any phone.</p>
+        <div class="arrow">➜</div>
+      </div>
+      <div class="step">
+        <div class="ph"><span class="tag">Template Reels<i></i></span><div class="scr s2">
+          <img class="bg" src="https://facelessreelslab-assets.onrender.com/ai-avatar-selfie.jpg?v=4" alt="A Reel playing on a phone">
+          <div class="shade"></div>
+          <div class="top"><span>Reels</span><span>📷</span></div>
+          <div class="rail">
+            <div class="liked"><svg viewBox="0 0 24 24"><path d="M12 21.4 3.9 13.3a5 5 0 0 1 7.1-7.1l1 1 1-1a5 5 0 1 1 7.1 7.1z"/></svg>48.2K</div>
+            <div><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.3 1.1 4.4 2.9 5.9L4 21l4.6-2.2c1.1.3 2.2.5 3.4.5 5.5 0 10-3.8 10-8.5S17.5 3 12 3z"/></svg>1,204</div>
+            <div><svg viewBox="0 0 24 24"><path d="M3 11.5 21 3l-6 18-3.5-7.5z"/></svg>9.8K</div>
+            <div><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg></div>
+          </div>
+          <div class="meta">
+            <div class="u"><i></i>faceless.reels.daily <b>Follow</b></div>
+            <div>POV: the cleanest morning routine 🌅</div>
+          </div>
+        </div></div>
+        <span class="n">2</span><h3>Re-post viral-style content</h3><p>Use our template reels to share proven, viral-style content — even if you start with zero followers.</p>
+        <div class="arrow">➜</div>
+      </div>
+      <div class="step">
+        <div class="ph"><div class="scr s1" style="justify-content:flex-start">
+          <div class="ttl" style="margin-top:6px">Your storefront</div>
+          <div class="av" style="border-style:solid;border-color:#C4B5FD"></div>
+          <div class="nf">Proven digital products</div>
+          <div class="fld"><span>Digital Guide</span><em>Add</em></div>
+          <div class="fld"><span>Template Pack</span><em>Add</em></div>
+          <div class="fld"><span>Mini-Course</span><em>Add</em></div>
+          <div class="btn">Share your link</div>
+          <div class="foot">Under your own brand</div>
+        </div></div>
+        <span class="n">3</span><h3 class="fit1">Offer ready-made products</h3><p>Offer proven, ready-made digital products under your own brand — no creating and no inventory.</p>
+      </div>
+    </div>
+    <div class="pill">✅ All you need is a smartphone + internet connection</div>
+  </div>
+</div>
+
+<!-- SKILL / YOU CAN LEARN THIS -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="quotebox">
+      <p><strong>This is designed for beginners.</strong> Even if you've never posted a Reel or sold anything online, we walk you through every step. It's built to fit around a busy schedule — but like any skill, what you get out of it depends on the effort you put in. <strong>Results vary and are not guaranteed.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- NO LIST -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">Zero Barriers To Start</span>
+    <h2 class="sec">I Call It The <span class="grad-txt">Faceless Funnel System</span> — Because It Requires NO:</h2>
+    <div class="nolist" style="text-align:left">
+      <div class="noitem">Showing your face</div>
+      <div class="noitem">Instagram experience</div>
+      <div class="noitem">Existing audience or followers</div>
+      <div class="noitem">Being US-based (works anywhere)</div>
+      <div class="noitem">Sitting at a computer all day</div>
+      <div class="noitem">Anyone but yourself to report to</div>
+    </div>
+  </div>
+</div>
+
+<!-- MID CTA -->
+<div class="nvsec center" style="padding-top:0">
+  <div class="wrap">
+    <a href="#checkout" class="cta">Get Access For Just $6.95<small>1-on-1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>30-Day Money-Back Guarantee</span></div>
+  </div>
+</div>
+
+<!-- SIMPLER WAY 2026 -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <h2 class="sec">A Simpler Way To Get Started In <span class="grad-txt">2026</span></h2>
+    <p class="lead">The Faceless Funnel System is a shortcut to learning the ropes. You re-post content built to perform. You offer proven products instead of building your own. And you skip a lot of the trial-and-error that stops most beginners. We call it <strong style="color:var(--txt)">"learning with confidence."</strong></p>
+  </div>
+</div>
+
+<!-- WHY WE BUILT THIS -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="quotebox">
+      <p>My partner and I built this challenge to make the faceless content skillset <strong>accessible to anyone</strong> willing to take the first step and put in the work — no matter where you're starting from. So now you have the chance to learn the exact system for yourself.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHALLENGE BREAKDOWN + CSS BUNDLE -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">The 10-Day Challenge</span>
+    <h2 class="sec">Copy &amp; Learn This Exact System For Yourself</h2>
+    <div class="devbundle">
+      <div class="dv laptop"><div class="lpscreen"><div class="lptitle">Template Reels Library</div>
+        <div class="lprow"><span class="lpp"></span><div><b>Viral Hook Pack</b><i>28 ready-to-post reels</i></div></div>
+        <div class="lprow"><span class="lpp"></span><div><b>Caption Templates</b><i>Fill-in-the-blank</i></div></div>
+        <div class="lprow"><span class="lpp"></span><div><b>Posting Schedule</b><i>10-20 min/day</i></div></div>
+      </div><div class="lpbase"></div></div>
+      <div class="dv imac"><div class="imscreen"><div class="imbrand">FACELESS REELS LAB</div><div class="imtitle">Members Area</div><div class="implay"></div></div><div class="imneck"></div><div class="imbase"></div></div>
+      <div class="dv ebooks">
+        <div class="ebk ebk1"><span>📘</span><b>The Faceless Reels Playbook</b></div>
+        <div class="ebk ebk2"><span>🎬</span><b>The Viral Content System</b></div>
+        <div class="ebk ebk3"><span>💼</span><b>Digital Products Guide</b></div>
+      </div>
+    </div>
+    <div class="steps" style="text-align:left;margin-top:42px">
+      <div class="step"><span class="n">1</span><h3>What we'll be doing 📱</h3><p>We'll set up your faceless Instagram account and teach you to share content and offer digital products — around 10-20 minutes a day, on your own schedule.</p></div>
+      <div class="step"><span class="n">2</span><h3>How it works 💡</h3><p>You learn the system step-by-step with template reels, guides and 1-on-1 chat support the whole way through.</p></div>
+      <div class="step"><span class="n">3</span><h3>What you need ✅</h3><p>An internet connection and a smartphone (iPhone 8+ / Android). That's it.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<div class="nvsec band">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Inside The Challenge</span>
+    <h2 class="sec">A Fraction Of What You'll Learn</h2></div>
+    <div class="gold">
+      <div class="gitem"><span class="ic">🚀</span><div><h3>The Faceless Starter Playbook</h3><p>The exact step-by-step system for getting your faceless page off the ground.</p></div></div>
+      <div class="gitem"><span class="ic">🎬</span><div><h3>The Faceless IG Formula</h3><p>We build your faceless account together so you have the right foundation from day one.</p></div></div>
+      <div class="gitem"><span class="ic">✍️</span><div><h3>Content &amp; Captions Toolkit</h3><p>Template reels and caption frameworks so you're never staring at a blank screen.</p></div></div>
+      <div class="gitem"><span class="ic">💎</span><div><h3>Picking Digital Products</h3><p>How to choose proven, ready-made digital products to offer under your own brand.</p></div></div>
+      <div class="gitem"><span class="ic">💬</span><div><h3>Chat Support &amp; Community</h3><p>1-on-1 chat support plus a community of students learning alongside you.</p></div></div>
+      <div class="gitem"><span class="ic">📈</span><div><h3>Scaling &amp; Automation Module</h3><p>Once you've got the basics down, learn how to streamline and automate your workflow.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MONEY-BACK GUARANTEE -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="guar">
+      <div class="badge" style="width:110px;height:110px;font-size:14px">30-DAY<br>MONEY<br>BACK</div>
+      <div>
+        <h3>30-Day Money-Back Guarantee</h3>
+        <p>Go through the challenge. If it's not for you, just email us within 30 days and we'll refund your $6.95 — no hard feelings. You also get 1-on-1 chat support the whole way through. See our <a href="https://facelessreelslab.com/refund-policy" target="_blank" rel="noopener" style="color:#6D28D9">Refund Policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE STACK -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <span class="eyebrow">Everything Included</span>
+    <h2 class="sec">Everything You Get When You Join</h2>
+    <div class="stack" style="text-align:left">
+      <div class="srow"><span>🚀 The Faceless Starter Playbook</span><span class="v">$199</span></div>
+      <div class="srow"><span>🎬 The Faceless IG Formula</span><span class="v">$399</span></div>
+      <div class="srow"><span>✍️ Content &amp; Captions Toolkit</span><span class="v">$149</span></div>
+      <div class="srow"><span>💎 Digital Products Guide</span><span class="v">$97</span></div>
+      <div class="srow"><span>💬 1-on-1 Chat Support</span><span class="v">$297</span></div>
+      <div class="srow"><span>📈 Scaling &amp; Automation Module</span><span class="v">$199</span></div>
+      <div class="stotal"><span>Total Value</span><span>$1,340</span></div>
+      <div class="sreg"><span>Regular Price</span><span><s style="color:#DC2626">$97</s></span></div>
+      <div class="sfinal">
+        <div style="color:var(--muted);font-size:14px;margin-bottom:4px">Get instant access today for only</div>
+        <div class="big grad-txt">$6.95</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:4px">Delivered instantly · start in the next 5 minutes</div>
+      </div>
+    </div>
+    <div style="margin-top:26px"><a href="#checkout" class="cta">Get Access For Just $6.95<small>1-on-1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>30-Day Money-Back Guarantee</span></div></div>
+  </div>
+</div>
+</div>
+<section id="checkout" style="background:#fff;margin:0 auto;max-width:560px;padding:34px 24px;text-align:center;font-family:Arial;color:#94a3b8;border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7"><div style="font-size:13px;letter-spacing:.05em;text-transform:uppercase">— native ClickFunnels order form sits here —</div></section><style>
+/* NOVA·AI full-bleed v3 — pure CSS (no JS layout mutation, so it never interferes with CF's
+   scroll-to-form on checkout submit). On phones each .nv breaks out of CF's padded row to the
+   full viewport width, centered. Global rule → covers every custom-HTML block on the page. */
+@media(max-width:640px){.nv{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;box-sizing:border-box}}
+#nova-next{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}</style>
+<script>
+/* NOVA·AI CTA behavior:
+   1) If a hidden native CF button with ID "nova-next" exists (jump-to-next-step pages), click it.
+   2) Otherwise (on-page checkout): smooth-scroll to the native ClickFunnels order form,
+      which must have Element ID "checkout" (falls back to any element whose id/class contains
+      "checkout" or "order-form").
+   Self-correcting: lazy-loaded images between the CTA and the form can grow the page mid-scroll
+      and make a long scroll undershoot. So we re-aim a few times over ~1.8s, but only while still
+      off-target (won't yank the user once they've arrived or if they scroll away themselves). */
+function novaFindCheckout(){return document.getElementById('checkout')||
+  document.querySelector('[id*="checkout" i],[class*="checkout" i],[class*="order-form" i]');}
+document.addEventListener('click',function(e){
+  var a=e.target.closest('.nv a.cta'); if(!a) return;
+  var host=document.getElementById('nova-next');
+  if(host){var btn=host.matches('a,button')?host:host.querySelector('a,button');
+    if(btn){e.preventDefault();btn.click();return;}}
+  var t=novaFindCheckout(); if(!t) return;
+  e.preventDefault();
+  var stop=false;
+  function cancel(){stop=true;
+    window.removeEventListener('wheel',cancel);window.removeEventListener('touchmove',cancel);window.removeEventListener('keydown',cancel);}
+  /* the moment the user scrolls themselves, quit auto-correcting so we never yank them back */
+  window.addEventListener('wheel',cancel,{passive:true});
+  window.addEventListener('touchmove',cancel,{passive:true});
+  window.addEventListener('keydown',cancel);
+  var aim=function(){if(stop) return; var el=novaFindCheckout(); if(!el) return;
+    if(Math.abs(el.getBoundingClientRect().top)>80){el.scrollIntoView({behavior:'smooth',block:'start'});}};
+  aim();[350,800,1300].forEach(function(ms){setTimeout(aim,ms);});
+  setTimeout(cancel,1500);
+});
+</script>
+<div class="nv">
+<!-- FAQ -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">FAQ</span><h2 class="sec">Still Got Questions?</h2></div>
+    <div class="faq">
+      <div class="fitem"><h3>How much time do I need?</h3><p>The 10-day challenge is built to fit a busy schedule — many students set aside around 10-20 minutes a day. You move at your own pace.</p></div>
+      <div class="fitem"><h3>Do I need to film or buy equipment?</h3><p>No. The whole point is that it's faceless. All you need is a smartphone, an internet connection, and the challenge.</p></div>
+      <div class="fitem"><h3>Do I need online experience?</h3><p>None. We teach everything from scratch and give you template reels and guides to work from.</p></div>
+      <div class="fitem"><h3>How fast can I start?</h3><p>You get access instantly and can start the first lesson right after signing up.</p></div>
+      <div class="fitem"><h3>Is income guaranteed?</h3><p>No. This is an educational program that teaches you a skillset. Results vary and depend on the effort you put in — we can't and don't guarantee any specific outcome.</p></div>
+      <div class="fitem"><h3>What if it's not for me?</h3><p>You're covered by our 30-day money-back guarantee. Email us within 30 days for a full refund.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="nvsec center" style="padding-top:0">
+  <div class="wrap">
+    <a href="#checkout" class="cta">Join The Challenge — $6.95<small>1-on-1 chat support included</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>30-Day Money-Back Guarantee</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="wrap">
+    <div class="flogo">🎬 Faceless Reels Lab</div>
+    <div><a href="https://facelessreelslab.com/terms" target="_blank" rel="noopener">Terms &amp; Conditions</a> · <a href="https://facelessreelslab.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> · <a href="https://facelessreelslab.com/refund-policy" target="_blank" rel="noopener">Refund Policy</a> · <a href="https://facelessreelslab.com/earnings-disclaimer" target="_blank" rel="noopener">Earnings Disclaimer</a> · <a href="https://facelessreelslab.com/income-disclosure" target="_blank" rel="noopener">Income Disclosure</a> · Contact: <a href="mailto:support@facelessreelslab.com">support@facelessreelslab.com</a></div>
+    <div class="disc">This site is not part of, or endorsed by, Facebook, Instagram, Google, Snapchat, TikTok or any social media platform in any way. All product names, logos, and brands are property of their respective owners and are used for identification purposes only; their use does not imply endorsement. FACEBOOK and INSTAGRAM are trademarks of Meta Platforms, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC. <strong>Earnings Disclaimer:</strong> Faceless Reels Lab is an educational program that teaches skills. We make no guarantee of income or results. Any examples are illustrative only and are not a promise or guarantee of earnings. Individual results depend entirely on your own effort, experience, skill, and market conditions, and most people who buy any "how-to" information get little to no result. Nothing on this page should be taken as a guarantee that you will earn any money. Always perform your own due diligence before making business decisions. See our <a href="https://facelessreelslab.com/earnings-disclaimer" target="_blank" rel="noopener">Earnings Disclaimer</a> and <a href="https://facelessreelslab.com/income-disclosure" target="_blank" rel="noopener">Income Disclosure</a> for full details. © 2026 Faceless Reels Lab. All rights reserved.</div>
+  </div>
+</div>
+</div>
+</body></html>
