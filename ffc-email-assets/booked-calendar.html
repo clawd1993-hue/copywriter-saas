@@ -1,0 +1,489 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The 90-Day Booked Calendar Blueprint</title><style>html,body{margin:0;padding:0;background:#fff}</style></head><body><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Grand+Hotel&display=swap" rel="stylesheet">
+<style>
+.nv{width:100%;max-width:none;box-sizing:border-box;text-align:left}
+.nv,.nv *{box-sizing:border-box}
+.nv h1,.nv h2,.nv h3,.nv p,.nv ul{margin:0;padding:0}
+.nv a{text-decoration:none}
+.nv img{max-width:100%;height:auto}
+.nv{--bg:#FFFFFF;
+    --bg2:#FAF8FF;
+    --card:#FFFFFF;
+    --line:rgba(88,52,190,.14);
+    --violet:#9D4E7A;
+    --magenta:#BE185D;
+    --cyan:#22D3EE;
+    --lime:#16A34A;
+    --txt:#120A2E;
+    --muted:#5B5478;
+    --grad:linear-gradient(100deg,#7B2E5D 0%,#C25E86 50%,#E0A75E 100%);
+    --gradsoft:linear-gradient(100deg,rgba(123,46,93,.10),rgba(194,94,134,.08),rgba(224,167,94,.12));}
+.nv *{margin:0;padding:0;box-sizing:border-box}
+.nv{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.nv h1,.nv h2,.nv h3,.nv .dsp{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1.1;letter-spacing:-.02em}
+.nv .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+.nv .grad-txt{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nv .pop{color:var(--lime)}
+.nv .mag{color:var(--magenta)}
+.nv .ribbon{background:var(--grad);text-align:center;font-weight:700;font-size:13px;letter-spacing:.08em;padding:9px;text-transform:uppercase;color:#fff}
+.nv .nav{display:flex;align-items:center;justify-content:center;gap:10px;padding:22px}
+.nv .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px}
+.nv .logo .mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(59,130,246,.5)}
+.nv .logo .mark span{font-size:18px}
+.nv .nvsec{padding:54px 0;position:relative}
+.nv .center{text-align:center}
+.nv .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9D2A66;background:rgba(157,78,122,.10);border:1px solid rgba(157,78,122,.30);padding:7px 14px;border-radius:100px;margin-bottom:20px}
+.nv .hero{background:radial-gradient(1100px 520px at 50% -8%,rgba(194,94,134,.16),transparent 60%),radial-gradient(800px 420px at 85% 20%,rgba(224,167,94,.16),transparent 60%),var(--bg);padding-top:12px;text-align:center}
+.nv .hero h1{font-size:46px;font-weight:700;margin:14px auto 18px;max-width:640px}
+.nv .hero .sub{color:var(--muted);font-size:19px;max-width:520px;margin:0 auto 8px}
+.nv .video{max-width:620px;margin:30px auto 26px;aspect-ratio:16/9;border-radius:18px;background:linear-gradient(160deg,#1b1440,#0d0a22);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px -30px rgba(139,92,246,.6);position:relative;overflow:hidden}
+.nv .video:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(59,130,246,.14),transparent 60%)}
+.nv .play{width:78px;height:78px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 40px rgba(59,130,246,.6)}
+.nv .play:after{content:"";margin-left:6px;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent #fff}
+.nv .vtag{position:absolute;bottom:14px;left:14px;font-size:12px;font-weight:600;color:var(--muted);z-index:1;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:8px}
+.nv .cta{display:inline-block;background:var(--grad);color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:14px;text-decoration:none;box-shadow:0 18px 50px -12px rgba(59,130,246,.6);transition:.2s;text-transform:uppercase;letter-spacing:.01em}
+.nv .cta:hover{transform:translateY(-2px)}
+.nv .cta small{display:block;font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.85);margin-top:3px;text-transform:uppercase}
+.nv .gline{margin-top:14px}
+.nv .gbadge{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:100px;background:#fff;border:1px solid rgba(22,163,74,.35);box-shadow:0 6px 18px -10px rgba(22,163,74,.5);font-size:13.5px;font-weight:700;color:#15803D;letter-spacing:.01em}
+.nv .gbadge .seal{width:28px;height:28px;flex:none;background:var(--grad);clip-path:polygon(50.0% 0.0%,60.4% 11.4%,75.0% 6.7%,78.3% 21.7%,93.3% 25.0%,88.6% 39.6%,100.0% 50.0%,88.6% 60.4%,93.3% 75.0%,78.3% 78.3%,75.0% 93.3%,60.4% 88.6%,50.0% 100.0%,39.6% 88.6%,25.0% 93.3%,21.7% 78.3%,6.7% 75.0%,11.4% 60.4%,0.0% 50.0%,11.4% 39.6%,6.7% 25.0%,21.7% 21.7%,25.0% 6.7%,39.6% 11.4%);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.nv .cta-note{color:var(--muted);font-size:13.5px;margin-top:14px}
+.nv .band{background:var(--gradsoft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nv .band h2{font-size:30px}
+.nv .proof{position:relative;max-width:560px;margin:26px auto 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -25px rgba(88,52,190,.5);background:#fff}
+.nv .proof img{display:block;width:100%;height:auto}
+.nv .ptag{position:absolute;left:14px;bottom:14px;background:rgba(18,10,46,.86);color:#fff;font-size:11.5px;font-weight:600;padding:7px 11px;border-radius:100px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px)}
+.nv .ptag b{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#A3E635}
+.nv .pdot{width:9px;height:9px;border-radius:50%;background:#A3E635;box-shadow:0 0 10px #A3E635;flex:none}
+.nv .pcap{color:var(--muted);font-size:13px;margin-top:22px;font-weight:600}
+.nv .collage{max-width:820px;margin:36px auto 0;padding:0 8px}
+.nv .collage img{width:100%;height:auto;display:block}
+.nv .collage .m{display:none}
+.nv .bignum{font-size:64px;font-weight:700;display:block;margin:6px 0}
+.nv h2.sec{font-size:34px;text-align:center;max-width:600px;margin:0 auto 14px}
+.nv .lead{color:var(--muted);font-size:18px;text-align:center;max-width:560px;margin:0 auto}
+.nv .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;text-align:center}
+.nv .step{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(88,52,190,.25);border-radius:18px;padding:22px 16px 24px;position:relative}
+.nv .step .n{display:inline-flex;width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;align-items:center;justify-content:center;font-size:16px;margin:0 auto 10px}
+.nv .step h3{font-size:18px;margin-bottom:6px}
+.nv .step p{color:var(--muted);font-size:14.5px}
+.nv .step .arrow{position:absolute;right:-20px;top:150px;width:22px;height:22px;z-index:2;color:#C25E86;font-size:22px;line-height:22px;font-weight:700}
+.nv .step:last-child .arrow{display:none}
+.nv .devbundle{position:relative;max-width:850px;height:420px;margin:38px auto 0}
+.nv .dv{position:absolute}
+.nv .imac{left:50%;bottom:0;transform:translateX(-50%);width:338px;z-index:3;text-align:center}
+.nv .imscreen{aspect-ratio:16/10;border:12px solid #16132e;border-radius:16px;background:linear-gradient(135deg,#7C3AED 0%,#3B82F6 55%,#22D3EE 100%);box-shadow:0 34px 60px -22px rgba(88,52,190,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:14px}
+.nv .imbrand{font-size:11px;letter-spacing:.22em;font-weight:700;opacity:.92}
+.nv .imtitle{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:25px;line-height:1.05;margin:7px 0 12px}
+.nv .implay{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.85);position:relative}
+.nv .implay:after{content:"";position:absolute;top:50%;left:53%;transform:translate(-50%,-50%);border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff}
+.nv .imneck{width:46px;height:30px;background:linear-gradient(#dcdcea,#b7b7cc);margin:-2px auto 0}
+.nv .imbase{width:168px;height:14px;border-radius:40%/100%;background:#c3c3d6;margin:0 auto}
+.nv .laptop{left:0;bottom:34px;width:300px;z-index:1;transform:rotate(-3deg)}
+.nv .lpscreen{background:#12102a;border:8px solid #1d1938;border-bottom:none;border-radius:12px 12px 0 0;padding:14px 13px;height:182px;overflow:hidden}
+.nv .lptitle{color:#fff;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;margin-bottom:9px}
+.nv .lprow{display:flex;gap:9px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:7px 9px;margin-bottom:7px}
+.nv .lpp{width:22px;height:22px;flex:none;border-radius:6px;background:var(--grad);position:relative}
+.nv .lpp:after{content:"";position:absolute;top:50%;left:54%;transform:translate(-50%,-50%);border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #fff}
+.nv .lprow b{color:#fff;font-size:11.5px;display:block;line-height:1.2}
+.nv .lprow i{color:#9a94c0;font-size:9.5px;font-style:normal}
+.nv .lpbase{height:11px;width:118%;margin-left:-9%;background:linear-gradient(#d2d2e0,#b4b4c8);border-radius:0 0 12px 12px;box-shadow:0 16px 26px -14px rgba(0,0,0,.45)}
+.nv .ebooks{right:2px;bottom:52px;z-index:2;display:flex;align-items:flex-end}
+.nv .ebk{width:100px;height:150px;border-radius:5px 11px 11px 5px;box-shadow:0 18px 34px -14px rgba(20,10,50,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-align:center;padding:12px;border-left:5px solid rgba(255,255,255,.28)}
+.nv .ebk span{font-size:27px}
+.nv .ebk b{font-size:12.5px;line-height:1.2;font-weight:700}
+.nv .ebk1{background:linear-gradient(160deg,#8B5CF6,#5B21B6)}
+.nv .ebk2{background:linear-gradient(160deg,#3B82F6,#1E3A8A);margin-left:-28px;transform:translateY(-13px)}
+.nv .ebk3{background:linear-gradient(160deg,#22D3EE,#0E7490);margin-left:-28px;transform:translateY(-4px)}
+.nv .ph{width:150px;height:296px;margin:0 auto 16px;border-radius:26px;background:#0d0a22;padding:7px;box-shadow:0 22px 40px -22px rgba(88,52,190,.7),inset 0 0 0 1px rgba(255,255,255,.08);position:relative}
+.nv .ph:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#0d0a22;border-radius:0 0 10px 10px;z-index:3}
+.nv .scr{border-radius:20px;height:100%;overflow:hidden;position:relative;background:#fff;text-align:left;font-size:9px;line-height:1.3;color:#120A2E}
+.nv .s1{padding:22px 10px 10px;display:flex;flex-direction:column;align-items:center}
+.nv .ig{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:8px}
+.nv .ig .glyph{display:block;flex:none}
+.nv .ig .wm{font-family:'Grand Hotel','Space Grotesk',cursive;font-weight:400;font-size:16px;line-height:1;margin-top:2px}
+.nv .s1 .ttl{font-weight:800;font-size:10.5px;text-align:center;line-height:1.2;margin-bottom:8px}
+.nv .s1 .av{width:44px;height:44px;border-radius:50%;border:2px dashed #C4B5FD;background:#F5F3FF;position:relative;overflow:hidden;margin-bottom:3px}
+.nv .s1 .av:before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:#C4B5FD}
+.nv .s1 .av:after{content:"";position:absolute;top:26px;left:50%;transform:translateX(-50%);width:28px;height:20px;border-radius:14px 14px 0 0;background:#C4B5FD}
+.nv .s1 .nf{font-size:7.5px;color:#6D28D9;font-weight:700;margin-bottom:8px}
+.nv .s1 .fld{width:100%;border:1px solid rgba(88,52,190,.25);border-radius:7px;padding:5px 6px;font-size:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;background:#fff}
+.nv .s1 .fld em{font-style:normal;color:#15803D;font-weight:800;font-size:7.5px}
+.nv .s1 .fld i{font-style:normal;color:#9CA3AF}
+.nv .s1 .btn{width:100%;background:var(--grad);color:#fff;border-radius:7px;padding:6px 0;text-align:center;font-weight:800;font-size:9px;margin-top:3px}
+.nv .s1 .foot{margin-top:auto;font-size:7px;color:#5B5478;text-align:center}
+.nv .s2{background:#0d0a22;color:#fff;height:100%;position:relative}
+.nv .s2 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.nv .s2 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),transparent 30%,transparent 55%,rgba(0,0,0,.72))}
+.nv .s2 .top{position:absolute;top:22px;left:0;right:0;display:flex;justify-content:space-between;padding:0 9px;font-size:8.5px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.nv .s2 .rail{position:absolute;right:6px;bottom:52px;display:flex;flex-direction:column;gap:9px;align-items:center;text-align:center;font-size:7px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.nv .s2 .rail svg{width:15px;height:15px;display:block;margin:0 auto 1px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.nv .s2 .rail .liked svg{fill:#FF3B5C}
+.nv .s2 .meta{position:absolute;left:8px;right:34px;bottom:10px;font-size:7.5px;line-height:1.35;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.nv .s2 .meta .u{display:flex;align-items:center;gap:4px;font-weight:800;font-size:8px;margin-bottom:3px}
+.nv .s2 .meta .u i{width:12px;height:12px;border-radius:50%;background:var(--grad);flex:none;border:1px solid #fff}
+.nv .s2 .meta .u b{border:1px solid #fff;border-radius:3px;padding:0 4px;font-size:6.5px;font-weight:700}
+.nv .s2 .meta .au{opacity:.85;margin-top:2px}
+.nv .tag{position:absolute;left:-26px;top:136px;z-index:4;background:#fff;color:#120A2E;border:1.5px solid #7C3AED;border-radius:100px;padding:5px 10px;font-size:10.5px;font-weight:800;box-shadow:0 10px 24px -8px rgba(88,52,190,.55);white-space:nowrap;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif}
+.nv .tag:before{content:"✨";margin-right:3px}
+.nv .tag:after{content:"";position:absolute;right:-16px;top:50%;width:14px;height:2px;background:#7C3AED;transform:translateY(-50%)}
+.nv .tag i{position:absolute;right:-22px;top:50%;width:8px;height:8px;border-radius:50%;background:#7C3AED;transform:translateY(-50%);box-shadow:0 0 0 3px rgba(124,58,237,.25)}
+.nv .s3{background:linear-gradient(160deg,#7C3AED,#3B82F6 55%,#22D3EE);padding:24px 7px 8px}
+.nv .s3 .tm{text-align:center;color:#fff;font-weight:700;font-size:22px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;line-height:1;margin-bottom:8px}
+.nv .s3 .pay{background:rgba(255,255,255,.92);border-radius:8px;padding:5px 6px;margin-bottom:4px;display:flex;gap:5px;align-items:center}
+.nv .s3 .pay i{flex:none;width:14px;height:14px;border-radius:4px;background:#635BFF;color:#fff;font-style:normal;font-weight:800;font-size:8px;display:flex;align-items:center;justify-content:center}
+.nv .s3 .pay b{display:block;font-size:7.5px}
+.nv .s3 .pay span{font-size:7px;color:#5B5478}
+.nv .s3 .pay em{font-style:normal;color:#15803D;font-weight:800}
+.nv .pill{display:inline-block;margin-top:18px;background:rgba(22,163,74,.10);border:1px solid rgba(22,163,74,.35);color:var(--lime);font-weight:600;font-size:14px;padding:10px 16px;border-radius:100px}
+.nv .phone{max-width:300px;margin:32px auto 0;background:#0d0a22;border:1px solid var(--line);border-radius:30px;padding:14px;box-shadow:0 30px 70px -25px rgba(139,92,246,.5)}
+.nv .phone .screen{background:linear-gradient(160deg,#17123a,#0b0820);border-radius:20px;padding:20px;text-align:center}
+.nv .cashline{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:26px;color:#A3E635;margin:8px 0}
+.nv .proofimg{display:block;width:100%;max-width:430px;margin:26px auto 0}
+.nv .studentrow{display:flex;flex-direction:row-reverse;align-items:center;gap:44px;max-width:880px;margin:0 auto}
+.nv .studentrow .proofimg{flex:0 0 auto;width:46%;max-width:400px;margin:0}
+.nv .studentrow h2.sec{flex:1;text-align:left;max-width:none;margin:0}
+.nv .notif{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#F5F3FF;border-radius:12px;padding:11px 13px;text-align:left;font-size:13px;margin-top:9px;display:flex;gap:9px;align-items:center}
+.nv .notif .dot{width:26px;height:26px;border-radius:7px;background:var(--grad);flex:none}
+.nv .nolist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.nv .noitem{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 48px;position:relative;font-weight:500;font-size:15px}
+.nv .noitem:before{content:"✕";position:absolute;left:16px;top:15px;width:22px;height:22px;border-radius:50%;background:rgba(37,99,235,.14);color:var(--magenta);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nv .quotebox{background:var(--gradsoft);border:1px solid var(--line);border-radius:18px;padding:34px;text-align:center;margin-top:10px}
+.nv .quotebox p{font-size:19px;max-width:520px;margin:0 auto}
+.nv .quotebox strong{color:var(--txt)}
+.nv .lifeimg{display:block;width:100%;max-width:720px;margin:0 auto;border-radius:16px}
+.nv .clockimg{max-width:470px}
+.nv .gold{display:grid;gap:14px;margin-top:34px}
+.nv .gitem{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px -14px rgba(88,52,190,.22);border-radius:14px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+.nv .gitem .ic{font-size:26px;flex:none;width:48px;height:48px;border-radius:12px;background:var(--gradsoft);display:flex;align-items:center;justify-content:center}
+.nv .gitem h3{font-size:17px;margin-bottom:4px}
+.nv .gitem p{color:var(--muted);font-size:14.5px}
+.nv .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.nv .rgrid{display:flex;gap:12px;margin-top:30px;align-items:flex-start}
+.nv .rcol{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.nv .rcol img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;display:block}
+.nv .rcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.nv .rcard .amt{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;color:var(--lime)}
+.nv .rcard .who{color:var(--muted);font-size:12.5px;margin-top:3px}
+.nv .rcard .stars{color:#F59E0B;font-size:13px;margin-top:6px}
+.nv .guar{display:flex;gap:20px;align-items:center;background:var(--bg2);border:1px solid rgba(22,163,74,.35);border-radius:18px;padding:28px}
+.nv .guar .badge{flex:none;width:92px;height:92px;border-radius:50%;background:var(--gradsoft);border:2px solid var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;text-align:center;font-size:13px;line-height:1.1;color:var(--lime)}
+.nv .guar h3{font-size:22px;margin-bottom:6px}
+.nv .guar p{color:var(--muted);font-size:15px}
+.nv .scar{text-align:center;background:var(--gradsoft);border:1px solid var(--line);border-radius:18px;padding:32px}
+.nv .scar .num{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:52px}
+.nv .stack{background:#fff;box-shadow:0 20px 60px -25px rgba(88,52,190,.35);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:26px}
+.nv .srow{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line);font-size:15.5px}
+.nv .srow .v{color:var(--muted);font-weight:600}
+.nv .stotal{display:flex;justify-content:space-between;padding:18px 22px;font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;border-bottom:1px solid var(--line)}
+.nv .sreg{display:flex;justify-content:space-between;padding:14px 22px;color:var(--muted);font-size:15px}
+.nv .sreg s{opacity:.7}
+.nv .sfinal{background:var(--gradsoft);padding:24px 22px;text-align:center}
+.nv .sfinal .big{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:40px}
+.nv .faq{margin-top:30px;display:grid;gap:12px}
+.nv .fitem{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.nv .fitem h3{font-size:16.5px;margin-bottom:7px;display:flex;gap:10px}
+.nv .fitem h3:before{content:"?";flex:none;width:22px;height:22px;border-radius:6px;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nv .fitem p{color:var(--muted);font-size:14.5px}
+.nv .footer{border-top:1px solid var(--line);padding:40px 0 60px;text-align:center;color:var(--muted);font-size:12.5px}
+.nv .footer .flogo{font-family:'Space Grotesk',-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;color:var(--txt);margin-bottom:12px}
+.nv .footer a{color:#6D28D9;text-decoration:none}
+.nv .footer .disc{max-width:640px;margin:18px auto 0;font-size:11px;opacity:.7;line-height:1.6}
+.nv .dreamrow{display:flex;align-items:center;gap:40px;max-width:900px;margin:0 auto}
+.nv .dreamrow img{width:44%;max-width:380px;flex:none}
+.nv .dreamrow h2{flex:1;font-size:32px;text-align:left}
+@media(max-width:640px){.nv .nvsec{padding:40px 0}
+.nv .cta{font-size:16px;padding:18px 20px;white-space:nowrap;max-width:100%}
+.nv .cta small{white-space:normal;letter-spacing:.08em}
+.nv .gbadge{font-size:12.5px}
+.nv .ribbon{font-size:10.5px;letter-spacing:.04em;padding:8px 6px;white-space:nowrap}
+.nv .hero h1{font-size:33px}
+.nv h2.sec,.nv .band h2{font-size:26px}
+.nv .bignum{font-size:46px}
+.nv .collage .d{display:none}
+.nv .collage .m{display:block}
+.nv .ptag{font-size:10.5px;padding:6px 9px}
+.nv .ptag b{font-size:12px}
+.nv .nolist,.nv .results,.nv .steps{grid-template-columns:1fr}
+.nv .rgrid{flex-direction:column;gap:10px}
+.nv .devbundle{height:auto;display:flex;flex-direction:column;align-items:center;gap:26px;overflow:hidden;max-width:100%}
+.nv .devbundle .dv{position:static;transform:none!important;margin:0}
+.nv .imac{order:1;width:min(330px,88vw)}
+.nv .imtitle{font-size:23px}
+.nv .ebooks{order:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:min(340px,92vw);align-items:stretch}
+.nv .ebk{width:auto;height:auto;min-height:128px}
+.nv .ebk2,.nv .ebk3{margin-left:0;transform:none}
+.nv .laptop{order:3;width:min(290px,82vw)}
+.nv .studentrow{flex-direction:column;gap:14px}
+.nv .studentrow h2.sec{text-align:center}
+.nv .studentrow .proofimg{width:100%;max-width:430px}
+.nv .quotebox p{font-size:17px}
+.nv .step h3.fit1{white-space:nowrap;font-size:clamp(12px,3.9vw,18px);letter-spacing:-.3px}
+.nv .step .arrow{display:none}
+.nv .guar{flex-direction:column;text-align:center}
+.nv .dreamrow{flex-direction:column;gap:22px}
+.nv .dreamrow img{width:84vw;max-width:84vw;margin-left:auto;margin-right:auto}
+.nv .dreamrow h2{text-align:center;font-size:26px}
+}
+
+.nv .cal{max-width:420px;margin:26px auto 0;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 70px -25px rgba(123,46,93,.4);overflow:hidden;text-align:left}
+.nv .cal .calhd{background:var(--grad);color:#fff;padding:14px 18px;font-family:'Space Grotesk',sans-serif;font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:15px}
+.nv .cal .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;padding:16px}
+.nv .cal .cd{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:#F7EEF3;color:#9a8ea3}
+.nv .cal .cd.bk{background:var(--grad);color:#fff;box-shadow:0 4px 10px -4px rgba(123,46,93,.5)}
+.nv .cal .calft{padding:12px 18px 16px;font-size:12.5px;color:var(--muted);font-weight:600;border-top:1px solid var(--line)}
+.nv .cal .calft b{color:#15803D}
+</style>
+<div class="nv">
+<div class="ribbon">💍 New Cohort Open — 12 Bonuses For The Next 30 Members</div>
+<div class="nav"><div class="logo"><span class="mark"><span>📅</span></span>Booked Calendar Blueprint</div></div>
+
+<!-- HERO -->
+<div class="nvsec hero" style="padding-top:8px">
+  <div class="wrap">
+    <span class="eyebrow">For Wedding Photographers 👇</span>
+    <h1>Get Your Calendar <span class="grad-txt">Booked A Year Out</span> By Local Wedding Planners <span class="mag">(Without Ads Or Expos)</span></h1>
+    <p class="sub">A simple planner-referral system that quietly fills your dates — at your real price. No running ads, no posting every day, no discounting, no dancing for the algorithm. <br><strong style="color:var(--txt)">Just planners sending you couples.</strong></p>
+    <div class="video">
+      <div class="play"></div>
+      <div class="vtag">▶ Watch: how the planner-referral system works</div>
+    </div>
+    <a href="#checkout" class="cta">Get Instant Access For $6.95<small>Instant access · start today</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>90-Day "Do The Work" Guarantee</span></div>
+    <div class="cta-note">Join photographers filling next year's calendar — planners do the marketing.</div>
+  </div>
+</div>
+
+<!-- STAT / SHOCKING STATEMENT BAND -->
+<div class="nvsec band center">
+  <div class="wrap">
+    <h2>There's Already <span class="grad-txt">A List</span>. You're Either On It… Or Invisible.</h2>
+    <p class="lead" style="margin-top:14px">In almost every town, a handful of wedding planners already decided who shoots most of the best weddings this year. It's not the economy. It's not your photos. It's not "too much competition." Nobody ever told you the list exists — let alone how to get on it.</p>
+    <div class="cal">
+      <div class="calhd"><span>Next October</span><span>✓ Fully Booked</span></div>
+      <div class="calgrid"><div class="cd">1</div><div class="cd">2</div><div class="cd">3</div><div class="cd bk">4</div><div class="cd bk">5</div><div class="cd">6</div><div class="cd">7</div><div class="cd">8</div><div class="cd bk">9</div><div class="cd">10</div><div class="cd">11</div><div class="cd bk">12</div><div class="cd bk">13</div><div class="cd">14</div><div class="cd">15</div><div class="cd bk">16</div><div class="cd">17</div><div class="cd bk">18</div><div class="cd bk">19</div><div class="cd">20</div><div class="cd">21</div><div class="cd">22</div><div class="cd bk">23</div><div class="cd bk">24</div><div class="cd bk">25</div><div class="cd">26</div><div class="cd bk">27</div><div class="cd">28</div><div class="cd">29</div><div class="cd bk">30</div></div>
+      <div class="calft">📅 <b>13 dates booked</b> — every one sent by a planner, at full price.</div>
+    </div>
+    <div class="pcap" style="margin-top:16px">This is what a planner-fed calendar looks like a year out.</div>
+  </div>
+</div>
+
+<!-- MECHANISM 3 STEP -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">The Method</span>
+    <h2 class="sec">The 3-Step Planner-Referral System</h2>
+    <p class="lead">In the next 90 days you can flip this — not with more marketing, but with a system built for working photographers. You're not chasing couples anymore. You're serving the few people who already choose who gets hired.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3>Build Your Planner Map</h3><p>In one evening, find and sort every working planner in your market — and see exactly who already controls the calendar.</p><div class="arrow">➜</div></div>
+      <div class="step"><span class="n">2</span><h3>Send The "Reverse Pitch"</h3><p>Fill-in-the-blank outreach that gets 3–5 planners happy to meet you and start sending couples — without ever "selling yourself."</p><div class="arrow">➜</div></div>
+      <div class="step"><span class="n">3</span><h3>Turn Jobs Into A Pipeline</h3><p>A simple follow-up + agreement framework that turns one referred wedding into a standing stream of bookings at your real price.</p></div>
+    </div>
+    <div class="pill">✅ Works whether you shoot 10 or 25 weddings a year — in a town of 30k or a city of 3 million</div>
+  </div>
+</div>
+
+<!-- STUDENT PROOF -->
+<div class="nvsec band">
+  <div class="wrap">
+    <div class="studentrow" style="justify-content:center">
+      <h2 class="sec">"Two planners later, I've got <span class="pop">11 weddings</span> on the books for next year — and I never pitched once."</h2>
+    </div>
+    <p class="lead" style="margin-top:14px">— Megan R., who went from ten inquiries and zero bookings in March to a full calendar by February, just by following the outreach scripts.</p>
+  </div>
+</div>
+
+<!-- REQUIRES NO -->
+<div class="nvsec">
+  <div class="wrap center">
+    <span class="eyebrow">The New Way</span>
+    <h2 class="sec">Fill Your Calendar — With <span class="grad-txt">NO</span>:</h2>
+    <div class="nolist" style="text-align:left">
+      <div class="noitem">Running ads</div>
+      <div class="noitem">Posting every day</div>
+      <div class="noitem">Discounting your packages</div>
+      <div class="noitem">Standing at expo booths</div>
+      <div class="noitem">Dancing for the algorithm</div>
+      <div class="noitem">Cringey "sell yourself" calls</div>
+    </div>
+  </div>
+</div>
+
+<!-- MID CTA -->
+<div class="nvsec center" style="padding-top:0"><div class="wrap"><a href="#checkout" class="cta">Get Instant Access For $6.95<small>Instant access · start today</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>90-Day "Do The Work" Guarantee</span></div></div></div>
+
+<!-- EASY WAY BAND -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <h2 class="sec">This Is The Calm, Dependable Way To Book In <span class="grad-txt">2026</span></h2>
+    <p class="lead">Imagine a Tuesday in February: you open your laptop and go straight to your calendar instead of your inbox. Next October is already full. So is September. This month's money is banked — next month's too. Same steady number, every month. You're not "hoping it works out" anymore. You're <strong style="color:var(--txt)">the photographer in your town.</strong></p>
+  </div>
+</div>
+
+<!-- WHY I BUILT THIS -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="quotebox">
+      <p>For years I did it the hard way — posting daily, paying for listings, standing at expo booths. Booked solid in October, broke by February. Then one planner sent me a single wedding: easiest booking of my life, no pitch, no discount. <strong>That's when it hit me — the couples were never my real buyers. The planners were.</strong> So I built a simple system around them. That's why this Blueprint exists.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COPY & PASTE THIS SYSTEM + BUNDLE -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <span class="eyebrow">Everything Included</span>
+    <h2 class="sec">The Complete Booked-Calendar System</h2>
+    <img src="https://facelessreelslab-assets.onrender.com/booked-calendar-bundle.jpg?v=1" alt="The 90-Day Booked Calendar Blueprint: roadmap, outreach playbook, tier-sorting map, booked calendar" loading="lazy" style="display:block;width:100%;max-width:520px;height:auto;margin:26px auto 4px;border-radius:16px">
+    <div class="steps" style="text-align:left;margin-top:10px">
+      <div class="step"><span class="n">1</span><h3>Build the list 🗺️</h3><p>Find and tier-sort the planners who already control the calendar in your market.</p></div>
+      <div class="step"><span class="n">2</span><h3>Send the outreach 💌</h3><p>Use the fill-in-the-blank "reverse pitch" so planners come to you — no salesy calls.</p></div>
+      <div class="step"><span class="n">3</span><h3>Let planners send couples 💍</h3><p>Follow the follow-up + agreement framework and turn referrals into a steady pipeline.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Inside The Blueprint</span>
+    <h2 class="sec">A Fraction Of What You'll Unlock</h2></div>
+    <div class="gold">
+      <div class="gitem"><span class="ic">🗺️</span><div><h3>Planner Discovery Method + List Sprint</h3><p>Find and tier-sort every working planner in your market in one sitting.</p></div></div>
+      <div class="gitem"><span class="ic">💌</span><div><h3>Fill-In-The-Blank Outreach Vault</h3><p>The exact "reverse pitch" messages that get planners meeting you — not the other way around.</p></div></div>
+      <div class="gitem"><span class="ic">👻</span><div><h3>Ghost-Proof Follow-Up Sequence</h3><p>Simple follow-ups that keep you top-of-mind without ever feeling pushy.</p></div></div>
+      <div class="gitem"><span class="ic">🤝</span><div><h3>Referral Agreement Blueprint</h3><p>Clean-terms frameworks that turn a warm planner into a standing referral partner.</p></div></div>
+      <div class="gitem"><span class="ic">💎</span><div><h3>Planner-Grade Positioning Kit</h3><p>Position yourself in front of couples who were never shopping on price.</p></div></div>
+      <div class="gitem"><span class="ic">🔁</span><div><h3>Repeat-Referral + Network Multiplier</h3><p>Turn a handful of planners into a 12-month stability roadmap of steady bookings.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS / TESTIMONIALS -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <span class="eyebrow">Real Photographers</span>
+    <h2 class="sec">What Happens When Planners Do The Marketing</h2>
+    <div class="gold" style="margin-top:30px">
+      <div class="gitem"><span class="ic">📸</span><div><h3>Megan R.</h3><p>"Ten inquiries, zero bookings in March. Two planners later, 11 weddings on the books for next year — and it's only February. I never pitched once."</p></div></div>
+      <div class="gitem"><span class="ic">📸</span><div><h3>Danny T.</h3><p>"I thought my town was too saturated. Fewer weddings, calmer months, and a steadier income than I've ever had. The planners here were already sending work to someone — it just wasn't me."</p></div></div>
+      <div class="gitem"><span class="ic">📸</span><div><h3>Priya K.</h3><p>"I'm an artist, not a salesperson — I always froze at 'sell yourself.' First planner said yes in three weeks and sent me a full-rate wedding. No discount, no weird sales call."</p></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="nv">
+<!-- GUARANTEE -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="guar">
+      <div class="badge" style="width:112px;height:112px;font-size:12.5px">90 DAYS<br>MY<br>RISK</div>
+      <div>
+        <h3>The Booked Calendar Guarantee</h3>
+        <p>Build your planner list. Send the outreach. Run the follow-ups exactly as I show you. If you do the work and don't land a single planner-referral relationship in 90 days, email me and I'll refund every cent of your $6.95. No forms, no begging — just show you tried.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCARCITY -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="scar">
+      <div class="num grad-txt">30</div>
+      <h3 class="sec" style="margin-bottom:10px">The 12 Bonuses Are For The Next 30 Members</h3>
+      <p class="lead">After that, the Blueprint is still $6.95 — but the bonuses disappear. Every week you wait is another week planners fill next year's dates with photographers who aren't you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE STACK -->
+<div class="nvsec band">
+  <div class="wrap center">
+    <span class="eyebrow">Here's Everything You Get</span>
+    <h2 class="sec">Join The Blueprint Today</h2>
+    <div class="stack" style="text-align:left">
+      <div class="srow"><span>📅 The 90-Day Booked Calendar Roadmap</span><span class="v">$1,500</span></div>
+      <div class="srow"><span>💌 The Non-Salesy Outreach Playbook</span><span class="v">$1,200</span></div>
+      <div class="srow"><span>🗺️ The Tier-Sorting Map</span><span class="v">$900</span></div>
+      <div class="srow"><span>🎁 12 Fast-Action Bonuses (next 30 only)</span><span class="v">$17,400</span></div>
+      <div class="stotal"><span>Total Value</span><span>$21,000+</span></div>
+      <div class="sreg"><span>Regular Price</span><span><s style="color:#DC2626">$497</s></span></div>
+      <div class="sfinal">
+        <div style="color:var(--muted);font-size:14px;margin-bottom:4px">Get instant access today for only</div>
+        <div class="big grad-txt">$6.95</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:4px">Delivered instantly · one evening to build your list</div>
+      </div>
+    </div>
+    <div style="margin-top:26px"><a href="#checkout" class="cta">Get Instant Access For $6.95<small>Instant access · start today</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>90-Day "Do The Work" Guarantee</span></div></div>
+  </div>
+</div>
+
+</div>
+<section id="checkout" style="background:#fff;margin:0 auto;max-width:560px;padding:34px 24px;text-align:center;font-family:Arial;color:#94a3b8;border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7"><div style="font-size:13px;letter-spacing:.05em;text-transform:uppercase">— native ClickFunnels order form sits here —</div></section><style>
+/* NOVA·AI full-bleed v3 — pure CSS (no JS layout mutation, so it never interferes with CF's
+   scroll-to-form on checkout submit). On phones each .nv breaks out of CF's padded row to the
+   full viewport width, centered. Global rule → covers every custom-HTML block on the page. */
+@media(max-width:640px){.nv{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;box-sizing:border-box}}
+#nova-next{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}</style>
+<script>
+/* NOVA·AI CTA behavior:
+   1) If a hidden native CF button with ID "nova-next" exists (jump-to-next-step pages), click it.
+   2) Otherwise (on-page checkout): smooth-scroll to the native ClickFunnels order form,
+      which must have Element ID "checkout" (falls back to any element whose id/class contains
+      "checkout" or "order-form").
+   Self-correcting: lazy-loaded images between the CTA and the form can grow the page mid-scroll
+      and make a long scroll undershoot. So we re-aim a few times over ~1.8s, but only while still
+      off-target (won't yank the user once they've arrived or if they scroll away themselves). */
+function novaFindCheckout(){return document.getElementById('checkout')||
+  document.querySelector('[id*="checkout" i],[class*="checkout" i],[class*="order-form" i]');}
+document.addEventListener('click',function(e){
+  var a=e.target.closest('.nv a.cta'); if(!a) return;
+  var host=document.getElementById('nova-next');
+  if(host){var btn=host.matches('a,button')?host:host.querySelector('a,button');
+    if(btn){e.preventDefault();btn.click();return;}}
+  var t=novaFindCheckout(); if(!t) return;
+  e.preventDefault();
+  var stop=false;
+  function cancel(){stop=true;
+    window.removeEventListener('wheel',cancel);window.removeEventListener('touchmove',cancel);window.removeEventListener('keydown',cancel);}
+  /* the moment the user scrolls themselves, quit auto-correcting so we never yank them back */
+  window.addEventListener('wheel',cancel,{passive:true});
+  window.addEventListener('touchmove',cancel,{passive:true});
+  window.addEventListener('keydown',cancel);
+  var aim=function(){if(stop) return; var el=novaFindCheckout(); if(!el) return;
+    if(Math.abs(el.getBoundingClientRect().top)>80){el.scrollIntoView({behavior:'smooth',block:'start'});}};
+  aim();[350,800,1300].forEach(function(ms){setTimeout(aim,ms);});
+  setTimeout(cancel,1500);
+});
+</script>
+<div class="nv">
+<!-- FAQ -->
+<div class="nvsec">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">FAQ</span><h2 class="sec">Still Got Questions?</h2></div>
+    <div class="faq">
+      <div class="fitem"><h3>My market feels saturated — will this still work?</h3><p>That's the point. The planners are already there sending weddings to someone. This just gets them sending to you — whether you're in a town of 30,000 or a city of 3 million.</p></div>
+      <div class="fitem"><h3>I'm an artist, not a salesperson. Is this too "business-y"?</h3><p>The outreach is fill-in-the-blank. Planners end up pitching you — no cringe calls, no "selling yourself."</p></div>
+      <div class="fitem"><h3>Do I need to run ads or post every day?</h3><p>No. No ads, no daily posting, no expos, no discounting. Just a planner list and a few messages.</p></div>
+      <div class="fitem"><h3>How much time does it take?</h3><p>About one evening to build your list and one afternoon to send the outreach. Then follow-ups as planners reply.</p></div>
+      <div class="fitem"><h3>What exactly do I get?</h3><p>The 90-Day Roadmap, the Non-Salesy Outreach Playbook, the Tier-Sorting Map — plus 12 fast-action bonuses if you're one of the next 30 members.</p></div>
+      <div class="fitem"><h3>What if it doesn't work for me?</h3><p>Do the work for 90 days. If you don't land a single planner-referral relationship, email me for a full refund. Results vary and depend on the effort you put in.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="nvsec center" style="padding-top:0;margin-top:-30px"><div class="wrap"><a href="#checkout" class="cta">Get Instant Access For $6.95<small>Plus 12 bonuses for the next 30</small></a>
+    <div class="gline"><span class="gbadge"><span class="seal">★</span>90-Day "Do The Work" Guarantee</span></div></div></div>
+
+<div class="footer">
+  <div class="wrap">
+    <div class="flogo">📅 The 90-Day Booked Calendar Blueprint</div>
+    <div>Terms &amp; Conditions · Privacy Policy · Contact: <a href="mailto:hello@example.com">hello@example.com</a></div>
+    <div class="disc">Results vary and depend on your own effort, market and follow-through. This is an educational program and does not guarantee any specific bookings or income. Testimonials are individual experiences and are not typical. All product names and brands are property of their respective owners.</div>
+  </div>
+</div>
+</div>
+</body></html>
