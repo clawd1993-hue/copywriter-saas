@@ -1,5 +1,10 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview</title><style>html,body{margin:0;padding:0;background:#fff}</style></head><body><!-- NOVA·AI — BLOCK 1 (paste into a Custom JS/HTML element) -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Grand+Hotel&display=swap" rel="stylesheet">
+<!-- VSL speed: warm Vidalytics connection + pre-fetch the player files early (block 1 = top of page) so the loader in block 2 fires against cache. No crossorigin → matches the async script fetch (no double download). -->
+<link rel="preconnect" href="https://fast.vidalytics.com">
+<link rel="dns-prefetch" href="https://fast.vidalytics.com">
+<link rel="preload" as="script" href="https://fast.vidalytics.com/embeds/wWEapjh9/avFUxrsTU2eqmAAg/loader.min.js">
+<link rel="preload" as="script" href="https://fast.vidalytics.com/embeds/wWEapjh9/avFUxrsTU2eqmAAg/player.min.js">
 <style>
 .nv{width:100%;max-width:none;box-sizing:border-box;text-align:left}
 .nv,.nv *{box-sizing:border-box}
