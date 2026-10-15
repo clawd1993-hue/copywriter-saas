@@ -6,38 +6,31 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Faceless Creators Hub — Silo Checklist</title>
 <style>
-  :root{--bg:#0b0f1a;--card:#121829;--card2:#0e1424;--line:#1e2740;--txt:#e7ecf6;
-    --muted:#8a93a9;--accent:#6d5efc;--accent2:#22d3ee;--ok:#22c55e;--warn:#f59e0b}
+  :root{--bg:#0b0f1a;--card2:#0e1424;--line:#1e2740;--txt:#e7ecf6;
+    --muted:#8a93a9;--accent:#6d5efc;--accent2:#22d3ee;--ok:#22c55e}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{margin:0;background:var(--bg);color:var(--txt);
-    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 0 60px}
-  .wrap{max-width:720px;margin:0 auto;padding:16px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 0 50px}
+  .wrap{max-width:620px;margin:0 auto;padding:20px 16px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
   .brand .dot{width:12px;height:12px;border-radius:50%;
     background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 14px var(--accent)}
-  .sub{color:var(--muted);font-size:13px;margin:3px 0 12px}
-  .progress{height:9px;background:var(--line);border-radius:999px;overflow:hidden;margin:4px 0}
+  .sub{color:var(--muted);font-size:13px;margin:4px 0 14px}
+  .progress{height:9px;background:var(--line);border-radius:999px;overflow:hidden}
   .progress>i{display:block;height:100%;width:0;border-radius:999px;
     background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .25s}
-  .pct{font-size:13px;color:var(--muted);text-align:right;margin-bottom:12px}
-  .golden{background:linear-gradient(135deg,#1a1430,#141a2d);border:1px solid #2c2550;border-radius:12px;
-    padding:11px 13px;margin:0 0 16px;font-size:13px;color:#cdc6ff}
-  .golden b{color:#fff}
-  h2{font-size:14px;letter-spacing:.3px;color:var(--accent2);margin:20px 0 6px;text-transform:uppercase}
-  h2:first-of-type{margin-top:6px}
-  .item{display:flex;gap:12px;align-items:flex-start;padding:12px 4px;border-bottom:1px solid var(--card2);cursor:pointer}
+  .pct{font-size:13px;color:var(--muted);text-align:right;margin:5px 0 16px}
+  .item{display:flex;gap:14px;align-items:center;padding:16px 6px;border-bottom:1px solid var(--card2);cursor:pointer}
   .item:active{background:var(--card2)}
-  .box{flex:none;width:26px;height:26px;border-radius:7px;border:2px solid #3a4566;
-    display:grid;place-items:center;transition:.15s;font-size:16px;color:#fff;font-weight:700}
+  .num{flex:none;width:22px;color:var(--muted);font-size:13px;text-align:right}
+  .box{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid #3a4566;
+    display:grid;place-items:center;transition:.15s;font-size:17px;color:#fff;font-weight:700}
   .item.done .box{background:linear-gradient(135deg,var(--ok),#16a34a);border-color:transparent}
   .item.done .box::after{content:"✓"}
-  .lbl{flex:1;font-size:15px;padding-top:2px}
+  .lbl{flex:1;font-size:16px}
   .item.done .lbl{color:var(--muted);text-decoration:line-through;text-decoration-color:#3a4566}
-  .note{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;text-decoration:none!important}
-  .warn{color:var(--warn);font-weight:700}
-  .resetbtn{margin-top:22px;background:var(--card2);border:1px solid #3a2030;color:#ff9d9d;
-    border-radius:10px;padding:11px 14px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
-  footer{color:var(--muted);font-size:11.5px;text-align:center;margin-top:16px}
+  .resetbtn{margin-top:24px;background:var(--card2);border:1px solid #3a2030;color:#ff9d9d;
+    border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
   .banner{background:linear-gradient(135deg,#0d2a1a,#0e2420);border:1px solid #1d5c3c;color:#8ff0bd;
     border-radius:12px;padding:13px;text-align:center;font-weight:700;margin-bottom:14px;display:none}
 </style>
@@ -45,102 +38,48 @@
 <body>
 <div class="wrap">
   <div class="brand"><span class="dot"></span>Faceless Creators Hub</div>
-  <div class="sub">🏗️ New Silo / Funnel Launch Checklist</div>
+  <div class="sub">🏭 Silo Setup Checklist</div>
   <div class="progress"><i id="bar"></i></div>
-  <div class="pct" id="pct">0 / 0</div>
+  <div class="pct" id="pct">0 / 8</div>
 
-  <div class="banner" id="banner">🎉 All done — silo built, verified, ready to launch.</div>
-
-  <div class="golden">⛔ <b>GOLDEN RULE:</b> one silo = one isolated bubble. ZERO shared signal (fingerprint · IP · login · payment · domain · <b>pixel</b> · page) with any other silo or the banned profile. About to reuse anything? → stop.</div>
-
+  <div class="banner" id="banner">✅ Silo setup complete.</div>
   <div id="list"></div>
 
-  <button class="resetbtn" id="reset">↺ Reset checklist (start a new silo)</button>
-  <footer>Saves on this device. Full detail: bm-silo-build-sop.md</footer>
+  <button class="resetbtn" id="reset">↺ Reset (new silo)</button>
 </div>
 
 <script>
-const DATA=[
- ["🧍 Persona + Infrastructure (FIRST)",[
-   ["Fresh persona — not you, not linked to banned profile","Aged/bought acct = use its own email+login"],
-   ["New AdsPower profile — fingerprint on AUTO","Fresh only. Never reuse a used profile"],
-   ["IPFoxy proxy — Static Residential / Native ISP Zone A","One per profile, geo-matched. Auto-renew ON. Check = green"],
-   ["Separate payment rail",""],
-   ["Virtual OTP phone (5sim / SMS-Activate)",""],
-   ["Warm profile LOGGED-OUT, 2-3 sessions over 1-2 days","Google/YouTube/Reddit, same IP, US content. THEN log into Meta"],
- ]],
- ["🏢 New BM",[
-   ["Create new Business Manager","Name: FFC — MMO — US — 2026"],
-   ["Ad account · Special Ad Category = Financial Products & Services",""],
- ]],
- ["📄 New Page",[["Create new Page for this silo","Keep clean, protect feedback score"]]],
- ["🎯 New Pixel",[
-   ["Create new pixel in this BM","This silo's alone — never on another funnel"],
-   ["Copy the Pixel ID (needed below)",""],
- ]],
- ["🧩 Add Pixel to Funnel",[
-   ["Pixel on the OPTIN / landing page ONLY","CF: via whop-cf-bridge or native pixel field"],
-   ["🚫 NO pixel on the spicy post-optin pages","Let Hyros CAPI carry those conversions"],
- ]],
- ["🔗 New Hyros Domain Connect",[
-   ["Connect a FRESH white-label subdomain for this silo",""],
-   ["Connect Stripe + apply the per-launch tag",""],
-   ["⚠️ Set Hyros to forward LEADS + PURCHASE to THIS pixel","Off by default — burned us before"],
- ]],
- ["📡 Hyros Tracking Code on Funnel",[
-   ["Add Hyros universal script (with this silo's tag)",""],
-   ["Verify: page source has /v1/lst/universal-script","Searching 'hyros' returns 0 — custom domain"],
- ]],
- ["🔔 ProveSource",[
-   ["Add ProveSource snippet","One account everywhere is fine"],
-   ["Set up the notification campaign",""],
- ]],
- ["🔌 Hyros ↔ Meta Auth",[
-   ["Authorize from INSIDE this AdsPower profile · Hyros login = email/password","NEVER 'Login with Google' = identity poison"],
- ]],
- ["🧪 Pre-Launch Verify",[
-   ["Test optin → pixel fires on clean page",""],
-   ["Test purchase → Hyros logs + forwards Purchase to this pixel",""],
-   ["ProveSource shows on live page",""],
-   ["NO pixel on spicy pages (view source)",""],
-   ["Mobile-check the live URL",""],
- ]],
- ["🚀 Launch Behavior",[
-   ["Warm $20-50/day, 7 days, ZERO changes",""],
-   ["Scale +20% every 2-3 days, never a jump. Horizontal > vertical",""],
-   ["New creative every 2 weeks, frequency <3, UGC",""],
- ]],
+const ITEMS=[
+  "New profile",
+  "New BM",
+  "New page",
+  "New pixel",
+  "Add pixel to funnel",
+  "New Hyros domain connect",
+  "Hyros tracking code on funnel",
+  "ProveSource code added and setup",
 ];
-const LS="fch_single_v1";
+const LS="fch_v2";
 let done=JSON.parse(localStorage.getItem(LS)||"{}");
 const list=document.getElementById("list");
-let html="";
-DATA.forEach((sec,si)=>{
-  html+=`<h2>${sec[0]}</h2>`;
-  sec[1].forEach((it,ii)=>{
-    const id=si+"-"+ii;
-    const note=it[1]?`<span class="note">${it[1].replace(/⚠️/,'<span class="warn">⚠️</span>')}</span>`:"";
-    html+=`<div class="item ${done[id]?'done':''}" data-id="${id}"><div class="box"></div><div class="lbl">${it[0]}${note}</div></div>`;
-  });
-});
-list.innerHTML=html;
+list.innerHTML=ITEMS.map((t,i)=>
+  `<div class="item ${done[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><div class="box"></div><div class="lbl">${t}</div></div>`
+).join("");
 function bar(){
-  let t=0,d=0;
-  DATA.forEach((s,si)=>s[1].forEach((_,ii)=>{t++;if(done[si+"-"+ii])d++;}));
-  const p=t?Math.round(d/t*100):0;
+  const d=ITEMS.filter((_,i)=>done[i]).length,p=Math.round(d/ITEMS.length*100);
   document.getElementById("bar").style.width=p+"%";
-  document.getElementById("pct").textContent=d+" / "+t+"  ·  "+p+"%";
-  document.getElementById("banner").style.display=(t&&d===t)?"block":"none";
+  document.getElementById("pct").textContent=d+" / "+ITEMS.length;
+  document.getElementById("banner").style.display=(d===ITEMS.length)?"block":"none";
 }
 list.addEventListener("click",e=>{
-  const it=e.target.closest("[data-id]");if(!it)return;
-  const id=it.dataset.id;done[id]=!done[id];
-  it.classList.toggle("done",done[id]);
+  const it=e.target.closest("[data-i]");if(!it)return;
+  const i=it.dataset.i;done[i]=!done[i];
+  it.classList.toggle("done",done[i]);
   localStorage.setItem(LS,JSON.stringify(done));bar();
 });
 document.getElementById("reset").onclick=()=>{
-  if(confirm("Reset all boxes to start a fresh silo?")){done={};localStorage.setItem(LS,"{}");
-    document.querySelectorAll(".item").forEach(i=>i.classList.remove("done"));bar();}
+  if(confirm("Reset all boxes?")){done={};localStorage.setItem(LS,"{}");
+    document.querySelectorAll(".item").forEach(x=>x.classList.remove("done"));bar();}
 };
 bar();
 </script>
