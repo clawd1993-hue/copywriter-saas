@@ -28,7 +28,10 @@
   .item.done .box{background:linear-gradient(135deg,var(--ok),#16a34a);border-color:transparent}
   .item.done .box::after{content:"✓"}
   .lbl{flex:1;font-size:16px}
+  .lbl .note{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;text-decoration:none}
+  .lbl .warn{color:#f59e0b;font-weight:700}
   .item.done .lbl{color:var(--muted);text-decoration:line-through;text-decoration-color:#3a4566}
+  .item.done .lbl .note{text-decoration:line-through;text-decoration-color:#3a4566}
   .resetbtn{margin-top:24px;background:var(--card2);border:1px solid #3a2030;color:#ff9d9d;
     border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
   .banner{background:linear-gradient(135deg,#0d2a1a,#0e2420);border:1px solid #1d5c3c;color:#8ff0bd;
@@ -40,7 +43,7 @@
   <div class="brand"><span class="dot"></span>Faceless Creators Hub</div>
   <div class="sub">🏭 Silo Setup Checklist</div>
   <div class="progress"><i id="bar"></i></div>
-  <div class="pct" id="pct">0 / 8</div>
+  <div class="pct" id="pct">0 / 9</div>
 
   <div class="banner" id="banner">✅ Silo setup complete.</div>
   <div id="list"></div>
@@ -50,21 +53,23 @@
 
 <script>
 const ITEMS=[
-  "New profile",
-  "New BM",
-  "New page",
-  "New pixel",
-  "Add pixel to funnel",
-  "New Hyros domain connect",
-  "Hyros tracking code on funnel",
-  "ProveSource code added and setup",
+  ["New profile"],
+  ["New BM"],
+  ["New page"],
+  ["New pixel"],
+  ["Add pixel to funnel"],
+  ["New Hyros domain connect"],
+  ["Hyros tracking code on funnel"],
+  ['<span class="warn">⚠️</span> Set Hyros to forward LEADS + PURCHASE to THIS pixel',"Off by default — burned us before"],
+  ["ProveSource code added and setup"],
 ];
-const LS="fch_v2";
+const LS="fch_v3";
 let done=JSON.parse(localStorage.getItem(LS)||"{}");
 const list=document.getElementById("list");
-list.innerHTML=ITEMS.map((t,i)=>
-  `<div class="item ${done[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><div class="box"></div><div class="lbl">${t}</div></div>`
-).join("");
+list.innerHTML=ITEMS.map((it,i)=>{
+  const note=it[1]?`<span class="note">${it[1]}</span>`:"";
+  return `<div class="item ${done[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><div class="box"></div><div class="lbl">${it[0]}${note}</div></div>`;
+}).join("");
 function bar(){
   const d=ITEMS.filter((_,i)=>done[i]).length,p=Math.round(d/ITEMS.length*100);
   document.getElementById("bar").style.width=p+"%";
