@@ -62,10 +62,10 @@ const ITEMS=[
   ["Fix downsell flow"],
   ["New Hyros domain connect"],
   ["Hyros tracking code on funnel"],
-  ['<span class="warn">⚠️</span> Set Hyros to forward LEADS + PURCHASE to THIS pixel',"Off by default — burned us before"],
+  ["Set Hyros to forward Leads + Purchase to new pixel"],
   ["ProveSource code added and setup"],
 ];
-const LS="fch_v5";
+const LS="fch_v6";
 let done=JSON.parse(localStorage.getItem(LS)||"{}");
 const list=document.getElementById("list");
 list.innerHTML=ITEMS.map((it,i)=>{
