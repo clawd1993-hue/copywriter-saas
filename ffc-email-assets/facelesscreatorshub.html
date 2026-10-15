@@ -43,7 +43,7 @@
   <div class="brand"><span class="dot"></span>Faceless Creators Hub</div>
   <div class="sub">🏭 Silo Setup Checklist</div>
   <div class="progress"><i id="bar"></i></div>
-  <div class="pct" id="pct">0 / 11</div>
+  <div class="pct" id="pct">0 / 13</div>
 
   <div class="banner" id="banner">✅ Silo setup complete.</div>
   <div id="list"></div>
@@ -64,8 +64,10 @@ const ITEMS=[
   ["Hyros tracking code on funnel"],
   ["Set Hyros to forward Leads + Purchase to new pixel"],
   ["ProveSource code added and setup"],
+  ["Warm up ad launched"],
+  ["Sales ad launched"],
 ];
-const LS="fch_v6";
+const LS="fch_v7";
 let done=JSON.parse(localStorage.getItem(LS)||"{}");
 const list=document.getElementById("list");
 list.innerHTML=ITEMS.map((it,i)=>{
