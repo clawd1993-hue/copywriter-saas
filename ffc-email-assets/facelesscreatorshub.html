@@ -43,7 +43,7 @@
   <div class="brand"><span class="dot"></span>Faceless Creators Hub</div>
   <div class="sub">🏭 Silo Setup Checklist</div>
   <div class="progress"><i id="bar"></i></div>
-  <div class="pct" id="pct">0 / 9</div>
+  <div class="pct" id="pct">0 / 10</div>
 
   <div class="banner" id="banner">✅ Silo setup complete.</div>
   <div id="list"></div>
@@ -58,12 +58,13 @@ const ITEMS=[
   ["New page"],
   ["New pixel"],
   ["Add pixel to funnel"],
+  ["Publish funnel on new domain"],
   ["New Hyros domain connect"],
   ["Hyros tracking code on funnel"],
   ['<span class="warn">⚠️</span> Set Hyros to forward LEADS + PURCHASE to THIS pixel',"Off by default — burned us before"],
   ["ProveSource code added and setup"],
 ];
-const LS="fch_v3";
+const LS="fch_v4";
 let done=JSON.parse(localStorage.getItem(LS)||"{}");
 const list=document.getElementById("list");
 list.innerHTML=ITEMS.map((it,i)=>{
