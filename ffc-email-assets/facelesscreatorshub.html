@@ -163,9 +163,17 @@ function loadState(id){
 let noteTimer=null;
 function saveNotes(){
   const id=curId();if(!id)return;
-  localStorage.setItem(notesKey(id),notes.value);
+  const val=notes.value;                 // capture id + value NOW, not when the timer fires
+  localStorage.setItem(notesKey(id),val);
   clearTimeout(noteTimer);
-  noteTimer=setTimeout(()=>{fetch(NOTES_API(id),{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:notes.value})}).catch(()=>{});},500);
+  noteTimer=setTimeout(()=>{noteTimer=null;fetch(NOTES_API(id),{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:val})}).catch(()=>{});},500);
+}
+function flushNotes(){                    // push any pending note for the CURRENT checklist before we switch away
+  if(noteTimer){clearTimeout(noteTimer);noteTimer=null;}
+  const id=curId();if(!id)return;
+  const val=notes.value;
+  localStorage.setItem(notesKey(id),val);
+  fetch(NOTES_API(id),{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:val})}).catch(()=>{});
 }
 function loadNotes(id){
   notes.value=localStorage.getItem(notesKey(id))||"";
@@ -179,11 +187,12 @@ function loadNotes(id){
 function setHash(id){try{history.replaceState(null,"",location.pathname+location.search+"#"+encodeURIComponent(id));}catch(e){location.hash=id;}}
 function hashId(){try{return decodeURIComponent((location.hash||"").replace(/^#/,""))||null;}catch(e){return null;}}
 function applyHash(){const h=hashId();if(h&&index.checklists.find(c=>c.id===h)){index.current=h;return true;}return false;}
-function switchTo(id){index.current=id;renderPicker();saveIndex();setHash(id);loadState(id);}
+function switchTo(id){if(id===index.current)return;flushNotes();index.current=id;renderPicker();saveIndex();setHash(id);loadState(id);}
 
 function newChecklist(){
   const name=(prompt("Name this checklist (profile / domain):")||"").trim();
   if(!name)return;
+  flushNotes();
   const id=slug(name)+"-"+Date.now().toString(36);
   index.checklists.push({id,name,created:new Date().toISOString()});
   index.current=id;done={};notes.value="";
@@ -230,7 +239,8 @@ fetch(INDEX_API).then(r=>r.json()).then(d=>{
   }else{saveIndex();}
 }).catch(()=>{});
 // react to back/forward or pasted #hash while open
-window.addEventListener("hashchange",()=>{const h=hashId();if(h&&h!==index.current&&index.checklists.find(c=>c.id===h)){index.current=h;renderPicker();loadState(h);}});
+window.addEventListener("hashchange",()=>{const h=hashId();if(h&&h!==index.current&&index.checklists.find(c=>c.id===h)){flushNotes();index.current=h;renderPicker();loadState(h);}});
+window.addEventListener("beforeunload",flushNotes);
 </script>
 </body>
 </html>
