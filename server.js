@@ -151,6 +151,29 @@ app.put('/api/checklist/:id', async (req, res) => {
   return res.status(502).json({ error: 'save failed', detail: up.status });
 });
 
+// General small-JSON KV (same bucket, isolated, auth-free) — used by the multi-checklist index.
+app.options('/api/kv/:key', (req, res) => { checklistCors(res); res.status(204).end(); });
+app.get('/api/kv/:key', async (req, res) => {
+  checklistCors(res);
+  const key = cleanChecklistId(req.params.key);
+  if (!key) return res.json({ value: null });
+  const r = await supaStorage('GET', `/storage/v1/object/${CHECKLIST_BUCKET}/kv-${key}.json`);
+  if (r.status === 200) { try { return res.json({ value: JSON.parse(r.data) }); } catch { return res.json({ value: null }); } }
+  return res.json({ value: null });
+});
+app.put('/api/kv/:key', async (req, res) => {
+  checklistCors(res);
+  const key = cleanChecklistId(req.params.key);
+  if (!key) return res.status(400).json({ error: 'bad key' });
+  const value = req.body && typeof req.body === 'object' ? ('value' in req.body ? req.body.value : req.body) : req.body;
+  const payload = JSON.stringify(value === undefined ? null : value);
+  if (payload.length > 20000) return res.status(413).json({ error: 'too big' });
+  await supaStorage('POST', '/storage/v1/bucket', { id: CHECKLIST_BUCKET, name: CHECKLIST_BUCKET, public: false }, { 'Content-Type': 'application/json' });
+  const up = await supaStorage('POST', `/storage/v1/object/${CHECKLIST_BUCKET}/kv-${key}.json`, payload, { 'Content-Type': 'application/json', 'x-upsert': 'true' });
+  if (up.status >= 200 && up.status < 300) return res.json({ ok: true });
+  return res.status(502).json({ error: 'save failed', detail: up.status });
+});
+
 app.get('/api/config', (req, res) => {
   res.json({
     supabaseUrl: process.env.SUPABASE_URL || '',

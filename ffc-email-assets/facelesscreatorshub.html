@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Faceless Creators Hub — Silo Checklist</title>
+<title>Faceless Creators Hub — Silo Checklists</title>
 <style>
   :root{--bg:#0b0f1a;--card2:#0e1424;--line:#1e2740;--txt:#e7ecf6;
     --muted:#8a93a9;--accent:#6d5efc;--accent2:#22d3ee;--ok:#22c55e}
@@ -16,6 +16,13 @@
   .brand .dot{width:12px;height:12px;border-radius:50%;
     background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 14px var(--accent)}
   .sub{color:var(--muted);font-size:13px;margin:4px 0 14px}
+  .bar-row{display:flex;gap:10px;align-items:center;margin:6px 0 16px}
+  .picker{flex:1;position:relative}
+  .picker select{width:100%;appearance:none;background:var(--card2);color:var(--txt);
+    border:1px solid var(--line);border-radius:10px;padding:11px 36px 11px 13px;font-size:15px;font-weight:600;cursor:pointer}
+  .picker::after{content:"▾";position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+  .newbtn{flex:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;
+    border-radius:10px;padding:11px 15px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap}
   .progress{height:9px;background:var(--line);border-radius:999px;overflow:hidden}
   .progress>i{display:block;height:100%;width:0;border-radius:999px;
     background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .25s}
@@ -32,23 +39,37 @@
   .lbl .warn{color:#f59e0b;font-weight:700}
   .item.done .lbl{color:var(--muted);text-decoration:line-through;text-decoration-color:#3a4566}
   .item.done .lbl .note{text-decoration:line-through;text-decoration-color:#3a4566}
-  .resetbtn{margin-top:24px;background:var(--card2);border:1px solid #3a2030;color:#ff9d9d;
-    border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
+  .footer{display:flex;gap:10px;margin-top:24px}
+  .resetbtn{flex:1;background:var(--card2);border:1px solid #3a2030;color:#ff9d9d;
+    border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer}
+  .delbtn{flex:none;background:var(--card2);border:1px solid #3a2030;color:#ff9d9d;
+    border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer}
   .banner{background:linear-gradient(135deg,#0d2a1a,#0e2420);border:1px solid #1d5c3c;color:#8ff0bd;
     border-radius:12px;padding:13px;text-align:center;font-weight:700;margin-bottom:14px;display:none}
+  .synced{font-size:11px;color:var(--muted);text-align:center;margin-top:14px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="brand"><span class="dot"></span>Faceless Creators Hub</div>
-  <div class="sub">🏭 Silo Setup Checklist</div>
+  <div class="sub">🏭 Silo Setup Checklists — one per profile</div>
+
+  <div class="bar-row">
+    <div class="picker"><select id="picker"></select></div>
+    <button class="newbtn" id="new">＋ New</button>
+  </div>
+
   <div class="progress"><i id="bar"></i></div>
   <div class="pct" id="pct">0 / 13</div>
 
   <div class="banner" id="banner">✅ Silo setup complete.</div>
   <div id="list"></div>
 
-  <button class="resetbtn" id="reset">↺ Reset (new silo)</button>
+  <div class="footer">
+    <button class="resetbtn" id="reset">↺ Reset boxes</button>
+    <button class="delbtn" id="del">🗑 Delete</button>
+  </div>
+  <div class="synced" id="synced">☁️ Saved to cloud — syncs across every browser &amp; profile</div>
 </div>
 
 <script>
@@ -67,12 +88,28 @@ const ITEMS=[
   ["Warm up ad launched"],
   ["Sales ad launched"],
 ];
-const LS="fch_v7";
-// Server-side save (survives any browser / AdsPower profile / cache clear). localStorage = offline cache.
-const API="https://copywriter-saas.onrender.com/api/checklist/facelesscreatorshub";
-let done=JSON.parse(localStorage.getItem(LS)||"{}");
-const list=document.getElementById("list");
-function render(){
+const API="https://copywriter-saas.onrender.com/api";
+const STATE_API=id=>`${API}/checklist/${id}`;
+const INDEX_API=`${API}/kv/fch-index`;
+const LS_IDX="fch_index_v1";
+const stateKey=id=>"fch_state_"+id;
+
+// index = { checklists:[{id,name,created}], current:id }
+let index=JSON.parse(localStorage.getItem(LS_IDX)||"null");
+if(!index||!Array.isArray(index.checklists)) index={checklists:[],current:null};
+let done={};
+
+const $=id=>document.getElementById(id);
+const list=$("list"),picker=$("picker");
+
+function slug(s){return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40)||"silo";}
+function curId(){return index.current;}
+function curName(){const c=index.checklists.find(c=>c.id===index.current);return c?c.name:"";}
+
+function renderPicker(){
+  picker.innerHTML=index.checklists.map(c=>`<option value="${c.id}" ${c.id===index.current?"selected":""}>${c.name.replace(/</g,"&lt;")}</option>`).join("");
+}
+function renderList(){
   list.innerHTML=ITEMS.map((it,i)=>{
     const note=it[1]?`<span class="note">${it[1]}</span>`:"";
     return `<div class="item ${done[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><div class="box"></div><div class="lbl">${it[0]}${note}</div></div>`;
@@ -80,35 +117,77 @@ function render(){
 }
 function bar(){
   const d=ITEMS.filter((_,i)=>done[i]).length,p=Math.round(d/ITEMS.length*100);
-  document.getElementById("bar").style.width=p+"%";
-  document.getElementById("pct").textContent=d+" / "+ITEMS.length;
-  document.getElementById("banner").style.display=(d===ITEMS.length)?"block":"none";
+  $("bar").style.width=p+"%";
+  $("pct").textContent=d+" / "+ITEMS.length;
+  $("banner").style.display=(d===ITEMS.length&&d>0)?"block":"none";
 }
-let saveTimer=null;
-function saveRemote(){
-  clearTimeout(saveTimer);
-  saveTimer=setTimeout(()=>{
-    fetch(API,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({state:done})}).catch(()=>{});
-  },400);
+
+let idxTimer=null;
+function saveIndex(){
+  localStorage.setItem(LS_IDX,JSON.stringify(index));
+  clearTimeout(idxTimer);
+  idxTimer=setTimeout(()=>{fetch(INDEX_API,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:index})}).catch(()=>{});},400);
 }
-function persist(){localStorage.setItem(LS,JSON.stringify(done));saveRemote();}
+let stTimer=null;
+function saveState(){
+  const id=curId();if(!id)return;
+  localStorage.setItem(stateKey(id),JSON.stringify(done));
+  clearTimeout(stTimer);
+  stTimer=setTimeout(()=>{fetch(STATE_API(id),{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({state:done})}).catch(()=>{});},400);
+}
+
+function loadState(id){
+  done=JSON.parse(localStorage.getItem(stateKey(id))||"{}");
+  renderList();bar();
+  fetch(STATE_API(id)).then(r=>r.json()).then(d=>{
+    const remote=d&&d.state&&typeof d.state==="object"?d.state:{};
+    if(Object.keys(remote).some(k=>remote[k])){done=remote;localStorage.setItem(stateKey(id),JSON.stringify(done));renderList();bar();}
+    else if(Object.keys(done).some(k=>done[k])){saveState();}
+  }).catch(()=>{});
+}
+
+function switchTo(id){index.current=id;renderPicker();saveIndex();loadState(id);}
+
+function newChecklist(){
+  const name=(prompt("Name this checklist (profile / domain):")||"").trim();
+  if(!name)return;
+  const id=slug(name)+"-"+Date.now().toString(36);
+  index.checklists.push({id,name,created:new Date().toISOString()});
+  index.current=id;done={};
+  renderPicker();renderList();bar();saveIndex();saveState();
+}
+
+picker.addEventListener("change",e=>switchTo(e.target.value));
+$("new").onclick=newChecklist;
 list.addEventListener("click",e=>{
   const it=e.target.closest("[data-i]");if(!it)return;
   const i=it.dataset.i;done[i]=!done[i];
-  it.classList.toggle("done",done[i]);
-  persist();bar();
+  it.classList.toggle("done",done[i]);saveState();bar();
 });
-document.getElementById("reset").onclick=()=>{
-  if(confirm("Reset all boxes?")){done={};persist();render();bar();}
+$("reset").onclick=()=>{if(confirm('Reset all boxes on "'+curName()+'"?')){done={};saveState();renderList();bar();}};
+$("del").onclick=()=>{
+  if(index.checklists.length<=1){alert("Can't delete your last checklist — reset it instead.");return;}
+  if(!confirm('Delete checklist "'+curName()+'"? This can\'t be undone.'))return;
+  index.checklists=index.checklists.filter(c=>c.id!==index.current);
+  index.current=index.checklists[0].id;
+  renderPicker();saveIndex();loadState(index.current);
 };
-render();bar();
-// Pull server state: server wins if it has anything; otherwise push existing local ticks up (one-time migration).
-fetch(API).then(r=>r.json()).then(d=>{
-  const remote=d&&d.state&&typeof d.state==="object"?d.state:{};
-  const remoteHas=Object.keys(remote).some(k=>remote[k]);
-  const localHas=Object.keys(done).some(k=>done[k]);
-  if(remoteHas){done=remote;localStorage.setItem(LS,JSON.stringify(done));render();bar();}
-  else if(localHas){saveRemote();}
+
+// ---- boot: pull index from server (server wins), seed a default if none ----
+function ensureSeed(){
+  if(index.checklists.length===0){
+    index.checklists=[{id:"facelesscreatorshub",name:"Faceless Creators Hub",created:new Date().toISOString()}];
+    index.current="facelesscreatorshub";
+  }
+  if(!index.current||!index.checklists.find(c=>c.id===index.current)) index.current=index.checklists[0].id;
+}
+ensureSeed();renderPicker();loadState(index.current);
+fetch(INDEX_API).then(r=>r.json()).then(d=>{
+  const v=d&&d.value;
+  if(v&&Array.isArray(v.checklists)&&v.checklists.length){
+    index=v;localStorage.setItem(LS_IDX,JSON.stringify(index));
+    ensureSeed();renderPicker();loadState(index.current);
+  }else{saveIndex();}
 }).catch(()=>{});
 </script>
 </body>
