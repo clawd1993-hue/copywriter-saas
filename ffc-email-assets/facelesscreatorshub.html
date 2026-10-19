@@ -46,6 +46,11 @@
     border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer}
   .banner{background:linear-gradient(135deg,#0d2a1a,#0e2420);border:1px solid #1d5c3c;color:#8ff0bd;
     border-radius:12px;padding:13px;text-align:center;font-weight:700;margin-bottom:14px;display:none}
+  .notes-wrap{margin-top:22px}
+  .notes-wrap label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px;font-weight:600}
+  .notes{width:100%;min-height:100px;resize:vertical;background:var(--card2);color:var(--txt);
+    border:1px solid var(--line);border-radius:10px;padding:12px 13px;font:15px/1.5 inherit}
+  .notes:focus{outline:none;border-color:var(--accent)}
   .synced{font-size:11px;color:var(--muted);text-align:center;margin-top:14px}
 </style>
 </head>
@@ -64,6 +69,11 @@
 
   <div class="banner" id="banner">✅ Silo setup complete.</div>
   <div id="list"></div>
+
+  <div class="notes-wrap">
+    <label>📝 Notes</label>
+    <textarea class="notes" id="notes" placeholder="Drop random thoughts for this silo…"></textarea>
+  </div>
 
   <div class="footer">
     <button class="resetbtn" id="reset">↺ Reset boxes</button>
@@ -90,9 +100,11 @@ const ITEMS=[
 ];
 const API="https://copywriter-saas.onrender.com/api";
 const STATE_API=id=>`${API}/checklist/${id}`;
+const NOTES_API=id=>`${API}/kv/notes-${id}`;
 const INDEX_API=`${API}/kv/fch-index`;
 const LS_IDX="fch_index_v1";
 const stateKey=id=>"fch_state_"+id;
+const notesKey=id=>"fch_notes_"+id;
 
 // index = { checklists:[{id,name,created}], current:id }
 let index=JSON.parse(localStorage.getItem(LS_IDX)||"null");
@@ -100,7 +112,7 @@ if(!index||!Array.isArray(index.checklists)) index={checklists:[],current:null};
 let done={};
 
 const $=id=>document.getElementById(id);
-const list=$("list"),picker=$("picker");
+const list=$("list"),picker=$("picker"),notes=$("notes");
 
 function slug(s){return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40)||"silo";}
 function curId(){return index.current;}
@@ -144,6 +156,22 @@ function loadState(id){
     if(Object.keys(remote).some(k=>remote[k])){done=remote;localStorage.setItem(stateKey(id),JSON.stringify(done));renderList();bar();}
     else if(Object.keys(done).some(k=>done[k])){saveState();}
   }).catch(()=>{});
+  loadNotes(id);
+}
+let noteTimer=null;
+function saveNotes(){
+  const id=curId();if(!id)return;
+  localStorage.setItem(notesKey(id),notes.value);
+  clearTimeout(noteTimer);
+  noteTimer=setTimeout(()=>{fetch(NOTES_API(id),{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:notes.value})}).catch(()=>{});},500);
+}
+function loadNotes(id){
+  notes.value=localStorage.getItem(notesKey(id))||"";
+  fetch(NOTES_API(id)).then(r=>r.json()).then(d=>{
+    const remote=typeof (d&&d.value)==="string"?d.value:"";
+    if(remote){notes.value=remote;localStorage.setItem(notesKey(id),remote);}
+    else if(notes.value){saveNotes();}
+  }).catch(()=>{});
 }
 
 function switchTo(id){index.current=id;renderPicker();saveIndex();loadState(id);}
@@ -153,11 +181,12 @@ function newChecklist(){
   if(!name)return;
   const id=slug(name)+"-"+Date.now().toString(36);
   index.checklists.push({id,name,created:new Date().toISOString()});
-  index.current=id;done={};
+  index.current=id;done={};notes.value="";
   renderPicker();renderList();bar();saveIndex();saveState();
 }
 
 picker.addEventListener("change",e=>switchTo(e.target.value));
+notes.addEventListener("input",saveNotes);
 $("new").onclick=newChecklist;
 list.addEventListener("click",e=>{
   const it=e.target.closest("[data-i]");if(!it)return;
