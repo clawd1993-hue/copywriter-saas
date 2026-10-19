@@ -68,29 +68,48 @@ const ITEMS=[
   ["Sales ad launched"],
 ];
 const LS="fch_v7";
+// Server-side save (survives any browser / AdsPower profile / cache clear). localStorage = offline cache.
+const API="https://copywriter-saas.onrender.com/api/checklist/facelesscreatorshub";
 let done=JSON.parse(localStorage.getItem(LS)||"{}");
 const list=document.getElementById("list");
-list.innerHTML=ITEMS.map((it,i)=>{
-  const note=it[1]?`<span class="note">${it[1]}</span>`:"";
-  return `<div class="item ${done[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><div class="box"></div><div class="lbl">${it[0]}${note}</div></div>`;
-}).join("");
+function render(){
+  list.innerHTML=ITEMS.map((it,i)=>{
+    const note=it[1]?`<span class="note">${it[1]}</span>`:"";
+    return `<div class="item ${done[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><div class="box"></div><div class="lbl">${it[0]}${note}</div></div>`;
+  }).join("");
+}
 function bar(){
   const d=ITEMS.filter((_,i)=>done[i]).length,p=Math.round(d/ITEMS.length*100);
   document.getElementById("bar").style.width=p+"%";
   document.getElementById("pct").textContent=d+" / "+ITEMS.length;
   document.getElementById("banner").style.display=(d===ITEMS.length)?"block":"none";
 }
+let saveTimer=null;
+function saveRemote(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    fetch(API,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({state:done})}).catch(()=>{});
+  },400);
+}
+function persist(){localStorage.setItem(LS,JSON.stringify(done));saveRemote();}
 list.addEventListener("click",e=>{
   const it=e.target.closest("[data-i]");if(!it)return;
   const i=it.dataset.i;done[i]=!done[i];
   it.classList.toggle("done",done[i]);
-  localStorage.setItem(LS,JSON.stringify(done));bar();
+  persist();bar();
 });
 document.getElementById("reset").onclick=()=>{
-  if(confirm("Reset all boxes?")){done={};localStorage.setItem(LS,"{}");
-    document.querySelectorAll(".item").forEach(x=>x.classList.remove("done"));bar();}
+  if(confirm("Reset all boxes?")){done={};persist();render();bar();}
 };
-bar();
+render();bar();
+// Pull server state: server wins if it has anything; otherwise push existing local ticks up (one-time migration).
+fetch(API).then(r=>r.json()).then(d=>{
+  const remote=d&&d.state&&typeof d.state==="object"?d.state:{};
+  const remoteHas=Object.keys(remote).some(k=>remote[k]);
+  const localHas=Object.keys(done).some(k=>done[k]);
+  if(remoteHas){done=remote;localStorage.setItem(LS,JSON.stringify(done));render();bar();}
+  else if(localHas){saveRemote();}
+}).catch(()=>{});
 </script>
 </body>
 </html>

@@ -101,6 +101,56 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 
+// ---------- Silo checklist persistence (ISOLATED — no auth, no DB table) ----------
+// Gives the static silo-setup checklists (facelessreelslab-assets) a durable server-side save so
+// progress survives any browser / AdsPower profile / cache clear. Stored as a tiny JSON object in a
+// private Supabase Storage bucket. Completely separate from chat/billing — cannot touch Jimmy Labs.
+const CHECKLIST_BUCKET = 'checklists';
+function supaStorage(method, p, body, extraHeaders) {
+  return new Promise((resolve) => {
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) return resolve({ status: 503, data: null });
+    const u = new URL(SUPABASE_URL + p);
+    const payload = body == null ? null : (typeof body === 'string' ? body : JSON.stringify(body));
+    const headers = { apikey: SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + SUPABASE_SERVICE_KEY, ...(extraHeaders || {}) };
+    if (payload != null) headers['Content-Length'] = Buffer.byteLength(payload);
+    const r = https.request({ hostname: u.hostname, path: u.pathname + u.search, method, headers }, resp => {
+      let d = ''; resp.setEncoding('utf8'); resp.on('data', c => d += c); resp.on('end', () => resolve({ status: resp.statusCode, data: d }));
+    });
+    r.on('error', () => resolve({ status: 500, data: null }));
+    if (payload != null) r.write(payload); r.end();
+  });
+}
+function checklistCors(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+const cleanChecklistId = s => String(s || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 64);
+app.options('/api/checklist/:id', (req, res) => { checklistCors(res); res.status(204).end(); });
+app.get('/api/checklist/:id', async (req, res) => {
+  checklistCors(res);
+  const id = cleanChecklistId(req.params.id);
+  if (!id) return res.json({ state: {} });
+  const r = await supaStorage('GET', `/storage/v1/object/${CHECKLIST_BUCKET}/${id}.json`);
+  if (r.status === 200) { try { return res.json({ state: JSON.parse(r.data) }); } catch { return res.json({ state: {} }); } }
+  return res.json({ state: {} });
+});
+app.put('/api/checklist/:id', async (req, res) => {
+  checklistCors(res);
+  const id = cleanChecklistId(req.params.id);
+  if (!id) return res.status(400).json({ error: 'bad id' });
+  const raw = req.body && typeof req.body === 'object' ? (req.body.state && typeof req.body.state === 'object' ? req.body.state : req.body) : {};
+  const clean = {};
+  for (const k of Object.keys(raw).slice(0, 200)) { if (/^\d+$/.test(k)) clean[k] = !!raw[k]; }
+  const payload = JSON.stringify(clean);
+  if (payload.length > 10000) return res.status(413).json({ error: 'too big' });
+  // ensure bucket exists (409 if already there — harmless)
+  await supaStorage('POST', '/storage/v1/bucket', { id: CHECKLIST_BUCKET, name: CHECKLIST_BUCKET, public: false }, { 'Content-Type': 'application/json' });
+  const up = await supaStorage('POST', `/storage/v1/object/${CHECKLIST_BUCKET}/${id}.json`, payload, { 'Content-Type': 'application/json', 'x-upsert': 'true' });
+  if (up.status >= 200 && up.status < 300) return res.json({ ok: true });
+  return res.status(502).json({ error: 'save failed', detail: up.status });
+});
+
 app.get('/api/config', (req, res) => {
   res.json({
     supabaseUrl: process.env.SUPABASE_URL || '',
