@@ -108,6 +108,27 @@ const LS_IDX="fch_index_v1";
 const stateKey=id=>"fch_state_"+id;
 const notesKey=id=>"fch_notes_"+id;
 
+// Fetch JSON, retrying through backend cold starts. Rejects only after all retries fail.
+// Resolves ONLY on a real 200 — a 5xx/offline is retried, never mistaken for "empty data".
+function getJSON(url,tries){
+  tries=(tries==null?5:tries);
+  return new Promise((resolve,reject)=>{
+    (function go(n){
+      fetch(url,{cache:"no-store"}).then(r=>{
+        if(r.status>=500) throw new Error("upstream "+r.status);
+        return r.json();
+      }).then(resolve).catch(err=>{ if(n>0) setTimeout(()=>go(n-1),2000); else reject(err); });
+    })(tries);
+  });
+}
+let ready=false,loadSeq=0;
+function setBusy(b,msg){
+  list.style.opacity=b?"0.45":"1";
+  list.style.pointerEvents=b?"none":"auto";
+  const s=$("synced");
+  if(s) s.textContent=msg||(b?"⏳ Loading your saved progress…":"☁️ Saved to cloud — syncs across every browser & profile");
+}
+
 // index = { checklists:[{id,name,created}], current:id }
 let index=JSON.parse(localStorage.getItem(LS_IDX)||"null");
 if(!index||!Array.isArray(index.checklists)) index={checklists:[],current:null};
@@ -144,6 +165,7 @@ function saveIndex(){
 }
 let stTimer=null;
 function saveState(){
+  if(!ready)return;                        // never write before the real state has loaded (prevents clobbering with an empty view)
   const id=curId();if(!id)return;
   localStorage.setItem(stateKey(id),JSON.stringify(done));
   clearTimeout(stTimer);
@@ -151,14 +173,18 @@ function saveState(){
 }
 
 function loadState(id){
-  done=JSON.parse(localStorage.getItem(stateKey(id))||"{}");
-  renderList();bar();
-  fetch(STATE_API(id)).then(r=>r.json()).then(d=>{
+  const seq=++loadSeq;ready=false;setBusy(true);
+  done=JSON.parse(localStorage.getItem(stateKey(id))||"{}");   // optimistic paint from cache
+  renderList();bar();loadNotes(id);
+  getJSON(STATE_API(id),6).then(d=>{
+    if(seq!==loadSeq)return;                                   // a newer load started — ignore this one
     const remote=d&&d.state&&typeof d.state==="object"?d.state:{};
-    if(Object.keys(remote).some(k=>remote[k])){done=remote;localStorage.setItem(stateKey(id),JSON.stringify(done));renderList();bar();}
-    else if(Object.keys(done).some(k=>done[k])){saveState();}
-  }).catch(()=>{});
-  loadNotes(id);
+    done=remote;localStorage.setItem(stateKey(id),JSON.stringify(done));  // server is source of truth
+    renderList();bar();ready=true;setBusy(false);
+  }).catch(()=>{
+    if(seq!==loadSeq)return;
+    ready=true;setBusy(false,"⚠️ Offline — showing last saved copy, will sync when reconnected");
+  });
 }
 let noteTimer=null;
 function saveNotes(){
@@ -176,11 +202,11 @@ function flushNotes(){                    // push any pending note for the CURRE
   fetch(NOTES_API(id),{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:val})}).catch(()=>{});
 }
 function loadNotes(id){
-  notes.value=localStorage.getItem(notesKey(id))||"";
-  fetch(NOTES_API(id)).then(r=>r.json()).then(d=>{
+  notes.value=localStorage.getItem(notesKey(id))||"";        // optimistic from cache
+  getJSON(NOTES_API(id),4).then(d=>{
+    if(curId()!==id)return;                                   // switched away — ignore
     const remote=typeof (d&&d.value)==="string"?d.value:"";
-    if(remote){notes.value=remote;localStorage.setItem(notesKey(id),remote);}
-    else if(notes.value){saveNotes();}
+    notes.value=remote;localStorage.setItem(notesKey(id),remote);  // server wins
   }).catch(()=>{});
 }
 
@@ -196,6 +222,7 @@ function newChecklist(){
   const id=slug(name)+"-"+Date.now().toString(36);
   index.checklists.push({id,name,created:new Date().toISOString()});
   index.current=id;done={};notes.value="";
+  ready=true;setBusy(false);                 // fresh empty checklist — safe to edit/save immediately
   renderPicker();renderList();bar();saveIndex();setHash(id);saveState();
 }
 
@@ -209,11 +236,12 @@ $("link").onclick=()=>{
   else prompt("Copy link to this checklist:",url);
 };
 list.addEventListener("click",e=>{
+  if(!ready)return;
   const it=e.target.closest("[data-i]");if(!it)return;
   const i=it.dataset.i;done[i]=!done[i];
   it.classList.toggle("done",done[i]);saveState();bar();
 });
-$("reset").onclick=()=>{if(confirm('Reset all boxes on "'+curName()+'"?')){done={};saveState();renderList();bar();}};
+$("reset").onclick=()=>{if(!ready)return;if(confirm('Reset all boxes on "'+curName()+'"?')){done={};saveState();renderList();bar();}};
 $("del").onclick=()=>{
   if(index.checklists.length<=1){alert("Can't delete your last checklist — reset it instead.");return;}
   if(!confirm('Delete checklist "'+curName()+'"? This can\'t be undone.'))return;
@@ -230,14 +258,14 @@ function ensureSeed(){
   }
   if(!index.current||!index.checklists.find(c=>c.id===index.current)) index.current=index.checklists[0].id;
 }
-ensureSeed();applyHash();renderPicker();loadState(index.current);setHash(index.current);
-fetch(INDEX_API).then(r=>r.json()).then(d=>{
+ensureSeed();applyHash();renderPicker();setHash(index.current);loadState(index.current);
+getJSON(INDEX_API,6).then(d=>{
   const v=d&&d.value;
   if(v&&Array.isArray(v.checklists)&&v.checklists.length){
     index=v;localStorage.setItem(LS_IDX,JSON.stringify(index));
-    ensureSeed();applyHash();renderPicker();loadState(index.current);setHash(index.current);
-  }else{saveIndex();}
-}).catch(()=>{});
+    ensureSeed();applyHash();renderPicker();setHash(index.current);loadState(index.current);
+  }else{saveIndex();}            // server confirmed empty (200) — seed it; NOT reached on a transient error (those retry/reject)
+}).catch(()=>{/* offline after retries — keep local index, never overwrite server */});
 // react to back/forward or pasted #hash while open
 window.addEventListener("hashchange",()=>{const h=hashId();if(h&&h!==index.current&&index.checklists.find(c=>c.id===h)){flushNotes();index.current=h;renderPicker();loadState(h);}});
 window.addEventListener("beforeunload",flushNotes);

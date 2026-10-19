@@ -133,7 +133,8 @@ app.get('/api/checklist/:id', async (req, res) => {
   if (!id) return res.json({ state: {} });
   const r = await supaStorage('GET', `/storage/v1/object/${CHECKLIST_BUCKET}/${id}.json`);
   if (r.status === 200) { try { return res.json({ state: JSON.parse(r.data) }); } catch { return res.json({ state: {} }); } }
-  return res.json({ state: {} });
+  if (r.status === 404 || r.status === 400) return res.json({ state: {} }); // not found = genuinely empty/new checklist
+  return res.status(503).json({ state: {}, error: 'upstream' });            // transient upstream error — client must retry, NOT treat as empty
 });
 app.put('/api/checklist/:id', async (req, res) => {
   checklistCors(res);
@@ -159,7 +160,8 @@ app.get('/api/kv/:key', async (req, res) => {
   if (!key) return res.json({ value: null });
   const r = await supaStorage('GET', `/storage/v1/object/${CHECKLIST_BUCKET}/kv-${key}.json`);
   if (r.status === 200) { try { return res.json({ value: JSON.parse(r.data) }); } catch { return res.json({ value: null }); } }
-  return res.json({ value: null });
+  if (r.status === 404 || r.status === 400) return res.json({ value: null }); // not found = genuinely absent
+  return res.status(503).json({ value: null, error: 'upstream' });            // transient upstream error — client retries
 });
 app.put('/api/kv/:key', async (req, res) => {
   checklistCors(res);
