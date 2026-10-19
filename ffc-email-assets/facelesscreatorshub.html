@@ -61,6 +61,7 @@
 
   <div class="bar-row">
     <div class="picker"><select id="picker"></select></div>
+    <button class="newbtn" id="link" title="Copy link to this checklist">🔗</button>
     <button class="newbtn" id="new">＋ New</button>
   </div>
 
@@ -175,7 +176,10 @@ function loadNotes(id){
   }).catch(()=>{});
 }
 
-function switchTo(id){index.current=id;renderPicker();saveIndex();loadState(id);}
+function setHash(id){try{history.replaceState(null,"",location.pathname+location.search+"#"+encodeURIComponent(id));}catch(e){location.hash=id;}}
+function hashId(){try{return decodeURIComponent((location.hash||"").replace(/^#/,""))||null;}catch(e){return null;}}
+function applyHash(){const h=hashId();if(h&&index.checklists.find(c=>c.id===h)){index.current=h;return true;}return false;}
+function switchTo(id){index.current=id;renderPicker();saveIndex();setHash(id);loadState(id);}
 
 function newChecklist(){
   const name=(prompt("Name this checklist (profile / domain):")||"").trim();
@@ -183,12 +187,18 @@ function newChecklist(){
   const id=slug(name)+"-"+Date.now().toString(36);
   index.checklists.push({id,name,created:new Date().toISOString()});
   index.current=id;done={};notes.value="";
-  renderPicker();renderList();bar();saveIndex();saveState();
+  renderPicker();renderList();bar();saveIndex();setHash(id);saveState();
 }
 
 picker.addEventListener("change",e=>switchTo(e.target.value));
 notes.addEventListener("input",saveNotes);
 $("new").onclick=newChecklist;
+$("link").onclick=()=>{
+  const url=location.href;
+  const done=()=>{const b=$("link");b.textContent="✓";setTimeout(()=>b.textContent="🔗",1200);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done).catch(()=>prompt("Copy link to this checklist:",url));}
+  else prompt("Copy link to this checklist:",url);
+};
 list.addEventListener("click",e=>{
   const it=e.target.closest("[data-i]");if(!it)return;
   const i=it.dataset.i;done[i]=!done[i];
@@ -211,14 +221,16 @@ function ensureSeed(){
   }
   if(!index.current||!index.checklists.find(c=>c.id===index.current)) index.current=index.checklists[0].id;
 }
-ensureSeed();renderPicker();loadState(index.current);
+ensureSeed();applyHash();renderPicker();loadState(index.current);setHash(index.current);
 fetch(INDEX_API).then(r=>r.json()).then(d=>{
   const v=d&&d.value;
   if(v&&Array.isArray(v.checklists)&&v.checklists.length){
     index=v;localStorage.setItem(LS_IDX,JSON.stringify(index));
-    ensureSeed();renderPicker();loadState(index.current);
+    ensureSeed();applyHash();renderPicker();loadState(index.current);setHash(index.current);
   }else{saveIndex();}
 }).catch(()=>{});
+// react to back/forward or pasted #hash while open
+window.addEventListener("hashchange",()=>{const h=hashId();if(h&&h!==index.current&&index.checklists.find(c=>c.id===h)){index.current=h;renderPicker();loadState(h);}});
 </script>
 </body>
 </html>
