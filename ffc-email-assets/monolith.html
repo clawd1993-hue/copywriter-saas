@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MONOLITH — Pure Creatine Monohydrate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060608; --bg2:#0b0b10; --panel:#101016; --line:rgba(255,255,255,.08);
+  --txt:#F4F5F7; --muted:#8C8F9A; --dim:#5A5D68;
+  --accent:#6C8CFF; --accent2:#9B6CFF; --ice:#BFE0FF;
+  --glow:0 0 60px rgba(108,140,255,.45);
+  --grad:linear-gradient(100deg,#8FB3FF,#6C8CFF 45%,#9B6CFF);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+h1,h2,h3,.dsp{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;line-height:1.02}
+.mega{font-family:'Anton',sans-serif;letter-spacing:.01em;line-height:.92;text-transform:uppercase;font-weight:400}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:600;font-size:15px;letter-spacing:.02em;padding:15px 28px;border-radius:100px;background:var(--grad);color:#07070b;box-shadow:0 10px 40px -10px rgba(108,140,255,.6);transition:.25s;border:none;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 50px -10px rgba(108,140,255,.8)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.03)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:'Space Grotesk';font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ice);background:rgba(108,140,255,.08);border:1px solid rgba(108,140,255,.22);padding:8px 16px;border-radius:100px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(6,6,8,.6);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:'Anton';font-size:26px;letter-spacing:.14em;text-transform:uppercase}
+.logo b{color:var(--accent)}
+.nav .links{display:flex;gap:34px;font-size:14px;font-weight:500;color:var(--muted)}
+.nav .links a:hover{color:var(--txt)}
+.nav .right{display:flex;align-items:center;gap:18px}
+.nav .cart{font-size:14px;color:var(--muted)}
+
+/* HERO */
+.hero{position:relative;padding:90px 0 70px;overflow:hidden}
+.hero:before{content:"";position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:1100px;height:1100px;background:radial-gradient(circle,rgba(108,140,255,.22),transparent 60%);filter:blur(10px);z-index:0}
+.hero:after{content:"";position:absolute;right:-10%;bottom:-20%;width:700px;height:700px;background:radial-gradient(circle,rgba(155,108,255,.16),transparent 60%);z-index:0}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(52px,7vw,104px);margin:22px 0 20px}
+.hero p.sub{color:var(--muted);font-size:19px;max-width:480px;margin-bottom:34px}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.hero .trust{display:flex;gap:26px;margin-top:38px;flex-wrap:wrap}
+.hero .trust div{font-size:13px;color:var(--dim);font-weight:500;display:flex;align-items:center;gap:8px}
+.hero .trust b{color:var(--ice)}
+.prod{position:relative;display:flex;align-items:center;justify-content:center;min-height:520px}
+.prod .pedestal{position:absolute;bottom:40px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(108,140,255,.5),transparent 62%);filter:blur(28px)}
+.prod img{position:relative;z-index:2;max-height:560px;filter:drop-shadow(0 50px 60px rgba(0,0,0,.65))}
+.prod .ring{position:absolute;width:420px;height:420px;border:1px solid rgba(255,255,255,.07);border-radius:50%}
+.prod .ring.r2{width:560px;height:560px;border-color:rgba(255,255,255,.04)}
+/* CSS PRODUCT TUB */
+.tub{position:relative;z-index:3;width:252px;height:400px;filter:drop-shadow(0 46px 55px rgba(0,0,0,.6))}
+.tub .body{position:absolute;top:44px;left:0;right:0;bottom:22px;border-radius:26px 26px 34px 34px/18px 18px 30px 30px;background:linear-gradient(90deg,#050507 2%,#191c23 19%,#2c303b 32%,#14161c 50%,#0a0b0f 68%,#040406 98%);box-shadow:inset 0 2px 0 rgba(255,255,255,.07),inset 0 -40px 60px -24px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.03)}
+.tub .lid{position:absolute;top:0;left:15px;right:15px;height:72px;border-radius:16px 16px 9px 9px/14px 14px 7px 7px;background:linear-gradient(90deg,#0e0f13,#363a44 28%,#50545f 45%,#23262e 64%,#0b0c10);box-shadow:inset 0 2px 2px rgba(255,255,255,.18),0 12px 22px -8px rgba(0,0,0,.6)}
+.tub .lid:before{content:"";position:absolute;top:-7px;left:0;right:0;height:17px;border-radius:50%;background:linear-gradient(90deg,#15171c,#3d414c 40%,#565a65 50%,#1b1d24 72%)}
+.tub .sheen{position:absolute;top:44px;bottom:22px;left:25%;width:9%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);filter:blur(2px);border-radius:50%}
+.tub .label{position:absolute;top:36%;left:16px;right:16px;text-align:center}
+.tub .le{font-family:'Space Grotesk';font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ice);opacity:.85}
+.tub .lw{font-family:'Anton';font-size:36px;letter-spacing:.05em;margin:9px 0;color:#fff;line-height:1}
+.tub .lw b{color:var(--accent)}
+.tub .ld{width:42px;height:2px;background:var(--grad);margin:2px auto 12px;border-radius:2px;box-shadow:0 0 10px rgba(108,140,255,.8)}
+.tub .ls{display:block;font-family:'Space Grotesk';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tub .ln{display:block;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-top:46px}
+
+/* MARQUEE */
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0}
+.marq .track{display:flex;gap:50px;white-space:nowrap;animation:scroll 26s linear infinite;font-family:'Anton';font-size:22px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.marq .track span{display:flex;align-items:center;gap:50px}
+.marq .track em{color:var(--accent);font-style:normal}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SECTION */
+section{position:relative}
+.sec{padding:110px 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 60px}
+.sec-head h2{font-size:clamp(34px,4.5vw,56px);margin:16px 0 14px}
+.sec-head p{color:var(--muted);font-size:18px}
+
+/* BENEFITS */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:20px;padding:30px 26px;transition:.3s}
+.card:hover{border-color:rgba(108,140,255,.4);transform:translateY(-4px);box-shadow:0 30px 60px -30px rgba(108,140,255,.4)}
+.card .ic{width:46px;height:46px;border-radius:12px;background:rgba(108,140,255,.12);border:1px solid rgba(108,140,255,.25);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14.5px}
+
+/* SCIENCE */
+.science{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.science .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.science .visual{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center}
+.science .visual .glow{position:absolute;width:360px;height:360px;background:radial-gradient(circle,rgba(155,108,255,.4),transparent 62%);filter:blur(30px)}
+.science .visual img{position:relative;z-index:2;max-height:470px;filter:drop-shadow(0 40px 50px rgba(0,0,0,.6))}
+.specs{list-style:none;margin-top:28px;display:grid;gap:2px}
+.specs li{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.specs li:last-child{border:none}
+.specs .k{font-family:'Space Grotesk';font-weight:700;font-size:16px;min-width:120px;color:var(--ice)}
+.specs .v{color:var(--muted);font-size:15px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel)}
+.stats div{padding:46px 24px;text-align:center;border-right:1px solid var(--line)}
+.stats div:last-child{border:none}
+.stats .n{font-family:'Anton';font-size:52px;line-height:1}
+.stats .l{color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-top:10px}
+
+/* REVIEWS */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rev{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:20px;padding:30px}
+.rev .stars{color:var(--accent);letter-spacing:3px;margin-bottom:16px;font-size:15px}
+.rev p{font-size:16px;margin-bottom:22px}
+.rev .who{display:flex;align-items:center;gap:12px}
+.rev .av{width:40px;height:40px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;color:#07070b;font-size:15px}
+.rev .who b{font-size:14.5px}
+.rev .who span{display:block;color:var(--dim);font-size:12.5px;font-weight:500}
+
+/* PRICING */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.price{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:36px 30px;display:flex;flex-direction:column}
+.price.feat{border-color:rgba(108,140,255,.55);box-shadow:0 40px 80px -40px rgba(108,140,255,.6)}
+.price.feat:before{content:"MOST POPULAR";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--grad);color:#07070b;font-family:'Space Grotesk';font-weight:700;font-size:11px;letter-spacing:.14em;padding:6px 16px;border-radius:100px}
+.price .name{font-family:'Space Grotesk';font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.price .amt{font-family:'Anton';font-size:60px;margin:14px 0 2px}
+.price .amt small{font-family:'Inter';font-size:16px;color:var(--dim);font-weight:500}
+.price .per{color:var(--dim);font-size:13.5px;margin-bottom:22px}
+.price ul{list-style:none;display:grid;gap:12px;margin-bottom:28px}
+.price li{font-size:14.5px;color:var(--muted);display:flex;gap:10px}
+.price li:before{content:"✦";color:var(--accent)}
+.price .btn{width:100%;justify-content:center;margin-top:auto}
+.price.feat .btn{}
+.price:not(.feat) .btn{background:transparent;color:var(--txt);border:1px solid var(--line);box-shadow:none}
+
+/* CTA */
+.cta{position:relative;text-align:center;padding:130px 0;overflow:hidden}
+.cta:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(108,140,255,.22),transparent 60%)}
+.cta .wrap{position:relative;z-index:2}
+.cta h2{font-size:clamp(44px,7vw,100px);margin-bottom:24px}
+.cta p{color:var(--muted);font-size:19px;max-width:440px;margin:0 auto 34px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);background:var(--bg2);padding:60px 0 40px;color:var(--muted)}
+footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding-bottom:40px;border-bottom:1px solid var(--line)}
+footer .logo{color:var(--txt)}
+footer .cols{display:flex;gap:70px;flex-wrap:wrap}
+footer .cols h4{color:var(--txt);font-family:'Space Grotesk';font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+footer .cols a{display:block;font-size:14px;margin-bottom:10px;color:var(--muted)}
+footer .cols a:hover{color:var(--txt)}
+footer .bot{display:flex;justify-content:space-between;padding-top:26px;font-size:13px;color:var(--dim);flex-wrap:wrap;gap:10px}
+
+@media(max-width:900px){
+  .hero .wrap,.science .wrap{grid-template-columns:1fr}
+  .prod{order:-1;min-height:380px}
+  .prod img{max-height:400px}
+  .grid4,.grid3,.prices,.stats{grid-template-columns:1fr}
+  .stats div{border-right:none;border-bottom:1px solid var(--line)}
+  .nav .links{display:none}
+  .sec{padding:80px 0}
+  .science .wrap{gap:40px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <div class="logo">MONO<b>LITH</b></div>
+  <div class="links"><a href="#science">Science</a><a href="#benefits">Benefits</a><a href="#reviews">Reviews</a><a href="#buy">Shop</a></div>
+  <div class="right"><span class="cart">Cart (0)</span><a href="#buy" class="btn">Shop Now</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <span class="eyebrow"><span class="dot"></span>5G Pure Creatine Monohydrate · Creapure®</span>
+    <h1 class="mega">The Purest<br>Form Of <span class="grad">Strength</span></h1>
+    <p class="sub">5 grams of micronized creatine monohydrate. No fillers. No fluff. Just the single most researched performance compound on earth — distilled to its purest form.</p>
+    <div class="cta-row">
+      <a href="#buy" class="btn">Shop MONOLITH →</a>
+      <a href="#science" class="btn ghost">The Science</a>
+    </div>
+    <div class="trust">
+      <div><b>✓</b> Creapure® German-made</div>
+      <div><b>✓</b> 3rd-Party Tested</div>
+      <div><b>✓</b> Vegan · 0 Fillers</div>
+    </div>
+  </div>
+  <div class="prod">
+    <div class="ring r2"></div><div class="ring"></div>
+    <div class="pedestal"></div>
+    <div class="tub">
+      <div class="lid"></div>
+      <div class="body">
+        <div class="sheen"></div>
+        <div class="label">
+          <span class="le">Creatine Monohydrate</span>
+          <div class="lw">MONO<b>LITH</b></div>
+          <div class="ld"></div>
+          <span class="ls">5g · Micronized · Creapure®</span>
+          <span class="ln">Net 300g · 60 Servings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></header>
+
+<div class="marq"><div class="track">
+  <span><em>◆</em> Strength <em>◆</em> Power Output <em>◆</em> Faster Recovery <em>◆</em> Sharper Focus <em>◆</em> Lean Mass <em>◆</em> Endurance <em>◆</em> Strength <em>◆</em> Power Output <em>◆</em> Faster Recovery <em>◆</em> Sharper Focus <em>◆</em> Lean Mass <em>◆</em> Endurance </span>
+</div></div>
+
+<section class="sec" id="benefits"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow"><span class="dot"></span>Why Creatine</span>
+    <h2>One compound.<br><span class="grad">Total dominance.</span></h2>
+    <p>Decades of research. Thousands of studies. The most proven supplement in existence — and we only put in what works.</p>
+  </div>
+  <div class="grid4">
+    <div class="card"><div class="ic">⚡</div><h3>Explosive Power</h3><p>Rapidly regenerates ATP for more reps, heavier lifts and higher output when it matters.</p></div>
+    <div class="card"><div class="ic">💪</div><h3>Raw Strength</h3><p>The gold-standard for building strength and lean muscle, backed by 500+ peer-reviewed studies.</p></div>
+    <div class="card"><div class="ic">🔁</div><h3>Faster Recovery</h3><p>Replenishes cellular energy so you bounce back harder between sets and sessions.</p></div>
+    <div class="card"><div class="ic">🧠</div><h3>Sharper Focus</h3><p>Fuels your brain as well as your body — clearer cognition, better under fatigue.</p></div>
+  </div>
+</div></section>
+
+<section class="sec science" id="science"><div class="wrap">
+  <div class="visual">
+    <div class="glow"></div>
+    <div class="tub" style="transform:scale(1.05)">
+      <div class="lid"></div>
+      <div class="body">
+        <div class="sheen"></div>
+        <div class="label">
+          <span class="le">Creatine Monohydrate</span>
+          <div class="lw">MONO<b>LITH</b></div>
+          <div class="ld"></div>
+          <span class="ls">5g · Micronized · Creapure®</span>
+          <span class="ln">Net 300g · 60 Servings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <span class="eyebrow"><span class="dot"></span>The Science</span>
+    <h2 style="font-size:clamp(32px,4vw,48px);margin:16px 0">Purity you can<br><span class="grad">actually feel.</span></h2>
+    <p style="color:var(--muted);font-size:17px">Most creatine is cut with cheap fillers and loaded in ways your body can't absorb. MONOLITH is a single ingredient, dosed clinically, milled ultra-fine for near-total absorption.</p>
+    <ul class="specs">
+      <li><span class="k">5g Dose</span><span class="v">The full clinical serving — no under-dosing, every scoop.</span></li>
+      <li><span class="k">Creapure®</span><span class="v">The purest creatine on earth, made in Germany to pharma standards.</span></li>
+      <li><span class="k">Micronized</span><span class="v">Milled ultra-fine so it mixes clear and absorbs fast. Zero grit.</span></li>
+      <li><span class="k">Tested</span><span class="v">Every batch third-party & Informed-Sport tested for banned substances.</span></li>
+      <li><span class="k">Nothing Else</span><span class="v">No fillers, no dyes, no sweeteners, no bull. One ingredient.</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="stats">
+    <div><div class="n grad">500+</div><div class="l">Studies</div></div>
+    <div><div class="n grad">5g</div><div class="l">Per Serving</div></div>
+    <div><div class="n grad">99.9%</div><div class="l">Pure</div></div>
+    <div><div class="n grad">0</div><div class="l">Fillers</div></div>
+  </div>
+</div></section>
+
+<section class="sec" id="reviews"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow"><span class="dot"></span>The Verdict</span>
+    <h2>Loved by people<br>who <span class="grad">don't miss.</span></h2>
+  </div>
+  <div class="grid3">
+    <div class="rev"><div class="stars">★★★★★</div><p>“Mixes completely clear, zero chalk, and my lifts jumped within two weeks. This is the only creatine I'll buy now.”</p><div class="who"><div class="av">JM</div><div><b>Jordan M.</b><span>Verified Buyer</span></div></div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>“The packaging alone is insane but the product backs it up. Clean, pure, no bloat. Recovery is noticeably faster.”</p><div class="who"><div class="av">SR</div><div><b>Sasha R.</b><span>Verified Buyer</span></div></div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>“Finally a brand that doesn't hide behind a proprietary blend. One ingredient, dosed right. Strength PRs incoming.”</p><div class="who"><div class="av">DL</div><div><b>Dev L.</b><span>Verified Buyer</span></div></div></div>
+  </div>
+</div></section>
+
+<section class="sec" id="buy"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow"><span class="dot"></span>Fuel Up</span>
+    <h2>Choose your <span class="grad">supply.</span></h2>
+    <p>Free shipping on every order. 60-day money-back guarantee — feel it or it's free.</p>
+  </div>
+  <div class="prices">
+    <div class="price">
+      <div class="name">One-Time</div>
+      <div class="amt">$39<small>/tub</small></div>
+      <div class="per">60 servings · 300g</div>
+      <ul><li>5g Creapure® per serve</li><li>Micronized &amp; unflavored</li><li>Free shipping</li></ul>
+      <a href="#" class="btn">Add to Cart</a>
+    </div>
+    <div class="price feat">
+      <div class="name">Subscribe &amp; Save</div>
+      <div class="amt">$31<small>/tub</small></div>
+      <div class="per">Ships monthly · cancel anytime</div>
+      <ul><li>Save 20% every order</li><li>Never run out mid-cycle</li><li>Free priority shipping</li><li>Locked-in founder pricing</li></ul>
+      <a href="#" class="btn">Subscribe Now</a>
+    </div>
+    <div class="price">
+      <div class="name">The Stack · 3-Pack</div>
+      <div class="amt">$99<small>/3</small></div>
+      <div class="per">180 servings · best value</div>
+      <ul><li>$33 per tub</li><li>6 months of fuel</li><li>Free express shipping</li></ul>
+      <a href="#" class="btn">Add to Cart</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <h2 class="mega">Fuel The<br><span class="grad">Machine.</span></h2>
+  <p>Join thousands building strength on the purest creatine ever bottled.</p>
+  <a href="#buy" class="btn">Shop MONOLITH →</a>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div style="max-width:300px">
+      <div class="logo">MONO<b>LITH</b></div>
+      <p style="margin-top:14px;font-size:14px">The purest form of strength. One ingredient, dosed right, tested relentlessly.</p>
+    </div>
+    <div class="cols">
+      <div><h4>Shop</h4><a href="#">Creatine</a><a href="#">The Stack</a><a href="#">Subscribe</a><a href="#">Gift Card</a></div>
+      <div><h4>Learn</h4><a href="#">The Science</a><a href="#">Dosing Guide</a><a href="#">FAQ</a><a href="#">Reviews</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Lab Results</a><a href="#">Contact</a><a href="#">Wholesale</a></div>
+    </div>
+  </div>
+  <div class="bot"><span>© 2026 MONOLITH Supplements. All rights reserved.</span><span>Privacy · Terms · Shipping</span></div>
+</div></footer>
+
+</body>
+</html>
