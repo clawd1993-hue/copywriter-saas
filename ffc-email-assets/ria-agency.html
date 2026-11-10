@@ -127,15 +127,12 @@
 .rc .gbox .or div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px;font-weight:600;color:var(--ink);font-size:16px}
 .rc .gbox .or div small{display:block;font-weight:500;color:var(--muted);font-size:13.5px;margin-top:4px}
 .rc .fine{font-size:14.5px;color:var(--muted)}
-.rc .gpay{margin-top:22px;background:linear-gradient(160deg,rgba(201,164,71,.16),rgba(201,164,71,.04));border:1.5px solid rgba(201,164,71,.55);border-radius:18px;padding:30px 32px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-.rc .gpay .tag{margin-bottom:12px}
-.rc .gpay h3{font-size:27px;font-family:'Fraunces',Georgia,serif;color:#fff;margin-bottom:10px;line-height:1.2}
-.rc .gpay p{color:var(--mutedl);font-size:15.5px}
-.rc .gpay .or{display:grid;gap:12px}
-.rc .gpay .or div{background:rgba(255,255,255,.05);border:1px solid var(--linel);border-radius:12px;padding:16px 18px;color:#fff;font-weight:600;font-size:15.5px;padding-left:46px;position:relative}
-.rc .gpay .or div:before{content:"→";position:absolute;left:18px;top:15px;color:var(--gold);font-weight:800}
-.rc .gpay .or div small{display:block;font-weight:400;color:var(--mutedl);font-size:13.5px;margin-top:3px}
-.rc .gpay .fine{font-size:13.5px;color:var(--mutedl);margin-top:14px}
+.rc .gline{margin-top:48px;padding-top:40px;border-top:1px solid rgba(201,164,71,.35);max-width:820px}
+.rc .gline .tag{margin-bottom:16px}
+.rc .gline h3{font-size:34px;font-family:'Fraunces',Georgia,serif;color:#fff;margin-bottom:14px;line-height:1.15;letter-spacing:-.015em}
+.rc .gline h3 em{font-style:normal;color:var(--gold)}
+.rc .gline p{color:var(--mutedl);font-size:17px}
+.rc .gline .fine{font-size:13.5px;margin-top:14px;opacity:.85}
 /* compliance */
 .rc .cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
 .rc .cgrid div{background:var(--ink2);border:1px solid var(--linel);border-radius:14px;padding:20px 20px 20px 54px;position:relative;color:#fff;font-size:15.5px}
@@ -177,8 +174,7 @@
 .rc .foot .fl{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
 .rc .foot .fl a{color:#fff;opacity:.75}
 @media(max-width:900px){
- .rc .hgrid,.rc .fgrid,.rc .pay,.rc .gpay,.rc .who,.rc .steps,.rc .cgrid,.rc .gbox .or,.rc .foot .wrap{grid-template-columns:1fr}
- .rc .quotes,.rc .get,.rc .founder{grid-template-columns:1fr}
+ .rc .hgrid,.rc .fgrid,.rc .pay, .rc .quotes,.rc .get,.rc .founder{grid-template-columns:1fr}
  .rc .proof{grid-template-columns:1fr 1fr}
  .rc .fphoto{max-width:320px}
  .rc .links a:not(.btn){display:none}
@@ -196,7 +192,7 @@
  .rc .cta{width:100%;display:block;padding:17px 20px;font-size:17px}
  .rc .cta.ghost{margin:10px 0 0}
  .rc .big{font-size:21px}
- .rc .gbox{padding:28px 22px}
+ .rc .gline h3{font-size:27px}
  .rc .strip .wrap{gap:12px}
  .rc .q p{font-size:19px}
  .rc .pcard .num{font-size:38px}
@@ -348,19 +344,11 @@
    </ul>
   </div>
  </div>
- <div class="gpay">
-  <div>
-   <span class="tag">The founding partner guarantee</span>
-   <h3>5 qualified meetings in 30 days, or you don't pay us a dollar.</h3>
-   <p>If by day 30 you haven't had at least 5 qualified meetings (households with $500k+ that fit your niche), we'll either:</p>
-  </div>
-  <div>
-   <div class="or">
-    <div>Work an additional 30 days at no management fee<small>Same team, same system, our time.</small></div>
-    <div>Help your team take the funnel in-house and part ways as friends<small>Pilot ends. No performance fees owed. You keep everything we built.</small></div>
-   </div>
-   <p class="fine">We can't guarantee investment performance or AUM growth; that's your domain and regulated for a reason. We can guarantee our effort and our willingness to take the risk with you. You're never locked into a long-term contract with a black-box vendor who stops picking up the phone.</p>
-  </div>
+ <div class="gline">
+  <span class="tag">The founding partner guarantee</span>
+  <h3>Get 5 qualified meetings in 30 days, <em>or you don't pay us a dollar.</em></h3>
+  <p>If by day 30 you haven't had at least 5 qualified meetings with $500k+ households that fit your niche, we'll either work another 30 days at no management fee, or help your team take the funnel in-house and part ways as friends. No performance fees owed. You keep everything we built.</p>
+  <p class="fine">We can't guarantee investment performance or AUM growth; that's your domain and regulated for a reason. We can guarantee our effort and our willingness to take the risk with you. You're never locked into a long-term contract with a black-box vendor who stops picking up the phone.</p>
  </div>
 </div></section>
 
