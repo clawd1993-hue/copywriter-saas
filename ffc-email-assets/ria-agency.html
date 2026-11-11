@@ -109,7 +109,8 @@
 .rc .press span{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:21px;color:var(--ink);opacity:.55;letter-spacing:-.01em}
 .rc .press span.sans{font-family:'Inter',sans-serif;font-weight:800;letter-spacing:-.03em;font-size:19px}
 /* pay */
-.rc .pay{display:grid;grid-template-columns:1fr;gap:20px;margin-top:40px;max-width:640px}
+.rc .pay{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.rc .pay .lead{margin-bottom:0}
 .rc .pcard{background:rgba(255,255,255,.04);border:1px solid var(--linel);border-radius:18px;padding:30px}
 .rc .pcard.hi{background:linear-gradient(160deg,rgba(36,87,245,.22),rgba(36,87,245,.05));border-color:rgba(91,130,255,.45)}
 .rc .pcard h3{font-size:14px;letter-spacing:.14em;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:700;color:var(--mutedl);margin-bottom:14px}
@@ -317,10 +318,12 @@
 
 <!-- PAY -->
 <section class="sec dark"><div class="wrap">
- <span class="eyebrow">How we get paid</span>
- <h2>Aligned with your growth, not our retainer.</h2>
- <p class="lead">We operate as a performance-aligned partner. If we don't help you add new households and new AUM, our upside is limited. We prefer that pressure. It keeps us obsessed with results.</p>
  <div class="pay">
+  <div>
+   <span class="eyebrow">How we get paid</span>
+   <h2>Aligned with your growth, not our retainer.</h2>
+   <p class="lead">We operate as a performance-aligned partner. If we don't help you add new households and new AUM, our upside is limited. We prefer that pressure. It keeps us obsessed with results.</p>
+  </div>
   <div class="pcard hi">
    <span class="tag">Founding Partner · 30-day pilot</span>
    <h3>What you pay up front</h3>
