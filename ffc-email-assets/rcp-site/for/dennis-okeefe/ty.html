@@ -15,7 +15,7 @@
 <!-- ===== RW BLOCK: THANK-YOU PAGE (bare snippet starts here) ===== -->
 <style>
 .rw,.rw *{box-sizing:border-box;margin:0;padding:0}
-.rw{--navy:#0F2A47;--navy2:#163A5F;--gold:#B8912E;--gold2:#D4AF4A;--bg:#FBFAF6;--card:#FFFFFF;--txt:#1B2430;--muted:#55606E;--line:rgba(15,42,71,.13);--green:#1E7F4F;--soft:#F1EFE7;
+.rw{--navy:#b30f43;--navy2:#163A5F;--gold:#B8912E;--gold2:#D4AF4A;--bg:#FBFAF6;--card:#FFFFFF;--txt:#1B2430;--muted:#55606E;--line:rgba(15,42,71,.13);--green:#1E7F4F;--soft:#F1EFE7;
  background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;width:100%;text-align:left}
 .rw h1,.rw h2,.rw h3{font-family:'Fraunces',Georgia,'Times New Roman',serif;line-height:1.15;letter-spacing:-.01em;color:var(--navy)}
 .rw a{text-decoration:none;color:inherit}
@@ -100,7 +100,7 @@
    <h2>Add It to Your Calendar</h2>
    <p class="m">Once you have your link, put this in your calendar:</p>
    <div class="cal">
-    <div><b>Date</b><span>Thursday, November 20</span></div>
+    <div><b>Date</b><span>Thursday, December 3</span></div>
     <div><b>Time</b><span>6:00 PM Eastern Time</span></div>
     <div><b>Topic</b><span>Retirement Tax &amp; Income Class (For Fall River Households With $500k+ Saved)</span></div>
    </div>
@@ -140,13 +140,13 @@
  var p=new URLSearchParams(location.search),fn=p.get('fn');
  if(fn){var h=document.getElementById('fnhi');h.textContent=fn.replace(/[^A-Za-z'\-]/g,'')+', ';}
  /* DM link — set to the firm's ManyChat ref URL or sms: link in production */
- var DM='sms:+15087302300?&body='+encodeURIComponent('Hi, I just registered for the Retirement Tax & Income Class. Please confirm my spot and send my access link.');
+ var DM='mailto:dennis@successfulmoney.com?subject=Retirement%20Tax%20%26%20Income%20Class?&body='+encodeURIComponent('Hi, I just registered for the Retirement Tax & Income Class. Please confirm my spot and send my access link.');
  var MC=''; /* e.g. https://m.me/<page>?ref=retireclass  — if set, overrides SMS */
  var dm=document.getElementById('dmlink'); dm.href=MC||DM;
  document.querySelectorAll('[data-dm]').forEach(function(a){a.href=MC||DM;});
  /* calendar */
  var title='Retirement Tax & Income Class — Successful Money Strategies',
-     start='20261120T230000Z',end='20261121T000000Z', /* Thu, Nov 20 6:00 PM ET */
+     start='20261203T230000Z',end='20261204T000000Z', /* Thu, Dec 3 6:00 PM ET */
      desc='Your private access link will be texted to you after you confirm your spot.';
  document.getElementById('gcal').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+start+'/'+end+'&details='+encodeURIComponent(desc);
  var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retirement Class//EN','BEGIN:VEVENT','UID:'+Date.now()+'@retirement-class.local','DTSTAMP:'+start,'DTSTART:'+start,'DTEND:'+end,'SUMMARY:'+title,'DESCRIPTION:'+desc,'END:VEVENT','END:VCALENDAR'].join('\r\n');
