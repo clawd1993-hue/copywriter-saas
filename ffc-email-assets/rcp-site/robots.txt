@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /hq/
+Disallow: /for/

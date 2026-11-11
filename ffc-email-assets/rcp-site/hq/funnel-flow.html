@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>The Client Funnel · Retirement Class Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A1628;--ink2:#111F38;--paper:#F6F5F0;--card:#fff;--line:#E4E2DA;--muted:#5B6474;--acc:#2457F5;--gold:#C9A447;--green:#1E8A5A;--red:#B3261E}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--paper);color:var(--ink);font:16.5px/1.6 'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.hero{background:var(--ink);color:#fff;padding:56px 0 44px;background-image:radial-gradient(900px 400px at 10% -10%,rgba(36,87,245,.3),transparent 60%),radial-gradient(600px 300px at 95% 20%,rgba(201,164,71,.14),transparent 60%)}
+.hero .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.hero .kick{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,164,71,.45);padding:6px 12px;border-radius:100px;margin-bottom:18px}
+.hero h1{font-family:'Fraunces',Georgia,serif;font-size:46px;line-height:1.05;margin:0 0 14px;letter-spacing:-.01em}
+.hero p{color:#B9C2D3;font-size:18px;max-width:760px;margin:0}
+.hero .meta{margin-top:18px;font-size:13px;color:#8C97AB}
+.lay{max-width:1180px;margin:0 auto;padding:36px 28px 90px;display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:start}
+.toc{position:sticky;top:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 6px 16px 16px;max-height:calc(100vh - 40px);overflow:auto}
+.toc .t{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toc a{display:block;color:var(--ink);font-size:13.5px;padding:5px 8px;border-radius:7px;line-height:1.3}
+.toc a.l3{padding-left:20px;color:var(--muted);font-size:12.5px}
+.toc a:hover{background:var(--paper);text-decoration:none}
+.doc>*:first-child{margin-top:0}
+.doc h2{font-family:'Fraunces',Georgia,serif;font-size:32px;line-height:1.1;margin:64px 0 18px;padding-top:22px;border-top:2px solid var(--ink);letter-spacing:-.01em}
+.doc h2:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.doc h3{font-family:'Fraunces',Georgia,serif;font-size:22px;margin:36px 0 12px}
+.doc h4{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:26px 0 8px}
+.doc p{margin:0 0 14px}
+.doc strong{font-weight:700}
+.doc blockquote{margin:14px 0 18px;padding:18px 22px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:12px;color:var(--ink);box-shadow:0 10px 30px -22px rgba(10,22,40,.5)}
+.doc blockquote p{margin:0 0 10px}.doc blockquote p:last-child{margin:0}
+.doc blockquote blockquote{border-left-color:var(--gold);margin:10px 0}
+.doc ul,.doc ol{padding-left:24px;margin:0 0 16px}.doc li{margin:5px 0}
+.doc li.todo{list-style:none;margin-left:-24px;display:flex;gap:10px;align-items:flex-start}
+.doc .box{flex:none;width:18px;height:18px;border:1.5px solid var(--muted);border-radius:5px;font-size:12px;line-height:16px;text-align:center;color:#fff;margin-top:4px}
+.doc li.done .box{background:var(--green);border-color:var(--green)}
+.doc table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0 22px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+.doc th{text-align:left;background:var(--ink);color:#fff;font-weight:600;padding:11px 14px;font-size:13px;letter-spacing:.04em}
+.doc td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.doc tr:nth-child(even) td{background:#FBFAF6}
+.doc code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;background:#EEEDE6;padding:2px 6px;border-radius:5px}
+.doc pre{background:var(--ink);color:#DCE3F0;padding:22px 24px;border-radius:14px;overflow:auto;margin:14px 0 24px;font-size:13.5px;line-height:1.5}
+.doc pre code{background:none;padding:0;color:inherit;font-size:inherit}
+.doc pre.spine{background:var(--ink2);border:1px solid #223253;font-size:14px}
+.doc hr{border:0;border-top:1px dashed var(--line);margin:40px 0}
+.doc em{color:var(--muted)}
+.wd{display:inline-block;font-family:'Inter',sans-serif;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A5A00;background:#FBEFC9;border:1px solid #E8D28A;padding:2px 8px;border-radius:100px;vertical-align:middle;margin-left:4px}
+.doc h2 .wd,.doc h3 .wd{font-size:11px}
+.foot{text-align:center;color:var(--muted);font-size:13px;padding:0 28px 60px}
+@media(max-width:900px){.lay{grid-template-columns:1fr;gap:20px}.toc{position:static;max-height:none}.hero h1{font-size:34px}.doc h2{font-size:27px}.doc table{display:block;overflow-x:auto}}
+@media print{.toc{display:none}.lay{grid-template-columns:1fr}.hero{background:#fff;color:#000}.hero p{color:#333}}
+</style></head>
+<body>
+<header class="hero"><div class="wrap">
+ <span class="kick">Ad → LP → setter → class → Retirement Map Call</span>
+ <h1>The Client Funnel</h1>
+ <p>Internal · Retirement Class Partners · not for distribution</p>
+ <div class="meta">Source: <code style="color:#C9D2E3">FUNNEL-FLOW.md</code> · rendered 2026-11-11</div>
+</div></header>
+<div class="lay">
+ <nav class="toc"><p class="t">On this page</p><a class="l2" href="#the-spine">THE SPINE</a>
+<a class="l2" href="#stage-1-ad">STAGE 1 · AD</a>
+<a class="l2" href="#stage-2-landing-page">STAGE 2 · LANDING PAGE</a>
+<a class="l2" href="#stage-3-thank-you-page">STAGE 3 · THANK-YOU PAGE</a>
+<a class="l2" href="#stage-4-setter-dm-script">STAGE 4 · SETTER DM SCRIPT</a>
+<a class="l3" href="#41-link-location-check-draft">4.1 — Link + location check ⚡ draft</a>
+<a class="l3" href="#42-bridge-to-quals-draft">4.2 — Bridge to quals ⚡ draft</a>
+<a class="l3" href="#43-qual-1-assets-hormozi-wording">4.3 — Qual 1: assets (Hormozi wording)</a>
+<a class="l3" href="#44-qual-2-timeline-draft">4.4 — Qual 2: timeline ⚡ draft</a>
+<a class="l3" href="#45-qual-3-motivation-hormozi-wording">4.5 — Qual 3: motivation (Hormozi wording)</a>
+<a class="l3" href="#46-confirm-set-expectation-draft">4.6 — Confirm + set expectation ⚡ draft</a>
+<a class="l3" href="#47-reminders-hormozi-verbatim">4.7 — Reminders (Hormozi, verbatim)</a>
+<a class="l3" href="#48-watch-gate-draft">4.8 — Watch-gate ⚡ draft</a>
+<a class="l3" href="#49-book-draft">4.9 — Book ⚡ draft</a>
+<a class="l3" href="#410-booking-confirmation-show-up-draft">4.10 — Booking confirmation + show-up ⚡ draft</a>
+<a class="l3" href="#411-post-class-didnt-book-hormozi-verbatim">4.11 — Post-class, didn&#x27;t book (Hormozi, verbatim)</a>
+<a class="l3" href="#setter-faq-answers-draft-the-questions-that-actually-come-in">Setter FAQ answers ⚡ draft (the questions that actually come in)</a>
+<a class="l3" href="#hard-rules-for-the-setter">Hard rules for the setter</a>
+<a class="l2" href="#stage-5-webinar">STAGE 5 · WEBINAR</a>
+<a class="l2" href="#stage-6-booking-page">STAGE 6 · BOOKING PAGE</a>
+<a class="l2" href="#stage-7-retirement-map-call">STAGE 7 · RETIREMENT MAP CALL</a>
+<a class="l2" href="#what-we-measure-weekly-pipeline-review">WHAT WE MEASURE (weekly pipeline review)</a>
+<a class="l2" href="#build-status">BUILD STATUS</a></nav>
+ <main class="doc"><p><strong>What a retiree sees, in order, from ad to booked Retirement Map Call. Setter script included.</strong>
+v1 · 2026-11-11 · Hormozi copy = verbatim where used. Setter flow = Michael's order (link first → location → quals → watch-gate → book). <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span> = Warren draft, Michael sharpens.</p>
+<p>This is the thing we install per RIA. One build in GHL/ManyChat, cloned per client.</p>
+<hr />
+<h2 id="the-spine">THE SPINE</h2>
+<pre class="spine"><code> AD (Meta / search)
+  │  &quot;Retirement Tax &amp; Income Class&quot; · [City] · 55–75 · $500k+
+  ▼
+ LANDING PAGE  retirementclasspartners.com/for/&lt;slug&gt;/   (later: client's own domain)
+  │  asset-gated form: name · email · mobile · assets dropdown · &quot;I live in [State]&quot; ✓
+  │  → webhook to GHL · tag by asset bucket · CAPI &quot;Lead&quot;
+  ▼
+ THANK-YOU PAGE  /for/&lt;slug&gt;/ty.html
+  │  &quot;Do this now&quot; → Step 1: tap to message the Concierge (SMS / Messenger)
+  │  Step 2: add to calendar · What to expect
+  ▼
+ SETTER DM (SMS or Messenger, GHL/ManyChat)
+  │  1. Link delivered          ── &quot;here's your link&quot;
+  │  2. Location check          ── &quot;where are you based?&quot;
+  │  3. Quals for the Map       ── assets · timeline · motivation  → tag QUALIFIED
+  │  4. Reminders               ── 24h · 1h
+  │  5. Watch-gate              ── &quot;have you watched the class yet?&quot;
+  │  6. Book                    ── calendar link → Retirement Map Call
+  ▼
+ WEBINAR  45–60 min, recorded once, 14 slides  (memory/ria-webinar-script.md)
+  │  Slide 12–14: Retirement Map Call offer + QR / short URL
+  ▼
+ BOOKING PAGE  (Retirement Map Call, advisor's calendar)
+  │  → CAPI &quot;Qualified&quot; fires here (the pixel learns on THIS, not on Lead)
+  ▼
+ RETIREMENT MAP CALL  — advisor's 1:1. Our job ends at &quot;on the calendar + showed up.&quot;
+  │
+  ▼
+ SIGNED HOUSEHOLD  → $1k bounty + 10% yr-1 fees (sales-call terms, see SALES-SCRIPTS.md)
+</code></pre>
+<p><strong>Setter owns everything between the TY page and the advisor's calendar.</strong> Contact, qualify, answer questions, remind, chase no-shows, book.</p>
+<hr />
+<h2 id="stage-1-ad">STAGE 1 · AD</h2>
+<p>Three scripts, 30–45s, advisor on camera, compliance-safe. Full text → <code>memory/hormozi-dump-4.md</code> §2.
+- <strong>Ad 1</strong> "Confused by Retirement Taxes?"
+- <strong>Ad 2</strong> "Paycheck to 'Retirement Paycheck'"
+- <strong>Ad 3</strong> "Avoid the Silent Retirement Mistakes"</p>
+<p>Targeting: [City] metro · 55–75 · interests retirement/financial planning · later: client-list lookalike. Education-only language in live text; any spicy claim lives in the image. CTA → landing page.</p>
+<p><strong>What fires:</strong> click → LP · CAPI <code>PageView</code>.</p>
+<hr />
+<h2 id="stage-2-landing-page">STAGE 2 · LANDING PAGE</h2>
+<p><strong>Headline:</strong> How to Reduce Retirement Taxes and Build an Income That Can Last 25+ Years
+<strong>Pre-head:</strong> Free Online Class for [City] Households With $500,000+ Saved
+<strong>Form:</strong> Full name · Email · Mobile · <em>Approximate investable assets (not including your home)?</em> dropdown · ☐ <em>Yes, I live in [State].</em> · <strong>Save My Seat</strong>
+Below: what you'll see · who it's for · host bio · how it works · compliance footer.</p>
+<p><strong>The asset dropdown IS the first gate.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Bucket</th>
+<th>Tag</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Under $250k</td>
+<td><code>COLD</code></td>
+<td>Allowed in, no setter push, no call offer</td>
+</tr>
+<tr>
+<td>$250–500k</td>
+<td><code>WARM</code></td>
+<td>Setter contacts, no pre-class booking push</td>
+</tr>
+<tr>
+<td>$500k–1M</td>
+<td><code>QUALIFIED</code></td>
+<td>Full setter flow</td>
+</tr>
+<tr>
+<td>$1–2M</td>
+<td><code>QUALIFIED-HI</code></td>
+<td>Full flow, priority</td>
+</tr>
+<tr>
+<td>$2M+</td>
+<td><code>QUALIFIED-HI</code></td>
+<td>Full flow, priority, advisor pinged</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What fires:</strong> form POST → GHL contact + tag · CAPI <code>Lead</code> · redirect to TY with <code>?fn=First&amp;a=&lt;bucket&gt;</code>.</p>
+<hr />
+<h2 id="stage-3-thank-you-page">STAGE 3 · THANK-YOU PAGE</h2>
+<p><strong>Ribbon:</strong> Registration received · One last step
+<strong>Headline:</strong> [First], you're registered for the Retirement Tax &amp; Income Class
+<strong>Subhead:</strong> One last step so we can send your private access link and make sure you're in the right room.</p>
+<p><strong>Step 1 (gold, "Do this now"):</strong> Confirm Your Spot &amp; Get Your Link</p>
+<blockquote>
+<p>To keep this class focused, we limit it to [State] residents with $500,000+ saved. Tap the button below to message our team. We'll ask you 2–3 quick questions, confirm your seat, and send your private viewing link.
+<strong>[ Tap Here to Confirm &amp; Get Your Access Link ]</strong>
+<em>Sends you to Messenger / SMS with our Retirement Class Concierge. Takes about 60 seconds.</em></p>
+</blockquote>
+<p><strong>Step 2:</strong> Add It to Your Calendar — date/time/topic, Google + .ics buttons. "Watch with your spouse/partner."
+<strong>What to expect:</strong> the 3 bullets + "no product pitch during the class."
+<strong>Footer:</strong> RIA disclosure + SMS consent + <strong>promoter disclosure</strong> (<code>hormozi-dump-4.md</code> §3B, required).</p>
+<p><strong>What fires:</strong> button → <code>sms:</code> link with prefilled body (or <code>m.me/&lt;page&gt;?ref=retireclass</code>) · opens the setter conversation.</p>
+<p>Prefilled SMS body: <em>"Hi, I just registered for the Retirement Tax &amp; Income Class. Please confirm my spot and send my access link."</em></p>
+<hr />
+<h2 id="stage-4-setter-dm-script">STAGE 4 · SETTER DM SCRIPT</h2>
+<p>Runs in GHL (SMS) or ManyChat (Messenger). Setter name = a real first name, from [Firm]. Tone: warm, short, texts like a person. One question per message. Never two.</p>
+<p><strong>Michael's order:</strong> link first → location → quals → watch-gate → book. <em>(Delta from Hormozi's draft, which held the link until after quals and pushed pre-class booking. Michael's call. Link-first = lower friction; watch-gate = higher show + better call quality.)</em></p>
+<h3 id="41-link-location-check-draft">4.1 — Link + location check <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<blockquote>
+<p>Hey [First], it's [Setter] from [Firm]. Thanks for grabbing a seat for the Retirement Tax &amp; Income Class.</p>
+<p>Here's your private link 👉 [WEBINAR LINK]</p>
+<p>Real quick, where are you based? Just want to make sure the class applies to you.</p>
+</blockquote>
+<ul>
+<li>In [State] → 4.2</li>
+<li>Out of state → "Got it. The class is built around [State] rules so some of it won't apply, but you're welcome to watch." Tag <code>OUT-OF-STATE</code>. No call offer. Stop.</li>
+<li>No reply 2h → "Still there, [First]? Just need your city so I can confirm your spot." · 24h → move on to reminders, no quals.</li>
+</ul>
+<h3 id="42-bridge-to-quals-draft">4.2 — Bridge to quals <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<blockquote>
+<p>Awesome, [City]'s right in our wheelhouse.</p>
+<p>A couple quick questions so I can pass them to the team and they can get started on your personalized Retirement Map before the class. Takes 30 seconds. Cool?</p>
+</blockquote>
+<p><em>(Yes / 👍 / any reply → 4.3. Silence → send 4.3 anyway after 1h.)</em></p>
+<h3 id="43-qual-1-assets-hormozi-wording">4.3 — Qual 1: assets (Hormozi wording)</h3>
+<blockquote>
+<p>First one. About how much have you saved for retirement so far, not counting your home?
+a) Under $250,000
+b) $250,000–$500,000
+c) $500,000–$1,000,000
+d) $1,000,000–$2,000,000
+e) $2,000,000+</p>
+</blockquote>
+<p><em>(Buttons on Messenger, free-type on SMS. Re-tag if it differs from the form answer. c–e → <code>QUALIFIED</code>.)</em></p>
+<h3 id="44-qual-2-timeline-draft">4.4 — Qual 2: timeline <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<blockquote>
+<p>Got it. And roughly when are you planning to retire, or are you already there?</p>
+</blockquote>
+<p><em>(Any answer accepted. Within 10 yrs or retired = ideal. Logs to contact.)</em></p>
+<h3 id="45-qual-3-motivation-hormozi-wording">4.5 — Qual 3: motivation (Hormozi wording)</h3>
+<blockquote>
+<p>Last one. What made you decide to register today?
+a) I'm worried about taxes in retirement
+b) I'm not sure if I'll have enough / might run out
+c) I'm retiring in the next few years and want a second opinion
+d) Something else</p>
+</blockquote>
+<p><strong>Mirror:</strong></p>
+<blockquote>
+<p>Got it – a lot of people we talk to feel the same way about "[their answer]" before they see the numbers.</p>
+</blockquote>
+<h3 id="46-confirm-set-expectation-draft">4.6 — Confirm + set expectation <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<blockquote>
+<p>Perfect, that's everything. I've passed it to the team so your Retirement Map's ready to go after the class.</p>
+<p>Your link again for [Day] at [Time] [TZ] 👉 [WEBINAR LINK]
+Join from phone, tablet, or computer. I'll ping you the day before and an hour before so you don't miss it.</p>
+<p>After you've watched, I'll send you a link to grab a free 1:1 Retirement Map Call with [Advisor First] where he plugs your actual numbers into the 5-step map. Sound good?</p>
+</blockquote>
+<p><em>(Stop here. Do NOT send the calendar link yet. That's the watch-gate.)</em></p>
+<p><strong>Exception, <code>QUALIFIED-HI</code> only</strong> (Hormozi's early-book, keep as an option): <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></p>
+<blockquote>
+<p>One more thing while you're here. Spots for the Retirement Map Call usually fill up right after the class, so some people grab a time in advance and keep it only if the class is useful. Want me to send you the calendar link now?
+→ Yes: [CALENDAR LINK] "Pick a time after the class. If it's not for you, cancel, no hard feelings."
+→ No: "Totally fine. Watch the class, I'll send it after."</p>
+</blockquote>
+<h3 id="47-reminders-hormozi-verbatim">4.7 — Reminders (Hormozi, verbatim)</h3>
+<p><strong>24h before:</strong></p>
+<blockquote>
+<p>Hey [First], quick reminder: your Retirement Tax &amp; Income Class is tomorrow at [Time] [TZ]. Here's your link again: [LINK]. Try to watch with your spouse/partner if you can – the couples who attend together get the most out of it.</p>
+</blockquote>
+<p><strong>1h before:</strong></p>
+<blockquote>
+<p>Hey [First], we're starting in about an hour. Your link: [LINK]. See you there.</p>
+</blockquote>
+<h3 id="48-watch-gate-draft">4.8 — Watch-gate <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<p>Fires 2h after the class ends (or next morning if class is evening).</p>
+<blockquote>
+<p>Hey [First], did you get a chance to watch the class?</p>
+</blockquote>
+<ul>
+<li><strong>Yes</strong> → 4.9</li>
+<li><strong>Part of it</strong> → "No worries, the Retirement Map part is the back half, slides 7 onward. Here's the link to finish it: [LINK]. Ping me when you're through and I'll send you [Advisor First]'s calendar." · re-check 24h.</li>
+<li><strong>No</strong> → "All good, it's recorded. Here's the link: [LINK]. It's about 45 minutes. Watch it when you've got a quiet hour and let me know, I'll hold a Retirement Map Call slot for you." · re-check 24h, then 72h, then drop to the post-class sequence.</li>
+<li><strong>Silence</strong> → 24h: "Still want me to hold a Retirement Map Call slot for you, [First]?" · 72h: last touch, post-class sequence.</li>
+</ul>
+<h3 id="49-book-draft">4.9 — Book <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<blockquote>
+<p>Great. Quick one: what stood out most?</p>
+</blockquote>
+<p><em>(Let them answer. Mirror one line. Then:)</em></p>
+<blockquote>
+<p>Makes sense. That's exactly what the Retirement Map Call is for. [Advisor First] takes your numbers and walks through the 5 steps for your situation, about 30 minutes, no cost, no pitch.</p>
+<p>Here's his calendar 👉 [CALENDAR LINK]
+Grab whatever's easiest this week or next.</p>
+</blockquote>
+<p><strong>Booked</strong> → 4.10. <strong>Not booked in 24h</strong> → "Did the times not work? I can get you something else." <strong>48h</strong> → "Last nudge from me, [First]. If you want your Retirement Map done, grab a slot here: [CALENDAR LINK]. Otherwise no worries, you've got the class."</p>
+<h3 id="410-booking-confirmation-show-up-draft">4.10 — Booking confirmation + show-up <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h3>
+<blockquote>
+<p>You're booked for [Day] at [Time] with [Advisor First]. Calendar invite's on its way.</p>
+<p>Two things to have handy: a rough list of your accounts and balances, and your Social Security estimate if you've got it. Makes the map a lot more useful.</p>
+<p>See you then.</p>
+</blockquote>
+<p><strong>24h before call:</strong> "Reminder, your Retirement Map Call with [Advisor First] is tomorrow at [Time]. Still good?"
+<strong>1h before:</strong> "Your call's in an hour. [Zoom/phone details]."
+<strong>No-show:</strong> within 15 min: "Hey [First], [Advisor First]'s on the line, everything ok?" · 2h: "No worries, life happens. Grab a new time here: [CALENDAR LINK]." · 24h: one more. Then drop to nurture.</p>
+<h3 id="411-post-class-didnt-book-hormozi-verbatim">4.11 — Post-class, didn't book (Hormozi, verbatim)</h3>
+<blockquote>
+<p>Hey [First], this is [Setter] from [Firm]. Saw you caught our Retirement Tax &amp; Income Class – thanks for spending part of your day with us. If you'd like us to plug your numbers into the 5-step Retirement Map we walked through, here's the link to grab a free 1:1 call: [CALENDAR LINK]. We only open a handful of spots each month, so if you want one, grab it while they're open.</p>
+</blockquote>
+<h3 id="setter-faq-answers-draft-the-questions-that-actually-come-in">Setter FAQ answers <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span> (the questions that actually come in)</h3>
+<table>
+<thead>
+<tr>
+<th>They ask</th>
+<th>Setter says</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Is this a sales pitch?"</td>
+<td>"No. The class is education only, nothing's sold. The Retirement Map Call is optional and free. If you want [Advisor First]'s help after, that's a separate conversation you'd have with him."</td>
+</tr>
+<tr>
+<td>"Who is [Advisor]?"</td>
+<td>"[Advisor First] is a [CFP® / fiduciary] at [Firm] here in [City]. He's been doing retirement income planning for [State] families for [X] years. His bio's on the registration page."</td>
+</tr>
+<tr>
+<td>"Is it live or recorded?"</td>
+<td>"It's a scheduled online class. You join at [Time] from the link. If you can't make it, let me know and I'll get you the replay."</td>
+</tr>
+<tr>
+<td>"Can my spouse join?"</td>
+<td>"Please do. Same link, one screen. The couples who watch together get the most out of it."</td>
+</tr>
+<tr>
+<td>"How did you get my number?"</td>
+<td>"You entered it when you registered for the class at [page]. If that wasn't you, reply STOP and I'll remove you."</td>
+</tr>
+<tr>
+<td>"I'm not in [State]."</td>
+<td>"The class is built around [State] rules so some won't apply, but you're welcome to watch." No call offer.</td>
+</tr>
+<tr>
+<td>"Is this free?"</td>
+<td>"Yes. The class and the Retirement Map Call are both free. No cost, no obligation."</td>
+</tr>
+<tr>
+<td>Anything about returns, products, specific accounts</td>
+<td>"That's exactly the kind of thing [Advisor First] goes through on the Retirement Map Call. I'm the scheduling side, I don't give advice."</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hard-rules-for-the-setter">Hard rules for the setter</h3>
+<ul>
+<li>Never discuss performance, returns, products, or specific securities. Redirect to the call.</li>
+<li>Never promise outcomes.</li>
+<li>Promoter disclosure line available on request and included in the first message's footer link.</li>
+<li>STOP = stop. Immediately.</li>
+<li>One question per message. Short. Like a person.</li>
+</ul>
+<hr />
+<h2 id="stage-5-webinar">STAGE 5 · WEBINAR</h2>
+<p>45–60 min, 14 slides, recorded once. Full script → <code>memory/ria-webinar-script.md</code>.
+- Slides 1–2: who it's for, "education not pitch," promise of the Retirement Map Call at the end
+- Slides 3–6: the 3 Retirement Killers (taxes · sequence of returns · inflation)
+- Slide 7: the 5-step Retirement Map
+- Slides 8–10: three case stories ($800k unsure · $1.4M afraid to pull the trigger · retired, afraid to spend)
+- Slide 11: blurred sample Retirement Map one-pager
+- Slide 12: "Two options from here"
+- Slide 13: what the Retirement Map Call is
+- Slide 14: how to book (short URL + QR)</p>
+<p><strong>Advisor records this once, within 7 days of signing.</strong> Plus the 3 ad clips.</p>
+<hr />
+<h2 id="stage-6-booking-page">STAGE 6 · BOOKING PAGE</h2>
+<p>Advisor's calendar (GHL calendar or Calendly, embedded on our page under <code>/for/&lt;slug&gt;/book</code>).
+<strong>Headline <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span>:</strong> Book Your Free Retirement Map Call With [Advisor Name]
+<strong>Sub <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span>:</strong> 30 minutes. We take your actual numbers and walk through the 5-step map for your situation. No cost, no product pitch.
+Pre-call questions on the booking form: account balances (ranges) · retirement year · biggest concern. Promoter disclosure in footer.</p>
+<p><strong>What fires:</strong> booking → GHL appointment · tag <code>BOOKED</code> · <strong>CAPI <code>Qualified</code></strong> (this is the Meta optimization event) · advisor notified · setter 4.10 sequence starts.</p>
+<p><em>Still to build: this page. Copy above is placeholder.</em></p>
+<hr />
+<h2 id="stage-7-retirement-map-call">STAGE 7 · RETIREMENT MAP CALL</h2>
+<p>Advisor's 1:1. 30 min. He runs the 5 steps on their numbers, shows them their own map, invites them to become a client. <strong>This is his sales call, not ours.</strong> We get him there with a pre-framed, pre-qualified, already-educated household.</p>
+<p><em>Still to build: advisor-side call framework (one page for the RIA). Separate doc.</em></p>
+<hr />
+<h2 id="what-we-measure-weekly-pipeline-review">WHAT WE MEASURE (weekly pipeline review)</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Metric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ad → LP</td>
+<td>CPM · CTR · cost per registrant</td>
+</tr>
+<tr>
+<td>LP → form</td>
+<td>registration rate · % <code>QUALIFIED</code></td>
+</tr>
+<tr>
+<td>TY → DM</td>
+<td>DM open rate (tap-through)</td>
+</tr>
+<tr>
+<td>DM</td>
+<td>qual completion rate · % in-state</td>
+</tr>
+<tr>
+<td>Class</td>
+<td>show rate · watch-through</td>
+</tr>
+<tr>
+<td>Watch-gate → booking</td>
+<td>booking rate from watched</td>
+</tr>
+<tr>
+<td>Call</td>
+<td>show rate · no-show recovery</td>
+</tr>
+<tr>
+<td>Outcome</td>
+<td><strong>new $500k+ households · new AUM</strong> (the only number the RIA cares about)</td>
+</tr>
+</tbody>
+</table>
+<p>Cost per qualified booked call is the number we tune ads on. New households is the number we get paid on.</p>
+<hr />
+<h2 id="build-status">BUILD STATUS</h2>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LP + TY (template + O'Keefe)</td>
+<td>✅ built, live</td>
+</tr>
+<tr>
+<td>Ad scripts (3)</td>
+<td>✅ written</td>
+</tr>
+<tr>
+<td>Webinar script (14 slides)</td>
+<td>✅ written</td>
+</tr>
+<tr>
+<td>Setter DM script</td>
+<td>✅ this doc</td>
+</tr>
+<tr>
+<td>Promoter disclosure</td>
+<td>✅ written, ⬜ wired into LP/TY footer + setter</td>
+</tr>
+<tr>
+<td>GHL/ManyChat wiring</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Booking page</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>CAPI <code>Lead</code> + <code>Qualified</code> events</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Advisor-side call framework</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>Per-client brand colors in build.py</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<p>Sources: [[ria-funnel-copy]] (LP/TY/setter, Hormozi) · [[ria-webinar-script]] · [[hormozi-dump-4]] (ads, disclosure) · [[ria-funnel-build]] · [[clawd-devils-advocate-2026-11-10]] (CAPI on Qualified).</p></main>
+</div>
+<div class="foot">Retirement Class Partners · internal working document</div>
+</body></html>
