@@ -96,7 +96,7 @@ v1 · 2026-11-11 · Hormozi copy = verbatim where used. Setter flow = Michael's 
   │  → webhook to GHL · tag by asset bucket · CAPI &quot;Lead&quot;
   ▼
  THANK-YOU PAGE  /for/&lt;slug&gt;/ty.html
-  │  &quot;Do this now&quot; → Step 1: tap to message the Concierge (SMS / Messenger)
+  │  &quot;Do this now&quot; → Step 1: Check your phone, reply to our text
   │  Step 2: set aside 45–60 min (watch anytime) · What to expect
   ▼
  SETTER DM (SMS or Messenger, GHL/ManyChat)
@@ -177,18 +177,15 @@ Below: what you'll see · who it's for · host bio · how it works · compliance
 <p><strong>Ribbon:</strong> Registration received · One last step
 <strong>Headline:</strong> [First], you're registered for the Retirement Tax &amp; Income Class
 <strong>Subhead:</strong> One last step so we can send your private access link and make sure you're in the right room.</p>
-<p><strong>Step 1 (gold, "Do this now"):</strong> Confirm Your Spot &amp; Get Your Link</p>
+<p><strong>Step 1 (gold, "Do this now"):</strong> Check Your Phone</p>
 <blockquote>
-<p>To keep this class focused, we limit it to [State] residents with $500,000+ saved. Tap the button below to message our team. We'll ask you 2–3 quick questions, confirm your seat, and send your private viewing link.
-<strong>[ Tap Here to Confirm &amp; Get Your Access Link ]</strong>
-<em>Sends you to Messenger / SMS with our Retirement Class Concierge. Takes about 60 seconds.</em></p>
+<p>We just texted you at (•••) •••-1234. <strong>Reply to that message</strong> to confirm your seat and get your private link. Our team will ask you 2–3 quick questions so the class is tailored to the right people.
+<em>Didn't get it? Give it a minute and check the number you entered. [mobile only: Or tap here to text us.]</em></p>
 </blockquote>
 <p><strong>Step 2:</strong> Set Aside 45–60 Minutes — watch anytime from phone/tablet/computer. "Watch with your spouse/partner." <em>(Calendar buttons removed 2026-11-11, no fixed date.)</em>
 <strong>What to expect:</strong> the 3 bullets + "no product pitch during the class."
 <strong>Footer:</strong> RIA disclosure + SMS consent + <strong>promoter disclosure</strong> (<code>hormozi-dump-4.md</code> §3B, required).</p>
-<p><strong>SMS mode (decided 2026-11-11, GHL):</strong> the LP form POSTs to a GHL webhook, the first text fires automatically, and the TY page says "Check your phone, we just texted (•••) •••-1234, reply to that message." No tap-to-text button. The button version stays only as demo fallback when no webhook is set. Build + setter prompt → <code>GHL-SETUP.md</code>.</p>
-<p><strong>What fires (legacy/demo):</strong> button → <code>sms:</code> link with prefilled body · opens the setter conversation.</p>
-<p>Prefilled SMS body: <em>"Hi, I just registered for the Retirement Tax &amp; Income Class. Please confirm my spot and send my access link."</em></p>
+<p><strong>How it fires:</strong> the LP form POSTs to the GHL webhook, the first text goes out automatically, the TY page just tells them to look at their phone. No tap-to-text button anywhere (removed 2026-11-11). Build + setter prompt → <code>GHL-SETUP.md</code>.</p>
 <hr />
 <h2 id="stage-4-setter-dm-script">STAGE 4 · SETTER DM SCRIPT</h2>
 <p>Runs in GHL (SMS) or ManyChat (Messenger). Setter name = a real first name, from [Firm]. Tone: warm, short, texts like a person. One question per message. Never two.</p>

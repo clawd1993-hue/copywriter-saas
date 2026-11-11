@@ -86,8 +86,8 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <td>✅ live on all 50</td>
 </tr>
 <tr>
-<td>TY page "Check your phone" mode (shows when the form posted)</td>
-<td>✅ built, dormant</td>
+<td>TY page = "Check your phone" (only Step 1, tap button removed)</td>
+<td>✅ live on all 50</td>
 </tr>
 <tr>
 <td>GHL sub-account + number</td>
@@ -170,7 +170,7 @@ The setter will identify as "Retirement Class Partners" on one shared number for
 <h2 id="4-wiring-already-in-the-template">4 · Wiring already in the template</h2>
 <ul>
 <li>LP posts JSON: <code>{name, first_name, email, phone (E.164), assets, state_ok, slug, source, page}</code> to <code>WEBHOOK</code>, then redirects to <code>ty.html?fn=First&amp;a=&lt;bucket&gt;&amp;ph=&lt;last4&gt;</code>. 4-second timeout so a slow webhook never blocks the redirect.</li>
-<li>TY reads <code>ph</code>: if present → "Check your phone, we texted (•••) •••-1234, reply to that message." If absent (demo mode) → the old tap-to-text button.</li>
+<li>TY always shows "Check your phone"; reads <code>ph</code> to mask the last 4 digits. Small mobile-only <code>sms:</code> fallback link under it.</li>
 <li>Consent line under the button: "By registering you agree to receive text messages and emails about this class from [Firm]. Msg &amp; data rates may apply. Reply STOP to opt out." <em>(For previews the sender is RCP, not the firm; swap to "from Retirement Class Partners on behalf of [Firm]" before go-live if counsel wants it.)</em></li>
 </ul>
 <p>Sources: [[FUNNEL-FLOW]] §3–4, [[ria-funnel-build]].</p></main>
