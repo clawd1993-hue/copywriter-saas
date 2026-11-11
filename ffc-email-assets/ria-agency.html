@@ -7,7 +7,7 @@
 <meta name="description" content="We build and run retirement class + webinar funnels that attract $1M+ retiree households, then our team qualifies, follows up, and books them straight onto your calendar. No retainers. Performance-aligned. SEC-registered RIAs and IARs only.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>html,body{margin:0;padding:0;background:#0A1628}</style>
+<style>html{scroll-behavior:smooth}html,body{margin:0;padding:0;background:#0A1628}</style>
 </head>
 <body>
 <style>
@@ -19,7 +19,8 @@
 .rc .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 .rc .narrow{max-width:780px;margin:0 auto;padding:0 24px}
 .rc .center{text-align:center}
-.rc .sec{padding:84px 0}
+.rc .sec{padding:84px 0;scroll-margin-top:72px}
+.rc .final,.rc .hero{scroll-margin-top:72px}
 .rc .dark{background:var(--ink);color:#fff}
 .rc .dark h1,.rc .dark h2,.rc .dark h3{color:#fff}
 .rc .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:16px}
@@ -425,6 +426,18 @@
 <script>
 (function(){
  document.getElementById('yr').textContent=new Date().getFullYear();
+ /* smooth in-page scroll (fallback + nav offset) */
+ document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+   var id=a.getAttribute('href').slice(1); if(!id) return;
+   var el=document.getElementById(id); if(!el) return;
+   e.preventDefault();
+   var y=el.getBoundingClientRect().top+window.pageYOffset-72;
+   try{window.scrollTo({top:y,behavior:'smooth'})}catch(x){window.scrollTo(0,y)}
+   if(history.replaceState) history.replaceState(null,'','#'+id);
+  });
+ });
+
  var go=document.getElementById('go');
  go.addEventListener('click',function(e){
   e.preventDefault();
