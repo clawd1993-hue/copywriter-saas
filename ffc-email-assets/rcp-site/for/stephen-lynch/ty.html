@@ -37,6 +37,8 @@
 .rw .steplabel{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .rw h2{font-size:27px;margin-bottom:10px}
 .rw .stepcard p{font-size:17px;color:var(--txt);margin-bottom:12px}
+.rw .stepcard p.big{font-size:19px;font-weight:600;color:var(--navy)}
+.rw .mob-only{display:none}@media(max-width:700px){.rw .mob-only{display:inline}}
 .rw .stepcard p.m{color:var(--muted);font-size:15.5px}
 .rw .cta{display:block;width:100%;background:var(--brand);color:#fff;font-weight:700;font-size:19px;padding:19px 22px;border-radius:12px;box-shadow:0 16px 36px -14px rgba(15,42,71,.55);transition:.18s;text-align:center;line-height:1.25;margin:18px 0 10px}
 .rw .cta:hover{transform:translateY(-2px);background:var(--navy2)}
@@ -85,7 +87,14 @@
 <div class="sec">
  <div class="wrap">
 
-  <div class="stepcard primary">
+  <div class="stepcard primary" id="step1sms" style="display:none">
+   <div class="steplabel">Step 1</div>
+   <h2>Check Your Phone</h2>
+   <p class="big">We just texted you at <b id="phmask">your mobile</b>.</p>
+   <p><b>Reply to that message</b> to confirm your seat and get your private link. Our team will ask you 2–3 quick questions so the class is tailored to the right people.</p>
+   <div class="cta-note"><span>💬</span><span>Didn’t get it? Give it a minute and check the number you entered. <a href="#" id="dmlink2" class="mob-only">Or tap here to text us.</a></span></div>
+  </div>
+  <div class="stepcard primary" id="step1tap">
    <div class="steplabel">Step 1</div>
    <h2>Confirm Your Spot &amp; Get Your Link</h2>
    <p>To keep this class focused, we limit it to New Mexico residents with $500,000+ saved.</p>
@@ -134,6 +143,15 @@
  var MC=''; /* e.g. https://m.me/<page>?ref=retireclass  — if set, overrides SMS */
  var dm=document.getElementById('dmlink'); dm.href=MC||DM;
  document.querySelectorAll('[data-dm]').forEach(function(a){a.href=MC||DM;});
+ /* SMS mode: LP already posted to GHL and the first text is out → show "check your phone" instead of the tap button */
+ var ph=p.get('ph');
+ if(ph&&/^\d{4}$/.test(ph)){
+  document.getElementById('step1tap').style.display='none';
+  var s1=document.getElementById('step1sms'); s1.style.display='';
+  document.getElementById('phmask').textContent='(•••) •••-'+ph;
+  var d2=document.getElementById('dmlink2'); if(d2) d2.href=MC||DM;
+  var lead=document.querySelector('.rw .hero .lead'); if(lead) lead.textContent='Your private access link is on its way by text.';
+ }
 
 })();
 </script>
