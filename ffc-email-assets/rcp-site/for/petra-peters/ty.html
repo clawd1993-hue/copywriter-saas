@@ -97,17 +97,8 @@
 
   <div class="stepcard">
    <div class="steplabel">Step 2</div>
-   <h2>Add It to Your Calendar</h2>
-   <p class="m">Once you have your link, put this in your calendar:</p>
-   <div class="cal">
-    <div><b>Date</b><span>Thursday, December 3</span></div>
-    <div><b>Time</b><span>6:00 PM Eastern Time</span></div>
-    <div><b>Topic</b><span>Retirement Tax &amp; Income Class (For New York Households With $500k+ Saved)</span></div>
-   </div>
-   <div class="calbtns">
-    <a class="btn2" id="gcal" href="#" target="_blank" rel="noopener">+ Google Calendar</a>
-    <a class="btn2" id="ical" href="#">+ Apple / Outlook (.ics)</a>
-   </div>
+   <h2>Set Aside 45–60 Minutes</h2>
+   <p class="m">Once you have your private link you can watch the class whenever it suits you, from your phone, tablet, or computer. Grab a quiet hour and a notepad.</p>
    <p class="m" style="margin-top:14px">We recommend watching with your spouse/partner if you’re planning retirement together.</p>
   </div>
 
@@ -144,14 +135,7 @@
  var MC=''; /* e.g. https://m.me/<page>?ref=retireclass  — if set, overrides SMS */
  var dm=document.getElementById('dmlink'); dm.href=MC||DM;
  document.querySelectorAll('[data-dm]').forEach(function(a){a.href=MC||DM;});
- /* calendar */
- var title='Retirement Tax & Income Class — Terra Nova Asset Management',
-     start='20261203T230000Z',end='20261204T000000Z', /* Thu, Dec 3 6:00 PM ET */
-     desc='Your private access link will be texted to you after you confirm your spot.';
- document.getElementById('gcal').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+start+'/'+end+'&details='+encodeURIComponent(desc);
- var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retirement Class//EN','BEGIN:VEVENT','UID:'+Date.now()+'@retirement-class.local','DTSTAMP:'+start,'DTSTART:'+start,'DTEND:'+end,'SUMMARY:'+title,'DESCRIPTION:'+desc,'END:VEVENT','END:VCALENDAR'].join('\r\n');
- document.getElementById('ical').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
- document.getElementById('ical').setAttribute('download','retirement-class.ics');
+
 })();
 </script>
 <!-- ===== /RW BLOCK ===== -->
