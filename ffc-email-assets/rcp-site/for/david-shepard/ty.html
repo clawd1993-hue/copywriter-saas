@@ -80,27 +80,19 @@
  <div class="wrap">
   <div class="check">✓</div>
   <h1><span id="fnhi"></span>You’re Registered for the Retirement Tax &amp; Income Class 🎉</h1>
-  <p class="lead">One last step so we can send your private access link and make sure you’re in the right room.</p>
+  <p class="lead">Your private access link is on its way by text.</p>
  </div>
 </div>
 
 <div class="sec">
  <div class="wrap">
 
-  <div class="stepcard primary" id="step1sms" style="display:none">
+  <div class="stepcard primary" id="step1sms">
    <div class="steplabel">Step 1</div>
    <h2>Check Your Phone</h2>
    <p class="big">We just texted you at <b id="phmask">your mobile</b>.</p>
    <p><b>Reply to that message</b> to confirm your seat and get your private link. Our team will ask you 2–3 quick questions so the class is tailored to the right people.</p>
    <div class="cta-note"><span>💬</span><span>Didn’t get it? Give it a minute and check the number you entered. <a href="#" id="dmlink2" class="mob-only">Or tap here to text us.</a></span></div>
-  </div>
-  <div class="stepcard primary" id="step1tap">
-   <div class="steplabel">Step 1</div>
-   <h2>Confirm Your Spot &amp; Get Your Link</h2>
-   <p>To keep this class focused, we limit it to Colorado residents with $500,000+ saved.</p>
-   <p>👉 <b>Tap the button below to message our team.</b> We’ll ask you 2–3 quick questions, confirm your seat, and send your private viewing link.</p>
-   <a href="#" class="cta gold" id="dmlink">Tap Here to Confirm &amp; Get Your Access Link<small>Opens a message with our Retirement Class Concierge</small></a>
-   <div class="cta-note"><span>💬</span><span>Sends you to Messenger / SMS with our Retirement Class Concierge. Takes about 60 seconds.</span></div>
   </div>
 
   <div class="stepcard">
@@ -141,17 +133,9 @@
  /* DM link — set to the firm's ManyChat ref URL or sms: link in production */
  var DM='mailto:david@callahancapital.com?subject=Retirement%20Tax%20%26%20Income%20Class?&body='+encodeURIComponent('Hi, I just registered for the Retirement Tax & Income Class. Please confirm my spot and send my access link.');
  var MC=''; /* e.g. https://m.me/<page>?ref=retireclass  — if set, overrides SMS */
- var dm=document.getElementById('dmlink'); dm.href=MC||DM;
- document.querySelectorAll('[data-dm]').forEach(function(a){a.href=MC||DM;});
- /* SMS mode: LP already posted to GHL and the first text is out → show "check your phone" instead of the tap button */
+ var d2=document.getElementById('dmlink2'); if(d2) d2.href=MC||DM;
  var ph=p.get('ph');
- if(ph&&/^\d{4}$/.test(ph)){
-  document.getElementById('step1tap').style.display='none';
-  var s1=document.getElementById('step1sms'); s1.style.display='';
-  document.getElementById('phmask').textContent='(•••) •••-'+ph;
-  var d2=document.getElementById('dmlink2'); if(d2) d2.href=MC||DM;
-  var lead=document.querySelector('.rw .hero .lead'); if(lead) lead.textContent='Your private access link is on its way by text.';
- }
+ if(ph&&/^\d{4}$/.test(ph)) document.getElementById('phmask').textContent='(•••) •••-'+ph;
 
 })();
 </script>
