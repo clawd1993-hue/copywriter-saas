@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><script>if(/retirementclasspartners\.com$/.test(location.hostname))location.replace("https://hnwacquisition.com"+location.pathname+location.search+location.hash);</script><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>GHL Setup · Retirement Class Partners</title>
+<title>GHL Setup · HNW Acquisition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -56,7 +56,7 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
 <header class="hero"><div class="wrap">
  <span class="kick">Live SMS setter on the previews</span>
  <h1>GHL Setup</h1>
- <p>Internal · Retirement Class Partners · not for distribution</p>
+ <p>Internal · HNW Acquisition · not for distribution</p>
  <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-11</div>
 </div></header>
 <div class="lay">
@@ -116,15 +116,15 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <h2 id="1-question-for-clawd-michael-pastes">1 · Question for Clawd (Michael pastes)</h2>
 <blockquote>
 <p>Warren needs FFC infra for the RIA venture. Three things:
-1. Does FFC have an agency GHL account I can get a sub-account under ("RCP Previews")? If yes, create it and send the API key + an inbound webhook URL for contact creation.
+1. Does FFC have an agency GHL account I can get a sub-account under ("HNWA Previews")? If yes, create it and send the API key + an inbound webhook URL for contact creation.
 2. Is A2P 10DLC (brand + campaign) already approved on that account so a new number can send US SMS right away? If not, what entity did you register under last time and how long did it take?
 3. Did FFC ever run GHL Conversation AI or a webhook bot on SMS? Anything reusable?
-The setter will identify as "Retirement Class Partners" on one shared number for previews, then get cloned into per-client sub-accounts after a close.</p>
+The setter will identify as "HNW Acquisition" on one shared number for previews, then get cloned into per-client sub-accounts after a close.</p>
 </blockquote>
 <hr />
 <h2 id="2-ghl-build-once-the-sub-account-exists">2 · GHL build (once the sub-account exists)</h2>
 <ol>
-<li><strong>Sub-account</strong> "RCP Previews". Timezone America/New_York. Business name Retirement Class Partners, website retirementclasspartners.com.</li>
+<li><strong>Sub-account</strong> "HNWA Previews". Timezone America/New_York. Business name HNW Acquisition, website hnwacquisition.com.</li>
 <li><strong>Number:</strong> buy one local US number (any metro, or a toll-free; toll-free verification is faster than 10DLC if we're stuck).</li>
 <li><strong>Custom fields on Contact:</strong> <code>slug</code>, <code>assets</code>, <code>state_ok</code>, <code>source</code>, <code>mode</code> (= <code>preview</code> / <code>client</code>), <code>firm</code>, <code>advisor_first</code>.</li>
 <li><strong>Inbound webhook</strong> (Automation → Trigger "Inbound Webhook"): maps the LP payload → create/update contact, set fields, add tag <code>preview-&lt;slug&gt;</code>, add tag by assets bucket (<code>cold</code> &lt;250k · <code>warm</code> 250–500k · <code>qualified</code> 500k–1M · <code>qualified-hi</code> 1M+).</li>
@@ -139,10 +139,10 @@ The setter will identify as "Retirement Class Partners" on one shared number for
 </ol>
 <hr />
 <h2 id="3-preview-mode-setter-script-draft">3 · Preview-mode setter script <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h2>
-<p><strong>Identity rule:</strong> until a firm signs, the setter is <em>Retirement Class Partners</em>, never "[Firm]". We're showing the advisor what his retirees would get, so the voice is the concierge, but the sender is us.</p>
+<p><strong>Identity rule:</strong> until a firm signs, the setter is <em>HNW Acquisition</em>, never "[Firm]". We're showing the advisor what his retirees would get, so the voice is the concierge, but the sender is us.</p>
 <p><strong>Message 1 (auto, 20s after submit)</strong></p>
 <blockquote>
-<p>Hey [First], it's the Retirement Class concierge from Retirement Class Partners 👋 You just registered on the class page we built for [Firm]. This is exactly what your retirees see.</p>
+<p>Hey [First], it's the concierge from HNW Acquisition 👋 You just registered on the class page we built for [Firm]. This is exactly what your retirees see.</p>
 <p>Here's the class link 👉 [SAMPLE LINK]</p>
 <p>Real quick, where are you based? Just want to make sure the class applies to you.</p>
 </blockquote>
@@ -154,7 +154,7 @@ The setter will identify as "Retirement Class Partners" on one shared number for
 </blockquote>
 <p><strong>If they reply anything like "who is this / what is this"</strong></p>
 <blockquote>
-<p>It's Michael's team at Retirement Class Partners. You opened the preview page we built for [Firm] and registered on it, so you're getting the same texts a retiree would. No spam, this is the only sequence. Want 5 minutes with Michael to see the rest? [LINK]. Or reply STOP and I'll close it out.</p>
+<p>It's Michael's team at HNW Acquisition. You opened the preview page we built for [Firm] and registered on it, so you're getting the same texts a retiree would. No spam, this is the only sequence. Want 5 minutes with Michael to see the rest? [LINK]. Or reply STOP and I'll close it out.</p>
 </blockquote>
 <p><strong>If they ask about cost / how it works</strong></p>
 <blockquote>
@@ -171,9 +171,9 @@ The setter will identify as "Retirement Class Partners" on one shared number for
 <ul>
 <li>LP posts JSON: <code>{name, first_name, email, phone (E.164), assets, state_ok, slug, source, page}</code> to <code>WEBHOOK</code>, then redirects to <code>ty.html?fn=First&amp;a=&lt;bucket&gt;&amp;ph=&lt;last4&gt;</code>. 4-second timeout so a slow webhook never blocks the redirect.</li>
 <li>TY always shows "Check your phone"; reads <code>ph</code> to mask the last 4 digits. Small mobile-only <code>sms:</code> fallback link under it.</li>
-<li>Consent line under the button: "By registering you agree to receive text messages and emails about this class from [Firm]. Msg &amp; data rates may apply. Reply STOP to opt out." <em>(For previews the sender is RCP, not the firm; swap to "from Retirement Class Partners on behalf of [Firm]" before go-live if counsel wants it.)</em></li>
+<li>Consent line under the button: "By registering you agree to receive text messages and emails about this class from [Firm]. Msg &amp; data rates may apply. Reply STOP to opt out." <em>(For previews the sender is HNW Acquisition, not the firm; swap to "from HNW Acquisition on behalf of [Firm]" before go-live if counsel wants it.)</em></li>
 </ul>
 <p>Sources: [[FUNNEL-FLOW]] §3–4, [[ria-funnel-build]].</p></main>
 </div>
-<div class="foot">Retirement Class Partners · internal working document</div>
+<div class="foot">HNW Acquisition · internal working document</div>
 </body></html>
