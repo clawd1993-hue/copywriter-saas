@@ -186,7 +186,8 @@ Below: what you'll see · who it's for · host bio · how it works · compliance
 <p><strong>Step 2:</strong> Set Aside 45–60 Minutes — watch anytime from phone/tablet/computer. "Watch with your spouse/partner." <em>(Calendar buttons removed 2026-11-11, no fixed date.)</em>
 <strong>What to expect:</strong> the 3 bullets + "no product pitch during the class."
 <strong>Footer:</strong> RIA disclosure + SMS consent + <strong>promoter disclosure</strong> (<code>hormozi-dump-4.md</code> §3B, required).</p>
-<p><strong>What fires:</strong> button → <code>sms:</code> link with prefilled body (or <code>m.me/&lt;page&gt;?ref=retireclass</code>) · opens the setter conversation.</p>
+<p><strong>SMS mode (decided 2026-11-11, GHL):</strong> the LP form POSTs to a GHL webhook, the first text fires automatically, and the TY page says "Check your phone, we just texted (•••) •••-1234, reply to that message." No tap-to-text button. The button version stays only as demo fallback when no webhook is set. Build + setter prompt → <code>GHL-SETUP.md</code>.</p>
+<p><strong>What fires (legacy/demo):</strong> button → <code>sms:</code> link with prefilled body · opens the setter conversation.</p>
 <p>Prefilled SMS body: <em>"Hi, I just registered for the Retirement Tax &amp; Income Class. Please confirm my spot and send my access link."</em></p>
 <hr />
 <h2 id="stage-4-setter-dm-script">STAGE 4 · SETTER DM SCRIPT</h2>
@@ -450,8 +451,8 @@ Pre-call questions on the booking form: account balances (ranges) · retirement 
 <td>✅ written, ⬜ wired into LP/TY footer + setter</td>
 </tr>
 <tr>
-<td>GHL/ManyChat wiring</td>
-<td>⬜</td>
+<td>GHL wiring</td>
+<td>🟡 LP→webhook + TY SMS mode built (dormant); sub-account + 10DLC pending Clawd. See GHL-SETUP.md</td>
 </tr>
 <tr>
 <td>Booking page</td>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>GHL Setup · Retirement Class Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A1628;--ink2:#111F38;--paper:#F6F5F0;--card:#fff;--line:#E4E2DA;--muted:#5B6474;--acc:#2457F5;--gold:#C9A447;--green:#1E8A5A;--red:#B3261E}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--paper);color:var(--ink);font:16.5px/1.6 'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.hero{background:var(--ink);color:#fff;padding:56px 0 44px;background-image:radial-gradient(900px 400px at 10% -10%,rgba(36,87,245,.3),transparent 60%),radial-gradient(600px 300px at 95% 20%,rgba(201,164,71,.14),transparent 60%)}
+.hero .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.hero .kick{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,164,71,.45);padding:6px 12px;border-radius:100px;margin-bottom:18px}
+.hero h1{font-family:'Fraunces',Georgia,serif;font-size:46px;line-height:1.05;margin:0 0 14px;letter-spacing:-.01em}
+.hero p{color:#B9C2D3;font-size:18px;max-width:760px;margin:0}
+.hero .meta{margin-top:18px;font-size:13px;color:#8C97AB}
+.lay{max-width:1180px;margin:0 auto;padding:36px 28px 90px;display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:start}
+.toc{position:sticky;top:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 6px 16px 16px;max-height:calc(100vh - 40px);overflow:auto}
+.toc .t{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toc a{display:block;color:var(--ink);font-size:13.5px;padding:5px 8px;border-radius:7px;line-height:1.3}
+.toc a.l3{padding-left:20px;color:var(--muted);font-size:12.5px}
+.toc a:hover{background:var(--paper);text-decoration:none}
+.doc>*:first-child{margin-top:0}
+.doc h2{font-family:'Fraunces',Georgia,serif;font-size:32px;line-height:1.1;margin:64px 0 18px;padding-top:22px;border-top:2px solid var(--ink);letter-spacing:-.01em}
+.doc h2:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.doc h3{font-family:'Fraunces',Georgia,serif;font-size:22px;margin:36px 0 12px}
+.doc h4{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:26px 0 8px}
+.doc p{margin:0 0 14px}
+.doc strong{font-weight:700}
+.doc blockquote{margin:14px 0 18px;padding:18px 22px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:12px;color:var(--ink);box-shadow:0 10px 30px -22px rgba(10,22,40,.5)}
+.doc blockquote p{margin:0 0 10px}.doc blockquote p:last-child{margin:0}
+.doc blockquote blockquote{border-left-color:var(--gold);margin:10px 0}
+.doc ul,.doc ol{padding-left:24px;margin:0 0 16px}.doc li{margin:5px 0}
+.doc li.todo{list-style:none;margin-left:-24px;display:flex;gap:10px;align-items:flex-start}
+.doc .box{flex:none;width:18px;height:18px;border:1.5px solid var(--muted);border-radius:5px;font-size:12px;line-height:16px;text-align:center;color:#fff;margin-top:4px}
+.doc li.done .box{background:var(--green);border-color:var(--green)}
+.doc table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0 22px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+.doc th{text-align:left;background:var(--ink);color:#fff;font-weight:600;padding:11px 14px;font-size:13px;letter-spacing:.04em}
+.doc td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.doc tr:nth-child(even) td{background:#FBFAF6}
+.doc code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;background:#EEEDE6;padding:2px 6px;border-radius:5px}
+.doc pre{background:var(--ink);color:#DCE3F0;padding:22px 24px;border-radius:14px;overflow:auto;margin:14px 0 24px;font-size:13.5px;line-height:1.5}
+.doc pre code{background:none;padding:0;color:inherit;font-size:inherit}
+.doc pre.spine{background:var(--ink2);border:1px solid #223253;font-size:14px}
+.doc hr{border:0;border-top:1px dashed var(--line);margin:40px 0}
+.doc em{color:var(--muted)}
+.wd{display:inline-block;font-family:'Inter',sans-serif;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7A5A00;background:#FBEFC9;border:1px solid #E8D28A;padding:2px 8px;border-radius:100px;vertical-align:middle;margin-left:4px}
+.doc h2 .wd,.doc h3 .wd{font-size:11px}
+.foot{text-align:center;color:var(--muted);font-size:13px;padding:0 28px 60px}
+@media(max-width:900px){.lay{grid-template-columns:1fr;gap:20px}.toc{position:static;max-height:none}.hero h1{font-size:34px}.doc h2{font-size:27px}.doc table{display:block;overflow-x:auto}}
+@media print{.toc{display:none}.lay{grid-template-columns:1fr}.hero{background:#fff;color:#000}.hero p{color:#333}}
+</style></head>
+<body>
+<header class="hero"><div class="wrap">
+ <span class="kick">Live SMS setter on the previews</span>
+ <h1>GHL Setup</h1>
+ <p>Internal · Retirement Class Partners · not for distribution</p>
+ <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-11</div>
+</div></header>
+<div class="lay">
+ <nav class="toc"><p class="t">On this page</p><a class="l2" href="#0-status">0 · Status</a>
+<a class="l2" href="#1-question-for-clawd-michael-pastes">1 · Question for Clawd (Michael pastes)</a>
+<a class="l2" href="#2-ghl-build-once-the-sub-account-exists">2 · GHL build (once the sub-account exists)</a>
+<a class="l2" href="#3-preview-mode-setter-script-draft">3 · Preview-mode setter script ⚡ draft</a>
+<a class="l2" href="#4-wiring-already-in-the-template">4 · Wiring already in the template</a></nav>
+ <main class="doc"><p><strong>Goal:</strong> an RIA fills in his own preview form → his phone buzzes in seconds → the AI setter runs the flow → ends by booking Michael's 5-min call. The product demos itself.
+v1 · 2026-11-11 · Michael approved ("ok do it").</p>
+<hr />
+<h2 id="0-status">0 · Status</h2>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LP form POSTs to webhook (slug, name, email, phone, assets)</td>
+<td>✅ built, <strong>dormant</strong> until <code>RCP_WEBHOOK</code> is set</td>
+</tr>
+<tr>
+<td>SMS consent line under Save My Seat</td>
+<td>✅ live on all 50</td>
+</tr>
+<tr>
+<td>TY page "Check your phone" mode (shows when the form posted)</td>
+<td>✅ built, dormant</td>
+</tr>
+<tr>
+<td>GHL sub-account + number</td>
+<td>⬜ Clawd / Michael</td>
+</tr>
+<tr>
+<td>A2P 10DLC approved on that number</td>
+<td>⬜ <strong>the blocker</strong></td>
+</tr>
+<tr>
+<td>Setter prompt loaded (preview mode)</td>
+<td>⬜ this doc §3</td>
+</tr>
+<tr>
+<td>Sample class link for previews</td>
+<td>⬜ Michael records 3-min walkthrough, or placeholder page</td>
+</tr>
+<tr>
+<td>Privacy page: demo-pages clause updated</td>
+<td>⬜ once live</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flip switch:</strong> <code>RCP_WEBHOOK=&lt;url&gt; python3 ria-funnel/batch_build.py</code> → deploy. One deploy turns all 50 on.</p>
+<hr />
+<h2 id="1-question-for-clawd-michael-pastes">1 · Question for Clawd (Michael pastes)</h2>
+<blockquote>
+<p>Warren needs FFC infra for the RIA venture. Three things:
+1. Does FFC have an agency GHL account I can get a sub-account under ("RCP Previews")? If yes, create it and send the API key + an inbound webhook URL for contact creation.
+2. Is A2P 10DLC (brand + campaign) already approved on that account so a new number can send US SMS right away? If not, what entity did you register under last time and how long did it take?
+3. Did FFC ever run GHL Conversation AI or a webhook bot on SMS? Anything reusable?
+The setter will identify as "Retirement Class Partners" on one shared number for previews, then get cloned into per-client sub-accounts after a close.</p>
+</blockquote>
+<hr />
+<h2 id="2-ghl-build-once-the-sub-account-exists">2 · GHL build (once the sub-account exists)</h2>
+<ol>
+<li><strong>Sub-account</strong> "RCP Previews". Timezone America/New_York. Business name Retirement Class Partners, website retirementclasspartners.com.</li>
+<li><strong>Number:</strong> buy one local US number (any metro, or a toll-free; toll-free verification is faster than 10DLC if we're stuck).</li>
+<li><strong>Custom fields on Contact:</strong> <code>slug</code>, <code>assets</code>, <code>state_ok</code>, <code>source</code>, <code>mode</code> (= <code>preview</code> / <code>client</code>), <code>firm</code>, <code>advisor_first</code>.</li>
+<li><strong>Inbound webhook</strong> (Automation → Trigger "Inbound Webhook"): maps the LP payload → create/update contact, set fields, add tag <code>preview-&lt;slug&gt;</code>, add tag by assets bucket (<code>cold</code> &lt;250k · <code>warm</code> 250–500k · <code>qualified</code> 500k–1M · <code>qualified-hi</code> 1M+).</li>
+<li><strong>Workflow "Preview setter"</strong> triggered by tag <code>preview-*</code>:
+   - Wait 20s (feels human).
+   - Send SMS = §3 message 1.
+   - Hand the conversation to <strong>Conversation AI</strong> (bot prompt = §3) with "book Michael's 5-min call" as the goal and the calendar link as the only CTA.
+   - Nudges: 24h and 72h if no reply, then stop.
+   - Any inbound from a <code>client-*</code> tagged contact → the real client flow (later).</li>
+<li><strong>Notification:</strong> every new preview contact → Michael's Telegram/email with slug + phone. Every conversation where the AI flags "sounds like a retiree, not an advisor" → human handoff to Michael.</li>
+<li><strong>Test</strong> with Michael's own number on /for/dennis-okeefe/ before the first email goes out.</li>
+</ol>
+<hr />
+<h2 id="3-preview-mode-setter-script-draft">3 · Preview-mode setter script <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h2>
+<p><strong>Identity rule:</strong> until a firm signs, the setter is <em>Retirement Class Partners</em>, never "[Firm]". We're showing the advisor what his retirees would get, so the voice is the concierge, but the sender is us.</p>
+<p><strong>Message 1 (auto, 20s after submit)</strong></p>
+<blockquote>
+<p>Hey [First], it's the Retirement Class concierge from Retirement Class Partners 👋 You just registered on the class page we built for [Firm]. This is exactly what your retirees see.</p>
+<p>Here's the class link 👉 [SAMPLE LINK]</p>
+<p>Real quick, where are you based? Just want to make sure the class applies to you.</p>
+</blockquote>
+<p><strong>Then the real flow, same wording as the client version</strong> (FUNNEL-FLOW.md §4.2–4.6): bridge → assets → timeline → motivation → mirror → confirm. The advisor answers as himself or plays a retiree; either works.</p>
+<p><strong>Watch-gate, preview version (24h)</strong></p>
+<blockquote>
+<p>Hey [First], did you get a chance to look at the class? Doesn't matter if not. Here's what you've seen so far: registration → instant text → qualification on assets and timeline → the link. For a real retiree, the next message books them straight onto your calendar.</p>
+<p>That's the whole machine. Want to see what it looks like running under your name, with your calendar on the end of it? Michael walks you through it in 5 minutes: [MICHAEL 5-MIN LINK]</p>
+</blockquote>
+<p><strong>If they reply anything like "who is this / what is this"</strong></p>
+<blockquote>
+<p>It's Michael's team at Retirement Class Partners. You opened the preview page we built for [Firm] and registered on it, so you're getting the same texts a retiree would. No spam, this is the only sequence. Want 5 minutes with Michael to see the rest? [LINK]. Or reply STOP and I'll close it out.</p>
+</blockquote>
+<p><strong>If they ask about cost / how it works</strong></p>
+<blockquote>
+<p>Short version: you record a 45-min class once, we run it to [City] retirees with $500k+, this concierge qualifies every registrant and books the real ones onto your calendar. For the pilot there's no setup fee and no retainer. Michael covers the exact structure on the call: [LINK]</p>
+</blockquote>
+<p><strong>If they sound like an actual retiree (not the advisor)</strong></p>
+<blockquote>
+<p>Thanks for your interest. This page is a preview we built for [Firm] and the class isn't running yet. If you'd like to be told when it is, reply YES and we'll pass your details to [Firm].
+<em>(Flag to Michael. Do not continue the qual flow. Do not send a calendar link.)</em></p>
+</blockquote>
+<p><strong>Hard rules:</strong> no performance claims · no advice · STOP = stop · never claim to be [Firm] · one question per message.</p>
+<hr />
+<h2 id="4-wiring-already-in-the-template">4 · Wiring already in the template</h2>
+<ul>
+<li>LP posts JSON: <code>{name, first_name, email, phone (E.164), assets, state_ok, slug, source, page}</code> to <code>WEBHOOK</code>, then redirects to <code>ty.html?fn=First&amp;a=&lt;bucket&gt;&amp;ph=&lt;last4&gt;</code>. 4-second timeout so a slow webhook never blocks the redirect.</li>
+<li>TY reads <code>ph</code>: if present → "Check your phone, we texted (•••) •••-1234, reply to that message." If absent (demo mode) → the old tap-to-text button.</li>
+<li>Consent line under the button: "By registering you agree to receive text messages and emails about this class from [Firm]. Msg &amp; data rates may apply. Reply STOP to opt out." <em>(For previews the sender is RCP, not the firm; swap to "from Retirement Class Partners on behalf of [Firm]" before go-live if counsel wants it.)</em></li>
+</ul>
+<p>Sources: [[FUNNEL-FLOW]] §3–4, [[ria-funnel-build]].</p></main>
+</div>
+<div class="foot">Retirement Class Partners · internal working document</div>
+</body></html>
