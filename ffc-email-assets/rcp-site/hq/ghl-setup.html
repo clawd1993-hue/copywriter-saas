@@ -59,21 +59,22 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
 </style></head>
 <body>
 <header class="hero"><div class="wrap">
- <span class="kick">SMS setter · preview funnels</span>
+ <span class="kick">SMS setter · previews + per-client</span>
  <h1>GHL Setup</h1>
  <p>Internal · HNW Acquisition · not for distribution</p>
- <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-11</div>
+ <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-12</div>
 </div></header>
 <div class="lay">
- <nav class="toc"><p class="t">On this page</p><a class="l2" href="#0-status">0 · Status</a>
-<a class="l2" href="#1-question-for-clawd-michael-pastes">1 · Question for Clawd (Michael pastes)</a>
-<a class="l2" href="#2-ghl-build-once-the-sub-account-exists">2 · GHL build (once the sub-account exists)</a>
+ <nav class="toc"><p class="t">On this page</p><a class="l2" href="#0-status-updated-2026-11-12-ffc-has-no-ghl-sms-setup-we-build-from-zero">0 · Status (updated 2026-11-12: FFC has NO GHL + SMS setup; we build from zero)</a>
+<a class="l2" href="#1-architecture-one-agency-one-sub-account-per-client">1 · Architecture: one agency, one sub-account per client</a>
+<a class="l2" href="#2-ghl-build-previews-sub-account-warren-once-michael-shares-agency-login">2 · GHL build — Previews sub-account (Warren, once Michael shares agency login)</a>
+<a class="l2" href="#2b-per-client-sub-account-playbook-day-0-after-a-close">2b · Per-client sub-account playbook (day 0 after a close)</a>
 <a class="l2" href="#3-preview-mode-setter-script-draft">3 · Preview-mode setter script ⚡ draft</a>
 <a class="l2" href="#4-wiring-already-in-the-template">4 · Wiring already in the template</a></nav>
  <main class="doc"><p><strong>Goal:</strong> an RIA fills in his own preview form → his phone buzzes in seconds → the AI setter runs the flow → ends by booking Michael's 5-min call. The product demos itself.
 v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <hr />
-<h2 id="0-status">0 · Status</h2>
+<h2 id="0-status-updated-2026-11-12-ffc-has-no-ghl-sms-setup-we-build-from-zero">0 · Status (updated 2026-11-12: FFC has NO GHL + SMS setup; we build from zero)</h2>
 <table>
 <thead>
 <tr>
@@ -91,46 +92,51 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <td>✅ live on all 50</td>
 </tr>
 <tr>
-<td>TY page = "Check your phone" (only Step 1, tap button removed)</td>
+<td>TY page = "Check your phone"</td>
 <td>✅ live on all 50</td>
 </tr>
 <tr>
-<td>GHL sub-account + number</td>
-<td>⬜ Clawd / Michael</td>
+<td>GHL <strong>agency</strong> account (HNW Acquisition)</td>
+<td>⬜ Michael signs up, $297/mo "Unlimited" (needs &gt;3 sub-accounts: previews + one per client)</td>
 </tr>
 <tr>
-<td>A2P 10DLC approved on that number</td>
-<td>⬜ <strong>the blocker</strong></td>
+<td>Sub-account "HNWA Previews" + number</td>
+<td>⬜ Warren builds once he has login</td>
+</tr>
+<tr>
+<td>Number verification for previews</td>
+<td>⬜ <strong>toll-free verification</strong> (1–2 wks, works for a non-US entity) rather than 10DLC (needs US EIN)</td>
 </tr>
 <tr>
 <td>Setter prompt loaded (preview mode)</td>
-<td>⬜ this doc §3</td>
+<td>⬜ §3</td>
 </tr>
 <tr>
 <td>Sample class link for previews</td>
 <td>⬜ Michael records 3-min walkthrough, or placeholder page</td>
 </tr>
 <tr>
-<td>Privacy page: demo-pages clause updated</td>
-<td>⬜ once live</td>
+<td>Per-client sub-account playbook</td>
+<td>⬜ §2b</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Flip switch:</strong> <code>HNWA_WEBHOOK=&lt;url&gt; python3 ria-funnel/batch_build.py</code> → deploy. One deploy turns all 50 on.</p>
 <hr />
-<h2 id="1-question-for-clawd-michael-pastes">1 · Question for Clawd (Michael pastes)</h2>
-<blockquote>
-<p>Warren needs FFC infra for the RIA venture. Three things:
-1. Does FFC have an agency GHL account I can get a sub-account under ("HNWA Previews")? If yes, create it and send the API key + an inbound webhook URL for contact creation.
-2. Is A2P 10DLC (brand + campaign) already approved on that account so a new number can send US SMS right away? If not, what entity did you register under last time and how long did it take?
-3. Did FFC ever run GHL Conversation AI or a webhook bot on SMS? Anything reusable?
-The setter will identify as "HNW Acquisition" on one shared number for previews, then get cloned into per-client sub-accounts after a close.</p>
-</blockquote>
+<h2 id="1-architecture-one-agency-one-sub-account-per-client">1 · Architecture: one agency, one sub-account per client</h2>
+<ul>
+<li><strong>Agency account</strong> = HNW Acquisition. Michael's card. $297/mo Unlimited plan (the $97 plan caps at 3 sub-accounts, dead on client #3).</li>
+<li><strong>Sub-account "HNWA Previews"</strong>: one shared toll-free number, setter identifies as HNW Acquisition, serves all 50 preview funnels. Toll-free verification instead of 10DLC because 10DLC brand registration wants a US EIN and HNWA is a Spanish entity (for now).</li>
+<li><strong>Sub-account per client</strong> (created on close, day 0 of the 7-day clock): client's own local number, <strong>10DLC registered under the client's EIN</strong> (they're a US business; they sign a one-page LOA, we file brand + campaign; 1–3 weeks typical, so file it the day they sign). Until 10DLC clears, the client sub-account can send via its own toll-free number as a bridge.</li>
+<li>Setter workflow + Conversation AI prompt built once in Previews, then <strong>snapshot</strong> → cloned into every client sub-account. Per-client swaps: firm name, advisor first name, city, calendar link, asset floor.</li>
+<li>Cost per client: ~$0 GHL (unlimited plan) + number ~$2/mo + 10DLC ~$4 brand + ~$15/mo campaign + SMS at ~$0.01–0.02 each. Negligible vs $5k/mo.</li>
+<li><strong>This replaces the Clawd ask.</strong> Nothing to relay.</li>
+</ul>
 <hr />
-<h2 id="2-ghl-build-once-the-sub-account-exists">2 · GHL build (once the sub-account exists)</h2>
+<h2 id="2-ghl-build-previews-sub-account-warren-once-michael-shares-agency-login">2 · GHL build — Previews sub-account (Warren, once Michael shares agency login)</h2>
 <ol>
 <li><strong>Sub-account</strong> "HNWA Previews". Timezone America/New_York. Business name HNW Acquisition, website hnwacquisition.com.</li>
-<li><strong>Number:</strong> buy one local US number (any metro, or a toll-free; toll-free verification is faster than 10DLC if we're stuck).</li>
+<li><strong>Number:</strong> buy a <strong>toll-free</strong> number in LC Phone. Submit toll-free verification immediately (business name HNW Acquisition, website hnwacquisition.com, use case: appointment reminders/qualification for people who opted in on our web forms, sample messages from §3, opt-in = the consent line screenshot). 1–2 weeks.</li>
 <li><strong>Custom fields on Contact:</strong> <code>slug</code>, <code>assets</code>, <code>state_ok</code>, <code>source</code>, <code>mode</code> (= <code>preview</code> / <code>client</code>), <code>firm</code>, <code>advisor_first</code>.</li>
 <li><strong>Inbound webhook</strong> (Automation → Trigger "Inbound Webhook"): maps the LP payload → create/update contact, set fields, add tag <code>preview-&lt;slug&gt;</code>, add tag by assets bucket (<code>cold</code> &lt;250k · <code>warm</code> 250–500k · <code>qualified</code> 500k–1M · <code>qualified-hi</code> 1M+).</li>
 <li><strong>Workflow "Preview setter"</strong> triggered by tag <code>preview-*</code>:
@@ -141,6 +147,16 @@ The setter will identify as "HNW Acquisition" on one shared number for previews,
    - Any inbound from a <code>client-*</code> tagged contact → the real client flow (later).</li>
 <li><strong>Notification:</strong> every new preview contact → Michael's Telegram/email with slug + phone. Every conversation where the AI flags "sounds like a retiree, not an advisor" → human handoff to Michael.</li>
 <li><strong>Test</strong> with Michael's own number on /for/dennis-okeefe/ before the first email goes out.</li>
+</ol>
+<h2 id="2b-per-client-sub-account-playbook-day-0-after-a-close">2b · Per-client sub-account playbook (day 0 after a close)</h2>
+<ol>
+<li>Agency → Sub-accounts → create from <strong>snapshot "HNWA Client Setter"</strong>. Name = firm. Timezone = theirs.</li>
+<li>Buy local number in their metro. Start toll-free verification as the bridge.</li>
+<li>Send client the 10DLC LOA + ask for: legal name, EIN, address, website, CCO contact. File brand + campaign same day.</li>
+<li>Swap custom values: firm, advisor_first, city, calendar_link, asset_floor, disclosure_line.</li>
+<li>Connect their calendar (Google/Outlook) to the booking calendar.</li>
+<li>Rebuild their funnel with <code>HNWA_WEBHOOK=&lt;their sub-account webhook&gt;</code> → deploy on their domain.</li>
+<li>Test end-to-end with Michael's number, then the advisor's.</li>
 </ol>
 <hr />
 <h2 id="3-preview-mode-setter-script-draft">3 · Preview-mode setter script <span class="wd" title="Warren draft — Michael sharpens">⚡ draft</span></h2>
