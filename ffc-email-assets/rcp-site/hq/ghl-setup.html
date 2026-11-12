@@ -70,6 +70,7 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
 <a class="l2" href="#2-ghl-build-previews-sub-account-warren-once-michael-shares-agency-login">2 · GHL build — Previews sub-account (Warren, once Michael shares agency login)</a>
 <a class="l2" href="#2b-per-client-sub-account-playbook-day-0-after-a-close">2b · Per-client sub-account playbook (day 0 after a close)</a>
 <a class="l2" href="#3-preview-mode-setter-script-draft">3 · Preview-mode setter script ⚡ draft</a>
+<a class="l2" href="#3b-setter-expansion-michael-2026-11-12-after-sms-is-live">3b · Setter expansion (Michael 2026-11-12, after SMS is live)</a>
 <a class="l2" href="#4-wiring-already-in-the-template">4 · Wiring already in the template</a></nav>
  <main class="doc"><p><strong>Goal:</strong> an RIA fills in his own preview form → his phone buzzes in seconds → the AI setter runs the flow → ends by booking Michael's 5-min call. The product demos itself.
 v1 · 2026-11-11 · Michael approved ("ok do it").</p>
@@ -188,6 +189,12 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 </blockquote>
 <p><strong>Hard rules:</strong> no performance claims · no advice · STOP = stop · never claim to be [Firm] · one question per message.</p>
 <hr />
+<h2 id="3b-setter-expansion-michael-2026-11-12-after-sms-is-live">3b · Setter expansion (Michael 2026-11-12, after SMS is live)</h2>
+<ul>
+<li><strong>AI voice agent</strong> (GHL Voice AI): calls every new registrant within ~5 min of submit, same qual script as §3 (location → assets → timeline), books into the calendar, leaves a voicemail + falls back to SMS on no-answer. Needs the verified number. ~$0.10–0.15/min.</li>
+<li><strong>AI DM setter</strong> (Conversation AI on Instagram/Facebook/LinkedIn channels): for leads that arrive via social ads/DMs instead of the LP. Same prompt, channel-aware. Needs the client's FB page + IG connected to their sub-account.</li>
+<li>Order: SMS first (this doc) → voice on client #1 once 10DLC clears → DMs when a client runs social ads.</li>
+</ul>
 <h2 id="4-wiring-already-in-the-template">4 · Wiring already in the template</h2>
 <ul>
 <li>LP posts JSON: <code>{name, first_name, email, phone (E.164), assets, state_ok, slug, source, page}</code> to <code>WEBHOOK</code>, then redirects to <code>ty.html?fn=First&amp;a=&lt;bucket&gt;&amp;ph=&lt;last4&gt;</code>. 4-second timeout so a slow webhook never blocks the redirect.</li>
