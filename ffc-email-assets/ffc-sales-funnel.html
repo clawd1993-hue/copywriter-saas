@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FFC Sales Funnel — May → Nov 2026</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--card:#ffffff;--text:#0b0b0b;--text2:#52514e;--muted:#8a8984;--grid:#e6e5e1;--series:#2a78d6;--series-soft:rgba(42,120,214,.12);--btn:#f1f0ec;--btn-on:#0b0b0b;--btn-on-text:#fff;--border:#dcdbd6}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--surface:#1a1a19;--card:#232322;--text:#fff;--text2:#c3c2b7;--muted:#8d8c86;--grid:#333331;--series:#3987e5;--series-soft:rgba(57,135,229,.18);--btn:#2e2e2c;--btn-on:#fff;--btn-on-text:#0b0b0b;--border:#3a3a38}}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--text);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:20px;margin:0 0 4px}.sub{color:var(--text2);font-size:13px;margin:0 0 16px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab{border:1px solid var(--border);background:var(--btn);color:var(--text);border-radius:999px;padding:9px 14px;font-size:14px;cursor:pointer;line-height:1.2}
+.tab[aria-selected=true]{background:var(--btn-on);color:var(--btn-on-text);border-color:var(--btn-on)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 16px 10px;position:relative}
+.card h2{font-size:17px;margin:0 0 2px}.card .desc{color:var(--text2);font-size:13px;margin:0 0 10px}
+.hero{display:flex;align-items:baseline;gap:10px;margin:0 0 6px}.hero b{font-size:30px;font-weight:700;letter-spacing:-.01em}.hero span{color:var(--text2);font-size:13px}
+svg{width:100%;height:auto;display:block;overflow:visible}
+.tt{position:absolute;pointer-events:none;background:var(--text);color:var(--surface);font-size:12px;padding:6px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%);display:none;z-index:2}
+.foot{color:var(--muted);font-size:12px;margin-top:10px}
+.tblbtn{margin-top:14px;background:none;border:1px solid var(--border);color:var(--text2);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--grid)}th:first-child,td:first-child{text-align:left}th{color:var(--text2);font-weight:600}
+</style></head><body><div class="wrap">
+<h1>FFC Sales Funnel</h1>
+<p class="sub">Source: Hyros (sales + calls + setter-connected tag). May → Nov 2026. Pulled 2026-11-12. Nov = 1–12 only.</p>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="card"><h2 id="t"></h2><p class="desc" id="d"></p><div class="hero"><b id="hv"></b><span id="hs"></span></div><div id="chart"></div><div class="tt" id="tt"></div><p class="foot" id="f"></p>
+<button class="tblbtn" id="tb">Show table</button><div id="tbl" style="display:none"></div></div>
+</div>
+<script>
+const ROWS=[{"month": "2026-05", "signups": 644, "leads": 312, "booked": 141, "closes": null, "cash": null, "s2l": 48.4, "l2b": 45.2, "b2c": null}, {"month": "2026-06", "signups": 521, "leads": 362, "booked": 168, "closes": 37, "cash": 73269, "s2l": 69.5, "l2b": 46.4, "b2c": 22.0}, {"month": "2026-07", "signups": 429, "leads": 309, "booked": 140, "closes": 32, "cash": 98274, "s2l": 72.0, "l2b": 45.3, "b2c": 22.9}, {"month": "2026-08", "signups": 323, "leads": 229, "booked": 111, "closes": 21, "cash": 44984, "s2l": 70.9, "l2b": 48.5, "b2c": 18.9}, {"month": "2026-09", "signups": 92, "leads": 78, "booked": 49, "closes": 8, "cash": 27084, "s2l": 84.8, "l2b": 62.8, "b2c": 16.3}, {"month": "2026-10", "signups": 135, "leads": 101, "booked": 56, "closes": 9, "cash": 20897, "s2l": 74.8, "l2b": 55.4, "b2c": 16.1}, {"month": "2026-11", "signups": 93, "leads": 54, "booked": 25, "closes": 5, "cash": 9400, "s2l": 58.1, "l2b": 46.3, "b2c": 20.0}];
+const M=ROWS.map(r=>{const [y,m]=r.month.split('-');return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1]});
+const VIEWS=[
+ {id:'ads',btn:'How are the ads doing?',title:'How are the ads doing?',desc:'Signups = low-ticket Challenge purchases per month.',key:'signups',pct:false,
+  foot:'Hyros under-captured Sep + Oct signups during the tracking rewire (true Sep/Oct are higher). Nov = 12 days.'},
+ {id:'connect',btn:'How many are connecting to the setter?',title:'How many of them are connecting to the setter?',desc:'Leads ÷ signups. Lead = signup who connected with a setter in ManyChat.',key:'s2l',pct:true,
+  foot:'May is partial (connected tag starts mid-May). Sep/Oct read high because signups are under-captured. Nov reads low because connecting lags purchase by a few days.'},
+ {id:'setters',btn:'How are the setters doing?',title:'How are the setters doing?',desc:'Booked calls ÷ leads. Booked = non-cancelled sales call with a closer.',key:'l2b',pct:true,
+  foot:'Sep/Oct inflated by the under-captured denominator. Jun–Aug and Nov are the clean read.'},
+ {id:'closers',btn:'How are the closers doing? / Lead quality',title:'How are the closers doing? / What’s the lead quality?',desc:'High-ticket closes ÷ booked calls. Close = first Elite payment.',key:'b2c',pct:true,
+  foot:'May blank: FanBasis pushed 83 historical payments into Hyros on May 22 (backfill), so May closes aren’t real.'}
+];
+let cur=0;const tabs=document.getElementById('tabs');
+VIEWS.forEach((v,i)=>{const b=document.createElement('button');b.className='tab';b.role='tab';b.textContent=v.btn;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)});
+function fmt(v,p){return v==null?'—':(p?v.toFixed(0)+'%':v.toLocaleString())}
+function render(){
+ const v=VIEWS[cur];[...tabs.children].forEach((b,i)=>b.setAttribute('aria-selected',i===cur));
+ document.getElementById('t').textContent=v.title;document.getElementById('d').textContent=v.desc;document.getElementById('f').textContent=v.foot;
+ const vals=ROWS.map(r=>r[v.key]);const last=[...vals].reverse().find(x=>x!=null);const idx=vals.lastIndexOf(last);
+ document.getElementById('hv').textContent=fmt(last,v.pct);document.getElementById('hs').textContent='latest ('+M[idx]+')';
+ const W=900,H=320,L=48,R=24,T=20,B=40;const xs=i=>L+i*(W-L-R)/(ROWS.length-1);
+ const nums=vals.filter(x=>x!=null);let max=Math.max(...nums),min=0;if(v.pct){max=Math.min(100,Math.ceil(max/10)*10+10)}else{max=Math.ceil(max/100)*100+50}
+ const ys=y=>T+(H-T-B)*(1-(y-min)/(max-min));
+ const ticks=5;let g='';for(let k=0;k<=ticks;k++){const yv=min+(max-min)*k/ticks,y=ys(yv);g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--muted)">${v.pct?yv.toFixed(0)+'%':yv.toLocaleString()}</text>`}
+ let path='',area='',pts='',labels='',started=false;
+ ROWS.forEach((r,i)=>{const y=vals[i];if(y==null){started=false;return}const X=xs(i),Y=ys(y);path+=(started?' L':' M')+X+' '+Y;started=true;
+  pts+=`<circle cx="${X}" cy="${Y}" r="5" fill="var(--series)" stroke="var(--card)" stroke-width="2"/>`;
+  if(i===idx||i===0||y===Math.max(...nums)||y===Math.min(...nums))labels+=`<text x="${X}" y="${Y-12}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">${fmt(y,v.pct)}</text>`});
+ let xl='';M.forEach((m,i)=>{xl+=`<text x="${xs(i)}" y="${H-B+22}" text-anchor="middle" font-size="12" fill="var(--text2)">${m}</text>`});
+ let hit='';ROWS.forEach((r,i)=>{hit+=`<rect data-i="${i}" x="${xs(i)-((W-L-R)/(ROWS.length-1))/2}" y="${T}" width="${(W-L-R)/(ROWS.length-1)}" height="${H-T-B}" fill="transparent"/>`});
+ document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${v.title}">${g}<line x1="${L}" x2="${W-R}" y1="${ys(min)}" y2="${ys(min)}" stroke="var(--border)"/><path d="${path}" fill="none" stroke="var(--series)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${pts}${labels}${xl}<g id="hits">${hit}</g><line id="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--muted)" stroke-dasharray="3 3" style="display:none"/></svg>`;
+ const svg=document.querySelector('#chart svg'),tt=document.getElementById('tt'),xh=document.getElementById('xh');
+ svg.querySelectorAll('#hits rect').forEach(rc=>{rc.onmousemove=e=>{const i=+rc.dataset.i,r=ROWS[i];const box=document.querySelector('.card').getBoundingClientRect();
+   tt.style.display='block';tt.style.left=(e.clientX-box.left)+'px';tt.style.top=(e.clientY-box.top)+'px';
+   tt.innerHTML=`<b>${M[i]}</b> · ${v.pct?fmt(vals[i],true):fmt(vals[i],false)}<br>signups ${fmt(r.signups)} · leads ${fmt(r.leads)} · booked ${fmt(r.booked)} · closes ${fmt(r.closes)}`;
+   xh.style.display='block';xh.setAttribute('x1',xs(i));xh.setAttribute('x2',xs(i))};rc.onmouseleave=()=>{tt.style.display='none';xh.style.display='none'}});
+ document.getElementById('tbl').innerHTML='<table><tr><th>Month</th><th>Signups</th><th>Leads</th><th>Signup→lead</th><th>Booked</th><th>Lead→booked</th><th>HT closes</th><th>Booked→close</th><th>Elite cash</th></tr>'+ROWS.map((r,i)=>`<tr><td>${M[i]}</td><td>${fmt(r.signups)}</td><td>${fmt(r.leads)}</td><td>${fmt(r.s2l,true)}</td><td>${fmt(r.booked)}</td><td>${fmt(r.l2b,true)}</td><td>${fmt(r.closes)}</td><td>${fmt(r.b2c,true)}</td><td>${r.cash==null?'—':'$'+r.cash.toLocaleString()}</td></tr>`).join('')+'</table>';
+}
+document.getElementById('tb').onclick=function(){const t=document.getElementById('tbl');const on=t.style.display==='none';t.style.display=on?'block':'none';this.textContent=on?'Hide table':'Show table'};
+render();
+</script></body></html>
