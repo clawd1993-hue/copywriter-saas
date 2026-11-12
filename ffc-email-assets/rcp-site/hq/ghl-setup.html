@@ -65,7 +65,7 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
  <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-12</div>
 </div></header>
 <div class="lay">
- <nav class="toc"><p class="t">On this page</p><a class="l2" href="#0-status-updated-2026-11-12-ffc-has-no-ghl-sms-setup-we-build-from-zero">0 · Status (updated 2026-11-12: FFC has NO GHL + SMS setup; we build from zero)</a>
+ <nav class="toc"><p class="t">On this page</p><a class="l2" href="#0-status-updated-2026-11-12-ffc-has-a-ghl-agency-account-no-smssetter-built-yet">0 · Status (updated 2026-11-12: FFC has a GHL agency account, no SMS/setter built yet)</a>
 <a class="l2" href="#1-architecture-one-agency-one-sub-account-per-client">1 · Architecture: one agency, one sub-account per client</a>
 <a class="l2" href="#2-ghl-build-previews-sub-account-warren-once-michael-shares-agency-login">2 · GHL build — Previews sub-account (Warren, once Michael shares agency login)</a>
 <a class="l2" href="#2b-per-client-sub-account-playbook-day-0-after-a-close">2b · Per-client sub-account playbook (day 0 after a close)</a>
@@ -74,7 +74,7 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
  <main class="doc"><p><strong>Goal:</strong> an RIA fills in his own preview form → his phone buzzes in seconds → the AI setter runs the flow → ends by booking Michael's 5-min call. The product demos itself.
 v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <hr />
-<h2 id="0-status-updated-2026-11-12-ffc-has-no-ghl-sms-setup-we-build-from-zero">0 · Status (updated 2026-11-12: FFC has NO GHL + SMS setup; we build from zero)</h2>
+<h2 id="0-status-updated-2026-11-12-ffc-has-a-ghl-agency-account-no-smssetter-built-yet">0 · Status (updated 2026-11-12: FFC has a GHL agency account, no SMS/setter built yet)</h2>
 <table>
 <thead>
 <tr>
@@ -96,8 +96,8 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <td>✅ live on all 50</td>
 </tr>
 <tr>
-<td>GHL <strong>agency</strong> account (HNW Acquisition)</td>
-<td>⬜ Michael signs up, $297/mo "Unlimited" (needs &gt;3 sub-accounts: previews + one per client)</td>
+<td>GHL agency account</td>
+<td>✅ FFC already has one (Michael 2026-11-12). Check plan allows unlimited sub-accounts; add Warren as agency user.</td>
 </tr>
 <tr>
 <td>Sub-account "HNWA Previews" + number</td>
@@ -125,7 +125,7 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <hr />
 <h2 id="1-architecture-one-agency-one-sub-account-per-client">1 · Architecture: one agency, one sub-account per client</h2>
 <ul>
-<li><strong>Agency account</strong> = HNW Acquisition. Michael's card. $297/mo Unlimited plan (the $97 plan caps at 3 sub-accounts, dead on client #3).</li>
+<li><strong>Agency account</strong> = FFC's existing GHL agency (confirmed 2026-11-12). HNWA sub-accounts live under it. If it's the $97 Starter plan (3 sub-account cap), upgrade to $297 Unlimited before client #2.</li>
 <li><strong>Sub-account "HNWA Previews"</strong>: one shared toll-free number, setter identifies as HNW Acquisition, serves all 50 preview funnels. Toll-free verification instead of 10DLC because 10DLC brand registration wants a US EIN and HNWA is a Spanish entity (for now).</li>
 <li><strong>Sub-account per client</strong> (created on close, day 0 of the 7-day clock): client's own local number, <strong>10DLC registered under the client's EIN</strong> (they're a US business; they sign a one-page LOA, we file brand + campaign; 1–3 weeks typical, so file it the day they sign). Until 10DLC clears, the client sub-account can send via its own toll-free number as a bridge.</li>
 <li>Setter workflow + Conversation AI prompt built once in Previews, then <strong>snapshot</strong> → cloned into every client sub-account. Per-client swaps: firm name, advisor first name, city, calendar link, asset floor.</li>
