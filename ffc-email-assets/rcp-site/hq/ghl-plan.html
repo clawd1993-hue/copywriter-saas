@@ -69,10 +69,10 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
 <a class="l2" href="#1-sms-inbound-outbound">1 · SMS, inbound + outbound</a>
 <a class="l2" href="#2-ai-sms-setter">2 · AI SMS setter</a>
 <a class="l2" href="#3-calling-inbound-outbound">3 · Calling, inbound + outbound</a>
-<a class="l2" href="#4-ai-outbound-calling-the-research">4 · AI outbound calling (the research)</a>
-<a class="l3" href="#the-field-checked-2026-11-13">The field, checked 2026-11-13</a>
-<a class="l3" href="#decision">Decision</a>
+<a class="l2" href="#4-ai-outbound-calling-retell-ai-elevenlabs-voice">4 · AI outbound calling → Retell AI + ElevenLabs voice</a>
+<a class="l3" href="#decision-2026-11-13-retell-not-ghl-native">Decision (2026-11-13): Retell, not GHL native</a>
 <a class="l3" href="#the-rules-so-this-never-surprises-a-client">The rules (so this never surprises a client)</a>
+<a class="l3" href="#how-the-script-sounds-the-is-it-a-bot-question">How the script sounds (the &quot;is it a bot&quot; question)</a>
 <a class="l3" href="#checklist">Checklist</a>
 <a class="l2" href="#5-ai-email-setter">5 · AI email setter</a>
 <a class="l2" href="#6-snapshot-per-client-clone">6 · Snapshot + per-client clone</a>
@@ -117,9 +117,9 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 <td>number</td>
 </tr>
 <tr>
-<td>4 · AI outbound calling</td>
+<td>4 · AI outbound calling (Retell + ElevenLabs voice)</td>
 <td>⬜</td>
-<td>number + consent-line update</td>
+<td>number + consent-line update + Retell account</td>
 </tr>
 <tr>
 <td>5 · AI email setter</td>
@@ -171,70 +171,47 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 </ul>
 <p><strong>Cost:</strong> ~$0.014/min out, ~$0.0085/min in. <strong>Done when:</strong> a call in and a call out both land on the contact record with a recording.</p>
 <hr />
-<h2 id="4-ai-outbound-calling-the-research">4 · AI outbound calling (the research)</h2>
-<p><strong>What it is:</strong> within ~5 minutes of a registration, an AI voice agent calls the retiree, runs the same qual script by phone, books the slot, and falls back to SMS on no-answer.</p>
-<h3 id="the-field-checked-2026-11-13">The field, checked 2026-11-13</h3>
+<h2 id="4-ai-outbound-calling-retell-ai-elevenlabs-voice">4 · AI outbound calling → <strong>Retell AI + ElevenLabs voice</strong></h2>
+<p><strong>What it is:</strong> within 5 minutes of a registration, an AI voice agent calls the retiree, runs the same qual script by phone, books the slot on the advisor's GHL calendar, and falls back to SMS on no-answer. Only ever to people who registered on the funnel. Never cold.</p>
+<h3 id="decision-2026-11-13-retell-not-ghl-native">Decision (2026-11-13): Retell, not GHL native</h3>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Quality / latency</th>
-<th>GHL integration</th>
-<th>Price (real-world)</th>
-<th>Verdict</th>
+<th></th>
+<th>Retell AI</th>
+<th>GHL native Voice AI</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>GHL Voice AI (native)</strong></td>
-<td>Mid. Fine for "did you register, want to book?" calls. ElevenLabs voices can be imported (agency-level, up to 10).</td>
-<td>Built in. Outbound from a workflow, books GHL calendars, custom actions mid-call. Zero wiring.</td>
-<td>$97/mo unlimited per location (fair use) or pay-per-use (engine + TTS + LLM)</td>
-<td><strong>Start here.</strong></td>
+<td>Sounds human</td>
+<td>~700ms response, handles interruptions, no robotic pause (the pause is what gives AI away, not the voice)</td>
+<td>A tier slower; fine for a demo, not for a $750k household</td>
 </tr>
 <tr>
-<td><strong>Retell AI</strong></td>
-<td>Best overall for production call automation in 2026 reviews. ~700–800ms latency, strong outbound, branded caller ID. ElevenLabs voices supported.</td>
-<td><strong>Native, maintained by Retell:</strong> reads/updates contacts, opportunities, custom fields, writes notes after calls. Setup = private integration token + location id.</td>
-<td>Pay-as-you-go from ~$0.07/min; ~$0.10–0.15/min all-in</td>
-<td><strong>Upgrade path if native isn't good enough on client #1.</strong></td>
+<td>Voice</td>
+<td>ElevenLabs voices plug in natively</td>
+<td>ElevenLabs voices importable (agency, ≤10)</td>
 </tr>
 <tr>
-<td>ElevenLabs Agents</td>
-<td>Best raw voice quality.</td>
-<td>Webhooks/tools only. You build the GHL wiring yourself.</td>
-<td>Minute bundles</td>
-<td>Use its <em>voices</em> inside GHL or Retell. Don't run it standalone.</td>
+<td>GHL integration</td>
+<td><strong>Native, built and maintained by Retell.</strong> One private-integration token + location id (we already have both). Agent tools mid-call: Search/Get/Update/Create Contact, Add Tags (fires GHL workflows), Create Note, Create/Update Opportunity, Check Availability, Book / Reschedule / Cancel Appointment on the sub-account's calendar. Post-call: writes extraction results to custom fields, logs the transcript as a contact note.</td>
+<td>Built in, zero wiring</td>
 </tr>
 <tr>
-<td>Vapi</td>
-<td>Developer toolkit, full control.</td>
-<td>GHL "tool provider" (get/create contact, check availability, create event).</td>
-<td>Advertised $0.05/min, real $0.25–0.33/min</td>
-<td>Engineering project. Skip.</td>
+<td>Price</td>
+<td>PAYG from ~$0.07/min, ~$0.10–0.15/min all-in. No contract.</td>
+<td>$97/mo unlimited per location</td>
 </tr>
 <tr>
-<td>Bland</td>
-<td>High-volume dialer.</td>
-<td>API + webhooks, middleware needed.</td>
-<td>~$0.14/min</td>
+<td>Verdict</td>
+<td><strong>Use this.</strong> Premium, and it still keeps GHL as the system of record.</td>
 <td>Skip.</td>
-</tr>
-<tr>
-<td>Synthflow</td>
-<td>No-code, enterprise.</td>
-<td>Marketplace app, calendar import, pushes call data to workflows.</td>
-<td>Annual enterprise contracts only now</td>
-<td>Skip for a 3-firm pilot.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="decision">Decision</h3>
-<ol>
-<li><strong>Phase A (pilot):</strong> GHL native Voice AI, ElevenLabs voice imported, triggered from the setter workflow 5 min after submit if no SMS reply. One platform, one snapshot, nothing to wire.</li>
-<li><strong>Phase B (after hearing it live on client #1):</strong> if latency or voice quality costs bookings, switch the call step to <strong>Retell</strong>. Native GHL integration, same number, same workflow, same custom fields. Half a day to swap.</li>
-<li>Never: raw ElevenLabs Agents, Vapi, Bland, Synthflow. Either engineering or contracts we don't need.</li>
-</ol>
+<p>Ruled out: ElevenLabs Agents standalone (best voice, no GHL connection; use its voices inside Retell), Vapi (engineering, real cost $0.25–0.33/min), Bland (API-only, $0.14/min), Synthflow (annual enterprise contracts).</p>
+<p><strong>Integration check (Retell docs, 2026-11-13):</strong> connect = GHL Settings → Private Integrations → token with Contacts, Opportunities, Custom Fields, Calendar scopes → paste token + Location ID into Retell → Integrations → GoHighLevel. Contact sync polls GHL every 5 min, matches on phone number, writes back mapped fields, logs every conversation as a note. Our existing "Warren build" token already carries those scopes. Verified smooth: no Zapier, no middleware, no webhooks to maintain.</p>
 <h3 id="the-rules-so-this-never-surprises-a-client">The rules (so this never surprises a client)</h3>
 <table>
 <thead>
@@ -253,7 +230,7 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 <tr>
 <td>AI cold call to a retiree who never opted in</td>
 <td>❌ never</td>
-<td>TCPA: $500–1,500 per call, FCC says AI voice = robocall (Feb 2024). The RIA gets sued, not us.</td>
+<td>TCPA: $500–1,500 per call, FCC ruled AI voice = robocall (Feb 2024). The RIA gets sued, not us.</td>
 </tr>
 <tr>
 <td>AI cold call to an RIA (B2B)</td>
@@ -263,37 +240,35 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 <tr>
 <td>Human cold call, DNC-scrubbed</td>
 <td>✅</td>
-<td>A person with the GHL dialer. Not Retell.</td>
-</tr>
-<tr>
-<td>Agent opens with "I'm a bot"</td>
-<td>Not required federally</td>
-<td>Opens like a concierge: "Hi Jane, it's the concierge from Dennis's office, you just registered…"</td>
-</tr>
-<tr>
-<td>Agent asked "are you a real person?"</td>
-<td><strong>Must say no</strong></td>
-<td>FCC: disclose when asked. "I'm the automated assistant for Dennis's office, but I can book you straight in with him." Never deny it.</td>
-</tr>
-<tr>
-<td>Upfront AI disclosure</td>
-<td>Required in some states (CA, UT, others)</td>
-<td>One-line opener, applied per contact state.</td>
+<td>A person with the GHL dialer, not Retell.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Design target: sounds human, never claims to be.</strong></p>
+<h3 id="how-the-script-sounds-the-is-it-a-bot-question">How the script sounds (the "is it a bot" question)</h3>
+<p>Consent = permission to call. It does not buy the right to claim to be human. Two layers:
+- <strong>Federal (FCC):</strong> no upfront "I'm a bot" required. Must disclose <strong>if asked</strong>, and must never deny it. "Are you a real person?" → "I'm the automated assistant for Dennis's office, but I can book you straight in with him." A lie here is the lawsuit.
+- <strong>Disclosure states (California, Utah, a handful more):</strong> one-clause upfront disclosure by law, regardless of consent. Script applies it automatically from the contact's state.</p>
+<p><strong>Default opener (~45 states):</strong></p>
+<blockquote>
+<p>"Hi Jane, it's the concierge from Dennis O'Keefe's office, you just registered for the retirement class. Got a sec?"</p>
+</blockquote>
+<p><strong>Disclosure-state opener:</strong></p>
+<blockquote>
+<p>"Hi Jane, it's Dennis O'Keefe's office, this is our automated assistant giving you a quick call because you just registered for the retirement class. Got a sec?"</p>
+</blockquote>
+<p>Half a sentence, said like a human, then the same conversation. Retirees hang up on dead air and robotic pauses, not on that line. <strong>Design target: sounds human, never claims to be.</strong></p>
 <h3 id="checklist">Checklist</h3>
 <ul>
-<li class="todo"><span class="box"></span>Add "calls, including automated/AI calls" to the consent line under the Save My Seat button on all 50 funnels (today it only says texts and emails) — Warren · <strong>TCPA: prior express written consent is required for AI/auto-dialed calls to consumers</strong></li>
-<li class="todo"><span class="box"></span>AI disclosure line at the top of the call script ("this is an automated assistant from…") — Warren</li>
-<li class="todo"><span class="box"></span>Calling window 9am–8pm in the contact's local time; DNC scrub on — Warren</li>
-<li class="todo"><span class="box"></span>Import one ElevenLabs voice at agency level; pick a calm, 40s-sounding male and female voice — Warren</li>
-<li class="todo"><span class="box"></span>Voice AI agent "HNWA Caller": same qual script as SMS, goal = book, fallback = "I'll text you the link" — Warren</li>
-<li class="todo"><span class="box"></span>Workflow step: 5 min after message 1, if no reply → Voice AI outbound call → on no-answer leave voicemail + SMS — Warren</li>
-<li class="todo"><span class="box"></span>Test on Michael's phone; record and review 10 real calls on client #1 before deciding Phase B</li>
+<li class="todo"><span class="box"></span>Add "calls, including automated/AI calls" to the consent line under Save My Seat on all 50 funnels (today it says texts and emails only) — Warren · rebuild + deploy</li>
+<li class="todo"><span class="box"></span>Retell account (michael@hnwacquisition.com), PAYG, card on file — <strong>Michael</strong> · 3 min</li>
+<li class="todo"><span class="box"></span>Connect Retell → GHL with the existing private-integration token + Location ID <code>8xfadLzLTOJMNmhvESGz</code>; set up contact sync (phone ↔ phone_number, map assets/slug/firm) — Warren</li>
+<li class="todo"><span class="box"></span>Pick one ElevenLabs voice (calm, 40s-sounding, breaths + fillers on) inside Retell — Warren, Michael approves on a test call</li>
+<li class="todo"><span class="box"></span>Retell agent "HNWA Caller": same qual script as SMS (location → assets → timeline → motivation → mirror → book), tools = Search Contact, Add Tags, Create Note, Check Availability, Book Appointment; disclosure opener switched by contact state; "are you real?" rule hard-coded — Warren</li>
+<li class="todo"><span class="box"></span>Calling window 9am–8pm contact-local; DNC scrub; max 2 attempts then SMS — Warren</li>
+<li class="todo"><span class="box"></span>GHL workflow step: 5 min after message 1, if no SMS reply → tag <code>call-now</code> → Retell outbound → on no-answer: voicemail + SMS link — Warren</li>
+<li class="todo"><span class="box"></span>Test on Michael's phone; review 10 real recordings on client #1 before scaling</li>
 </ul>
-<p><strong>Cost:</strong> inside the $97/mo AI plan + telephony minutes. Retell adds ~$0.10–0.15/min if Phase B. <strong>Done when:</strong> a registration produces a phone call that books a meeting with no human.</p>
+<p><strong>Cost:</strong> ~$0.10–0.15/min, a 4-minute qual call ≈ $0.50. <strong>Done when:</strong> a registration produces a phone call that books a meeting with no human.</p>
 <hr />
 <h2 id="5-ai-email-setter">5 · AI email setter</h2>
 <p><strong>What it is:</strong> the same Conversation AI agent answers and nurtures by email, in-thread, from a sending address on the client's domain. For leads who register but don't text back, and for the preview RIAs who reply to Michael's outreach by email.</p>
@@ -311,7 +286,7 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 <li class="todo"><span class="box"></span>Everything per-client lives in Custom Values: firm, advisor_first, city, calendar_link, asset_floor, class_link, disclosure_line, sender_name, mode — ✅ created 2026-11-12</li>
 <li class="todo"><span class="box"></span>Snapshot "HNWA Client Setter" taken from the demo sub-account once 1–5 work — Warren</li>
 <li class="todo"><span class="box"></span>Per-client playbook (GHL-SETUP §2b): create sub-account from snapshot → local number → 10DLC under the client's EIN (one-page LOA) → swap custom values → connect their calendar → rebuild their funnel with their webhook → test → go — Warren, day 0 after a close</li>
-<li class="todo"><span class="box"></span>Cost per client: GHL $0 (Unlimited agency) + AI plan $97/mo + number ~$1 + 10DLC ~$15/mo + minutes. Call it <strong>$120/mo per client</strong> before Retell.</li>
+<li class="todo"><span class="box"></span>Cost per client: GHL $0 (Unlimited agency) + Conversation AI plan $97/mo + number ~$1 + 10DLC ~$15/mo + Retell minutes (~$0.50 per qual call). Call it <strong>$120/mo per client + ~$50 per 100 calls</strong>.</li>
 </ul>
 <hr />
 <h2 id="build-order">Build order</h2>
@@ -320,12 +295,12 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 <li><strong>SMS + AI SMS setter</strong> (§1, §2). Warren builds the workflow and prompt now, flips live the moment the number sends.</li>
 <li><strong>Calling</strong> (§3). Same day as the number.</li>
 <li><strong>AI email</strong> (§5). Same week, no number needed; needs the sending domain.</li>
-<li><strong>AI outbound calling</strong> (§4). After 10 real SMS conversations have been reviewed, and after the consent line is updated.</li>
+<li><strong>AI outbound calling</strong> (§4). Retell. After 10 real SMS conversations have been reviewed, and after the consent line is updated.</li>
 <li><strong>Snapshot</strong> (§6). After 1–5 are tested end to end on the Dennis page.</li>
 </ol>
 <h2 id="open-from-michael">Open from Michael</h2>
 <ul>
-<li>Persona ID verification · 10DLC entity details (legal name, EIN, entity type, address) · calendar (Google connect or Calendly link)</li>
+<li>Persona ID verification · 10DLC entity details (legal name, EIN, entity type, address) · calendar (Google connect or Calendly link) · Retell account (PAYG, 3 min)</li>
 </ul></main>
 </div>
 <div class="foot">HNW Acquisition · internal working document</div>

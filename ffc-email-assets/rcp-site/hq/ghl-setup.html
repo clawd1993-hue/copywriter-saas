@@ -59,10 +59,10 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
 </style></head>
 <body>
 <header class="hero"><div class="wrap">
- <span class="kick">SMS setter · previews + per-client</span>
+ <span class="kick">Scripts + wiring · previews + per-client</span>
  <h1>GHL Setup</h1>
  <p>Internal · HNW Acquisition · not for distribution</p>
- <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-12</div>
+ <div class="meta">Source: <code style="color:#C9D2E3">GHL-SETUP.md</code> · rendered 2026-11-13</div>
 </div></header>
 <div class="lay">
  <nav class="toc"><p class="t">On this page</p><a class="l2" href="#0-status-updated-2026-11-12-ffc-has-a-ghl-agency-account-no-smssetter-built-yet">0 · Status (updated 2026-11-12: FFC has a GHL agency account, no SMS/setter built yet)</a>
@@ -211,8 +211,8 @@ v1 · 2026-11-11 · Michael approved ("ok do it").</p>
 <hr />
 <h2 id="3b-setter-expansion-michael-2026-11-12-after-sms-is-live">3b · Setter expansion (Michael 2026-11-12, after SMS is live)</h2>
 <ul>
-<li><strong>Voice platform decision (researched 2026-11-12):</strong> start with <strong>GHL native Voice AI</strong> ($97/mo flat or ~$0.045/min + model costs; inbound + outbound + booking inside the sub-account, no integration, snapshots cleanly). Upgrade path if the native voice/latency isn't good enough on a real client: <strong>Retell</strong> or <strong>Vapi</strong> (~$0.05–0.06/min infra + model, all-in ~$0.10–0.15/min) both publish native GHL connections and plug into the same number + workflow. Bland ~$0.14/min, no reason to pick it. Decision rule: native first, swap only after hearing it on client #1.</li>
-<li><strong>AI voice agent</strong> (GHL Voice AI): calls every new registrant within ~5 min of submit, same qual script as §3 (location → assets → timeline), books into the calendar, leaves a voicemail + falls back to SMS on no-answer. Needs the verified number. ~$0.10–0.15/min.</li>
+<li><strong>Voice platform: Retell AI + ElevenLabs voice (decided 2026-11-13, see GHL-PLAN §4).</strong> Native GHL integration, same token + location id, books the sub-account calendar mid-call. GHL native Voice AI dropped.</li>
+<li><strong>AI voice agent</strong> (Retell): calls every new registrant within ~5 min of submit, same qual script as §3 (location → assets → timeline), books into the calendar, leaves a voicemail + falls back to SMS on no-answer. Needs the verified number. ~$0.10–0.15/min.</li>
 <li><strong>AI DM setter</strong> (Conversation AI on Instagram/Facebook/LinkedIn channels): for leads that arrive via social ads/DMs instead of the LP. Same prompt, channel-aware. Needs the client's FB page + IG connected to their sub-account.</li>
 <li>Order: SMS first (this doc) → voice on client #1 once 10DLC clears → DMs when a client runs social ads.</li>
 </ul>
