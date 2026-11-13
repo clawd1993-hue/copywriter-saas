@@ -72,6 +72,7 @@ a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
 <a class="l2" href="#4-ai-outbound-calling-the-research">4 · AI outbound calling (the research)</a>
 <a class="l3" href="#the-field-checked-2026-11-13">The field, checked 2026-11-13</a>
 <a class="l3" href="#decision">Decision</a>
+<a class="l3" href="#the-rules-so-this-never-surprises-a-client">The rules (so this never surprises a client)</a>
 <a class="l3" href="#checklist">Checklist</a>
 <a class="l2" href="#5-ai-email-setter">5 · AI email setter</a>
 <a class="l2" href="#6-snapshot-per-client-clone">6 · Snapshot + per-client clone</a>
@@ -234,6 +235,54 @@ v1 · 2026-11-13 · Michael's checklist → Warren's build plan. Setter scripts 
 <li><strong>Phase B (after hearing it live on client #1):</strong> if latency or voice quality costs bookings, switch the call step to <strong>Retell</strong>. Native GHL integration, same number, same workflow, same custom fields. Half a day to swap.</li>
 <li>Never: raw ElevenLabs Agents, Vapi, Bland, Synthflow. Either engineering or contracts we don't need.</li>
 </ol>
+<h3 id="the-rules-so-this-never-surprises-a-client">The rules (so this never surprises a client)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Allowed?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI call to someone who registered on the funnel (consent line includes calls)</td>
+<td>✅</td>
+<td>Prior express written consent = the form. Call within 5 min. This is the whole play.</td>
+</tr>
+<tr>
+<td>AI cold call to a retiree who never opted in</td>
+<td>❌ never</td>
+<td>TCPA: $500–1,500 per call, FCC says AI voice = robocall (Feb 2024). The RIA gets sued, not us.</td>
+</tr>
+<tr>
+<td>AI cold call to an RIA (B2B)</td>
+<td>❌</td>
+<td>Mobiles are covered regardless of who owns them; most owners answer on their cell. Human only.</td>
+</tr>
+<tr>
+<td>Human cold call, DNC-scrubbed</td>
+<td>✅</td>
+<td>A person with the GHL dialer. Not Retell.</td>
+</tr>
+<tr>
+<td>Agent opens with "I'm a bot"</td>
+<td>Not required federally</td>
+<td>Opens like a concierge: "Hi Jane, it's the concierge from Dennis's office, you just registered…"</td>
+</tr>
+<tr>
+<td>Agent asked "are you a real person?"</td>
+<td><strong>Must say no</strong></td>
+<td>FCC: disclose when asked. "I'm the automated assistant for Dennis's office, but I can book you straight in with him." Never deny it.</td>
+</tr>
+<tr>
+<td>Upfront AI disclosure</td>
+<td>Required in some states (CA, UT, others)</td>
+<td>One-line opener, applied per contact state.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design target: sounds human, never claims to be.</strong></p>
 <h3 id="checklist">Checklist</h3>
 <ul>
 <li class="todo"><span class="box"></span>Add "calls, including automated/AI calls" to the consent line under the Save My Seat button on all 50 funnels (today it only says texts and emails) — Warren · <strong>TCPA: prior express written consent is required for AI/auto-dialed calls to consumers</strong></li>
