@@ -1,6 +1,6 @@
 owner,firm,title,city,state,aum,email,email_status,linkedin,photo,logo,flags,wave,funnel_url
 Michael Nord,Alliant Securities,President,Liberty Lake,WA,300000000,mike@alliantsecurities.com,verified,http://www.linkedin.com/in/michael-nord-3a9549bb,,y,no_photo,pool,https://hnwacquisition.com/for/michael-nord/
-Jason Ruther,Capital West Partners,Managing Partner,Tucson,AZ,299981160,jruther@capitalwestpartners.com,,,,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/jason-ruther/
+Jason Ruther,Capital West Partners,Managing Partner,Tucson,AZ,299981160,jruther@capitalwestpartners.com,,,,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/jason-ruther/
 Laura Robayo,Silver Oak Wealth Advisors Services,Chief Compliance Officer (CCO),Los Angeles,CA,299962641,lrobayo@silveroakwa.com,verified,http://www.linkedin.com/in/laura-robayo-msceng-cfp%c2%ae-ceft%c2%ae-6b031a39,y,y,non_owner_title,pool,https://hnwacquisition.com/for/laura-robayo/
 Logan Macgray,Stonecrop Wealth Advisors,President,West Chester,PA,299540652,lmacgray@stonecropadvisors.com,verified,http://www.linkedin.com/in/loganmacgray,y,,,pool,https://hnwacquisition.com/for/logan-macgray/
 Mark Herhold,Security First Financial,,Swartz Creek,MI,299520495,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/mark-herhold/
@@ -17,7 +17,7 @@ John Bowers,Bowers Wealth Management,,Glenbrook,NV,298517625,john.bowers@lpl.com
 May Miao,Trend Trade Pro,,Pasadena,CA,298313852,mmiao@trendtradepro.com,verified,,,y,no_title|no_photo,pool,https://hnwacquisition.com/for/may-miao/
 Yongjun Li,Kailasa Capital Management,,Pittsburgh,PA,298265753,frank.li@kailasacm.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/yongjun-li/
 Daniel Bakalarz,Unison Asset Management,Co-CIO and Managing Partner,Aventura,FL,298201516,dan@unisonam.com,verified,http://www.linkedin.com/in/danielbakalarz,,,no_photo,pool,https://hnwacquisition.com/for/daniel-bakalarz/
-Denis Ryan,Interwealth Management,business owner,Scottsdale,AZ,298005781,denisryan@interwealthmanagement.com,,,,,email_domain_mismatch|email_unknown|no_photo,pool,https://hnwacquisition.com/for/denis-ryan/
+Denis Ryan,Interwealth Management,business owner,Scottsdale,AZ,298005781,denisryan@interwealthmanagement.com,,,,,email_domain_mismatch|email_unverified|no_photo,pool,https://hnwacquisition.com/for/denis-ryan/
 Dennis Marshall,Marshall Investment Management,,Greenwood Village,CO,297993524,dennis@investwithmarshall.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/dennis-marshall/
 Anthony Minopoli,Innovative Asset Advisors Group,Partner,Shelton,CT,297932861,tminopoli@innovativeaag.com,verified,http://www.linkedin.com/in/anthony-minopoli-729b29a,y,y,,pool,https://hnwacquisition.com/for/anthony-minopoli/
 Jon Erdner,Its Asset Management,,North Haven,CT,297803611,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/jon-erdner/
@@ -29,7 +29,7 @@ Jeff Bernier,Tandemgrowth Financial Advisors,"Founder, President & Wealth Adviso
 Daren Shavell,Calder Investment Advisors,Partner,Ada,MI,297000000,daren@calderadvisors.com,verified,http://www.linkedin.com/in/daren-shavell-cfa-b415748a,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/daren-shavell/
 Kelly Pedersen,Caissa Wealth Strategies,"Certified Financial Planner, Founder, and CEO",Bloomington,MN,296976582,kelly@caissawealth.com,verified,http://www.linkedin.com/in/kellyolsonpedersen,y,,,pool,https://hnwacquisition.com/for/kelly-pedersen/
 Tom Kopas,Pring/turner Capital Group,"Principal, Portfolio Manager",Alamo,CA,296933050,tom@pringturner.com,verified,http://www.linkedin.com/in/thomaskopas,y,y,,pool,https://hnwacquisition.com/for/tom-kopas/
-Joshua Hebert,Beacon Financial Advisors,Principal,Houston,TX,296912883,josh@bfaltd.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/joshua-hebert/
+Joshua Hebert,Beacon Financial Advisors,Principal,Houston,TX,296912883,josh@bfaltd.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/joshua-hebert/
 Alejandro Algaze,Matters Capital,Partner,Coral Gables,FL,296786932,aalgaze@matters.capital,verified,http://www.linkedin.com/in/alejandro-algaze,y,,,pool,https://hnwacquisition.com/for/alejandro-algaze/
 Lucie Estabrook,Birchbrook,Chief Executive Officer,Bangor,ME,296464387,lucieestabrook@birchbrook.com,verified,http://www.linkedin.com/in/lucie-estabrook-ctfa-632267a,,,no_photo,pool,https://hnwacquisition.com/for/lucie-estabrook/
 Brad Dobson,Fearless Solutions,Executive Vice President & Co-Founder,San Antonio,TX,296378147,brad@bestinvestsa.com,verified,http://www.linkedin.com/in/brad-dobson-cfp%c2%ae-aif%c2%ae-a9471b1b,y,,,pool,https://hnwacquisition.com/for/brad-dobson/
@@ -55,7 +55,7 @@ Chad Taylor,Mdt Financial Advisors,Managing Partner,Webster,TX,294032544,chad.ta
 Matthew Davis,Sherwood Financial Partners,Founding Partner | Lead Financial Advisor,Westlake Village,CA,293848203,matthew.davis@sherwoodfp.com,verified,http://www.linkedin.com/in/matthew-davis-cfp%c2%ae-mba-2834165b,y,y,,pool,https://hnwacquisition.com/for/matthew-davis/
 Scott Hohman,Resolute Wealth Advisor,President,Findlay,OH,293754297,shohman@resoluteadvisor.com,verified,http://www.linkedin.com/in/scott-hohman-resolute,,,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/scott-hohman/
 Thomas Plumb,Wisconsin Capital Management,President,Madison,WI,293636953,tplumb@wiscap.com,verified,http://www.linkedin.com/in/thomas-plumb-4a80643a,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/thomas-plumb/
-Douglas Mollin,Enright Mollin Cascio & Ramusevic,,Elmhurst,NY,293511744,dmollin@emcradvisors.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/douglas-mollin/
+Douglas Mollin,Enright Mollin Cascio & Ramusevic,,Elmhurst,NY,293511744,dmollin@emcradvisors.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/douglas-mollin/
 Dan Binn,Private Portfolios,Managing Partner,San Mateo,CA,293473879,dan@privateportfolios.com,verified,http://www.linkedin.com/in/dan-binn-7282ab13,,,no_photo,pool,https://hnwacquisition.com/for/dan-binn/
 Mark Carlton,Trademark Financial Management,Portfolio Manager,Bloomington,MN,293422543,mark@trademarkfinancial.us,verified,http://www.linkedin.com/in/mark-carlton-cfa-504bb110,y,,no_photo,pool,https://hnwacquisition.com/for/mark-carlton/
 Michael Tate,Tate Wealth Management,CPA,Sacramento,CA,293356007,mtate@tategrp.com,verified,http://www.linkedin.com/in/michaeltatecpa,y,y,no_photo,pool,https://hnwacquisition.com/for/michael-tate/
@@ -215,7 +215,7 @@ Bryan Smith,Pathworks Financial,Chief Technology Officer,Novi,MI,279258481,bryan
 Sarah Wells,Wells Financial Advisors,Principal and CCO,Framingham,MA,279258283,sarah.wells@wellsfainc.com,verified,http://www.linkedin.com/in/sarahwellswfa,y,y,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/sarah-wells/
 Brett Detterbeck,Dwm Financial Group,President / Investment Adviser,Palatine,IL,279209017,brett@dwmgmt.com,verified,http://www.linkedin.com/in/brett-detterbeck-cfa-cfp%c2%ae-b77a3a9,y,,,pool,https://hnwacquisition.com/for/brett-detterbeck/
 Blane Shea,Horizon Family Wealth,Managing Director,Chicago,IL,278813453,blaneshea@horizonfamilywealth.com,verified,http://www.linkedin.com/in/blane-shea-cpwa%c2%ae-9529481,y,y,,pool,https://hnwacquisition.com/for/blane-shea/
-Steven Farris,Lobscouser II,,St. Louis,MO,278766890,steven@aquilantadvisors.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/steven-farris/
+Steven Farris,Lobscouser II,,St. Louis,MO,278766890,steven@aquilantadvisors.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/steven-farris/
 Gabriele Gudaityte,Millennial Wealth,Senior Partnerships Manager,Fall City,WA,278715447,gabriele.gudaityte@mailerlite.com,verified,http://www.linkedin.com/in/gabriele-gudaityte-podere,,y,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/gabriele-gudaityte/
 Stacy Clifford,Holistic Wealth Advisors,Founder and President,Clifton Park,NY,278674280,stacy@holisticwealthadvisors.com,verified,http://www.linkedin.com/in/stacy-clifford-950a5035,y,,,pool,https://hnwacquisition.com/for/stacy-clifford/
 Ryan Vermillion,Vermillion & White Wealth Management Group,,Phoenixville,PA,278557328,rvermillion@vwwgroup.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/ryan-vermillion/
@@ -226,7 +226,7 @@ Scott Hoover,Lexington Hill Partners,Managing Director,Dallas,TX,278437717,shoov
 Jason Giordano,Guardian Asset Advisors,CEOwner,Mechanicsburg,PA,278314238,jay.giordano@securitiesamerica.com,verified,http://www.linkedin.com/in/jaygiordano,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/jason-giordano/
 Rick Laymon,Beacon Wealth Consultants,CEO/Visioneer,Roanoke,VA,278261194,rick@beaconwealth.com,verified,http://www.linkedin.com/in/ricklaymon,,,no_photo,pool,https://hnwacquisition.com/for/rick-laymon/
 Donald Collins,Ironwood Investment Management,Managing Director,Boston,MA,278157501,dcollins@ironwoodinvestmentmanagement.com,verified,http://www.linkedin.com/in/donald-collins-26041034,y,y,,pool,https://hnwacquisition.com/for/donald-collins/
-Brenda Friedlander,Friedlander Brenda S,Owner,San Rafael,CA,278056086,brenda@spectrumfinancialmgmt.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/brenda-friedlander/
+Brenda Friedlander,Friedlander Brenda S,Owner,San Rafael,CA,278056086,brenda@spectrumfinancialmgmt.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/brenda-friedlander/
 Geraldine Cunningham,First Financial Advisory Services,Registered Representative,Westerly,RI,278038908,gcunningham@1stallied.com,verified,http://www.linkedin.com/in/geraldine-cunningham-chfc-clu-chmc-197a37bb,,,email_domain_mismatch|photo_dead,pool,https://hnwacquisition.com/for/geraldine-cunningham/
 Bryan Foronjy,Foronjy Financial,Founder and Principal Wealth Manager,Santa Barbara,CA,278028743,bryan@foronjyfinancial.com,verified,http://www.linkedin.com/in/westcoastfinancialprofessional,y,,,pool,https://hnwacquisition.com/for/bryan-foronjy/
 David McKee,Accordant Advisory Group,,Annapolis,MD,277973372,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/david-mckee/
@@ -276,11 +276,11 @@ Chase Hammett,Legacy Capital Wealth Management,Managing Partner,The Woodlands,TX
 Brent Caswell,Summit Investment Advisors,Principal,Leawood,KS,273353092,brent@normandyia.com,verified,http://www.linkedin.com/in/brent-caswell-cf2-aif%c2%ae-465317a7,y,,,pool,https://hnwacquisition.com/for/brent-caswell/
 James Baer,Uhlmann Investment Management,President,Skokie,IL,273182000,jbaer@upsecurities.com,verified,http://www.linkedin.com/in/james-baer-33112ba9,y,,,pool,https://hnwacquisition.com/for/james-baer/
 Drue Kampmann,Tfp Management,Financial Planner,Bettendorf,IA,272999277,,unavailable,http://www.linkedin.com/in/drue-kampmann-98b78423,y,y,no_email,pool,https://hnwacquisition.com/for/drue-kampmann/
-Elizabeth Catlin,Bluestone Wealth Management,,Keene,NH,272940969,elizabeth@bluestonenh.com,,,y,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/elizabeth-catlin/
+Elizabeth Catlin,Bluestone Wealth Management,,Keene,NH,272940969,elizabeth@bluestonenh.com,,,y,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/elizabeth-catlin/
 William Alexander,Knox Wealth Partners Advisory,,Knoxville,TN,272877382,porter@knoxwealthpartners.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/william-alexander/
 Brandon Hatton,Conscious Wealth Investments,,Atlanta,GA,272797562,,,,y,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/brandon-hatton/
 Taylor Thomas,South Shore Capital Advisors,Owner,Boston,MA,272789211,taylor@sscainvest.com,verified,http://www.linkedin.com/in/taylor-thomas-5819ab6,y,y,,pool,https://hnwacquisition.com/for/taylor-thomas/
-Buddy Levy,Nestegg Advisors,,Hauppauge,NY,272745355,budlevy@nesteggadvisors.net,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/buddy-levy/
+Buddy Levy,Nestegg Advisors,,Hauppauge,NY,272745355,budlevy@nesteggadvisors.net,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/buddy-levy/
 Jeffrey Foster,Retirement Strategies,Chief Investment Officer,Dublin,OH,272729463,jfoster@retirement-strategies.com,verified,http://www.linkedin.com/in/jeff-foster-2176679,,,no_photo,pool,https://hnwacquisition.com/for/jeffrey-foster/
 Earle Horwitz,E. A. Horwitz,Owner,Deerfield,IL,272647037,,unavailable,http://www.linkedin.com/in/earle-horwitz-055aa512,,,no_email|no_photo,pool,https://hnwacquisition.com/for/earle-horwitz/
 David Nolet,Nolet Wealth Management,,Fort Worth,TX,272586305,david.nolet@noletwealth.com,verified,,,y,no_title|no_photo,pool,https://hnwacquisition.com/for/david-nolet/
@@ -333,7 +333,7 @@ Travis Tsukayama,Andrews Advisory Associates,Partner,Honolulu,HI,268633269,,unav
 Robert Shattuck,Athos Private Wealth,,Holladay,UT,268494780,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/robert-shattuck/
 Allan Slider,Astra Wealth Partners,Founder and President,Jersey City,NJ,268442170,allan@feeonlynetwork.com,verified,http://www.linkedin.com/in/allanslider,y,,,pool,https://hnwacquisition.com/for/allan-slider/
 Jerry Schuder,Sage Investment Advisers,President,Wappingers Falls,NY,268400685,jschuder@sageinvestmentadvisersllc.com,verified,http://www.linkedin.com/in/jerry-schuder-5196a636a,y,y,,pool,https://hnwacquisition.com/for/jerry-schuder/
-James King,Jmk & Associates,,Spokane,WA,268371774,jimmy@jmkfa.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/james-king/
+James King,Jmk & Associates,,Spokane,WA,268371774,jimmy@jmkfa.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/james-king/
 Rich Gunn,Bpm Wealth Advisors,"Partner, CEPA, CPA",San Francisco,CA,268325995,rgunn@bpm.com,verified,http://www.linkedin.com/in/rigunn,,y,no_photo,pool,https://hnwacquisition.com/for/rich-gunn/
 Kristen Coombs,Kristen E. Coombs,Owner and Senior Financial Advisor,State College,PA,268278361,kristen@weareinvested.com,verified,http://www.linkedin.com/in/kristen-coombs-cfp%c2%ae-b091a274,,,no_photo,pool,https://hnwacquisition.com/for/kristen-coombs/
 Robert Wagler,Reliant Investment Partners,,Pinehurst,NC,268274719,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/robert-wagler/
@@ -349,7 +349,7 @@ Scott Wisniewski,Wisniewski Wealth Management,,Dallas,TX,266149431,s.wisniewski@
 Bradley Kendall,Tassel Capital Management,Financial Planner,Matthews,NC,266028959,bradley.kendall@tasselcapital.com,verified,http://www.linkedin.com/in/bradley-kendall-cfp%c2%ae-cka%c2%ae-35459513b,y,,no_photo,pool,https://hnwacquisition.com/for/bradley-kendall/
 Aaron Munoz,Cerda Munoz Advisors,,Whittier,CA,265698162,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/aaron-munoz/
 John Gomez,Brentview Investment Management,Founder,Rosemont,IL,265661976,john.gomez@brentviewim.com,verified,http://www.linkedin.com/in/john-gomez-a25b4320,y,y,,pool,https://hnwacquisition.com/for/john-gomez/
-Kevin Bernzott,Bernzott Capital Advisors,Chairman & Chief Executive Officer,Camarillo,CA,265385563,kevin@bernzott.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/kevin-bernzott/
+Kevin Bernzott,Bernzott Capital Advisors,Chairman & Chief Executive Officer,Camarillo,CA,265385563,kevin@bernzott.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/kevin-bernzott/
 John West,Spraker West Wealth Management,"President, Sr Financial Advisor, COO, CCO",Winter Park,FL,265323432,john@sprakerwest.com,verified,http://www.linkedin.com/in/john-west-mba-cfp%c2%ae-053b358,y,,,pool,https://hnwacquisition.com/for/john-west/
 Jeffrey Sexton,Demeter Tactical Investments,Founder and Chief Investment Officer,Prospect,KY,265266889,jas@demeter-funds.com,verified,,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/jeffrey-sexton/
 Prabhjot Kaur,The Dala Group,Tech Recruiting Partner,Hoffman Estates,IL,265216193,pkaurs@amazon.com,verified,http://www.linkedin.com/in/prabhjotkaur27,,,no_photo,pool,https://hnwacquisition.com/for/prabhjot-kaur/
@@ -368,7 +368,7 @@ Ron Wyatt,Wyze Wealth Advisors,Founder | CEO,Canonsburg,PA,264521124,ronwyatt@wy
 Todd Derrick,Fuller Investment Management,President,Pasadena,CA,264464740,tderrick@fullerinvesting.com,verified,http://www.linkedin.com/in/todd-derrick-664152133,y,,,pool,https://hnwacquisition.com/for/todd-derrick/
 Lance Johnson,Roi Financial Advisors,Acting CEO,Beaverton,OR,264156070,lance.j.johnson@roi-fa.com,verified,http://www.linkedin.com/in/lance-johnson-a835601b6,y,y,,pool,https://hnwacquisition.com/for/lance-johnson/
 Jeremy Wallace,Wallace Hart,Founder,Lexington,KY,264001265,jeremy@wallacehart.com,verified,http://www.linkedin.com/in/jeremywallacehart,y,,,pool,https://hnwacquisition.com/for/jeremy-wallace/
-Ronald Hochstein,Comprehensive Financial Planning,,Richmond,VA,263885687,rhochstein@highstonegroup.com,,,y,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/ronald-hochstein/
+Ronald Hochstein,Comprehensive Financial Planning,,Richmond,VA,263885687,rhochstein@highstonegroup.com,,,y,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/ronald-hochstein/
 Josh Welch,Welch Investment Group,Chief Compliance Officer,Grants Pass,OR,263795723,josh@welchig.com,verified,http://www.linkedin.com/in/josh-welch-4b7225,,y,non_owner_title|no_photo,pool,https://hnwacquisition.com/for/josh-welch/
 Jeff Ehlinger,Bankplus Wealth Management,Executive Vice President & Louisiana President,Jackson,MS,263759468,jeffehlinger@bankplus.net,verified,http://www.linkedin.com/in/jeff-ehlinger-mba-a6621bb,,,no_photo,pool,https://hnwacquisition.com/for/jeff-ehlinger/
 Mark Olson,Guidestream Financial,"President, CEO",Spring Arbor,MI,263463837,molson@fmfinancial.org,verified,http://www.linkedin.com/in/mark-olson-cima-aif-49680323,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/mark-olson/
@@ -388,7 +388,7 @@ Keith Butler,Timecapital Investor Advisory Services,Partner,Port Jefferson Stati
 Jody Team,J. Team Financial,The Texas Fund - Portfolio Manager,Abilene,TX,262026877,jteam@teamstrategiesonline.com,verified,http://www.linkedin.com/in/jody-team-cfp%c2%ae-b743517,y,y,no_photo,pool,https://hnwacquisition.com/for/jody-team/
 Brad Kiplinger,Kiplinger Investment Advisors Llc.,President/Wealth Advisor,Springboro,OH,261664703,,unavailable,http://www.linkedin.com/in/brad-kiplinger-86446711,y,,no_email,pool,https://hnwacquisition.com/for/brad-kiplinger/
 Ryan Hughes,Bull Oak Capital,Founder,Rancho Santa Fe,CA,261648815,ryan@bulloakcapital.com,verified,http://www.linkedin.com/in/ryanahughes,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/ryan-hughes/
-Chester Schaal,Tandem Wealth Advisors,,Phoenix,AZ,261539225,cschaal@tandemwealth.com,,,y,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/chester-schaal/
+Chester Schaal,Tandem Wealth Advisors,,Phoenix,AZ,261539225,cschaal@tandemwealth.com,,,y,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/chester-schaal/
 Jeffry Jones,Wj Wealth Management,,Glendale,AZ,261532091,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/jeffry-jones/
 Owen Wang,Tiller Partners,General Partner,Beverly Hills,CA,261477780,,unavailable,http://www.linkedin.com/in/owen-w-524490241,,,no_email|no_photo,pool,https://hnwacquisition.com/for/owen-wang/
 Mary Naber,Sage Stone Wealth Management,Founder & President,La Jolla,CA,261444674,mary_naber@sagestonewealth.com,verified,http://www.linkedin.com/in/mary-naber-a0699b38,y,y,,pool,https://hnwacquisition.com/for/mary-naber/
@@ -443,7 +443,7 @@ Jeff McCullough,Koenig Investment Advisory,Owner & Financial Advisor,Ashland,OR,
 Bruce Allen,Bruce G. Allen Investments,Independent Financial Advisor,Denver,CO,258147622,bruce@bgaillc.com,verified,http://www.linkedin.com/in/bruce-allen-b6986714,,,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/bruce-allen/
 Michael Czajka,Malvern Capital Management,Chief Executive Officer / Co-Founder,Malvern,PA,258119057,michael@malverncap.com,verified,http://www.linkedin.com/in/michael-p-czajka-7659891,y,y,,pool,https://hnwacquisition.com/for/michael-czajka/
 Nayivi Velez,Our Wealth Guides,Financial Planner,Westlake Village,CA,257908095,nayivi@villagewealthadvisors.com,verified,http://www.linkedin.com/in/nayivivelez,y,y,,pool,https://hnwacquisition.com/for/nayivi-velez/
-Karen Schaeffer,Schaeffer Financial,Managing Member,Rockville,MD,257695379,karen@schaefferfinancial.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/karen-schaeffer/
+Karen Schaeffer,Schaeffer Financial,Managing Member,Rockville,MD,257695379,karen@schaefferfinancial.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/karen-schaeffer/
 Kurt Schrader,Carbahal Olsen Financial Services Group,Partner,Davis,CA,257597197,kschrader@carbahalolsen.com,verified,http://www.linkedin.com/in/kurt-schrader-cfp%c2%ae-88083518,,y,no_photo,pool,https://hnwacquisition.com/for/kurt-schrader/
 Wayne Carroll,Wilkins Miller Wealth Management,,Mobile,AL,257491633,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/wayne-carroll/
 Julie Siegel,Clarity Asset Management,Chief Compliance Officer,Ames,IA,257355061,jsiegel@investmentclarity.com,verified,,y,,non_owner_title|no_photo,pool,https://hnwacquisition.com/for/julie-siegel/
@@ -455,7 +455,7 @@ Mark Vasquez,Red Spruce Capital,Portfolio Manager,Berwyn,PA,256905735,mark.vasqu
 Delcena Lewis,Rd Lewis Holdings,"Founder, President & Chief Advisory Officer",Maitland,FL,256787908,dee@rdlewiswealthmanagement.com,verified,http://www.linkedin.com/in/delcena-lewis,y,y,,pool,https://hnwacquisition.com/for/delcena-lewis/
 Kevin Manning,Stone Pine Financial Partners,Managing Partner,Media,PA,256750667,kmanning@stonepinefinancial.com,verified,http://www.linkedin.com/in/kevinjmanning,y,y,photo_dead,pool,https://hnwacquisition.com/for/kevin-manning/
 Stephen Blumenthal,Cmg Capital Management Group,Chairman and CEO,Malvern,PA,256546961,blumenthal@cmgwealth.com,verified,http://www.linkedin.com/in/stephen-blumenthal-36648664,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/stephen-blumenthal/
-Darryl Bryant,6th Street Advisors,,Daphne,AL,256543633,dbryant@6thstreetadvisors.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/darryl-bryant/
+Darryl Bryant,6th Street Advisors,,Daphne,AL,256543633,dbryant@6thstreetadvisors.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/darryl-bryant/
 Yanjuan Huang,Vienna Asset Management,,Saratoga,CA,256525661,jennifer.huang@vamladvisors.com,verified,,y,,no_title,pool,https://hnwacquisition.com/for/yanjuan-huang/
 Jeffrey Delarme,Delarme Wealth Management,,Palos Verdes Estates,CA,256500641,jeff@delarmewm.com,verified,,y,,no_title|no_photo,pool,https://hnwacquisition.com/for/jeffrey-delarme/
 Jordan Jacobs,Estate & Trust Advisors,Senior Vice President,Riverwoods,IL,256470000,jordan@etaadvisor.com,verified,http://www.linkedin.com/in/jordan-jacobseta,y,y,,pool,https://hnwacquisition.com/for/jordan-jacobs/
@@ -469,7 +469,7 @@ Kelly Smith,Certis Capital Management,Founder and Managing Principal,Santa Barba
 Kristi Murphy,Plotkin Financial Advisors,Exec. VP - Client Operations,Chevy Chase,MD,255869623,kmurphy@pfallc.com,verified,http://www.linkedin.com/in/kristi-murphy-13523639,y,y,non_owner_title,pool,https://hnwacquisition.com/for/kristi-murphy/
 Phil Bailey,Muirfield Wealth Advisors,Senior Financial Advisor/Managing Principal,Charlotte,NC,255776091,pbailey@muirfieldwealth.com,verified,http://www.linkedin.com/in/phil-bailey-23202a21,y,y,,pool,https://hnwacquisition.com/for/phil-bailey/
 Charles Krusen,Krusen Capital Management,"Founder, Owner & Chief Executive Officer",West Palm Beach,FL,255745817,charles.krusen@krusencapital.com,verified,http://www.linkedin.com/in/charles-krusen-471235,y,y,,pool,https://hnwacquisition.com/for/charles-krusen/
-Timothy Humphreys,Delaware Avenue Wealth Planners,Owner & CEO,Wilmington,DE,255567984,thumphreys@dwpinvest.com,,,,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/timothy-humphreys/
+Timothy Humphreys,Delaware Avenue Wealth Planners,Owner & CEO,Wilmington,DE,255567984,thumphreys@dwpinvest.com,,,,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/timothy-humphreys/
 Kimberly Bannwarth,Releve Financial Group,Vice President and Managing Director,Scottsdale,AZ,255563347,kimberly@relevefinancialgroup.com,verified,http://www.linkedin.com/in/kimberly-bannwarth-crpc%c2%ae-378a52147,y,y,,pool,https://hnwacquisition.com/for/kimberly-bannwarth/
 John Child,Sound Investment Management,,Tualatin,OR,255500000,jchild@simiusa.com,verified,,y,,no_title|no_photo,pool,https://hnwacquisition.com/for/john-child/
 Daniel Guillen,International Private Wealth Advisors,"Wealth Manager, Co-Founder, COO",San Diego,CA,255341082,daniel@ipwadvisors.com,verified,http://www.linkedin.com/in/daniel-guillen-aif%c2%ae-cepa%c2%ae-a3773a11,,y,no_photo,pool,https://hnwacquisition.com/for/daniel-guillen/
@@ -541,7 +541,7 @@ Dan Monaghan,Liberty Forge,Partner,Boston,MA,250802244,dan@civicfinancial.com,ve
 Keith Deane,Deane Retirement Strategies,Certified Financial Planner,New Orleans,LA,250732080,kdeane@deaneretire.com,verified,http://www.linkedin.com/in/keith-deane-b10526329,y,,no_photo,pool,https://hnwacquisition.com/for/keith-deane/
 Philip Sallee,Wealthmd,Chief Investment Officer,Louisville,KY,250521809,psallee@wealthmd.net,verified,http://www.linkedin.com/in/philip-parrish-sallee-a2487224b,y,y,,pool,https://hnwacquisition.com/for/philip-sallee/
 Amber Whitehorne,Amara Financial,Recruitment Director & Founder,San Francisco,CA,250466937,amber@amaraizfinancial.com,verified,http://www.linkedin.com/in/amber-whitehorne,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/amber-whitehorne/
-Michael Lorenzen,Lig Capital Management,President & Cco Investment Portfolio Manager,Oklahoma City,OK,250406715,mike@ligcam.com,,,,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/michael-lorenzen/
+Michael Lorenzen,Lig Capital Management,President & Cco Investment Portfolio Manager,Oklahoma City,OK,250406715,mike@ligcam.com,,,,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/michael-lorenzen/
 Beau Fisher,Fisher & Wiens Wealth Management,"Owner, Fisher & Wiens Wealth Management",Danville,CA,250341000,,unavailable,http://www.linkedin.com/in/beau-fisher-fisherandwiens,y,y,no_email|no_photo,pool,https://hnwacquisition.com/for/beau-fisher/
 Kyle Hammerschmidt,Mokan Wealth Management,Founder,Overland Park,KS,250337407,kyle@mokanwealth.com,verified,http://www.linkedin.com/in/kylehammerschmidt,,,no_photo,pool,https://hnwacquisition.com/for/kyle-hammerschmidt/
 Alexander Ross,Main Street Investment Advisors,Managing Principal,Northbrook,IL,250312643,aross@msinvadv.com,verified,http://www.linkedin.com/in/alexanderlross,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/alexander-ross/
@@ -563,7 +563,7 @@ Christina Zins,Summit Wealth Management Group,Wealth Advisor,Camarillo,CA,249527
 Jason Semeleng,Calabasas Advisory Group,,Westlake Village,CA,249526000,jason@semelengfinancialservices.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/jason-semeleng/
 Wesley Pingelton,Northill Aims,Founder,Richardson,TX,249477467,,unavailable,http://www.linkedin.com/in/wesleypingeltoncfa,,y,no_email|photo_dead,pool,https://hnwacquisition.com/for/wesley-pingelton/
 Jean Baun,Chancellor Financial Group,President,Wilkes-Barre,PA,249305348,jean@jsbfin.com,verified,http://www.linkedin.com/in/jean-baun-3140aa52,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/jean-baun/
-Patrick Keen,Prairie Rivers Investments,,Robinson,IL,249261888,pat@ourpri.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/patrick-keen/
+Patrick Keen,Prairie Rivers Investments,,Robinson,IL,249261888,pat@ourpri.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/patrick-keen/
 Kyle Louvar,Guided Capital Wealth Management,Chief Executive Officer,Houston,TX,249186592,klouvar@guidedcapitalwealth.com,verified,http://www.linkedin.com/in/kyle-louvar-cfp,y,,,pool,https://hnwacquisition.com/for/kyle-louvar/
 Nicholas Efthemis,Emergent Wealth Advisors,Wealth Manager,Williamsville,NY,249075065,nick@emergentwa.com,verified,http://www.linkedin.com/in/nicholas-j-efthemis-cfp,y,,,pool,https://hnwacquisition.com/for/nicholas-efthemis/
 Antoine Souma,Galliott Capital Advisors,Managing Partner,Beverly Hills,CA,248958072,antoine.souma@galliott.com,verified,http://www.linkedin.com/in/antoine-souma,y,y,,pool,https://hnwacquisition.com/for/antoine-souma/
@@ -589,7 +589,7 @@ Frank Sabin,Blueline Advisors,Chief Investment Officer,Exeter,NH,247237600,fsabi
 Coe Magruder,Washington Growth Strategies,Founder and CEO,Washington,DC,247180436,coe@washingtongrowthstrategies.com,verified,http://www.linkedin.com/in/coe-m-magruder-8b833b1a,,,no_photo,pool,https://hnwacquisition.com/for/coe-magruder/
 Tanner Wrisley,Anchor Bay Capital,"CEO, CIO & Partner",Carlsbad,CA,247127800,tanner@anchorbaycapital.com,verified,http://www.linkedin.com/in/tannerwrisley,y,,,pool,https://hnwacquisition.com/for/tanner-wrisley/
 Dave Crouch,Agp Franklin,Financial Advisor and Registered Principal,Franklin,TN,247058110,dave.crouch@aspengroveassetmanagement.com,verified,http://www.linkedin.com/in/dave-crouch,y,y,,pool,https://hnwacquisition.com/for/dave-crouch/
-Richard Schoenfeld,Intervest,President,Chevy Chase,MD,246950187,richard@intervestltd.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/richard-schoenfeld/
+Richard Schoenfeld,Intervest,President,Chevy Chase,MD,246950187,richard@intervestltd.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/richard-schoenfeld/
 Justin Lepage,Northern Edge Wealth Management,Financial Advisor/President,Marquette,MI,246928100,justin@northernedgewealth.com,verified,http://www.linkedin.com/in/justin-lepage-cfp%c2%ae-10ba6714,y,,no_photo,pool,https://hnwacquisition.com/for/justin-lepage/
 Tommy Light,Lighthouse Wealth Management,President | Wealth Advisor,Camp Hill,PA,246761584,,unavailable,http://www.linkedin.com/in/tommylighthousewealth,y,,no_email|name_fixed,pool,https://hnwacquisition.com/for/tommy-light/
 Andrew Hodges,Value Investment Professionals,,New York,NY,246737018,ahodges@valueinvestmentprofessionals.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/andrew-hodges/
@@ -605,9 +605,9 @@ Spencer Hall,Hall Retirement Planning Services,President,Knoxville,TN,245979415,
 Janet Wan,Sierra Pacific Private Wealth,Founder| Senior Wealth Advisor,Pleasanton,CA,245900000,jwan@sierrapacificpw.com,verified,http://www.linkedin.com/in/janetwan,y,,,pool,https://hnwacquisition.com/for/janet-wan/
 Russell Kartub,Insight Inv,President,El Segundo,CA,245734467,russ@insightinv.com,verified,http://www.linkedin.com/in/russell-kartub-2a5b5812,y,y,no_photo,pool,https://hnwacquisition.com/for/russell-kartub/
 Jeremy Shevlin,Toro West Capital Advisors,"Founder, Managing Partner & Advisor",Louisville,CO,245672052,jeremy@torowestcapital.com,verified,http://www.linkedin.com/in/jeremy-shevlin-cfa%c2%ae-cfp%c2%ae-6385a78,,y,no_photo,pool,https://hnwacquisition.com/for/jeremy-shevlin/
-Ram Kolluri,Global Wealth Management,,Kingston,NJ,245661289,rkolluri@globalwealthllc.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/ram-kolluri/
+Ram Kolluri,Global Wealth Management,,Kingston,NJ,245661289,rkolluri@globalwealthllc.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/ram-kolluri/
 Kevin Zywna,Wealthway Financial Advisors,President,Norfolk,VA,245569000,kevin@wealthwayadvisors.com,verified,http://www.linkedin.com/in/kevin-zywna-cfp-007393185,y,,,pool,https://hnwacquisition.com/for/kevin-zywna/
-Aaron Rugh,Rm Financial Services,,Falmouth,ME,245391882,arugh@rmfsllc.com,,,y,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/aaron-rugh/
+Aaron Rugh,Rm Financial Services,,Falmouth,ME,245391882,arugh@rmfsllc.com,,,y,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/aaron-rugh/
 Graham Williams,Optimist Retirement Group,Managing Member,Bellevue,WA,245276023,graham@optimistretirement.com,verified,http://www.linkedin.com/in/retire-in-scottsdale,y,y,,pool,https://hnwacquisition.com/for/graham-williams/
 Angela Cox,W Advisors,Client Service Manager,Germantown,TN,244889761,angela@wadvisorsllc.com,verified,http://www.linkedin.com/in/angela-cox-268b89144,y,,non_owner_title,pool,https://hnwacquisition.com/for/angela-cox/
 Nirav Tolia,Integras Partners,Co-Founder & CEO,Alpharetta,GA,244833956,nirav@nextdoor.com,verified,http://www.linkedin.com/in/niravtolia,y,,,pool,https://hnwacquisition.com/for/nirav-tolia/
@@ -617,7 +617,7 @@ Michael Brundage,Clear Ridge Wealth Management,Co-Founder,Kalamazoo,MI,244630166
 Steven Woods,Stirlingshire RIA,Founder & CEO,New York,NY,244624972,steven@stirlingshire.com,verified,http://www.linkedin.com/in/stirlingshireinvestments,y,,,pool,https://hnwacquisition.com/for/steven-woods/
 Eric Boyce,Boyce & Associates Wealth Consulting,President & Chief Executive Officer,Cedar Park,TX,244618764,eric@boycewealth.com,verified,http://www.linkedin.com/in/ericboyce1,y,,,pool,https://hnwacquisition.com/for/eric-boyce/
 Connor Browne,City Different Holdings,"Founder, CEO, Portfolio Manager",Santa Fe,NM,244435498,connor@citydifferentinvestments.com,verified,http://www.linkedin.com/in/connor-browne-841a52,y,,,pool,https://hnwacquisition.com/for/connor-browne/
-Richard Lederer,Lederer & Associates Investment Counsel,President & Chief Investment Officer,Long Beach,CA,244306687,richard@lederer-associates.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/richard-lederer/
+Richard Lederer,Lederer & Associates Investment Counsel,President & Chief Investment Officer,Long Beach,CA,244306687,richard@lederer-associates.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/richard-lederer/
 Ryan Posner,Gulfstream Cm,,Summit,NJ,244221320,rposner@gulfstreamcm.com,verified,,,y,no_title|no_photo,pool,https://hnwacquisition.com/for/ryan-posner/
 Duane Bazis,Bazis Private Wealth,Founder,Omaha,NE,244134828,duane@baziswealth.com,verified,http://www.linkedin.com/in/duane-b%c4%81zis-cpwa%c2%ae-687424134,,,no_photo,pool,https://hnwacquisition.com/for/duane-bazis/
 Jeffrey Richter,Ares Financial Consulting,,Calabasas,CA,243880799,jeff@aresfinancialconsulting.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/jeffrey-richter/
@@ -641,7 +641,7 @@ David Munn,Munn Wealth Management,President; Senior Client Advisor,Maumee,OH,242
 Sam Sweitzer,Anson Capital,Founder,Tyrone,GA,242205754,sam.sweitzer@ansonanalytics.com,verified,http://www.linkedin.com/in/sam-sweitzer-cfa-8051ba7,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/sam-sweitzer/
 Danny Allizadeh,Position Wealth,Managing Partner,The Woodlands,TX,242108683,danny@positionwealth.com,verified,http://www.linkedin.com/in/danny-allizadeh,y,y,,pool,https://hnwacquisition.com/for/danny-allizadeh/
 Jason Good,Intelligent Financial Strategies,President,Excelsior,MN,241994381,jason@excelsiorinvestors.com,verified,http://www.linkedin.com/in/jason-good-5256996,y,,photo_dead,pool,https://hnwacquisition.com/for/jason-good/
-John Davis,J. P. Davis,,Oro Valley,AZ,241969239,jack@navigationretirement.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/john-davis-oro-valley/
+John Davis,J. P. Davis,,Oro Valley,AZ,241969239,jack@navigationretirement.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/john-davis-oro-valley/
 Policarpio Sanchez,Sanchez & Zures,,Mclean,VA,241940448,paul.sanchez@szadvisors.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/policarpio-sanchez/
 Ryan Fleischer,Revolution Capital,Founder/ Chairman,Omaha,NE,241915426,ryan@revgroupllc.com,verified,http://www.linkedin.com/in/ryanfleischer,y,y,,pool,https://hnwacquisition.com/for/ryan-fleischer/
 Fuad Hageb,Vanderbilt Avenue Asset Management,Senior Vice President,New York,NY,241914564,fhageb@vaamllc.com,verified,http://www.linkedin.com/in/fuad-hageb-01bb3986,,,no_photo,pool,https://hnwacquisition.com/for/fuad-hageb/
@@ -659,7 +659,7 @@ Tyler Ryan,Vvr Holdings,Managing Partner / Financial Advisor,Bellingham,WA,24108
 Andrew Rafal,Bayntree Wealth Advisors,,Scottsdale,AZ,241077085,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/andrew-rafal/
 Brint Detwiler,Barnstone Advisors,President,Phoenixville,PA,241063476,brintd@barnstoneadvisors.com,verified,http://www.linkedin.com/in/brintdetwiler,y,y,,pool,https://hnwacquisition.com/for/brint-detwiler/
 Mike Srulowitz,Heritage Haus Wealth Partners,"CEO, Co-Founder",New Braunfels,TX,241051249,msrulowitz@heritagehauswp.com,verified,http://www.linkedin.com/in/mike-srulowitz-ea-83319b15,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/mike-srulowitz/
-Vincent Oldre,Assured Retirement Financial Group,,Edina,MN,241013112,vincent.oldre@assuredretirementgroup.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/vincent-oldre/
+Vincent Oldre,Assured Retirement Financial Group,,Edina,MN,241013112,vincent.oldre@assuredretirementgroup.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/vincent-oldre/
 Ehsan Bassam,Bassam Wealth Management,,Palm Beach,FL,240970936,ehsan.bassam@bassamwealthmanagement.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/ehsan-bassam/
 Nicholas Carlin,Carlin Wealth Management Group,,Austin,TX,240889754,,,,y,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/nicholas-carlin/
 Jessica Neisler,Carolina Financial Advisors,Chief Compliance Officer / Operations Manager,Greensboro,NC,240885264,jessica@carolinafinancialadvisors.com,verified,http://www.linkedin.com/in/jessica-neisler-39b85623,y,,non_owner_title,pool,https://hnwacquisition.com/for/jessica-neisler/
@@ -698,7 +698,7 @@ William Corrigan,Snowcap Capital Management,,Dallas,TX,238889532,wcorrigan@snowc
 Howard Richardson,Investment Management & Planning,President,Greenville,DE,238848448,howard.richardson@imandp.com,verified,http://www.linkedin.com/in/howard-richardson-b20a193,,y,photo_dead,pool,https://hnwacquisition.com/for/howard-richardson/
 Frank Gallo,Investors Portfolio Services,Owner,Puyallup,WA,238839710,frank@investorsportfolioservices.com,verified,http://www.linkedin.com/in/frank-gallo-cfp%c2%ae-71033b40,y,y,,pool,https://hnwacquisition.com/for/frank-gallo/
 Charles Reinhold,Cpr Investments,,Rochester,MI,238785216,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/charles-reinhold/
-Christopher Ganim,Gfs Wealth Management Advisors,President,Shelton,CT,238639022,cganim@ganimfinancial.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/christopher-ganim/
+Christopher Ganim,Gfs Wealth Management Advisors,President,Shelton,CT,238639022,cganim@ganimfinancial.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/christopher-ganim/
 Brant Snavely,Westhampton Capital,,Winston-Salem,NC,238519094,brant@westhamptoncapital.com,verified,,,y,no_title|no_photo,pool,https://hnwacquisition.com/for/brant-snavely/
 Jerry Mirolla,Prossimo Advisors,,San Luis Obispo,CA,238503090,tmirolla@prossimoadvisors.com,verified,,y,,no_title|no_photo,pool,https://hnwacquisition.com/for/jerry-mirolla/
 George Smith,Smith Bruer Advisors,Co-CEO and Financial Advisor,Tallahassee,FL,238483049,,unavailable,http://www.linkedin.com/in/george-m-smith-cima-%c2%ae%ef%b8%8f-7110559,,,no_email|no_photo,pool,https://hnwacquisition.com/for/george-smith/
@@ -706,9 +706,9 @@ John Mathena,Jm2 Capital,Founder and President,Edmond,OK,238449954,jmathena@jm2c
 Matthew Deaton,Acute Investment Advisory,,Mesa,AZ,238432347,,,,y,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/matthew-deaton/
 Adrianne Yamaki,Strategic Wealth Capital,Founder and Managing Director,San Francisco,CA,238395849,adrianne@swcllc.com,verified,http://www.linkedin.com/in/cfpmba,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/adrianne-yamaki/
 Andres Villegas,Goldenstone Wealth Management,Principal and Co-Founder,El Dorado Hills,CA,238259000,andres@goldenstonewealth.com,verified,http://www.linkedin.com/in/andres-r-villegas-cfa,,y,no_photo,pool,https://hnwacquisition.com/for/andres-villegas/
-Patrick Hutchinson,Sector Analysts,,Allentown,PA,238163786,patrick@sectoranalysts.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/patrick-hutchinson/
+Patrick Hutchinson,Sector Analysts,,Allentown,PA,238163786,patrick@sectoranalysts.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/patrick-hutchinson/
 Jeremy Presley,Alexander Capital Wealth Management,Managing Partner,Red Bank,NJ,238078668,jeremy@axiows.com,verified,http://www.linkedin.com/in/jeremypresley1,y,,,pool,https://hnwacquisition.com/for/jeremy-presley/
-Tod Fisher,Rachor Investment Advisory Services,,Linden,MI,238062651,tod@rias.net,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/tod-fisher/
+Tod Fisher,Rachor Investment Advisory Services,,Linden,MI,238062651,tod@rias.net,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/tod-fisher/
 Kevin Caldwell,Golden Road Advisors,Principal,Tampa,FL,237749516,kevin@goldenroadadvisors.com,verified,http://www.linkedin.com/in/kevin-caldwellcfp,y,y,no_photo,pool,https://hnwacquisition.com/for/kevin-caldwell/
 Kenneth Stephenson,Quest 10 Wealth Builders,Owner,Fuquay-Varina,NC,237739145,kenneth@completefinancialsolutions.org,verified,http://www.linkedin.com/in/kenneth-stephenson-18638713,y,,no_photo,pool,https://hnwacquisition.com/for/kenneth-stephenson/
 Jesse Rodrigue,Fortune 45 Llc.,President & Financial Advisor,Gonzales,LA,237666282,jesse@fortune45.com,verified,http://www.linkedin.com/in/jesse-b-rodrigue-34353319,,y,photo_notimage,pool,https://hnwacquisition.com/for/jesse-rodrigue/
@@ -751,7 +751,7 @@ Dana Grigg,Camelot Technology Advisors,,San Francisco,CA,234947793,,,,,y,no_titl
 Repp Lambert,Lcw Services,Co-founder,Virginia Beach,VA,234907065,repp.lambert@alturawealth.com,verified,http://www.linkedin.com/in/repplambert,y,y,,pool,https://hnwacquisition.com/for/repp-lambert/
 Woody Derricks,Partnership Wealth Management,"President, Partner",Towson,MD,234906000,woody@partnershipwm.com,verified,http://www.linkedin.com/in/woodyderricks,y,,,pool,https://hnwacquisition.com/for/woody-derricks/
 Julie Skye,Sustainable Advisors Alliance,,Tulsa,OK,234841969,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/julie-skye/
-William Tevis,Tevis Investment Management,,Plano,TX,234793030,ryan@tevisinvest.com,,,y,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/william-tevis/
+William Tevis,Tevis Investment Management,,Plano,TX,234793030,ryan@tevisinvest.com,,,y,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/william-tevis/
 Megan Poore,Cbm Financial,President and Financial Advisor,Austin,TX,234750441,megan@watercolorfinancial.com,verified,http://www.linkedin.com/in/meganpoore,y,y,,pool,https://hnwacquisition.com/for/megan-poore/
 Rick Mueller,Peak Investment Advisors,President/CEO,Colorado Springs,CO,234624302,rick@peakiateam.com,extrapolated,http://www.linkedin.com/in/rick-mueller-a59a8832,,y,email_domain_mismatch|email_extrapolated|no_photo,pool,https://hnwacquisition.com/for/rick-mueller/
 Christopher Haydel,Hba Advisors,Co-Host Market Meditations Podcast,Pasadena,CA,234310000,chris@equanimityfinancial.com,verified,,y,y,no_photo,pool,https://hnwacquisition.com/for/christopher-haydel/
@@ -769,14 +769,14 @@ John Berry,Adaptation Financial Advisors,Managing Director,Oklahoma City,OK,2336
 Matt Pequet,Mpi Wealth Management,Portfolio Manager,Hinsdale,IL,233597123,matt@mpi-invest.com,verified,http://www.linkedin.com/in/matt-pequet-49212b122,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/matt-pequet/
 David Rasmussen,Catalyst Financial Nw,,Gresham,OR,233421000,david@catalyst-nw.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/david-rasmussen/
 Lisa Cooper,Figure 8 Investment Strategies,President,Boise,ID,233394064,lisa@figure8investing.com,verified,http://www.linkedin.com/in/lisaleffcooper,y,y,,pool,https://hnwacquisition.com/for/lisa-cooper/
-Scott Walker,Walker Financial Advisors Inc. Dba California 457 Benefits,,Mission Viejo,CA,233284348,scott@walkerfinancial.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/scott-walker/
+Scott Walker,Walker Financial Advisors Inc. Dba California 457 Benefits,,Mission Viejo,CA,233284348,scott@walkerfinancial.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/scott-walker/
 Paul Grace,Aspirean Wealth,Financial Advisor and Coach,Mill Valley,CA,233159926,paul@aspirean.com,verified,http://www.linkedin.com/in/paul-grace-5183a77,y,,no_photo,pool,https://hnwacquisition.com/for/paul-grace/
 John Williams,Ironwood Wealth Management,,Hurricane,WV,233131125,john@ironwood-wealth.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/john-williams/
-David Matulewicz,Holos Integrated Wealth,Managing Partner,Kennett Square,PA,233097307,dmatulewicz@holosiw.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/david-matulewicz/
+David Matulewicz,Holos Integrated Wealth,Managing Partner,Kennett Square,PA,233097307,dmatulewicz@holosiw.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/david-matulewicz/
 Terry Wheeler,We Alliance Wealth Advisors,CEO,Roseville,CA,233075774,terry@weriaadvisors.com,verified,http://www.linkedin.com/in/terry-wheeler-jd-cfp,y,y,name_fixed,pool,https://hnwacquisition.com/for/terry-wheeler/
 Kasia Marczyk,Anchor Wealth Management Group,"President, Founder",West Palm Beach,FL,232975560,kmarczyk@anchorwealthgroup.com,verified,http://www.linkedin.com/in/kasiamarczyk,y,y,,pool,https://hnwacquisition.com/for/kasia-marczyk/
 Jay Jennings,Sundvold Capital Management,Partner,Columbia,MO,232900000,,unavailable,http://www.linkedin.com/in/jay-jennings-930636a,,y,no_email|no_photo,pool,https://hnwacquisition.com/for/jay-jennings/
-Roger Miller,Summit Financial Advisors,President,Middletown,OH,232826293,rmiller@sfadvisorsinc.com,,,,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/roger-miller/
+Roger Miller,Summit Financial Advisors,President,Middletown,OH,232826293,rmiller@sfadvisorsinc.com,,,,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/roger-miller/
 Dan Baldini,Oberon Asset Management,Managing Partner,New York,NY,232703406,dbaldini@oberonasset.com,verified,http://www.linkedin.com/in/dan-baldini-64b3785,y,,,pool,https://hnwacquisition.com/for/dan-baldini/
 Justin Klein,Klein Pavlis & Peasley Financial,CEO,Irvine,CA,232698506,jklein@kppfinancial.com,verified,http://www.linkedin.com/in/justinkleinkpp,,y,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/justin-klein/
 Karen Frigon,Taylor Frigon Capital Management,,Scottsdale,AZ,232628086,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/karen-frigon/
@@ -784,7 +784,7 @@ Kevin Lum,Foundry Financial,Founder & CEO,Pasadena,CA,232611535,kevin@foundryfin
 Mark Sullivan,Mount Vernon Associates,,Baltimore,MD,232510350,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/mark-sullivan/
 Joseph Perfilio,Integrated Capital Management,CEO,Jessup,PA,232443145,jperfilio@icm-invest.com,verified,http://www.linkedin.com/in/joseph-perfilio-22855623,,y,no_photo,pool,https://hnwacquisition.com/for/joseph-perfilio/
 Lock Bingham,Bingham Private Wealth,CEO/President,San Francisco,CA,232421518,lock@binghamprivate.com,verified,http://www.linkedin.com/in/lockbingham,y,,,pool,https://hnwacquisition.com/for/lock-bingham/
-Patrick Miller,Millennium Capital Advisors,Owner,Little Rock,AR,232245250,pmiller@mca-ar.com,,,,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/patrick-miller/
+Patrick Miller,Millennium Capital Advisors,Owner,Little Rock,AR,232245250,pmiller@mca-ar.com,,,,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/patrick-miller/
 David Kranz,Reshape,CEO I Senior Investment Advisor I Certified Financial Planner ™,Boca Raton,FL,232231669,david.kranz@reshapewealth.com,verified,http://www.linkedin.com/in/dkranzco,y,,,pool,https://hnwacquisition.com/for/david-kranz/
 Steve Economopoulos,Econ Financial Services,Managing Principal,Harrisburg,PA,232083037,secon@econwealth.com,verified,http://www.linkedin.com/in/steve-economopoulos-bbb5597,,,no_photo,pool,https://hnwacquisition.com/for/steve-economopoulos/
 Sean Chaitman,Shelter Rock Management,"President, Chief Investment Officer",Jericho,NY,231979085,sean@shelterrockmanagement.com,verified,http://www.linkedin.com/in/sean-chaitman-9b93935,,y,no_photo,pool,https://hnwacquisition.com/for/sean-chaitman/
@@ -810,7 +810,7 @@ Nicholas Rotello,Seventwo,Founder | CIO,Denver,CO,230391190,nrotello@seventwopar
 Zachary Miller,Redwood Investment Group,Vice President of Wealth Management,Fort Bragg,CA,230299398,zachary@myredwoodinvestments.com,extrapolated,http://www.linkedin.com/in/zack-miller234,y,,email_extrapolated,pool,https://hnwacquisition.com/for/zachary-miller/
 Zach Brodt,Slt Holdings,CEO & Founder,Scottsdale,AZ,230289447,zbrodt@slcapitalwealth.com,verified,http://www.linkedin.com/in/zach-brodt-3502b8280,y,y,,pool,https://hnwacquisition.com/for/zach-brodt/
 Darren Tompkins,Austerra Wealth Management,Owner,Dallas,TX,230269794,,unavailable,http://www.linkedin.com/in/darren-tompkins-572b299,,,no_email|no_photo,pool,https://hnwacquisition.com/for/darren-tompkins/
-Elliott Collins,Aljen Asset Management,,Cedar Knolls,NJ,230227440,elliott@aljenam.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/elliott-collins/
+Elliott Collins,Aljen Asset Management,,Cedar Knolls,NJ,230227440,elliott@aljenam.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/elliott-collins/
 James Dobbs,Woodfield Financial Advisors,President,Deer Park,IL,230069047,jdobbs@woodfieldfinancialadvisors.com,verified,,y,,,pool,https://hnwacquisition.com/for/james-dobbs/
 Drew Lunt,Scratch Capital,Founder and Advisor,Boise,ID,230052827,drew@scratch-capital.com,verified,http://www.linkedin.com/in/drew-lunt,y,y,,pool,https://hnwacquisition.com/for/drew-lunt/
 Gregory Guenther,Grantvest Financial Group,Award-Winning Wealth Manager,Matawan,NJ,230000000,gregory@grantvest.com,verified,http://www.linkedin.com/in/gregory-guenther-9080761a,y,,,pool,https://hnwacquisition.com/for/gregory-guenther/
@@ -819,7 +819,7 @@ John Catalfamo,Primoris Wealth Advisors,,North Palm Beach,FL,229982481,johnc@pri
 Charles Andriole,Granite Islands Private Wealth,Founder and Managing Partner,Guilford,CT,229860232,candriole@graniteislands.com,verified,http://www.linkedin.com/in/andriole,y,,,pool,https://hnwacquisition.com/for/charles-andriole/
 Scott Lasky,Lionshead Wealth Management,Private Wealth Advisor,New York,NY,229846327,scott@lionsheadwealth.com,verified,http://www.linkedin.com/in/realizeyourdreams,y,y,,pool,https://hnwacquisition.com/for/scott-lasky/
 Cean Rogers,Wlth Capital Management,Owner,Chandler,AZ,229766959,crogers@wlthmanagement.com,verified,http://www.linkedin.com/in/cean-rogers-cfa-cfp%c2%ae-cpwa%c2%ae-aif%c2%ae-7a5b451,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/cean-rogers/
-Jeffrey Montgomery,Montgomery Financial Services,Owner,Ocean City,MD,229758052,jeff@mfswealth.com,,,y,,email_unknown,pool,https://hnwacquisition.com/for/jeffrey-montgomery/
+Jeffrey Montgomery,Montgomery Financial Services,Owner,Ocean City,MD,229758052,jeff@mfswealth.com,,,y,,email_unverified,pool,https://hnwacquisition.com/for/jeffrey-montgomery/
 Matthew Chester,Tableaux,Managing Director & Financial Advisor,Great Barrington,MA,229743914,matt@tableauxwealth.com,verified,http://www.linkedin.com/in/mattchester,y,y,,pool,https://hnwacquisition.com/for/matthew-chester/
 James Tausz,Bradford Financial Center,,Clarion,IA,229709395,jim@bradfordfinancialcenter.com,verified,,,y,no_title|no_photo,pool,https://hnwacquisition.com/for/james-tausz/
 Andrew Tang,Turner Financial Group,,Pace,FL,229566133,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/andrew-tang/
@@ -860,7 +860,7 @@ Jessica McConnell,Capital Cs Group,"Managing Partner, CCO",Irvine,CA,227302570,j
 Anthony McEahern,Gilpin Wealth Management,Managing Partner,Golden,CO,227216997,tony.mceahern@gilpinwealth.com,verified,http://www.linkedin.com/in/anthony-k-mceahern-a4850710,y,y,,pool,https://hnwacquisition.com/for/anthony-mceahern/
 Dennis O'Keefe,Successful Money Strategies,Telecom Retirement Guide 📱Making Sense of Employee Benefits Plans for Telecom Employees,Fall River,MA,227105725,dennis@successfulmoney.com,verified,http://www.linkedin.com/in/dennisokeefe-,y,y,,pool,https://hnwacquisition.com/for/dennis-okeefe-fall-river/
 Clifford Favrot,Dumaine Investments,Founder and President of Dumaine Investments,New Orleans,LA,226991557,unsubcfavrot@dumaineinvestments.com,verified,http://www.linkedin.com/in/clifford-f-favrot-cfa-cfp-241a2020,y,y,,pool,https://hnwacquisition.com/for/clifford-favrot/
-Patrick Gall,Retirement Wealth Solutions,,Marshfield,WI,226991000,pat@retirews.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/patrick-gall/
+Patrick Gall,Retirement Wealth Solutions,,Marshfield,WI,226991000,pat@retirews.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/patrick-gall/
 Donald Carnaghi,Premier Estate Planners,President/CEO,Clinton Township,MI,226948109,don@yourplanners.com,verified,http://www.linkedin.com/in/donaldcarnaghi,y,,,pool,https://hnwacquisition.com/for/donald-carnaghi/
 Brian Bruneau,Naples Wealth Planning,President,Bonita Springs,FL,226934674,bbruneau@napleswealthplanning.com,verified,http://www.linkedin.com/in/brian-bruneau-95b8aa84,y,y,,pool,https://hnwacquisition.com/for/brian-bruneau/
 Devan Naidoo,Structured Wealth Management,CEO,Toledo,OH,226890000,indy@swm.org.za,verified,http://www.linkedin.com/in/devan-naidoo-59055b20,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/devan-naidoo/
@@ -898,7 +898,7 @@ Victor Gil,Iadvise Partners,Managing Partner,New York,NY,224450799,vgil@iadvisep
 Winnie Sun,Sun Group Wealth Partners,Founder,Irvine,CA,224450529,winnie@sungroupwp.com,verified,http://www.linkedin.com/in/winniesun,y,,,pool,https://hnwacquisition.com/for/winnie-sun/
 Kenneth Ouellette,Orca Wealth Management,,New Port Richey,FL,224401139,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/kenneth-ouellette/
 Eric Ochocki,McAlvany Wealth Management,Precious Metals Advisor,Durango,CO,224230606,eric@mcalvany.com,verified,http://www.linkedin.com/in/ericochocki,y,,,pool,https://hnwacquisition.com/for/eric-ochocki/
-Daniel Quirk,Bucket List Wealth Management,President,The Villages,FL,224229438,dan@bucketlistwealth.com,,,,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/daniel-quirk/
+Daniel Quirk,Bucket List Wealth Management,President,The Villages,FL,224229438,dan@bucketlistwealth.com,,,,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/daniel-quirk/
 John McAlister,McAlister Sweet & Associates,,Houston,TX,224207084,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/john-mcalister/
 Charles Webb,Alder Financial Group,President,Atlanta,GA,224134685,cwebb@alderfinancial.com,verified,http://www.linkedin.com/in/charles-webb-9b76002,y,y,,pool,https://hnwacquisition.com/for/charles-webb-atlanta/
 Charles H. Webb,Alder Financial Group,President & Co-Founder,Atlanta,GA,224134685,cwebb@alderfinancial.com,,https://www.linkedin.com/in/charles-webb-9b76002/,y,y,,wave1,https://hnwacquisition.com/for/charles-webb/
@@ -973,7 +973,7 @@ Michael Terrio,Motiv8 Investments,,Port St Lucie,FL,219071944,,,,,y,no_title|no_
 Jason Smith,Four Quadrant Wealth Advisors,"President, Chief Executive Officer, Founder",Carmel,IN,219022260,jsmith@4quadrant.com,verified,http://www.linkedin.com/in/jason-smith-48008774,y,y,,pool,https://hnwacquisition.com/for/jason-smith/
 Jay Furst,Forteris Wealth Management,Founding Principal,Armonk,NY,219013000,jfurst@forteriswealth.com,verified,http://www.linkedin.com/in/jayfurst,,,no_photo,pool,https://hnwacquisition.com/for/jay-furst/
 Robert Wink,Summit Financial Consulting,,Sterling Heights,MI,218950198,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/robert-wink/
-Rasool Shaik,Emc Capital Management,Founder & Managing Principal,Houston,TX,218888113,rshaik@emccap.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/rasool-shaik/
+Rasool Shaik,Emc Capital Management,Founder & Managing Principal,Houston,TX,218888113,rshaik@emccap.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/rasool-shaik/
 Robert Henderson,San Blas Advisory,President,Atlanta,GA,218880000,rhj@roberthendersonjr.com,verified,http://www.linkedin.com/in/robert-henderson-jr-a783808b,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/robert-henderson-atlanta/
 James Vaughan,Vaughan and Company Securities,Financial Advisor/CEO,Ridgewood,NJ,218871800,jdviii@vaughanandco.com,verified,http://www.linkedin.com/in/jimvaughaniii,y,y,no_photo,pool,https://hnwacquisition.com/for/james-vaughan/
 Brian Adamek,E-Wealth Partners,Certified Financial Planner™ Professional at E-Wealth Partners,Minnetonka,MN,218724724,badamek@e-wealthpartners.com,verified,http://www.linkedin.com/in/brianadamek,y,y,,pool,https://hnwacquisition.com/for/brian-adamek/
@@ -1011,7 +1011,7 @@ Robert Wofchuck,Ledgewood Wealth Advisors,,Exeter,NH,216828143,robw@ledgewoodwea
 James Simmons,The Simmons Partnership,,Towson,MD,216542492,darby@thesimmonspartnership.com,verified,,y,y,no_title,pool,https://hnwacquisition.com/for/james-simmons/
 Blake Barnett,Ffg Retirement Advisors,Partner / Senior Planner,Centennial,CO,216470615,,unavailable,http://www.linkedin.com/in/blake-barnett-cfp,y,,no_email,pool,https://hnwacquisition.com/for/blake-barnett/
 Darin Lucas,Aegis Wealth Management,,Guthrie Center,IA,216466362,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/darin-lucas/
-Jeremy Hofer,Hofer & Associates,Owner,Thousand Oaks,CA,216385585,jeremy@hoferwm.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/jeremy-hofer/
+Jeremy Hofer,Hofer & Associates,Owner,Thousand Oaks,CA,216385585,jeremy@hoferwm.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/jeremy-hofer/
 Charles Smith,Delta Advisory Group,,Maitland,FL,216326482,csmith@deltaadvisory.com,verified,,y,,no_title,pool,https://hnwacquisition.com/for/charles-smith-maitland/
 Charles Smith Jr.,Delta Advisory Group,Founder & President,Maitland,FL,216326482,info@deltaadvisory.com,,,,,,wave1,https://hnwacquisition.com/for/charles-smith/
 Johnny Brown,Brown Capital Management,"Advisor, President,Chief Executive Officer & Chief Compliance Officer",Little Rock,AR,216143607,jbrown@brown-cm.com,verified,,y,,,pool,https://hnwacquisition.com/for/johnny-brown/
@@ -1108,14 +1108,14 @@ Ashley Kabalan,Independence Wealth Advisors,"Director of Operations, Chief Compl
 Eric Wolfe,Succession Financial,"Senior Financial Advisor, Founder",Mckinney,TX,210297733,ewolfe@succession-financial.com,verified,http://www.linkedin.com/in/ericwolfe1,y,,,pool,https://hnwacquisition.com/for/eric-wolfe/
 Keith Campbell,Smart Portfolios,CIO,Lake Forest Park,WA,210282076,kcampbell@smartportfolios.com,verified,http://www.linkedin.com/in/keith-campbell-3276808a,y,y,,pool,https://hnwacquisition.com/for/keith-campbell/
 Michael Nobile,Crescent Sterling,Vice President,Metairie,LA,210200000,mnobile@crescentsterling.com,verified,http://www.linkedin.com/in/michael-nobile-52a34549,y,y,,pool,https://hnwacquisition.com/for/michael-nobile/
-Erick Ormsby,Alcosta Capital Management,,San Ramon,CA,210198851,eo@alcostacapital.com,,,,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/erick-ormsby/
+Erick Ormsby,Alcosta Capital Management,,San Ramon,CA,210198851,eo@alcostacapital.com,,,,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/erick-ormsby/
 Raul Isern,Atlantic Family Wealth,Wealth Advisor,Coral Gables,FL,210123792,raul.isern@lpl.com,verified,http://www.linkedin.com/in/raulisern,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/raul-isern/
 Travis Daniel,Daniel Investment Group,Company Owner,Royal Oak,MI,210062660,travis.daniel@danielinvestment.com,verified,http://www.linkedin.com/in/travis-daniel-8035281a4,y,,,pool,https://hnwacquisition.com/for/travis-daniel/
 Michael Sander,Sander Capital Advisors,Investment Advisor Representative,Seattle,WA,210000000,mike@sandercapital.com,verified,http://www.linkedin.com/in/michaelmsander,y,y,,pool,https://hnwacquisition.com/for/michael-sander/
 Russell Fieger,Cornerstone Securities,,Overland Park,KS,210000000,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/russell-fieger/
-David Pedley,Treetop Wealth Management,Managing Principal,Northfield,IL,210000000,dpedley@treetopwm.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/david-pedley/
+David Pedley,Treetop Wealth Management,Managing Principal,Northfield,IL,210000000,dpedley@treetopwm.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/david-pedley/
 Kevin Meaders,Magellan Planning Group,CEO and Founder,Atlanta,GA,209983000,kevin@magellanplanning.com,verified,http://www.linkedin.com/in/kevin-meaders-084a8414,y,,,pool,https://hnwacquisition.com/for/kevin-meaders/
-Palmer Lummis,Lummis Asset Management,,Fort Worth,TX,209957416,bradley@lamcocapital.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/palmer-lummis/
+Palmer Lummis,Lummis Asset Management,,Fort Worth,TX,209957416,bradley@lamcocapital.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/palmer-lummis/
 Fanie Gouws,Gouws Capital,Founder and Principal,Charlotte,NC,209933675,fanie@gouwscapital.com,verified,http://www.linkedin.com/in/fanie-gouws-91892219,y,,,pool,https://hnwacquisition.com/for/fanie-gouws/
 James Williams,Williams Financial,CEO & Founder | Wealth Advisor,North Bennington,VT,209922715,james@williamsfinancial.net,verified,http://www.linkedin.com/in/james-jj-williams-mba,y,,,pool,https://hnwacquisition.com/for/james-williams-north-bennington/
 Thomas Seneca,T.M. Wealth Management,Managing Partner,Reston,VA,209803730,thomas@tm-wealth.com,verified,http://www.linkedin.com/in/thomasseneca,y,,,pool,https://hnwacquisition.com/for/thomas-seneca/
@@ -1147,7 +1147,7 @@ Don Deseranno,Deseranno,President,Grosse Pointe Farms,MI,207987834,don@deseranno
 Dyllin Moulton,Fairscale Capital,Managing Member,Nashua,NH,207808425,dmoulton@fairscalecapital.com,verified,http://www.linkedin.com/in/dyllin-moulton-780b047b,y,,,pool,https://hnwacquisition.com/for/dyllin-moulton/
 Barbara Johnson,Capstar Financial Services,Operations Manager,Austin,TX,207804471,barbara@capstarfinancial.com,verified,http://www.linkedin.com/in/barbara-johnson-283a0663,y,,non_owner_title|no_photo,pool,https://hnwacquisition.com/for/barbara-johnson/
 Esther Szabo,Gates Pass Advisors,CEO,Los Altos,CA,207586221,esther@gatespassadvisors.com,verified,http://www.linkedin.com/in/k-esther-szabo-072bb718,y,y,,pool,https://hnwacquisition.com/for/esther-szabo/
-Donald Garlikov,Garlikov Advisors,,Columbus,OH,207583700,dgarlikov@garlikovcompanies.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/donald-garlikov/
+Donald Garlikov,Garlikov Advisors,,Columbus,OH,207583700,dgarlikov@garlikovcompanies.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/donald-garlikov/
 Wade Smith,L & W Financial,,College Station,TX,207487000,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/wade-smith/
 Timothy Regan,Prairieview Wealth Partners,,Frankfort,IL,207454539,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/timothy-regan/
 Harpreet Mangat,White Knight Strategic Wealth Advisors,,Lawrenceville,NJ,207367471,harpreet@wkswa.com,verified,http://www.linkedin.com/in/harpreet-s-mangat-cfp-17449813,y,,no_title,pool,https://hnwacquisition.com/for/harpreet-mangat/
@@ -1175,7 +1175,7 @@ Kimiko Inoue,Manhattan Global Asset Management,Managing Director,Las Vegas,NV,20
 Ray Lent,The Putney Financial Group,Founder,San Rafael,CA,205409186,ray@putneyfinancial.com,verified,http://www.linkedin.com/in/ray-lent,y,y,,pool,https://hnwacquisition.com/for/ray-lent-san-rafael/
 Ray Lent,The Putney Financial Group,Founder & CEO,San Rafael,CA,205409186,info@putneyfinancial.com,,,y,y,,wave1,https://hnwacquisition.com/for/ray-lent/
 John Osbon,Osbon Capital Management,Managing Partner,Boston,MA,205298967,josbon@osboncapital.com,verified,http://www.linkedin.com/in/johnosbon,y,y,,pool,https://hnwacquisition.com/for/john-osbon/
-Arturo Tabuenca,Blue Marble Investments,,Santa Barbara,CA,205057533,art@earthfolio.net,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/arturo-tabuenca/
+Arturo Tabuenca,Blue Marble Investments,,Santa Barbara,CA,205057533,art@earthfolio.net,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/arturo-tabuenca/
 Scott Beck,Chesapeake Investment Management,"Owner, President and CEO",Mclean,VA,205000000,sbeck@chesapeakeim.com,verified,http://www.linkedin.com/in/scott-beck-631a9355,,y,no_photo,pool,https://hnwacquisition.com/for/scott-beck/
 Thomas Flavin,Flavin Financial Services,Managing Partner,Melbourne,FL,204988428,tflavin@flavincpa.com,verified,http://www.linkedin.com/in/thomas-flavin-cpa-pfs-03784665,y,y,,pool,https://hnwacquisition.com/for/thomas-flavin/
 Kirk Taylor,Kirk Capital Advisors,Founder & President,Vienna,VA,204891142,kirk@kirkcapitaladvisors.com,verified,http://www.linkedin.com/in/wkirktaylor,y,y,,pool,https://hnwacquisition.com/for/kirk-taylor/
@@ -1223,7 +1223,7 @@ Steven Howell,Paradigm Wealth Advisory,Managing Partner,Bridgewater,NJ,201238727
 Anna-Christina Brockschmidt,Pacific Financial Strategies,Vice President,Thousand Oaks,CA,201189309,anna@pacfs.com,verified,http://www.linkedin.com/in/anna-christina-brockschmidt-mba-a1aa18b3,y,,,pool,https://hnwacquisition.com/for/anna-christina-brockschmidt/
 James Walker,Strategic Advisory Services,,Memphis,TN,201174393,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/james-walker/
 Martin Bicker,Waverley Wealth Management,,Mountain View,CA,201152058,martinb@bickerandco.com,verified,,,y,no_title|email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/martin-bicker/
-Stephen Kyne,Sterling Manor Financial,Owner,Saratoga Springs,NY,201005892,smk@sterlingmanorfinancial.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/stephen-kyne/
+Stephen Kyne,Sterling Manor Financial,Owner,Saratoga Springs,NY,201005892,smk@sterlingmanorfinancial.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/stephen-kyne/
 Marcos Westphalen,My Portfolio Guide,"Vice President, Latin America",Seal Beach,CA,200987737,mwestphalen@pinterest.com,verified,http://www.linkedin.com/in/marcoswestphalen,y,y,,pool,https://hnwacquisition.com/for/marcos-westphalen/
 Patricia McElroy,Stride Investments,Chief Financial Officer,Chicago,IL,200926083,pmcelroy@stridefinancialadvisors.com,verified,http://www.linkedin.com/in/patricia-mcelroy-2641424,y,,no_photo,pool,https://hnwacquisition.com/for/patricia-mcelroy/
 Eric Ramirez,Blue Capital,Dir. Estrategia y Operaciones,Omaha,NE,200818353,eric@thebcap.com,verified,http://www.linkedin.com/in/ericramc,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/eric-ramirez/
@@ -1237,7 +1237,7 @@ John Laughlin,Laughlin Financial,Founder/President,Bloomington,IN,200198285,john
 Paul Stone,Genesis Wealth Advisors,CEO,Braintree,MA,200074039,pstone@genesisadvisors.com,verified,http://www.linkedin.com/in/paulfstone,y,y,,pool,https://hnwacquisition.com/for/paul-stone/
 Andrew Nida,Amg Asset Management Group,President,Cartersville,GA,200055821,andrew@assetmg-inc.com,verified,http://www.linkedin.com/in/andrew-nida-18915184,y,,,pool,https://hnwacquisition.com/for/andrew-nida/
 Stuart Allen,Allen Capital Management,Attorney,Vancouver,WA,200030786,,unavailable,,y,,no_email|no_photo,pool,https://hnwacquisition.com/for/stuart-allen/
-David Newbore,Newbore Wealth Management,,Gladstone,OR,200025054,dave@newbore-wealth.com,,,,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/david-newbore/
+David Newbore,Newbore Wealth Management,,Gladstone,OR,200025054,dave@newbore-wealth.com,,,,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/david-newbore/
 Paula Harris,Wh Cornerstone Investments,Co-owner and Principal,Duxbury,MA,200013404,pharris@whcornerstone.com,verified,http://www.linkedin.com/in/paulaharris,y,y,,pool,https://hnwacquisition.com/for/paula-harris/
 Todd Dathe,Aspen Private Advisors,Business Owner,Sioux Falls,SD,199936645,todd@aspenpa.com,verified,,y,y,no_photo,pool,https://hnwacquisition.com/for/todd-dathe/
 Thomas Goldsmith,Flagship Capital Management,President,Media,PA,199880000,tgoldsmith@flagshipcap.com,verified,http://www.linkedin.com/in/thomas-goldsmith-323b3973,,,no_photo,pool,https://hnwacquisition.com/for/thomas-goldsmith/
@@ -1304,7 +1304,7 @@ John Kvale,J.K. Financial,Founder & President,Dallas,TX,195811000,Jen@jkfinancia
 John Salomon,J2 Capital Management,CFO,Troy,MI,195720451,johns@j2cmonline.com,verified,http://www.linkedin.com/in/johnsalomoncpacfp,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/john-salomon/
 Dave Tepp,Tepp RIA,Founder and Chief Wealth Strategist,Westfield,NJ,195713644,dtepp@teppwealth.com,verified,http://www.linkedin.com/in/dave-tepp-cpa-pfs-aep-mba-2824745,y,,,pool,https://hnwacquisition.com/for/dave-tepp/
 Todd Marvin,Marvin & Palmer Associates,President,Wilmington,DE,195696579,toddmarvin@mpainc.com,verified,http://www.linkedin.com/in/todd-marvin-7bb0b737,,,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/todd-marvin/
-Brent Plunkett,Charter Wealth Management,CEO,Raleigh,NC,195612950,brent@charterwm.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/brent-plunkett/
+Brent Plunkett,Charter Wealth Management,CEO,Raleigh,NC,195612950,brent@charterwm.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/brent-plunkett/
 Charles Clark,Clark & Stuart,,Portland,ME,195585257,rocky@clarkandstuart.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/charles-clark/
 Robert Frazee,Frazee Investment Consulting,Principal,Memphis,TN,195541442,robert@frazeeinvestment.com,verified,http://www.linkedin.com/in/robert-frazee-038bb74,y,,,pool,https://hnwacquisition.com/for/robert-frazee/
 Isaac Halls,Plan Life & Wealth Management,"Vice President, Shareholder",Fresno,CA,195434083,ihalls@planfinancial.com,verified,http://www.linkedin.com/in/isaac-halls-crpc,y,,,pool,https://hnwacquisition.com/for/isaac-halls/
@@ -1331,7 +1331,7 @@ Ian Kos,Tetley Investments,Vice President,Park Ridge,IL,193857815,ian@tetleyinve
 Matthew Shapiro,Mws Capital Consultants,President and Founder,Chicago,IL,193676494,mshapiro@mwscapital.com,verified,http://www.linkedin.com/in/matthewshapiromwscapital,y,y,,pool,https://hnwacquisition.com/for/matthew-shapiro/
 David Brenner,D. M. Brenner,Owner,Solana Beach,CA,193620246,david@dmbrenner.com,verified,http://www.linkedin.com/in/dmbrenner,y,y,,pool,https://hnwacquisition.com/for/david-brenner/
 Jordan Linn,One Wealth Management Investment and Advisory Services,Advisor,Boca Raton,FL,193499450,jordan@onewealthinvestors.com,verified,,y,y,photo_dead,pool,https://hnwacquisition.com/for/jordan-linn/
-Peter Lehrman,Sandia Wealth Management,President,Albuquerque,NM,193482000,peter@sandiawealth.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/peter-lehrman/
+Peter Lehrman,Sandia Wealth Management,President,Albuquerque,NM,193482000,peter@sandiawealth.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/peter-lehrman/
 Denny Marinich,Future Financial Wealth Management Group,President,Cincinnati,OH,193418350,denny@future-financial.net,verified,http://www.linkedin.com/in/dennymarinich,y,y,,pool,https://hnwacquisition.com/for/denny-marinich/
 Adam Carlini,Dynamic Wealth Advisors,"President, Financial Advisor",Surprise,AZ,193346000,adam@dynamicwealthmgt.com,verified,http://www.linkedin.com/in/adam-carlini-765b5610,y,y,no_photo,pool,https://hnwacquisition.com/for/adam-carlini/
 Matthew Pierce,Kastel Capital Advisors,Managing Partner,Wellesley,MA,193282908,mvpierce@kastelcapital.com,verified,http://www.linkedin.com/in/matthew-v-pierce-ba36a3,y,,,pool,https://hnwacquisition.com/for/matthew-pierce/
@@ -1400,7 +1400,7 @@ Mark Fredback,Pacific Value,,Boise,ID,190000000,mark@pacificvalue.net,verified,,
 Chad Nehring,Conceptual Financial Advisors,Certified Financial Planner™ practitioner/President,Appleton,WI,189909772,chad@ontrackadvisor.com,verified,http://www.linkedin.com/in/chadnehring,y,,,pool,https://hnwacquisition.com/for/chad-nehring/
 Jonathan Spencer,Signet Private Wealth,"Founder, Managing Principal",Chicago,IL,189682344,jspencer@signet-invest.com,verified,http://www.linkedin.com/in/jonathan-b-spencer-cfa-96a20124,,,photo_notimage,pool,https://hnwacquisition.com/for/jonathan-spencer/
 Isaac Brohinsky,Financial Independence Advisors,Managing Partner,Jacksonville,FL,189648100,isaac@fiajacksonville.com,verified,http://www.linkedin.com/in/isaac-brohinsky-cpa-pfs-03146817,y,,,pool,https://hnwacquisition.com/for/isaac-brohinsky/
-John Stone,Calvert Wealth Management,Financial Advisor And Co-president Of Calvert Wealth Management,Dunkirk,MD,189569655,john@calvertwealth.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/john-stone/
+John Stone,Calvert Wealth Management,Financial Advisor And Co-president Of Calvert Wealth Management,Dunkirk,MD,189569655,john@calvertwealth.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/john-stone/
 Suzanne Fitzgerald,Solutions 4 Wealth,Partner and Senior Wealth Advisor,Southlake,TX,189447995,,unavailable,http://www.linkedin.com/in/suzanne-fitzgerald-9117543,y,,no_email,pool,https://hnwacquisition.com/for/suzanne-fitzgerald/
 Patrick Callahan,Xception Advisory Services,Wealth Advisor / Co-Founder,Atlanta,GA,189340109,pcallahan@xceptionadvisorygroup.com,verified,http://www.linkedin.com/in/m-patrick-callahan-jd-6b68583,y,,email_domain_mismatch,pool,https://hnwacquisition.com/for/patrick-callahan/
 Tom Eidelman,Daytona Street Capital,President,Saint Louis,MO,189256439,tom@daytonastreet.com,verified,http://www.linkedin.com/in/tomeidelman,y,y,,pool,https://hnwacquisition.com/for/tom-eidelman/
@@ -1431,7 +1431,7 @@ John Zeidler,Wall Street Financial Group,Financial Advisor,Carlinville,IL,187678
 Gayle Colman,Colman Knight Advisory Group,Co-Founder,Acton,MA,187675186,gayle@colmanknight.com,verified,http://www.linkedin.com/in/gayle-colman-cfp%c2%ae-010a2,y,y,name_fixed,pool,https://hnwacquisition.com/for/gayle-colman/
 Don Snyder,Sfg Wealth Advisors,President,Tampa,FL,187673116,don@sfgtampa.com,verified,http://www.linkedin.com/in/don-snyder-cfp%c2%ae-cka%c2%ae-a881541a,y,,,pool,https://hnwacquisition.com/for/don-snyder/
 Matthew Slaney,Finarc Investments,President,Norwood,MA,187601199,matthew.slaney@finarc.com,verified,http://www.linkedin.com/in/matthew-c-slaney-cfa-2723111,,y,no_photo,pool,https://hnwacquisition.com/for/matthew-slaney/
-Daniel Katz,Cdkv Holdings,Managing Principal,Denver,CO,187524263,dkatz@steelestpwm.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/daniel-katz/
+Daniel Katz,Cdkv Holdings,Managing Principal,Denver,CO,187524263,dkatz@steelestpwm.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/daniel-katz/
 Mike Durante,Durante & Waters,Owner and Principal,Brewster,NY,187437448,mike@iwmria.com,verified,http://www.linkedin.com/in/mikedurantecfp,y,y,,pool,https://hnwacquisition.com/for/mike-durante/
 Michael A. Durante,Durante & Waters,Founder,Brewster,NY,187437448,mike@iwmria.com,,https://www.linkedin.com/in/mikedurantecfp/,y,y,,wave1,https://hnwacquisition.com/for/michael-durante/
 Jeffrey Farni,Quantitative Asset Management,President,Minnetonka,MN,187409295,farnisr@qamgmt.com,verified,http://www.linkedin.com/in/jeffrey-farni-sr-aa538151,,,no_photo,pool,https://hnwacquisition.com/for/jeffrey-farni/
@@ -1460,12 +1460,12 @@ Brandon Berman,Total Wealth Services,Founder,Westlake Village,CA,186079681,brand
 David Vigil,Vigil Wealth Management,"Managing Director, Private Wealth Advisor",Ponte Vedra Beach,FL,186035899,david@vigilwm.com,verified,http://www.linkedin.com/in/davidvigilvigilwealth,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/david-vigil/
 Scott Adams,Ridge Capital Management,"President, Ridge Capital Management, LLC",John Creek,GA,186024178,scott@ridgecapitalmgt.com,verified,http://www.linkedin.com/in/scott-adams-32035a11,,,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/scott-adams/
 Kent Forsey,Hillspring Financial,President,Surprise,AZ,185998213,kent@hillspringfinancial.com,verified,http://www.linkedin.com/in/kent-forsey-9b35b58,y,y,no_photo,pool,https://hnwacquisition.com/for/kent-forsey/
-Owen Schrum,Schrum Private Wealth Management,President,Saint Augustine,FL,185947743,owen@schrumpw.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/owen-schrum/
+Owen Schrum,Schrum Private Wealth Management,President,Saint Augustine,FL,185947743,owen@schrumpw.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/owen-schrum/
 Bryan Kocen,The Kocen Financial Group,President,Rancho Mirage,CA,185854186,bryan@kfginc.com,verified,,y,,,pool,https://hnwacquisition.com/for/bryan-kocen/
 Luke Cheatham,Diamond Client Group,President,The Woodlands,TX,185808906,luke@diamondclientgroup.com,verified,http://www.linkedin.com/in/luke-cheatham,y,y,no_photo,pool,https://hnwacquisition.com/for/luke-cheatham/
 John Zeltmann,S.F. Ehrlich Associates,Wealth Manager,Cranford,NJ,185778206,jzeltmann@sfehrlich.com,verified,http://www.linkedin.com/in/johnzeltmann,y,y,,pool,https://hnwacquisition.com/for/john-zeltmann/
 Stanley F. Ehrlich,S.F. Ehrlich Associates,President,Cranford,NJ,185778206,stan@sfehrlich.com,,https://www.linkedin.com/in/stanley-f-ehrlich-9263539/,,y,,wave1,https://hnwacquisition.com/for/stanley-ehrlich/
-Sean Oneill,Doheny Asset Management,,Los Angeles,CA,185691910,soneill@dohenyasset.com,,,y,y,no_title|email_unknown,pool,https://hnwacquisition.com/for/sean-oneill/
+Sean Oneill,Doheny Asset Management,,Los Angeles,CA,185691910,soneill@dohenyasset.com,,,y,y,no_title|email_unverified,pool,https://hnwacquisition.com/for/sean-oneill/
 Daniel Mason,First Mason Financial,,Medina,OH,185661618,,,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/daniel-mason/
 Andrew Smith,Delos Private Client Group,Chief Investment Strategist,Dallas,TX,185578593,andrew@delosca.com,verified,http://www.linkedin.com/in/andrew-h-smith-55540820,y,y,,pool,https://hnwacquisition.com/for/andrew-smith/
 Eugene Hsu,Archer Pointe Wealth Management,Certified Financial Planner™,Davis,CA,185573000,gene@archerpointewm.com,verified,http://www.linkedin.com/in/archer-pointe-wealth-management,y,,no_photo,pool,https://hnwacquisition.com/for/eugene-hsu/
@@ -1510,7 +1510,7 @@ Diane Hart,Econologics Financial Advisors,,Largo,FL,183239676,,,,,y,no_title|no_
 Jac Arbour,J.M. Arbour,Founder and CEO,Gardiner,ME,183158509,jac@jmarbour.com,verified,http://www.linkedin.com/in/jac-m-arbour-cfp%c2%ae-chfc%c2%ae-2a062a36,y,y,name_fixed,pool,https://hnwacquisition.com/for/jac-arbour/
 Steven Zanolli,Sandy Morris Financial & Estate Planning Services,Chief Compliance Officer/Portfolio Manager,Tampa,FL,183125945,steve@sandymorrisfinancial.com,verified,http://www.linkedin.com/in/steven-zanolli-26920549,y,y,non_owner_title,pool,https://hnwacquisition.com/for/steven-zanolli/
 Paul Gesko,Miller Gesko &,President,Buffalo,NY,183073565,prgesko@millergesko.com,verified,http://www.linkedin.com/in/paul-gesko-0455a11a,y,y,no_photo,pool,https://hnwacquisition.com/for/paul-gesko/
-George Hiller,George M. Hiller Companies,,Atlanta,GA,182985729,ghiller@georgehiller.com,,,y,,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/george-hiller/
+George Hiller,George M. Hiller Companies,,Atlanta,GA,182985729,ghiller@georgehiller.com,,,y,,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/george-hiller/
 Scott Walton,Walton Financial,Owner,Birmingham,AL,182903769,scott@waltonfin.com,verified,http://www.linkedin.com/in/scottawaltonfinancial,y,y,no_photo,pool,https://hnwacquisition.com/for/scott-walton/
 Robert Stahler,Anchored Financial Planning,President and Financial Planner,West Deptford,NJ,182862179,bob@anchoredfinancialplanning.com,verified,http://www.linkedin.com/in/bobstahler,y,y,,pool,https://hnwacquisition.com/for/robert-stahler/
 Ron Bowman,Marathon Strategic Advisors,Executive Vice President,Pittsburgh,PA,182742274,,unavailable,http://www.linkedin.com/in/ron-bowman-a91328ba,,y,no_email|no_photo,pool,https://hnwacquisition.com/for/ron-bowman/
@@ -1537,16 +1537,16 @@ Brian Malizia,Lakeshore Capital Group,President and Founder,Rolling Meadows,IL,1
 Kyle Spahn,Spahn Wealth & Retirement,,Scottsdale,AZ,181438726,kyle@spahnwealth.com,verified,,,y,no_title|no_photo,pool,https://hnwacquisition.com/for/kyle-spahn/
 Jo Fritz,Balanced Financial Planning,President,Overland Park,KS,181332636,joellen@bfplanning.com,verified,http://www.linkedin.com/in/joellenfritz,y,y,,pool,https://hnwacquisition.com/for/jo-fritz/
 Jo Ellen Fritz,Balanced Financial Planning,President,Overland Park,KS,181332636,joellen@bfplanning.com,,https://www.linkedin.com/company/balanced-financial-planning-inc-,y,y,,wave1,https://hnwacquisition.com/for/jo-ellen-fritz/
-Keith Amburgey,Rutherford Asset Planning,Chief Executive Officer,Tampa,FL,181313080,keith@rutherfordasset.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/keith-amburgey-tampa/
+Keith Amburgey,Rutherford Asset Planning,Chief Executive Officer,Tampa,FL,181313080,keith@rutherfordasset.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/keith-amburgey-tampa/
 Keith Amburgey,Rutherford Asset Planning,CEO,Tampa,FL,181313080,info@rutherfordasset.com,,https://www.linkedin.com/in/keithamburgey/,y,,,wave1,https://hnwacquisition.com/for/keith-amburgey/
-Geoffrey Owen,Fpf Fa,,Charlotte,NC,181283949,geoff@frontporchfa.com,,,y,y,no_title|email_unknown|no_photo,pool,https://hnwacquisition.com/for/geoffrey-owen/
+Geoffrey Owen,Fpf Fa,,Charlotte,NC,181283949,geoff@frontporchfa.com,,,y,y,no_title|email_unverified|no_photo,pool,https://hnwacquisition.com/for/geoffrey-owen/
 Joseph Downey,Private Client Asset Management,,Massapequa,NY,181222268,jd@pcaminvest.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/joseph-downey/
-Patricio Filippi,Chronos Capital Advisors,Managing Partner,Miami,FL,181078654,pfilippi@chronosfo.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/patricio-filippi/
+Patricio Filippi,Chronos Capital Advisors,Managing Partner,Miami,FL,181078654,pfilippi@chronosfo.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/patricio-filippi/
 Martin Cole,Cole Wealth Management,Certified Financial Planner,Scottsdale,AZ,181069922,mcole@colewealthmanagement.com,verified,http://www.linkedin.com/in/martin-cole-msfs-cfp-chfc-aams-clu-5609aa7,y,y,,pool,https://hnwacquisition.com/for/martin-cole/
 Ankur Nagpal,Carry Advisors,GP,Brooklyn,NY,180909997,ankur@carry.com,verified,http://www.linkedin.com/in/ankurnagpal,y,y,,pool,https://hnwacquisition.com/for/ankur-nagpal/
-David Darmour,Cornerstone Investment Advisors,Partner,Boulder,CO,180835242,dave@cstoneinvest.com,,,,,email_unknown|no_photo,pool,https://hnwacquisition.com/for/david-darmour/
+David Darmour,Cornerstone Investment Advisors,Partner,Boulder,CO,180835242,dave@cstoneinvest.com,,,,,email_unverified|no_photo,pool,https://hnwacquisition.com/for/david-darmour/
 Kristina Saperston,Saperston Legacy Advisors,Portfolio Manager,Hamburg,NY,180788751,,unavailable,http://www.linkedin.com/in/kristinasaperston,,y,no_email|photo_notimage,pool,https://hnwacquisition.com/for/kristina-saperston/
-Kathy Ellis,Good Steward Wealth Advisers,"President & Founder, Certified Financial Planner™ CFP®, Registered Principal, Financial Adviser",Clarksville,TN,180726290,kathy@retireconfident.com,,,y,,email_unknown,pool,https://hnwacquisition.com/for/kathy-ellis/
+Kathy Ellis,Good Steward Wealth Advisers,"President & Founder, Certified Financial Planner™ CFP®, Registered Principal, Financial Adviser",Clarksville,TN,180726290,kathy@retireconfident.com,,,y,,email_unverified,pool,https://hnwacquisition.com/for/kathy-ellis/
 Andrew Horowitz,Horowitz &,Founder,Fort Lauderdale,FL,180658367,andrewh@horowitzco.com,verified,http://www.linkedin.com/in/theandrewhorowitz,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/andrew-horowitz/
 John Atkins,Integrity Capital Management,"Partner, Investment Advisor Representative",Kingsport,TN,180540377,john.atkins@retirewithicm.com,verified,http://www.linkedin.com/in/johncatkins,y,y,,pool,https://hnwacquisition.com/for/john-atkins/
 Christian Cyr,Cyr Financial,President,Hennepin,IL,180516603,chris@cyrfinancial.net,verified,http://www.linkedin.com/in/chriscyr,y,y,email_domain_mismatch,pool,https://hnwacquisition.com/for/christian-cyr/
@@ -1575,7 +1575,7 @@ Benjamin Dolan,Dolan Capital Advisors,President & Founder,Charlotte,NC,179147870
 John O'Connor,O'connor Wealth Management,,Monrovia,CA,179112814,,,,,,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/john-oconnor/
 Matt Eltringham,Eltringham Wealth Partners,"Managing Director, Wealth Advisor",Cincinnati,OH,179034817,meltringham@benchmark-wealth.com,verified,http://www.linkedin.com/in/matteltringham,y,y,,pool,https://hnwacquisition.com/for/matt-eltringham/
 James Smith,Parvin Asset Management,,Sioux Falls,SD,178969401,ssmith@parvinam.com,verified,,,,no_title|photo_dead,pool,https://hnwacquisition.com/for/james-smith/
-Timothy Perryman,Mirretti Perryman Wealth Strategies,Wealth Advisor,Skokie,IL,178897115,tim@mirrettiperryman.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/timothy-perryman/
+Timothy Perryman,Mirretti Perryman Wealth Strategies,Wealth Advisor,Skokie,IL,178897115,tim@mirrettiperryman.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/timothy-perryman/
 Daniel Mahoney,True Square Financial,President,Atlanta,GA,178846896,dan@truesquarefinancial.com,verified,http://www.linkedin.com/in/danielpmahoney,y,y,,pool,https://hnwacquisition.com/for/daniel-mahoney/
 John Orindgreff,Collaborative Portfolio Management,,Overland Park,KS,178738625,jorindgreff@cpm-llc.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/john-orindgreff/
 Jeffrey Ross,The Planner's Edge,,Mercer Island,WA,178713196,info@theplannersedge.com,verified,,y,y,no_title|no_photo,pool,https://hnwacquisition.com/for/jeffrey-ross-mercer-island/
@@ -1592,7 +1592,7 @@ Chris Swenson,Wisconsin Wealth Advisors,Owner,Sun Prairie,WI,177965058,chris.swe
 Tim Porter,Smb Financial Services,President,Portland,OR,177799486,tim@smb.financial,verified,http://www.linkedin.com/in/tim-l-porter-cfp%c2%ae-46766054,y,,,pool,https://hnwacquisition.com/for/tim-porter/
 Gerald Gasber,Gasber Financial Advisors,Founder/Senior Financial Advisor,Folsom,CA,177731911,gerry@gasberfinancial.com,verified,http://www.linkedin.com/in/geraldgasber,y,y,,pool,https://hnwacquisition.com/for/gerald-gasber/
 Cristina Montiel,Flow Focus,,Miami,FL,177722073,cristina@theatlasfinancialgroup.com,verified,,,,no_title|no_photo,pool,https://hnwacquisition.com/for/cristina-montiel/
-Patricia Conway,Conway Financial Group,Owner,Chesterfield,MO,177721549,pconway@conwayfinancialgroup.com,,,y,y,email_unknown|no_photo,pool,https://hnwacquisition.com/for/patricia-conway/
+Patricia Conway,Conway Financial Group,Owner,Chesterfield,MO,177721549,pconway@conwayfinancialgroup.com,,,y,y,email_unverified|no_photo,pool,https://hnwacquisition.com/for/patricia-conway/
 David Muntz,Muntz Financial,Principal,Doylestown,PA,177601228,david.muntz@starbridgeadvisors.com,verified,http://www.linkedin.com/in/david-muntz-a3825a7,y,,email_domain_mismatch|no_photo,pool,https://hnwacquisition.com/for/david-muntz/
 Ronnie Craig,Tdc Capital Advisors,,College Station,TX,177592784,,unavailable,,,y,no_title|no_email|no_photo,pool,https://hnwacquisition.com/for/ronnie-craig/
 Justin Farris,Farris Capital Management,Company Owner,Carrollton,TX,177504806,justin@farriscap.com,verified,http://www.linkedin.com/in/justin-farris-b059693,y,y,no_photo,pool,https://hnwacquisition.com/for/justin-farris/
