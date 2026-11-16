@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Request a Strategy Call — HNW Acquisition</title>
+<meta name="description" content="Independent advisory firms: request a 20-minute strategy call with HNW Acquisition.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A1628;--paper:#F6F5F0;--line:#E4E2DA;--muted:#5B6474;--acc:#2457F5;--gold:#C9A447}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.nav{background:var(--ink);padding:16px 0}.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:18px;text-decoration:none}.logo img{width:34px;height:34px;border-radius:8px}
+main{padding:36px 0 60px}
+h1{font-family:'Fraunces',Georgia,serif;font-size:32px;line-height:1.1;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 24px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+label.l{display:block;font-size:13.5px;font-weight:600;margin:14px 0 6px}
+input[type=text],input[type=email],input[type=tel],select{width:100%;font:16px Inter;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#FBFAF6;color:var(--ink)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--muted);margin:10px 0 4px;cursor:pointer}.consent input{margin-top:3px;width:16px;height:16px;flex:none}.consent a{color:inherit;text-decoration:underline}
+.cta{width:100%;margin-top:18px;font:600 17px Inter;color:#fff;background:var(--acc);border:0;border-radius:12px;padding:16px;cursor:pointer}
+.fine{font-size:13px;color:var(--muted);margin:12px 0 0}
+.ok{display:none}
+.foot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px}
+@media(max-width:480px){.row2{grid-template-columns:1fr}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="nav"><div class="wrap"><a class="logo" href="/"><img src="/mark.svg?v=2" alt="HNW Acquisition">HNW Acquisition</a></div></div>
+<main><div class="wrap">
+<h1>Request a 20-minute strategy call</h1>
+<p class="sub">For independent, fee-only advisory firms. We'll follow up by email, and by text if you opt in, with a few call times within one business day.</p>
+<div class="card">
+ <div id="f">
+  <div class="row2">
+   <div><label class="l" for="fn">First name</label><input type="text" id="fn" autocomplete="given-name"></div>
+   <div><label class="l" for="ln">Last name</label><input type="text" id="ln" autocomplete="family-name"></div>
+  </div>
+  <label class="l" for="firm">Firm</label><input type="text" id="firm" autocomplete="organization">
+  <label class="l" for="em">Work email</label><input type="email" id="em" autocomplete="email" placeholder="you@yourfirm.com">
+  <label class="l" for="ph">Mobile</label><input type="tel" id="ph" autocomplete="tel" placeholder="(555) 555-0123">
+  <label class="consent"><input type="checkbox" id="sms"><span>I consent to receive non-marketing text messages from HNW Acquisition about my strategy-call request, including scheduling and appointment reminders, at the phone number provided. Message frequency may vary. Message and data rates may apply. Text HELP for assistance. Reply STOP to opt out. <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms &amp; Conditions</a>.</span></label>
+  <label class="l" for="aum">Firm AUM</label><select id="aum"><option value="">Select…</option><option>Under $50M</option><option>$50M–$100M</option><option>$100M–$250M</option><option>$250M–$500M</option><option>$500M+</option></select>
+  <button class="cta" id="go">Request My Call</button>
+  <p class="fine">For SEC- or state-registered investment advisers and their representatives. We don't work with retail investors. Submitting this form does not require SMS consent.</p>
+ </div>
+ <div class="ok" id="ok"><h2 style="font-family:Fraunces,Georgia,serif;margin:0 0 8px">Got it. ✓</h2><p>We'll be in touch within one business day with a few times.</p></div>
+</div>
+</div></main>
+<div class="foot"><div class="wrap">HNW Acquisition is a brand of Plan C Enterprises LLC, 30 N Gould St Ste R, Sheridan, WY 82801. We are a marketing services company, not an investment adviser. <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms &amp; Conditions</a> · <a href="/">Home</a></div></div>
+<script>
+(function(){
+ var go=document.getElementById('go');
+ go.addEventListener('click',function(e){
+  e.preventDefault();
+  var v=function(id){return document.getElementById(id).value.trim()};
+  var fn=v('fn'),ln=v('ln'),firm=v('firm'),em=v('em'),aum=v('aum'),ph=v('ph').replace(/[^0-9+]/g,''),sms=document.getElementById('sms').checked;
+  var bad=[];
+  if(!fn)bad.push('fn');if(!ln)bad.push('ln');if(!firm)bad.push('firm');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em))bad.push('em');
+  if(ph.replace(/\D/g,'').length<10)bad.push('ph');
+  if(!aum)bad.push('aum');
+  ['fn','ln','firm','em','ph','aum'].forEach(function(id){document.getElementById(id).style.borderColor=''});
+  if(bad.length){bad.forEach(function(id){document.getElementById(id).style.borderColor='#D33'});document.getElementById(bad[0]).focus();return}
+  var WEBHOOK='';
+  if(WEBHOOK){try{fetch(WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({fn:fn,ln:ln,firm:firm,email:em,phone:ph,sms_consent:sms,aum:aum,src:'book-page'})})}catch(x){}}
+  document.getElementById('f').style.display='none';
+  document.getElementById('ok').style.display='block';
+ });
+})();
+</script>
+</body>
+</html>
