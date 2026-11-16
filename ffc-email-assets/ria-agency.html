@@ -400,20 +400,20 @@
  <div class="form">
   <div id="f">
    <h3>Book your 20-min strategy call</h3>
-   <p class="fsub">We'll text and email you a few times within one business day.</p>
+   <p class="fsub">We'll email you a few times within one business day (and text you if you opt in).</p>
    <div class="row2">
     <div class="field"><label>First name</label><input type="text" id="fn" placeholder="First name"></div>
     <div class="field"><label>Last name</label><input type="text" id="ln" placeholder="Last name"></div>
    </div>
    <div class="field"><label>Firm</label><input type="text" id="firm" placeholder="Firm name"></div>
    <div class="field"><label>Work email</label><input type="email" id="em" placeholder="you@yourfirm.com"></div>
-   <div class="field"><label>Mobile (we text you call times)</label><input type="tel" id="ph" placeholder="(555) 555-0123" autocomplete="tel"></div>
+   <div class="field"><label>Mobile</label><input type="tel" id="ph" placeholder="(555) 555-0123" autocomplete="tel"></div>
+   <label class="consent" style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--muted);margin:-6px 0 14px;cursor:pointer"><input type="checkbox" id="sms" style="margin-top:3px;width:16px;height:16px;flex:none"><span>I consent to receive non-marketing text messages from HNW Acquisition about my strategy-call request, including scheduling and appointment reminders, at the phone number provided. Message frequency may vary. Message and data rates may apply. Text HELP for assistance. Reply STOP to opt out. <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms.html" style="color:inherit;text-decoration:underline">Terms &amp; Conditions</a>.</span></label>
    <div class="field"><label>Firm AUM</label><select id="aum"><option value="">Select…</option><option>$50M–$100M</option><option>$100M–$250M</option><option>$250M–$500M</option><option>$500M+</option><option>Under $50M</option></select></div>
-   <label class="consent" style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--muted);margin:4px 0 12px;cursor:pointer"><input type="checkbox" id="sms" style="margin-top:3px;width:16px;height:16px;flex:none"><span>I agree to receive text messages from HNW Acquisition about my call request, including scheduling and reminders. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. <a href="/privacy.html" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms.html" style="color:inherit;text-decoration:underline">Terms</a>.</span></label>
    <button class="cta" id="go">Request My Call</button>
    <p class="fine">For SEC-registered RIAs and IARs. We don't work with retail investors.</p>
   </div>
-  <div class="ok" id="ok"><h3>Got it. ✓</h3><p class="lead" style="font-size:16px">Check your phone: we'll text you a few times within one business day.</p></div>
+  <div class="ok" id="ok"><h3>Got it. ✓</h3><p class="lead" style="font-size:16px">We'll be in touch within one business day with a few times.</p></div>
  </div>
 </div></div></section>
 
@@ -450,7 +450,6 @@
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em))bad.push('em');
   if(!aum)bad.push('aum');
   if(ph.replace(/\D/g,'').length<10)bad.push('ph');
-  if(!sms){document.getElementById('sms').focus();document.querySelector('.consent').style.color='#D33';return}
   ['fn','ln','firm','em','aum','ph'].forEach(function(id){document.getElementById(id).style.borderColor=''});
   if(bad.length){bad.forEach(function(id){document.getElementById(id).style.borderColor='#D33'});document.getElementById(bad[0]).focus();return}
   /* PRODUCTION: POST to GHL/webhook here */
