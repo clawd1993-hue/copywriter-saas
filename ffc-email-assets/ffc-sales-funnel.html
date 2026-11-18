@@ -40,8 +40,8 @@ let LQ=null;
 const VIEWS=[
  {id:'ads',btn:'How are the ads doing?',title:'How are the ads doing?',desc:'Customers = unique front-end buyers per month (FFC-METRIC-DEFINITIONS rule).',key:'signups',pct:false,
   foot:'Customer = unique email with a sale $0.01–$97, excluding plan-ct-lt (licensees included). New customers acquired per month (first purchase). Live Hyros /sales, pulled 2026-11-18. Nov = partial month.'},
- {id:'connect',btn:'How many are connecting to the setter?',title:'How many of them are connecting to the setter?',desc:'Leads ÷ signups. Lead = signup who connected with a setter in ManyChat.',key:'s2l',pct:true,
-  foot:'Connected = Hyros !setter-connected tag ÷ customers. Only live-tracked May–Aug; the tag was dead ~Sep 13 → Nov 17, so Sep–Nov are gapped (backfill, not Hyros-live). May gapped (tag ramping). Clean live tracking resumes Dec.'},
+ {id:'connect',btn:'How many are connecting to the setter?',title:'How many of them are connecting to the setter?',desc:'Leads ÷ signups. Lead = signup who connected with a setter in ManyChat.',key:'s2l',pct:true,bf:{'2026-09':58,'2026-10':66},
+  foot:'Connected = Hyros !setter-connected tag ÷ customers. Solid = live-tracked (Jun–Aug). Dashed Sep & Oct (*) = backfill estimate from the ManyChat upload (reconstructed, likely slight under-count). May gapped (tag ramping); Nov gapped (pipe only re-went-live Nov 17 + connecting lags). Clean live line resumes Dec.'},
  {id:'setters',btn:'How are the setters doing?',title:'How are the setters doing?',desc:'Booked calls ÷ leads. Booked = non-cancelled sales call with a closer.',key:'l2b',pct:true,
   foot:'Booked (unique non-cancelled Elite sales call, Hyros /calls) ÷ connected. Booked is clean Hyros all months; gapped where the connect denominator was not live (May, Sep–Nov).'},
  {id:'closers',btn:'How are the closers doing?',title:'How are the closers doing?',desc:'High-ticket closes ÷ booked calls. Close = customer’s first charge over $1,000 (high-ticket rule). Deposits/instalments ≤$1,000 don’t count as a close.',key:'b2c',pct:true,
@@ -67,8 +67,13 @@ function render(){
   pts+=`<circle cx="${X}" cy="${Y}" r="5" fill="var(--series)" stroke="var(--card)" stroke-width="2"/>`;
   if(i===idx||i===0||y===Math.max(...nums)||y===Math.min(...nums))labels+=`<text x="${X}" y="${Y-12}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">${fmt(y,v.pct)}</text>`});
  let xl='';M.forEach((m,i)=>{xl+=`<text x="${xs(i)}" y="${H-B+22}" text-anchor="middle" font-size="12" fill="var(--text2)">${m}</text>`});
+ let bfLayer='';
+ if(v.bf){const ent=ROWS.map((r,i)=>[i,v.bf[r.month]]).filter(([i,val])=>val!=null);
+  if(ent.length){let dp='M'+xs(idx)+' '+ys(vals[idx]);ent.forEach(([i,val])=>{dp+=' L'+xs(i)+' '+ys(val)});
+   bfLayer=`<path d="${dp}" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/>`;
+   ent.forEach(([i,val])=>{bfLayer+=`<circle cx="${xs(i)}" cy="${ys(val)}" r="4.5" fill="var(--surface)" stroke="var(--muted)" stroke-width="2"/><text x="${xs(i)}" y="${ys(val)-11}" text-anchor="middle" font-size="12" fill="var(--muted)">${val}%*</text>`})}}
  let hit='';ROWS.forEach((r,i)=>{hit+=`<rect data-i="${i}" x="${xs(i)-((W-L-R)/(ROWS.length-1))/2}" y="${T}" width="${(W-L-R)/(ROWS.length-1)}" height="${H-T-B}" fill="transparent"/>`});
- document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${v.title}">${g}<line x1="${L}" x2="${W-R}" y1="${ys(min)}" y2="${ys(min)}" stroke="var(--border)"/><path d="${path}" fill="none" stroke="var(--series)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${pts}${labels}${xl}<g id="hits">${hit}</g><line id="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--muted)" stroke-dasharray="3 3" style="display:none"/></svg>`;
+ document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${v.title}">${g}<line x1="${L}" x2="${W-R}" y1="${ys(min)}" y2="${ys(min)}" stroke="var(--border)"/><path d="${path}" fill="none" stroke="var(--series)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${bfLayer}${pts}${labels}${xl}<g id="hits">${hit}</g><line id="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--muted)" stroke-dasharray="3 3" style="display:none"/></svg>`;
  const svg=document.querySelector('#chart svg'),tt=document.getElementById('tt'),xh=document.getElementById('xh');
  svg.querySelectorAll('#hits rect').forEach(rc=>{rc.onmousemove=e=>{const i=+rc.dataset.i,r=ROWS[i];const box=document.querySelector('.card').getBoundingClientRect();
    tt.style.display='block';tt.style.left=(e.clientX-box.left)+'px';tt.style.top=(e.clientY-box.top)+'px';
