@@ -26,7 +26,7 @@ table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}th,td{t
 .tile .n{font-size:26px;font-weight:700;line-height:1}.tile .l{color:var(--text2);font-size:13px;margin-top:4px}.tile .p{color:var(--muted);font-size:12px}
 </style></head><body><div class="wrap">
 <div class="top"><h1>FFC Sales Funnel</h1><button class="refresh" id="refresh">🔄 Refresh</button></div>
-<p class="sub">Source: Hyros + live lead-score feed. Customer per FFC-METRIC-DEFINITIONS.md (locked 2026-11-18): unique email with a sale $0.01–$97, excluding the plan-ct-lt test account; licensees included. Funnel May → Nov 2026 (live Hyros pull 2026-11-18; Nov partial). Gaps = data not reliably tracked that month (shown honestly, not guessed). Lead Quality Score = live.</p>
+<p class="sub">Source: Hyros + live lead-score feed. Customer per FFC-METRIC-DEFINITIONS.md (locked 2026-11-18): unique email with a sale $0.01–$97, excluding the plan-ct-lt test account; licensees included. Funnel May → Nov 2026 (live Hyros pull 2026-11-18; Nov partial). Solid line = clean live Hyros. Dashed (*) = manually-filled estimate (backfill or still-maturing). Gap = no reliable data that month. Lead Quality Score = live; funnel tabs updated manually (~weekly).</p>
 <div class="tabs" role="tablist" id="tabs"></div>
 <div class="card"><h2 id="t"></h2><p class="desc" id="d"></p><div class="hero"><b id="hv"></b><span id="hs"></span></div><div id="chart"></div><div class="tt" id="tt"></div><p class="foot" id="f"></p>
 <button class="tblbtn" id="tb">Show table</button><div id="tbl" style="display:none"></div></div>
@@ -44,8 +44,8 @@ const VIEWS=[
   foot:'Connected = Hyros !setter-connected tag ÷ customers. Solid = live-tracked (Jun–Aug). Dashed Sep & Oct (*) = backfill estimate from the ManyChat upload (reconstructed, likely slight under-count). May gapped (tag ramping); Nov gapped (pipe only re-went-live Nov 17 + connecting lags). Clean live line resumes Dec.'},
  {id:'setters',btn:'How are the setters doing?',title:'How are the setters doing?',desc:'Booked calls ÷ leads. Booked = non-cancelled sales call with a closer.',key:'l2b',pct:true,
   foot:'Booked (unique non-cancelled Elite sales call, Hyros /calls) ÷ connected. Booked is clean Hyros all months; gapped where the connect denominator was not live (May, Sep–Nov).'},
- {id:'closers',btn:'How are the closers doing?',title:'How are the closers doing?',desc:'High-ticket closes ÷ booked calls. Close = customer’s first charge over $1,000 (high-ticket rule). Deposits/instalments ≤$1,000 don’t count as a close.',key:'b2c',pct:true,
-  foot:'High-ticket close = unique email, first charge >$1,000, Hyros /sales ÷ booked. Both sides pure Hyros, independent of the connect tag. May gapped (FanBasis May-22 backfill). Oct–Nov gapped: closes lag the booking by weeks (immature, will rise).'},
+ {id:'closers',btn:'How are the closers doing?',title:'How are the closers doing?',desc:'High-ticket closes ÷ booked calls. Close = customer’s first charge over $1,000 (high-ticket rule). Deposits/instalments ≤$1,000 don’t count as a close.',key:'b2c',pct:true,bf:{'2026-10':13},
+  foot:'High-ticket close = unique email, first charge >$1,000, Hyros /sales ÷ booked. Both sides pure Hyros, independent of the connect tag. Solid = settled (Jun–Sep). Dashed Oct (*) = still maturing — closes lag the booking by ~weeks, so it will rise. May gapped (FanBasis May-22 backfill); Nov gapped (too recent).'},
  {id:'lq',type:'lq',btn:'Lead Quality Score',title:'Lead Quality Score',desc:'Live score of FFC Elite call applicants (0–100, Hormozi money-gate model). From the booking form via Zapier. 🟢≥70 · 🟡 45–69 · 🔴 <45.',
   foot:'Score = budget/access (45) + work situation (20) + savings-credit (20) + timeline (15). Auto-🔴: "just researching", or not-working+<$1k, or <$1k+won’t-use-credit. Builds as bookings flow. v1.1 — recalibrates vs close-rate.'}
 ];
