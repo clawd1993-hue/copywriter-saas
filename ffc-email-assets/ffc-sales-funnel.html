@@ -42,6 +42,8 @@ const VIEWS=[
   foot:'Customer = unique email with a sale $0.01–$97, excluding plan-ct-lt (licensees included). New customers acquired per month (first purchase). Live Hyros /sales, pulled 2026-11-18. Nov = partial month.'},
  {id:'connect',btn:'How many are connecting to the setter?',title:'How many of them are connecting to the setter?',desc:'Leads ÷ signups. Lead = signup who connected with a setter in ManyChat.',key:'s2l',pct:true,bf:{'2026-09':58,'2026-10':66},
   foot:'Connected = Hyros !setter-connected tag ÷ customers. Solid = live-tracked (Jun–Aug). Dashed Sep & Oct (*) = backfill estimate from the ManyChat upload (reconstructed, likely slight under-count). May gapped (tag ramping); Nov gapped (pipe only re-went-live Nov 17 + connecting lags). Clean live line resumes Dec.'},
+ {id:'qual',btn:"How many leads aren't broke?",title:"How many leads aren't broke?",desc:'Of leads who connected with a setter, the % who qualify — have a job / savings (not broke). Hyros "Qualified" stage ÷ connected.',key:'c2q',pct:true,
+  foot:'Qualified = ManyChat “Working / Has Savings” branch → Hyros “Qualified” stage (went live 2026-11-17, also fires to Meta). No history before that and no backfill, so the line builds forward from December. connected → qualified = how many aren’t broke.'},
  {id:'setters',btn:'How are the setters doing?',title:'How are the setters doing?',desc:'Connected → booked. Of the customers who connected with a setter, the % who then booked a sales call.',key:'l2b',pct:true,bf:{'2026-09':29,'2026-10':33},
   foot:'Of each month’s customers who hit the !setter-connected tag, % who booked a non-cancelled Elite sales call (Hyros /calls) — cohort-based (avoids the calendar-mix inflation the old 50%+ numbers had). Solid Jun–Aug (live tag). Dashed Sep/Oct (*) = backfill connected. May gapped (tag ramp); Nov gapped (immature).'},
  {id:'closers',btn:'How are the closers doing?',title:'How are the closers doing?',desc:'High-ticket closes ÷ booked calls. Close = customer’s first charge over $1,000 (high-ticket rule). Deposits/instalments ≤$1,000 don’t count as a close.',key:'b2c',pct:true,bf:{'2026-10':13},
@@ -57,6 +59,7 @@ function render(){
  document.getElementById('t').textContent=v.title;document.getElementById('d').textContent=v.desc;document.getElementById('f').textContent=v.foot;
  if(v.type==='lq'){renderLQ();return;}
  const vals=ROWS.map(r=>r[v.key]);const last=[...vals].reverse().find(x=>x!=null);const idx=vals.lastIndexOf(last);
+ if(!vals.some(x=>x!=null)){document.getElementById('hv').textContent='—';document.getElementById('hs').textContent='builds from Dec';document.getElementById('chart').innerHTML='<p class="foot" style="padding:34px 0;text-align:center">No data yet — this metric went live 2026-11-17. The line fills from December onward.</p>';document.getElementById('tbl').innerHTML='';return;}
  document.getElementById('hv').textContent=fmt(last,v.pct);document.getElementById('hs').textContent='latest ('+M[idx]+')';
  const W=900,H=320,L=48,R=24,T=20,B=40;const xs=i=>L+i*(W-L-R)/(ROWS.length-1);
  const nums=vals.filter(x=>x!=null);let max=Math.max(...nums),min=0;if(v.pct){max=Math.min(100,Math.ceil(max/10)*10+10)}else{max=Math.ceil(max/100)*100+50}
