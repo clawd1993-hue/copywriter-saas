@@ -77,21 +77,27 @@ function render(){
  document.getElementById('tbl').innerHTML='<table><tr><th>Month</th><th>Signups</th><th>Leads</th><th>Signup→lead</th><th>Booked</th><th>Lead→booked</th><th>HT closes</th><th>Booked→close</th><th>Elite cash</th></tr>'+ROWS.map((r,i)=>`<tr><td>${M[i]}</td><td>${fmt(r.signups)}</td><td>${fmt(r.leads)}</td><td>${fmt(r.s2l,true)}</td><td>${fmt(r.booked)}</td><td>${fmt(r.l2b,true)}</td><td>${fmt(r.closes)}</td><td>${fmt(r.b2c,true)}</td><td>${r.cash==null?'—':'$'+r.cash.toLocaleString()}</td></tr>`).join('')+'</table>';
 }
 function renderLQ(){
- const o=(LQ&&LQ.overall)||{total:0,green:0,yellow:0,red:0,green_rate:0,avg_score:0};
- document.getElementById('hv').textContent=o.green_rate+'%';
- document.getElementById('hs').textContent='green-rate · '+o.total+' lead'+(o.total===1?'':'s')+' scored';
- const t=(cls,lbl,n)=>`<div class="tile"><div class="n" style="color:var(--${cls})">${n}</div><div class="l">${lbl}</div><div class="p">${o.total?Math.round(100*n/o.total):0}% of leads</div></div>`;
- let html=`<div class="tiles">${t('green','🟢 Green (ready)',o.green)}${t('yellow','🟡 Yellow (maybe)',o.yellow)}${t('red','🔴 Red (nurture)',o.red)}</div>`;
- html+=`<div class="tiles"><div class="tile"><div class="n">${o.avg_score}</div><div class="l">Avg score / 100</div></div><div class="tile"><div class="n">${o.total}</div><div class="l">Total scored</div></div></div>`;
- const mo=(LQ&&LQ.monthly)||[];
- if(mo.length>=2){
-   const W=900,H=220,L=40,R=20,T=16,B=34,xs=i=>L+i*(W-L-R)/(mo.length-1),ys=y=>T+(H-T-B)*(1-y/100);
-   let g='';for(let k=0;k<=5;k++){const yv=k*20,y=ys(yv);g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--muted)">${yv}%</text>`}
-   let p='',pts='',xl='';mo.forEach((m,i)=>{const X=xs(i),Y=ys(m.green_rate);p+=(i?' L':' M')+X+' '+Y;pts+=`<circle cx="${X}" cy="${Y}" r="4.5" fill="var(--green)" stroke="var(--card)" stroke-width="2"/><text x="${X}" y="${Y-11}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">${m.green_rate}%</text>`;xl+=`<text x="${X}" y="${H-B+22}" text-anchor="middle" font-size="12" fill="var(--text2)">${m.mo.slice(5)}</text>`});
-   html+=`<p class="foot" style="margin:14px 0 2px">Green-rate by month</p><svg viewBox="0 0 ${W} ${H}">${g}<path d="${p}" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linejoin="round"/>${pts}${xl}</svg>`;
- }
- document.getElementById('chart').innerHTML=html;
- document.getElementById('tbl').innerHTML='<table><tr><th>Month</th><th>Scored</th><th>🟢</th><th>🟡</th><th>🔴</th><th>Green-rate</th><th>Avg</th></tr>'+(mo.length?mo.map(m=>`<tr><td>${m.mo}</td><td>${m.total}</td><td>${m.green}</td><td>${m.yellow}</td><td>${m.red}</td><td>${m.green_rate}%</td><td>${m.avg_score}</td></tr>`).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--muted)">No leads scored yet — waiting on bookings.</td></tr>')+'</table>';
+ const mo=(LQ&&LQ.monthly)||[];const o=(LQ&&LQ.overall)||{total:0,avg_score:0,green_rate:0};
+ const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const lab=m=>MN[+m.mo.slice(5,7)-1];
+ const last=mo.length?mo[mo.length-1]:null;
+ document.getElementById('hv').textContent=last?last.avg_score:'—';
+ document.getElementById('hs').textContent=last?('latest ('+lab(last)+') · '+o.total+' scored'):(o.total+' scored');
+ if(!mo.length){document.getElementById('chart').innerHTML='<p class="foot" style="padding:34px 0;text-align:center">No leads scored yet — waiting on bookings.</p>';document.getElementById('tbl').innerHTML='';return;}
+ const W=900,H=320,L=48,R=24,T=20,B=40,n=mo.length;const xs=i=>n===1?L+(W-L-R)/2:L+i*(W-L-R)/(n-1);const ys=y=>T+(H-T-B)*(1-y/100);
+ let g='';for(let k=0;k<=5;k++){const yv=k*20,y=ys(yv);g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--muted)">${yv}</text>`}
+ let path='',pts='',labels='',xl='';
+ mo.forEach((m,i)=>{const X=xs(i),Y=ys(m.avg_score);path+=(i?' L':' M')+X+' '+Y;
+  pts+=`<circle cx="${X}" cy="${Y}" r="5" fill="var(--series)" stroke="var(--card)" stroke-width="2"/>`;
+  labels+=`<text x="${X}" y="${Y-12}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">${m.avg_score}</text>`;
+  xl+=`<text x="${X}" y="${H-B+22}" text-anchor="middle" font-size="12" fill="var(--text2)">${lab(m)}</text>`});
+ let hit='';mo.forEach((m,i)=>{const w=n===1?(W-L-R):(W-L-R)/(n-1);hit+=`<rect data-i="${i}" x="${xs(i)-w/2}" y="${T}" width="${w}" height="${H-T-B}" fill="transparent"/>`});
+ document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Lead Quality Score over time">${g}<line x1="${L}" x2="${W-R}" y1="${ys(0)}" y2="${ys(0)}" stroke="var(--border)"/><path d="${path}" fill="none" stroke="var(--series)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${pts}${labels}${xl}<g id="hits">${hit}</g><line id="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--muted)" stroke-dasharray="3 3" style="display:none"/></svg>`;
+ const svg=document.querySelector('#chart svg'),tt=document.getElementById('tt'),xh=document.getElementById('xh');
+ svg.querySelectorAll('#hits rect').forEach(rc=>{rc.onmousemove=e=>{const i=+rc.dataset.i,m=mo[i];const box=document.querySelector('.card').getBoundingClientRect();
+   tt.style.display='block';tt.style.left=(e.clientX-box.left)+'px';tt.style.top=(e.clientY-box.top)+'px';
+   tt.innerHTML=`<b>${lab(m)}</b> · avg ${m.avg_score}/100<br>🟢 ${m.green} · 🟡 ${m.yellow} · 🔴 ${m.red} · green ${m.green_rate}%`;
+   xh.style.display='block';xh.setAttribute('x1',xs(i));xh.setAttribute('x2',xs(i))};rc.onmouseleave=()=>{tt.style.display='none';xh.style.display='none'}});
+ document.getElementById('tbl').innerHTML='<table><tr><th>Month</th><th>Scored</th><th>🟢</th><th>🟡</th><th>🔴</th><th>Green-rate</th><th>Avg score</th></tr>'+mo.map(m=>`<tr><td>${m.mo}</td><td>${m.total}</td><td>${m.green}</td><td>${m.yellow}</td><td>${m.red}</td><td>${m.green_rate}%</td><td>${m.avg_score}</td></tr>`).join('')+'</table>';
 }
 async function loadLQ(btn){
  if(btn){btn.disabled=true;btn.textContent='⏳ …';}
